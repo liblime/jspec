@@ -136,6 +136,7 @@ into your custom context.
       
 == Todo
 
+* ometa js or jscc?
 * add pre-processing to prevent pollution of prototypes
 * JSpec exceptions .. evaluations .. better debugging
 * add formatter hooks to display spinner etc
