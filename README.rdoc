@@ -162,7 +162,8 @@ Secondly the matcher invocation is converted:
 == Todo
 
 * have eql match [1,2] [1,2]
-* better printing of objects .. recursive for array, html tag escaped, etc object.selector.length == 0 ? object.get(0) : "'" + object.selector + "'"
+* better printing of objects .. recursive for array, html tag escaped, etc "<" + object.tagName + " " + (object.className != "" ? "class='" + object.className + "'" : "") + 
+      (object.id != "" ? "id='" + object.id + "'" : "") + ">"
 * allow chaining of matchers within grammar
 * add JSpec.extend
 * auto-merge default context?

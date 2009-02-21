@@ -34,6 +34,10 @@ describe 'jQuery matchers'
     this.elem = $(html)
   end
   
+  it 'should fail with pretty print of element'
+    this.elem.should_have_tag('foobar')
+  end
+  
   it 'have_tag'
     this.elem.should_have_tag('label')
     this.elem.should_have_tag('em')
