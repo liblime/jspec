@@ -52,8 +52,8 @@ describe 'Matchers'
   
   it 'be_empty'
     var string = '', array = []
-    string.should_be_empty()
-    array.should_be_empty()
+    string.should_be_empty
+    array.should_be_empty
   end
   
   it 'have_length'
