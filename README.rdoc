@@ -147,8 +147,6 @@ To reset the context simply assign null to obtain the original context.
 * allow chaining of matchers within grammar
 * add JSpec.extend
 * auto-merge default context?
-* ometa js or jscc?
-* add pre-processing to prevent pollution of prototypes
 * JSpec exceptions .. evaluations .. better debugging
 * add formatter hooks to display spinner etc
 * finish terminal usage
