@@ -153,9 +153,8 @@ Secondly the matcher invocation is converted:
 
 == Misc
 
-* \_\_END\_\_
-  - Place the \_\_END\_\_ token in your document to prevent evaluation of
-    the following code. Useful for quickly debugging or speeding up suites.
+* Place the \_\_END\_\_ token in your document to prevent evaluation of
+  the following code. Useful for quickly debugging or speeding up suites.
 
 * For more information consult the JSpec source code documentation.
       
