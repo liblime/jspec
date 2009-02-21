@@ -53,7 +53,7 @@ then run any number of specific suites, and report.
 
   describe 'Shopping cart'
 
-    before each
+    before_each
       this.cart = new ShoppingCart
     end
     
