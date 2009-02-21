@@ -11,6 +11,10 @@ describe 'Positive specs'
     'bar'.should_not_equal('foo')
   end
   
+  // it 'should pass using chaining of assertions'
+  //   'foo'.should_equal('foo').should_be true
+  // end
+  
 end
 
 describe 'Negative specs'
