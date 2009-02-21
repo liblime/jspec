@@ -144,6 +144,9 @@ To reset the context simply assign null to obtain the original context.
       
 == Todo
 
+* 'foobar' should include 'foo'    =>   match('foobar', 'include', 'foo')
+* 'foo' should not have_length 2    =>   match('foo', 'have_length', 'foo')
+* display spec body when failing instead of message??... test in branch
 * auto-merge default context
 * ometa js or jscc?
 * add pre-processing to prevent pollution of prototypes
