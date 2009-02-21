@@ -118,9 +118,15 @@ In most cases the default context will suffice, in combination with the
 you will loose functionality provided by it, unless you manually merge it
 into your custom context.
 
+To reset the context simply assign null to obtain the original context.
+
   ...
   before
     JSpec.context = { foo : 'bar' }
+  end
+
+  after
+    JSpec.context = null
   end
 
   it 'will work ;)'
