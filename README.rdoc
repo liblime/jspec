@@ -161,6 +161,9 @@ Secondly the matcher invocation is converted:
       
 == Todo
 
+* make match() have should param not negate ... reads better with true bool
+* make others using negate have args at the end so that arguments can be used in applying for multi-args
+* recursive check for include() test..
 * have eql match [1,2] [1,2]
 * better printing of objects .. recursive for array, html tag escaped, etc "<" + object.tagName + " " + (object.className != "" ? "class='" + object.className + "'" : "") + 
       (object.id != "" ? "id='" + object.id + "'" : "") + ">"
