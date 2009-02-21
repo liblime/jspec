@@ -28,6 +28,10 @@ describe 'Negative specs'
     'test'.should_equal('foo')
   end
   
+  it 'should fail and print array with square braces'
+    [1,2].should_equal([1,3])
+  end
+  
 end
 
 describe 'Misc'
