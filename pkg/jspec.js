@@ -183,10 +183,10 @@ var JSpec = {
     if (!report) throw 'JSpec requires div#jspec to output its reports'
 
     markup += 
-    '<div id="jspec-report"><div class="heading">' +
-    '<span class="passes">Passes: <em>' + results.stats.passes + '</em></span> ' +
-    '<span class="failures">Failures: <em>' + results.stats.failures + '</em></span>' +
-    '</div><div class="suites">'
+    '<div id="jspec-report"><div class="heading">                                   \
+    <span class="passes">Passes: <em>' + results.stats.passes + '</em></span>       \
+    <span class="failures">Failures: <em>' + results.stats.failures + '</em></span> \
+    </div><div class="suites">'
     
     results.each(results.suites, function(description, suite){
       if (suite.ran) {
@@ -359,6 +359,7 @@ var JSpec = {
    * Pre-process capture body.
    *
    * - Allow optional parents like should_be_true
+   * - Convert matchers to prevent pollution of core object prototypes
    *
    * @param  {string} body
    * @return {Type}
