@@ -7,6 +7,7 @@ providing simple installation, usage, and extremely low learning curve.
 == Features
 
 * Sexiest syntax of them all
+* Does not pollute core object prototypes
 * Evalute or load any number of suites
 * Several helpful formatters
 * Custom formatters
@@ -133,6 +134,22 @@ To reset the context simply assign null to obtain the original context.
     this.foo.should_equal 'bar'
   end
   ...
+
+== Pre-processor
+
+The pre-processing capability of JSpec is extremely powerful. Your JavaScript
+code is not necessarily what it seems. For example when you seemingly invoke a
+object's prototype like below:
+
+  'foobar'.should_include 'bar'
+
+First parens are added:
+
+  'foobar'.should_include('bar')
+
+Secondly the matcher invocation is converted:
+
+  JSpec.match('foobar', 'should', 'include', 'bar')
 
 == Misc
 
