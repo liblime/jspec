@@ -3,7 +3,7 @@
 
 var JSpec = {
   
-  version : '0.3.2',
+  version : '0.4.0',
   main    : this,
   suites  : {},
   stats   : { specs : 0, assertions : 0, failures : 0, passes : 0 },
@@ -283,23 +283,23 @@ var JSpec = {
   // --- Methods
   
   /**
-   * Invoke a matcher. Useful when creating custom matchers
-   * so that you may utilize, or negate others when creating your own.
+   * Invoke a matcher. 
    *
-   * this.match('test', 'be_a', String)
+   * this.match('test', 'should', 'be_a', String)
    * 
    * @param  {object} actual
+   * @param  {bool, string} negate
    * @param  {string} name
    * @param  {object} expected
-   * @param  {bool} negate
    * @return {bool}
    * @api public
    */
   
-  match : function(actual, name, expected, negate) {
-    negate = negate || false
+  match : function(actual, negate, name, expected) {
+    if (typeof negate == 'string') negate = negate == 'should' ? false : true
     var matcher = new JSpec.Matcher(name, this.matchers[name], expected, actual, negate)
-    return matcher.passes()
+    JSpec.currentSpec.assertions.push(matcher.exec())
+    return matcher.result
   },
   
   /**
@@ -331,44 +331,10 @@ var JSpec = {
    */
   
   addMatchers : function(matchers) {
+    // TODO: this.extend(o, o)
     this.each(matchers, function(name, body){
-      this.addMatcher(name, body)
+      this.matchers[name] = body
     })
-    return this
-  },
-  
-  /**
-   * Add a matcher.
-   *
-   * @param  {string} name
-   * @param  {string, hash} body
-   * @return {JSpec}
-   * @api public
-   */
-   
-   addMatcher : function(name, body) {
-     this._addMatcher(name, body, true)._addMatcher(name, body, false)
-   },
-  
-  /**
-   * Add raw matcher, this requires that you specify the negate
-   * parameter, use addMatcher instead.
-   *
-   * @param  {string} name
-   * @param  {string, hash} body
-   * @param  {bool} negate
-   * @return {JSpec}
-   * @api private
-   */
-  
-  _addMatcher : function(name, body, negate) {
-    Object.prototype['should_' + (negate ? 'not_' : '') + name] = function(other) {
-      var matcher = new JSpec.Matcher(name, body, other, this, negate)
-      if (JSpec.currentSpec) {
-        JSpec.currentSpec.assertions.push(matcher.exec())
-        return matcher.result
-      }
-    }
     return this
   },
   
@@ -400,7 +366,12 @@ var JSpec = {
    */
   
   preProcessBody : function(body) {
+    // Allow optional parens for matchers
     body = body.replace(/\.should_(\w+)(?: |$)(.*)$/gm, '.should_$1($2)')
+    // Convert to non-polluting match() invocation
+    body = body.replace(/(.+?)\.(should(?:_not)?)_(\w+)\((.*)\)$/gm, 'JSpec.match($1, "$2", "$3", $4)')
+    // Remove expected arg ', )' left when not set
+    body = body.replace(/, \)$/gm, ')')
     return body
   },
   
@@ -413,12 +384,14 @@ var JSpec = {
    */
    
   parse : function(input) {
-    var describing, specing, capturing
+    var describing, specing, capturing, commenting
     var token, describe, spec, capture, body = []
     var tokens = this.tokenize(input)
     
     while (tokens.length) {
       token = tokens.shift()
+      
+      if (commenting && token != "\n") continue
       
       switch (token) {
         case 'end':
@@ -438,14 +411,12 @@ var JSpec = {
           }
           break
           
-        case 'before':
-        case 'after':
-        case 'before_each':
-        case 'after_each': capturing = true; break
-        
-        case 'describe': describing = true; break
-        case 'it'      : specing = true;    break
-        case '__END__' : return this;       break
+        case 'before': case 'after': case 'before_each': case 'after_each': capturing = true; break
+        case "\n"       : commenting = false; break
+        case '//'       : commenting = true;  break
+        case 'describe' : describing = true;  break
+        case 'it'       : specing = true;     break
+        case '__END__'  : return this;        break
       }
       
       if (spec || capture) {
@@ -473,7 +444,7 @@ var JSpec = {
   
   tokenize : function(input) {
     if (input.constructor == Array) return input
-    var regexp = /(?:__END__|end|before_each|after_each|before|after|it|describe|'.*?')(?= |\n|$)|\n|./gm
+    var regexp = /(?:__END__|end|before_each|after_each|before|after|it|describe|'.*?')(?= |\n|$)|\/\/|\n|./gm
     return input.match(regexp)
   },
   
