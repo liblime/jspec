@@ -87,11 +87,11 @@ then run any number of specific suites, and report.
   
   * jQuery
   
-  - have_tag       have exactly one tag   
-  - have_tags      have more than one tag
-  - have_child     have exactly one child
-  - have_children  have more than one child
-  - have_text      have plain text
+  - have_tag         have exactly one tag   
+  - have_tags        have more than one tag
+  - have_child       have exactly one child
+  - have_children    have more than one child
+  - have_text        have plain text
   - have_value     
   - have_class
   - be_visible
@@ -139,9 +139,12 @@ To reset the context simply assign null to obtain the original context.
 * \_\_END\_\_
   - Place the \_\_END\_\_ token in your document to prevent evaluation of
     the following code. Useful for quickly debugging or speeding up suites.
+
+* For more information consult the JSpec source code documentation.
       
 == Todo
 
+* auto-merge default context
 * ometa js or jscc?
 * add pre-processing to prevent pollution of prototypes
 * JSpec exceptions .. evaluations .. better debugging
