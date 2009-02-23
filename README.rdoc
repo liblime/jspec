@@ -158,9 +158,12 @@ Secondly the matcher invocation is converted:
   the below it code. Useful for quickly debugging or speeding up suites.
 
 * For more information consult the JSpec source code documentation.
+
+* Get the TextMate bundle at https://github.com/visionmedia/jspec.tmbundle/tree
       
 == Todo
 
+* run time duration displayed / tracked on report
 * output div formatter option
 * alias element() to elements()
 * make match() have should param not negate ... reads better with true bool
