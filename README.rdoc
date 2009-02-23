@@ -108,6 +108,7 @@ using the exec() method, then run specific suite(s), and report.
                 
   - sandbox     used to generate new DOM sandbox, using jQuery object
   - element     same as invoking jQuery, just reads better and no need to worry about $ collisions
+  - elements    alias of element
 
 == Custom Contexts
 
