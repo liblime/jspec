@@ -13,6 +13,7 @@ if (typeof jQuery == 'undefined') throw 'jQuery is required to use JSpec jQuery 
 // --- Helpers
 
 JSpec.defaultContext.element = jQuery
+JSpec.defaultContext.elements = jQuery
 JSpec.defaultContext.defaultSandbox = JSpec.defaultContext.sandbox
 JSpec.defaultContext.sandbox = function() { return jQuery(JSpec.defaultContext.defaultSandbox()) }
 

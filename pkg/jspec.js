@@ -3,7 +3,7 @@
 
 var JSpec = {
   
-  version : '0.4.0',
+  version : '0.4.1',
   main    : this,
   suites  : {},
   stats   : { specs : 0, assertions : 0, failures : 0, passes : 0 },
@@ -116,9 +116,12 @@ var JSpec = {
     
     function print(object) {
       if (object == null) return ''
-      else if (object.jquery) return object.selector.length == 0 ? object.get(0) : "'" + object.selector + "'"
-      else if (typeof object == 'string') return "'" + object + "'"
-      else return object
+      if (object.jquery && object.selector.length > 0) return "selector '" + object.selector + "'"
+      switch(object.constructor) {
+        case Array:       return '[' + object + ']'; break
+        case String:      return "'" + object + "'"; break
+        default:          return object
+      }
     }
     
     // Generate matcher message
@@ -480,12 +483,13 @@ var JSpec = {
   /**
    * Run a suite.
    *
-   * @param  {Suite}  suite
+   * @param  {Suite, string}  suite
    * @return {JSpec}
    * @api public
    */
   
   runSuite : function(suite) {
+    if (typeof suite == 'string') suite = this.suites[suite]
     suite.ran = true
     suite.hook('before')
     this.each(suite.specs, function(spec) {

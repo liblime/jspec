@@ -1,4 +1,11 @@
 
+=== 0.4.1 / 2009-02-22
+
+* Added elements() alias of element()
+* Added support for string passed to runSuite; runSuite('Matchers') is the same as
+  runSuite(JSpec.suites['Matchers']).
+* Fixed some documentation
+
 === 0.4.0 / 2009-02-20
 
 * Added comment literal (//)
