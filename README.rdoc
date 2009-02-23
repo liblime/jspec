@@ -55,14 +55,13 @@ loaded using the exec method. Below is an example:
   ...
 
 To run specific suites we first load and evaluate a JSpec script,
-using the exec() method, then run, and report.
+using the exec() method, then run specific suite(s), and report.
   
   ...
   function runSuites() {
     JSpec
     .exec('spec.core.js')
-    .runSuite(JSpec.suites['Matchers'])
-    .run()
+    .runSuite('Matchers')
     .report()
   }
   ...
