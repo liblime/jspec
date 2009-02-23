@@ -9,12 +9,28 @@ and absolutely no pollution to core object prototypes.
 
 * Sexiest syntax of them all
 * Does not pollute core object prototypes
-* Evalute or load any number of suites
+* Evalute any number of suites (or cherry pick specific suites loaded)
 * Several helpful formatters
 * Custom formatters
 * Evaluation contexts for providing helper methods and properties
 * Allows parens to be optional when using matchers ('foobar'.should_include 'foo')
 * Extremely simple matcher declaration
+
+== Examples
+
+  describe 'Shopping cart'
+
+    before_each
+      this.cart = new ShoppingCart
+    end
+    
+    it 'should add products'
+      this.cart.addProduct('cookie')
+      this.cart.products.should_include('cookie')
+      this.cart.should_not_be_empty
+    end
+    
+  end
 
 == Installation
 
@@ -39,33 +55,17 @@ loaded using the exec method. Below is an example:
   ...
 
 To run specific suites we first load and evaluate a JSpec script,
-then run any number of specific suites, and report.
+using the exec() method, then run, and report.
   
   ...
   function runSuites() {
     JSpec
-    .eval(JSpec.load('test.js'))
+    .exec('spec.core.js')
     .runSuite(JSpec.suites['Matchers'])
     .run()
     .report()
   }
   ...
-
-== Examples
-
-  describe 'Shopping cart'
-
-    before_each
-      this.cart = new ShoppingCart
-    end
-    
-    it 'should add products'
-      this.cart.addProduct('cookie')
-      this.cart.products.should_include('cookie')
-      this.cart.empty.should_be_false
-    end
-    
-  end
   
 == Matchers
 
@@ -161,6 +161,8 @@ Secondly the matcher invocation is converted:
       
 == Todo
 
+* output div formatter option
+* alias element() to elements()
 * make match() have should param not negate ... reads better with true bool
 * make others using negate have args at the end so that arguments can be used in applying for multi-args
 * recursive check for include() test..
