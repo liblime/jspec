@@ -163,6 +163,7 @@ Secondly the matcher invocation is converted:
       
 == Todo
 
+* store / use line number in exceptions
 * run time duration displayed / tracked on report
 * output div formatter option
 * alias element() to elements()
