@@ -1,4 +1,8 @@
 
+=== 0.5.1 / 2009-02-24
+
+* Damn auto-release messed up
+
 === 0.5.0 / 2009-02-24
 
 * Added async support for jQuery

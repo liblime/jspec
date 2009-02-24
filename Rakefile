@@ -60,5 +60,5 @@ task :release do
 end
 
 def version
-  $1 if File.read('lib/jspec.js').match /version : '(.*?)'/
+  $1 if File.read('lib/jspec.js').match /version *: *'(.*?)'/
 end
