@@ -166,17 +166,13 @@ Secondly the matcher invocation is converted:
 * store / use line number in exceptions
 * run time duration displayed / tracked on report
 * output div formatter option
-* alias element() to elements()
-* make match() have should param not negate ... reads better with true bool
-* make others using negate have args at the end so that arguments can be used in applying for multi-args
+* always pass matcher args as array 
 * recursive check for include() test..
-* have eql match [1,2] [1,2]
-* better printing of objects .. recursive for array, html tag escaped, etc "<" + object.tagName + " " + (object.className != "" ? "class='" + object.className + "'" : "") + 
-      (object.id != "" ? "id='" + object.id + "'" : "") + ">"
+* have eql match [1,2, [1]] [1,2, [1]]
+* better printing of objects .. recursive for array, html tag escaped, etc 
 * allow chaining of matchers within grammar
 * add JSpec.extend
 * auto-merge default context?
-* JSpec exceptions .. evaluations .. better debugging
 * add formatter hooks to display spinner etc
 * finish terminal usage
 * nesting
