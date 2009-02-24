@@ -15,6 +15,7 @@ and absolutely no pollution to core object prototypes.
 * Evaluation contexts for providing helper methods and properties
 * Allows parens to be optional when using matchers ('foobar'.should_include 'foo')
 * Extremely simple matcher declaration
+* Async support (jQuery only at the moment)
 
 == Examples
 
@@ -135,6 +136,17 @@ To reset the context simply assign null to obtain the original context.
     this.foo.should_equal 'bar'
   end
   ...
+
+== Async Support
+
+Currently only jspec.jquery.js supports async requests. JSpec uses jQuery.ajaxSetup and sets all
+requests to sync, which preserves execution order, and reports correctly.
+
+  it 'should load mah cookies (textfile)'
+    $.post('async', function(text){
+      text.should_eql 'cookies!'
+    })
+  end
 
 == Pre-processor
 
