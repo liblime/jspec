@@ -80,3 +80,13 @@ describe 'jQuery matchers'
   end
   
 end
+
+describe 'Async'
+
+  it 'should load mah cookies (textfile)'
+    $.post('async', function(text){
+      text.should_eql 'cookies!'
+    });
+  end
+  
+end
