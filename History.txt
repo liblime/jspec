@@ -1,4 +1,14 @@
 
+=== 0.5.0 / 2009-02-24
+
+* Added async support for jQuery
+* Added JSpec.requires for dependencies
+* Added JSpec.throw
+* Added JSpec.runSpec
+* Refactored jspec.jquery.js
+* Fixed evalBody exceptions, previously was not showing exception message
+* Fixed bug of JSpec interpreting // in a string such as http:// to be a comment.
+
 === 0.4.1 / 2009-02-22
 
 * Added elements() alias of element()

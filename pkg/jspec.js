@@ -1,12 +1,12 @@
-
+0.5.0
 // JSpec - Core - Copyright TJ Holowaychuk <tj@vision-media.ca> (MIT Licensed)
 
 var JSpec = {
   
-  version : '0.4.1',
-  main    : this,
-  suites  : {},
-  stats   : { specs : 0, assertions : 0, failures : 0, passes : 0 },
+  version  : '0.4.1',
+  main     : this,
+  suites   : {},
+  stats    : { specs : 0, assertions : 0, failures : 0, passes : 0 },
   
   // --- Matchers
   
@@ -245,7 +245,7 @@ var JSpec = {
     
     this.hook = function(hook) {
       if (body = this.hooks[hook]) 
-        JSpec.evalBody(body, "Error in hook '" + hook + "', suite '" + this.description + "'")  
+        JSpec.evalBody(body, "Error in hook '" + hook + "', suite '" + this.description + "': ")  
     }
   },
   
@@ -355,7 +355,7 @@ var JSpec = {
       var runner = function() { eval(JSpec.preProcessBody(body)) }
       runner.call(this.context || this.defaultContext)
     } 
-    catch(e) { throw (errorMessage || 'Error: ') + e }
+    catch(e) { this.throw(errorMessage + e) }
   },
   
   /**
@@ -395,7 +395,7 @@ var JSpec = {
     while (tokens.length) {
       token = tokens.shift()
       
-      if (commenting && token != "\n") continue
+      if (commenting && token != "\n" && !specing && !capturing) continue
       
       switch (token) {
         case 'end':
@@ -494,14 +494,52 @@ var JSpec = {
     suite.hook('before')
     this.each(suite.specs, function(spec) {
       suite.hook('before_each')
-      this.currentSpec = spec
-      this.stats.specs += 1
-      this.evalBody(spec.body, "Error in spec '" + spec.description + "': ")
-      this.stats.assertions += spec.assertions.length
+      this.runSpec(spec)
       suite.hook('after_each')
     })
     suite.hook('after')
     return this
+  },
+  
+  /**
+   * Run a spec.
+   *
+   * @param  {Spec} spec
+   * @api public
+   */
+  
+  runSpec : function(spec) {
+    this.currentSpec = spec
+    this.stats.specs++
+    this.evalBody(spec.body, "Error in spec '" + spec.description + "': ")
+    this.stats.assertions += spec.assertions.length
+  },
+  
+  /**
+   * Require a dependency, with optional message.
+   *
+   * @param  {string} dependency
+   * @param  {string} message (optional)
+   * @api public
+   */
+  
+  requires : function(dependency, message) {
+    try { eval(dependency) }
+    catch (e) { throw 'JSpec depends on ' + dependency + ' ' + (message || '') }
+  },
+  
+  /**
+   * Throw a JSpec related error. Use when you wish to include
+   * the current line number.
+   *
+   * TODO: line number! :D
+   *
+   * @param  {string} error
+   * @api public
+   */
+  
+  throw : function(error) {
+    throw 'jspec(): ' + error
   },
   
   /**
