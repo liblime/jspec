@@ -79,37 +79,31 @@ describe 'Matchers'
   end
   
   it 'respond_to'
-    var string = 'test'
-    string.should_not_respond_to('whatever')
-    string.should_respond_to('toString')
+    'test'.should_not_respond_to('whatever')
+    'test'.should_respond_to('toString')
   end
   
   it 'include'
-    'hey there'.should_include('hey')
-    var numbers = [1, 2, 3], object = { hey : 'there' }
-    numbers.should_include(2)
-    numbers.should_not_include(5)
-    object.should_include('hey')
+    'hey there'.should_include 'hey'
+    [1, 2, 3].should_include 2
+    [1, 2, 3].should_not_include 5
+    { hey : 'there' }.should_include 'hey'
   end
   
   it 'be_a'
-    var array = []
-    'test'.should_be_a(String)
-    array.should_be_an(Array)
+    'test'.should_be_a String
+    [].should_be_an Array
   end
   
   it 'throw_error'
-    var lambda = function() { throw 'error' }
-    lambda.should_throw_error()
-    var lambda = function() { return 'test' }
-    lambda.should_not_throw_error()
+    function() { throw 'error' }.should_throw_error
+    function() { return 'test' }.should_not_throw_error
   end
   
   it 'be_type'
-    var object = {}, func = function(){}
     'hey'.should_be_type('string')
-    object.should_be_type('object')
-    func.should_be_type('function')
+    {}.should_be_type('object')
+    function(){}.should_be_type('function')
   end
 
 end
@@ -131,16 +125,16 @@ describe 'Position hooks'
   end
   
   it 'before should work'
-    this.passBefore.should_be_true()
+    this.passBefore.should_be_true
   end
   
   it 'before should work again'
-    this.passBefore.should_be_true()
+    this.passBefore.should_be_true
   end
   
   it 'before / after each should work'
-    this.beforeSpecNum.should_equal(3)
-    this.afterSpecNum.should_equal(2)
+    this.beforeSpecNum.should_equal 3
+    this.afterSpecNum.should_equal 2
   end
   
 end
@@ -172,6 +166,10 @@ describe 'Pre-processor'
   it 'should allow parens to be optional with args'
     'foobar'.should_include 'foo'
   end
+  
+  it 'should allow literals without assigning as variables'
+    {}.should_be_an Object
+  end
 
 end
 
@@ -186,7 +184,7 @@ describe 'Custom Contexts'
   end
 
   it 'should allow helpers'
-    this.iLike.should_equal('cookies')
+    this.iLike.should_equal 'cookies'
   end
 
 end
