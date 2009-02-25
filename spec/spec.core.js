@@ -65,6 +65,12 @@ describe 'Matchers'
     array.should_be_empty
   end
   
+  it 'be_null'
+    var foo = null
+    foo.should_be_null
+    'test'.should_not_be_null
+  end
+  
   it 'have_length'
     'test'.should_have_length(4)
   end

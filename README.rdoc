@@ -76,6 +76,7 @@ using the exec() method, then run specific suite(s), and report.
   - be_a, be_an      have constructor of x
   - be_at_least      >=
   - be_at_most       <=
+  - be_null          == null
   - be_empty         length of 0
   - be_true          == true
   - be_false         == false
@@ -175,7 +176,6 @@ Secondly the matcher invocation is converted:
       
 == Todo
 
-* store / use line number in exceptions
 * run time duration displayed / tracked on report
 * output div formatter option
 * always pass matcher args as array 
