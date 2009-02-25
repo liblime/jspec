@@ -53,8 +53,8 @@ describe 'Matchers'
   end
   
   it 'equal'
-    'test'.should_equal('test')
-    '1'.should_not_equal(1)
+    'test'.should_equal 'test' 
+    '1'.should_not_equal 1
   end
   
   it 'match'
@@ -75,7 +75,7 @@ describe 'Matchers'
   end
   
   it 'have_length'
-    'test'.should_have_length(4)
+    'test'.should_have_length 4
   end
   
   it 'respond_to'
@@ -148,15 +148,15 @@ end
 describe 'Matcher messages'
 
   it 'Fail with negative message'
-    '1'.should_not_be(true)
+    '1'.should_not_be_true
   end
   
   it 'Fail with positive message'
-    false.should_be(true)
+    false.should_be_true
   end
   
   it 'Fail second assertion message'
-    true.should_be(true)
+    true.should_be_true
     'bar'.should_include('foo')
     'bar'.should_match(/foo/)
   end
