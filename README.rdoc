@@ -71,7 +71,6 @@ using the exec() method, then run specific suite(s), and report.
 
   * Core
   
-  - eql, be          ==
   - equal            ===
   - be_a, be_an      have constructor of x
   - be_at_least      >=
@@ -87,6 +86,9 @@ using the exec() method, then run specific suite(s), and report.
   - include          include substring, array element, or hash key
   - match            string should match regexp x
   - respond_to       property x should be a function
+  - eql, be          matches simple literals (strings, numbers) with == . 
+                     However composites like arrays or 'hashes' are recursively matched,
+                     meaning that [1, 2, [3]].should_eql([1, 2, [3]]) will be true.
   
   * jQuery
   
@@ -180,7 +182,6 @@ Secondly the matcher invocation is converted:
 * output div formatter option
 * always pass matcher args as array 
 * recursive check for include() test..
-* have eql match [1,2, [1]] [1,2, [1]]
 * better printing of objects .. recursive for array, html tag escaped, etc 
 * allow chaining of matchers within grammar
 * add JSpec.extend

@@ -49,6 +49,7 @@ describe 'Matchers'
     '1'.should_be 1
     [1, 2].should_eql [1, 2]
     [1, 2, [3], { foo : 'bar' }].should_eql [1, 2, [3], { foo : 'bar' }]
+    { foo : 'bar' }.should_eql { foo : 'bar' }
   end
   
   it 'equal'
