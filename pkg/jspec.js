@@ -3,7 +3,7 @@
 
 var JSpec = {
   
-  version : '0.5.1',
+  version : '0.6.0',
   main    : this,
   suites  : {},
   stats   : { specs : 0, assertions : 0, failures : 0, passes : 0 },
@@ -11,7 +11,6 @@ var JSpec = {
   // --- Matchers
   
   matchers : {
-    eql             : "==",
     be              : "alias eql",
     equal           : "===",
     be_greater_than : ">",
@@ -20,6 +19,7 @@ var JSpec = {
     be_at_most      : "<=",
     be_a            : "actual.constructor == expected",
     be_an           : "alias be_a",
+    be_null         : "actual == null",
     be_empty        : "actual.length == 0",
     be_true         : "actual == true",
     be_false        : "actual == false",
@@ -27,9 +27,14 @@ var JSpec = {
     match           : "typeof actual == 'string' ? actual.match(expected) : false",
     have_length     : "actual.length == expected",
     respond_to      : "typeof actual[expected] == 'function'",
+    
+    eql : { match : function(expected, actual) {
+      if (actual.constructor == Array || actual.constructor == Object) return this.hash(actual) == this.hash(expected)
+      else return actual == expected
+    }},
 
     include : { match : function(expected, actual) {
-      if (actual.constructor == String) return actual.match(expected)
+      if (typeof actual == 'string') return actual.match(expected)
       else return expected in actual
     }},
     
@@ -157,8 +162,9 @@ var JSpec = {
     // Return result of match
 
     this.match = function() {
-      expected = expected == null ? null : expected.valueOf()
-      return matcher.match.call(JSpec, expected, actual.valueOf())
+      if (expected != null) expected = expected.valueOf()
+      if (actual != null) actual = actual.valueOf()
+      return matcher.match.call(JSpec, expected, actual)
     }
     
     // Boolean match result
@@ -183,7 +189,7 @@ var JSpec = {
   
   DOMFormatter : function(results, options) {
     var markup = '', report = document.getElementById('jspec')
-    if (!report) throw 'JSpec requires div#jspec to output its reports'
+    if (!report) this.throw('requires div#jspec to output its reports')
 
     markup += 
     '<div id="jspec-report"><div class="heading">                                   \
@@ -284,6 +290,23 @@ var JSpec = {
   },
   
   // --- Methods
+  
+  /**
+   * Generates a hash of the object passed. 
+   *
+   * @param  {object} object
+   * @return string
+   * @api public
+   */
+  
+  hash : function(object) {
+    var hash = ''
+    this.each(object, function(key ,value){
+      if (value.constructor == Array || value.constructor == Object ) hash += this.hash(value)
+      else hash += key.toString() + value.toString()
+    })
+    return hash
+  },
   
   /**
    * Invoke a matcher. 
@@ -525,21 +548,19 @@ var JSpec = {
   
   requires : function(dependency, message) {
     try { eval(dependency) }
-    catch (e) { throw 'JSpec depends on ' + dependency + ' ' + (message || '') }
+    catch (e) { this.throw('depends on ' + dependency + ' ' + (message || '')) }
   },
   
   /**
    * Throw a JSpec related error. Use when you wish to include
    * the current line number.
    *
-   * TODO: line number! :D
-   *
    * @param  {string} error
    * @api public
    */
   
   throw : function(error) {
-    throw 'jspec(): ' + error
+    throw 'jspec: ' + error
   },
   
   /**
@@ -575,7 +596,7 @@ var JSpec = {
       load(file)
     }
     else {
-      throw 'Cannot load ' + file
+      this.throw('cannot load ' + file)
     }
   },
   
@@ -593,3 +614,4 @@ var JSpec = {
 }
 
 JSpec.addMatchers(JSpec.matchers)
+

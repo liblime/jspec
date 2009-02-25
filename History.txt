@@ -1,4 +1,12 @@
 
+=== 0.6.0 / 2009-02-24
+
+* Added JSpec.hash 
+* Added be_null matcher
+* Allow recursive composite matching using should_eql and should_not_eql
+  For example [1, 2, [3]].should_eql([1, 2, [3]]) is true, works with object
+  'hashes' as well.
+
 === 0.5.1 / 2009-02-24
 
 * Damn auto-release messed up
