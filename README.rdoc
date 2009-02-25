@@ -167,6 +167,15 @@ Secondly the matcher invocation is converted:
 
   JSpec.match('foobar', 'should', 'include', 'bar')
 
+This also means instead of:
+
+  var object = { foo : 'bar' }
+  object.should_include 'foo'
+
+We can do:
+ 
+  { foo : 'bar' }.should_include 'foo'
+
 == Misc
 
 * Place the \_\_END\_\_ token in your document to prevent interpretation of
