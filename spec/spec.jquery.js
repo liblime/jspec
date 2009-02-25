@@ -42,14 +42,14 @@ end
 describe 'jQuery matchers'
 
   before_each
-    var html = '<p><label><em>Save?</em></label>' +
-    '<select class="save" style="display: none;">' +
-    '<option value="0">No</option>' +
-    '<option value="1">Yes</option>' +
-    '</select>' +
-    '<strong>test</strong>' +
-    '<strong>test</strong>' +
-    '</p>'
+    var html = '<p><label><em>Save?</em></label>    \
+    <select class="save" style="display: none;">    \
+    <option value="0">No</option>                   \
+    <option value="1">Yes</option>                  \
+    </select>                                       \
+    <strong>test</strong>                           \
+    <strong>test</strong>                           \
+    </p>'
     this.elem = $(html)
   end
   

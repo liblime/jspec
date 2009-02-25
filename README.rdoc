@@ -190,7 +190,7 @@ We can do:
 * eql match without hash, this will benefit when matching functions? worth it?..
 * run time duration displayed / tracked on report
 * output div formatter option
-* always pass matcher args as array 
+* always pass matcher args as array (update docs)
 * recursive check for include() test..
 * better printing of objects .. recursive for array, html tag escaped, etc 
 * allow chaining of matchers within grammar
