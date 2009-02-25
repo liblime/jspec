@@ -44,9 +44,11 @@ end
 describe 'Matchers'
 
   it 'eql'
-    'test'.should_eql('test')
-    '1'.should_eql(1)
-    '1'.should_be(1)
+    'test'.should_eql 'test'
+    '1'.should_eql 1
+    '1'.should_be 1
+    [1, 2].should_eql [1, 2]
+    [1, 2, [3], { foo : 'bar' }].should_eql [1, 2, [3], { foo : 'bar' }]
   end
   
   it 'equal'
