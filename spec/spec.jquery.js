@@ -28,7 +28,7 @@ describe 'Async'
     })
   end
   
-  it 'should load mah cookies again (ensure multiple async requests work)'
+  it 'should load mah cookies twice (ensure multiple async requests work)'
     $.post('async', function(text){
       text.should_eql 'cookies!'
     })

@@ -187,7 +187,6 @@ We can do:
       
 == Todo
 
-* eql match without hash, this will benefit when matching functions? worth it?..
 * run time duration displayed / tracked on report
 * output div formatter option
 * always pass matcher args as array (update docs)
