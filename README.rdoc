@@ -195,8 +195,6 @@ There is also an alternative closure literal so these are equivalent:
 
 == Todo
 
-* enclose in (function(){})() to limit scope and clean up JSpec.Blah
-* use Something.prototype = { methods } convention to clean up the this.whatever
 * have include() match object hashes as well? so [1,2,[1]].should_include [1]  => true
 * always pass matcher args as array (update docs)
 * better printing of objects .. recursive for array, html tag escaped, truncating of final string, etc 
