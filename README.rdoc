@@ -69,6 +69,9 @@ using the exec() method, then run specific suite(s), and report.
     .report()
   }
   ...
+
+You may optionally want to use sources in the /pkg directory
+for your project, since it includes compressed alternatives.
   
 == Matchers
 
