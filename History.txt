@@ -1,4 +1,11 @@
 
+=== 0.6.2 / 2009-02-26
+
+* Changed; using $ in jspec.jquery.js for JSpec, take that jQuery ;)
+* Added addMatchers, print, hash, and each as 'utility functions' this allows 
+  JSpec to do each(...) internally instead of JSpec.each(...), while still preventing
+  pollution of the global scope.
+
 === 0.6.1 / 2009-02-26
 
 * Added closrue literal -{ (view README)

@@ -1,13 +1,13 @@
 
 // JSpec - jQuery - Copyright TJ Holowaychuk <tj@vision-media.ca> (MIT Licensed)
 
-// TODO: have_attr('attr', value)
+(function($){
 
-(function(JS){
+  // TODO: have_attr('attr', value)
   
   // --- Dependencies
 
-  JS.requires('jQuery', 'when using jspec.jquery.js')
+  $.requires('jQuery', 'when using jspec.jquery.js')
   
   // --- Async Support
 
@@ -15,14 +15,14 @@
 
   // --- Helpers
 
-  JS.defaultContext.element = jQuery
-  JS.defaultContext.elements = jQuery
-  JS.defaultContext.defaultSandbox = JS.defaultContext.sandbox
-  JS.defaultContext.sandbox = function() { return jQuery(JS.defaultContext.defaultSandbox()) }
+  $.defaultContext.element = jQuery
+  $.defaultContext.elements = jQuery
+  $.defaultContext.defaultSandbox = $.defaultContext.sandbox
+  $.defaultContext.sandbox = function() { return jQuery($.defaultContext.defaultSandbox()) }
 
   // --- Matchers
 
-  JS.addMatchers({
+  $.addMatchers({
     have_tag      : "jQuery(expected, actual).length == 1",
     have_tags     : "jQuery(expected, actual).length > 1",
     have_child    : "jQuery(actual).children(expected).length == 1",
