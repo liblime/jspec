@@ -38,7 +38,8 @@ and much more.
 
 Simply download JSpec and include JSpec.css and JSpec.js in your markup.
 A div with the id of #jspec should be present for displaying when using
-the default formatter. 
+the default DOM formatter, or you may pass options to report() to alter
+these default settings (view source code documentation for options). 
 
 JSpec scripts should NOT be referenced via the <script> tag, they should be
 loaded using the exec method. Below is an example:
