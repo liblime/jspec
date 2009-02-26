@@ -190,6 +190,7 @@ We can do:
 
 * run time duration displayed / tracked on report
 * output div formatter option
+* have include() match object hashes as well? so [1,2,[1]].should_include [1]  => true
 * always pass matcher args as array (update docs)
 * better printing of objects .. recursive for array, html tag escaped, truncating of final string, etc 
 * allow chaining of matchers within grammar

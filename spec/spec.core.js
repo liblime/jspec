@@ -32,6 +32,20 @@ describe 'Negative specs'
     [1,2].should_equal([1,3])
   end
   
+  it 'Fail with negative message'
+    '1'.should_not_be_true
+  end
+  
+  it 'Fail with positive message'
+    false.should_be_true
+  end
+  
+  it 'Fail second assertion message'
+    true.should_be_true
+    'bar'.should_include('foo')
+    'bar'.should_match(/foo/)
+  end
+  
 end
 
 describe 'Misc'
@@ -137,23 +151,6 @@ describe 'Position hooks'
     this.afterSpecNum.should_equal 2
   end
   
-end
-
-describe 'Matcher messages'
-
-  it 'Fail with negative message'
-    '1'.should_not_be_true
-  end
-  
-  it 'Fail with positive message'
-    false.should_be_true
-  end
-  
-  it 'Fail second assertion message'
-    true.should_be_true
-    'bar'.should_include('foo')
-    'bar'.should_match(/foo/)
-  end
 end
 
 describe 'Pre-processor'

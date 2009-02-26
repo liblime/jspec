@@ -54,7 +54,6 @@ describe 'jQuery matchers'
   end
   
   it 'should fail with pretty print of element'
-    this.elem.should_have_tag('foobar')
   end
   
   it 'have_tag'
