@@ -1,4 +1,9 @@
 
+=== 0.6.3 / 2009-02-26
+
+* Added minification for jspec.jquery.js when packaging before release
+* Added compression of css when packaging before release
+
 === 0.6.2 / 2009-02-26
 
 * Changed; using $ in jspec.jquery.js for JSpec, take that jQuery ;)
