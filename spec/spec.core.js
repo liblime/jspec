@@ -167,6 +167,10 @@ describe 'Pre-processor'
   it 'should allow literals without assigning as variables'
     {}.should_be_an Object
   end
+  
+  it 'should allow alternative closure literal'
+    -{ throw 'test' }.should_throw_error
+  end
 
 end
 

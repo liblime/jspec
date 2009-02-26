@@ -178,6 +178,11 @@ We can do:
  
   { foo : 'bar' }.should_include 'foo'
 
+There is also an alternative closure literal so these are equivalent:
+
+  -{ throw 'test' }.should_throw_error
+  function() { throw 'test' }.should_throw_error
+
 == Misc
 
 * Place the \_\_END\_\_ token in your document to prevent interpretation of
@@ -186,7 +191,7 @@ We can do:
 * For more information consult the JSpec source code documentation.
 
 * Get the TextMate bundle at https://github.com/visionmedia/jspec.tmbundle/tree
-      
+
 == Todo
 
 * have include() match object hashes as well? so [1,2,[1]].should_include [1]  => true
