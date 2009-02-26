@@ -6,6 +6,7 @@ task :package => [:clear] do
     sh 'cp -fr lib/* pkg'
     minify 'lib/jspec.js', 'pkg/jspec.min.js'
     minify 'lib/jspec.jquery.js', 'pkg/jspec.jquery.min.js'
+    compress 'lib/jspec.css', 'pkg/jspec.min.css'
     sh 'git add pkg/.'
   rescue Exception => e
     puts "Failed to package: #{e}."
@@ -62,6 +63,12 @@ end
 
 def minify from, to
   sh "jsmin < #{from} > #{to}"
+end
+
+def compress from, to
+  File.open(to, 'w+') do |file|
+    file.write File.read(from).gsub(/(^[\t ]*)|\n/, '')
+  end
 end
 
 def version
