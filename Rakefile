@@ -4,8 +4,8 @@ task :package => [:clear] do
   begin
     sh 'mkdir pkg'
     sh 'cp -fr lib/* pkg'
-    sh "jsmin < lib/jspec.js > pkg/jspec.min.js"
-    sh "jsmin < lib/jspec.jquery.js > pkg/jspec.jquery.min.js"
+    minify 'lib/jspec.js', 'pkg/jspec.min.js'
+    minify 'lib/jspec.jquery.js', 'pkg/jspec.jquery.min.js'
     sh 'git add pkg/.'
   rescue Exception => e
     puts "Failed to package: #{e}."
@@ -58,6 +58,10 @@ task :release do
   rescue => e
     puts "Failed to release: #{e}"
   end
+end
+
+def minify from, to
+  sh "jsmin < #{from} > #{to}"
 end
 
 def version
