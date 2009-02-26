@@ -1,4 +1,9 @@
 
+=== 0.6.1 / 2009-02-26
+
+* Added closrue literal -{ (view README)
+* Added option to DOM formatter, now allows you to specify which element id to output to
+
 === 0.6.0 / 2009-02-24
 
 * Added JSpec.hash 

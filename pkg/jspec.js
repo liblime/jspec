@@ -1,9 +1,9 @@
-
+  
 // JSpec - Core - Copyright TJ Holowaychuk <tj@vision-media.ca> (MIT Licensed)
 
 var JSpec = {
   
-  version : '0.6.0',
+  version : '0.6.1',
   main    : this,
   suites  : {},
   stats   : { specs : 0, assertions : 0, failures : 0, passes : 0 },
@@ -117,15 +117,16 @@ var JSpec = {
       matcher = { match : function(expected, actual) { return eval(body) } }
     }
     
-    // Convert common objects to read-friendly strings
+    // Convert common objects to print-friendly strings
     
     function print(object) {
-      if (object == null) return ''
-      if (object.jquery && object.selector.length > 0) return "selector '" + object.selector + "'"
+      if (object == undefined) return '' 
+      else if (object == null) return 'null' 
+      else if (object.jquery && object.selector.length > 0) return "selector '" + object.selector + "'"
       switch(object.constructor) {
-        case Array:       return '[' + object + ']'; break
-        case String:      return "'" + object + "'"; break
-        default:          return object
+        case Array:   return '[' + object + ']'; break
+        case String:  return "'" + object + "'"; break
+        default:      return object
       }
     }
     
@@ -184,12 +185,16 @@ var JSpec = {
       
   /**
    * Default formatter, outputting to the DOM.
+   * 
+   * Options:
+   *   - reportToId  id of element to output reports to, defaults to 'jspec'
+   *
    * @api public
    */
   
   DOMFormatter : function(results, options) {
-    var markup = '', report = document.getElementById('jspec')
-    if (!report) this.throw('requires div#jspec to output its reports')
+    var markup = '', report = document.getElementById(options.reportToId || 'jspec')
+    if (!report) this.throw('requires the element #' + (options.reportToId || 'jspec') + ' to output its reports')
 
     markup += 
     '<div id="jspec-report"><div class="heading">                                   \
@@ -378,7 +383,7 @@ var JSpec = {
       var runner = function() { eval(JSpec.preProcessBody(body)) }
       runner.call(this.context || this.defaultContext)
     } 
-    catch(e) { this.throw(errorMessage + e) }
+    catch(e) { this.throw(errorMessage, e) }
   },
   
   /**
@@ -393,12 +398,15 @@ var JSpec = {
    */
   
   preProcessBody : function(body) {
+    // Allow -{ closure literal
+    body = body.replace('-{', 'function(){')
     // Allow optional parens for matchers
     body = body.replace(/\.should_(\w+)(?: |$)(.*)$/gm, '.should_$1($2)')
     // Convert to non-polluting match() invocation
     body = body.replace(/(.+?)\.(should(?:_not)?)_(\w+)\((.*)\)$/gm, 'JSpec.match($1, "$2", "$3", $4)')
     // Remove expected arg ', )' left when not set
     body = body.replace(/, \)$/gm, ')')
+    
     return body
   },
   
@@ -484,8 +492,8 @@ var JSpec = {
    */
   
   report : function(options) {
-    options = options || {}
-    this.formatter ? new this.formatter(this, options) : new JSpec.DOMFormatter(this, options)
+    this.formatter ? new JSpec.formatter(this, options || {}) 
+                   : new JSpec.DOMFormatter(this, options || {})
     return this
   },
   
@@ -555,12 +563,13 @@ var JSpec = {
    * Throw a JSpec related error. Use when you wish to include
    * the current line number.
    *
-   * @param  {string} error
+   * @param  {string} message
+   * @param  {Exception} error
    * @api public
    */
   
-  throw : function(error) {
-    throw 'jspec: ' + error
+  throw : function(message, error) {
+    throw 'jspec: ' + message + (error ? error.message + '; in ' + error.fileName + ' on line ' + error.lineNumber : '')
   },
   
   /**
@@ -614,4 +623,3 @@ var JSpec = {
 }
 
 JSpec.addMatchers(JSpec.matchers)
-
