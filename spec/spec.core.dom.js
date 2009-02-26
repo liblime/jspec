@@ -6,7 +6,7 @@ describe 'DOM Sandbox'
   end
   
   it 'should allow creation of sandboxes'
-    this.dom.should_be_a(HTMLDivElement)
+    this.dom.should_be_a HTMLDivElement
   end
   
 end
