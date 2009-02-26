@@ -36,7 +36,8 @@ and much more.
 
 == Installation
 
-Simply download JSpec and include JSpec.css and JSpec.js in your markup.
+Simply download JSpec and include JSpec.css and JSpec.js in your markup
+( head to the downloads section on Github, or clone this public repo).
 A div with the id of #jspec should be present for displaying when using
 the default DOM formatter, or you may pass options to report() to alter
 these default settings (view source code documentation for options). 
@@ -198,11 +199,9 @@ There is also an alternative closure literal so these are equivalent:
 * always pass matcher args as array (update docs)
 * better printing of objects .. recursive for array, html tag escaped, truncating of final string, etc 
 * allow chaining of matchers within grammar
-* add JSpec.extend
-* auto-merge default context?
 * add formatter hooks to display spinner etc
-* finish terminal usage
-* nesting
+* finish terminal formatter / usage
+* nesting / nested display
   
 == License 
 
