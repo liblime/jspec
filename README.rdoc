@@ -196,6 +196,24 @@ There is also an alternative closure literal so these are equivalent:
   -{ throw 'test' }.should_throw_error
   function() { throw 'test' }.should_throw_error
 
+Commonly throughout using JSpec you will often need to do things like the following,
+while referencing 'this.cart' throughout your specs:
+
+  before
+    this.cart = new ShoppingCart
+  end
+
+Thanks to the pre-processor we can simply use a terse version like below:
+
+  before
+    .cart = new ShoppingCart
+  end
+
+  it '...'
+    .cart.products.should_have_length 4
+  end
+
+
 == Formatters
 
 === DOM
@@ -221,7 +239,7 @@ Coming soon
 
 == Todo
 
-* charts / sparks for DOM formatter / canvas or google charts
+* charts / sparks for DOM formatter / svg, canvas, imgs whatever
 * add wait method (inject methods into block scope so this.__ is not required?)
 * add prototype and some matchers / ajax etc
 * add mootools and some matchers / ajax etc

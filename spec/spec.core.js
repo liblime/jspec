@@ -125,30 +125,30 @@ end
 describe 'Position hooks'
   
   before 
-    this.beforeSpecNum = 0
-    this.afterSpecNum = 0
-    this.passBefore = true
+    .beforeSpecNum = 0
+    .afterSpecNum = 0
+    .passBefore = true
   end
   
   before_each
-    this.beforeSpecNum++
+    .beforeSpecNum++
   end
   
   after_each 
-    this.afterSpecNum++
+    .afterSpecNum++
   end
   
   it 'before should work'
-    this.passBefore.should_be_true
+    .passBefore.should_be_true
   end
   
   it 'before should work again'
-    this.passBefore.should_be_true
+    .passBefore.should_be_true
   end
   
   it 'before / after each should work'
-    this.beforeSpecNum.should_equal 3
-    this.afterSpecNum.should_equal 2
+    .beforeSpecNum.should_equal 3
+    .afterSpecNum.should_equal 2
   end
   
 end
@@ -171,6 +171,11 @@ describe 'Pre-processor'
   it 'should allow alternative closure literal'
     -{ throw 'test' }.should_throw_error
   end
+  
+  it 'should allow . this. literal'
+    this.foo = 'bar'
+    .foo.should_eql 'bar'
+  end
 
 end
 
@@ -185,7 +190,7 @@ describe 'Custom Contexts'
   end
 
   it 'should allow helpers'
-    this.iLike.should_equal 'cookies'
+    .iLike.should_equal 'cookies'
   end
 
 end
