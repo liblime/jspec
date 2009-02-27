@@ -222,7 +222,6 @@ Coming soon
 == Todo
 
 * charts / sparks for DOM formatter
-* nest formatters ... JSpec.formatter.DOM, etc
 * add wait method (inject methods into block scope so this.__ is not required?)
 * add prototype and some matchers / ajax etc
 * add mootools and some matchers / ajax etc
