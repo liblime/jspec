@@ -61,6 +61,17 @@ task :release do
   end
 end
 
+desc 'Display compression savings of last release'
+task :savings do
+  format = '%25s : %0.3f kb'
+  total = %w( pkg/jspec.min.js pkg/jspec.jquery.min.js pkg/jspec.min.css ).inject 0 do |total, file|
+    saved = (File.size(file.sub('.min', '')) - File.size(file)).to_f / 1024
+    puts format % [file.sub('pkg/', ''), saved]
+    total += saved
+  end
+  puts format % ['total', total]
+end
+
 def minify from, to
   sh "jsmin < #{from} > #{to}"
 end
