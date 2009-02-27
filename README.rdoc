@@ -233,12 +233,15 @@ Coming soon
 * Place the \_\_END\_\_ token in your document to prevent interpretation of
   the below it code. Useful for quickly debugging or speeding up suites.
 
+* Get the TextMate bundle at https://github.com/visionmedia/jspec.tmbundle/tree
+
 * For more information consult the JSpec source code documentation.
 
-* Get the TextMate bundle at https://github.com/visionmedia/jspec.tmbundle/tree
+* Dont forget to watch the screencasts in the wiki :)
 
 == Todo
 
+* more screencasts of features / add them on wiki
 * charts / sparks for DOM formatter / svg, canvas, imgs whatever
 * add wait method (inject methods into block scope so this.__ is not required?)
 * add prototype and some matchers / ajax etc
