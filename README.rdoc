@@ -20,18 +20,18 @@ and much more.
 * Profiling
 * Tiny (10 kb compressed)
 
-== Examples
+== Example
 
   describe 'Shopping cart'
 
     before_each
-      this.cart = new ShoppingCart
+      .cart = new ShoppingCart
     end
     
     it 'should add products'
-      this.cart.addProduct('cookie')
-      this.cart.products.should_include('cookie')
-      this.cart.should_not_be_empty
+      .cart.addProduct('cookie')
+      .cart.products.should_include 'cookie'
+      .cart.should_not_be_empty
     end
     
   end
@@ -254,6 +254,7 @@ Coming soon
 * finish terminal formatter / usage / http://github.com/jeresig/env-js/tree/master ? rhino io?
 * nesting / nested display
 * sexier DOM formatter
+* implement this. literal globally?
 * better convention for filenames in spec
 
 == License 
