@@ -78,7 +78,8 @@ for your project, since it includes compressed alternatives.
 You may alter the way JSpec operates by assigning options via the
 JSpec.options object.
 
-  * profile {bool} when enabled, uses console.time() in order to display profile information in your console log as specs are completed 
+* profile {bool} when enabled, uses console.time() in order to display performance
+                 information in your console log as specs are completed.
   
 == Matchers
 
