@@ -17,6 +17,8 @@ and much more.
 * Extremely simple matcher declaration
 * Several helpful formatters (dom, console, terminal, ...)
 * Custom formatters
+* Profiling
+* Tiny (10 kb compressed)
 
 == Examples
 
