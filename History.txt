@@ -1,4 +1,14 @@
 
+=== 0.7.0 / 2009-02-27
+
+* Added Console formatter (anything implementing the console object. Firebug, Safari 4, etc)
+* Added JSpec.options.profile for optional profiling of specs
+* Added this. literal alternative (view readme)
+* Moved formatters into JSpec.formatters 
+* Added error() util
+* Added savings raketask
+* Fixed parse error bug in Safari 4
+
 === 0.6.3 / 2009-02-26
 
 * Added minification for jspec.jquery.js when packaging before release

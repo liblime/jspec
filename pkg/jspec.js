@@ -5,11 +5,12 @@
 
   var JSpec = {
   
-    version  : '0.6.3',
+    version  : '0.7.0',
     main     : this,
     suites   : {},
     matchers : {},
     stats    : { specs : 0, assertions : 0, failures : 0, passes : 0 },
+    options  : { profile : false },
   
     /**
      * Default context in which bodies are evaluated.
@@ -137,57 +138,82 @@
       }
     },
       
-    /**
-     * Default formatter, outputting to the DOM.
-     * 
-     * Options:
-     *   - reportToId  id of element to output reports to, defaults to 'jspec'
-     *
-     * @api public
-     */
-  
-    DOMFormatter : function(results, options) {
-      var markup = '', report = document.getElementById(options.reportToId || 'jspec')
-      if (!report) this.throw('requires the element #' + (options.reportToId || 'jspec') + ' to output its reports')
 
-      markup += 
-      '<div id="jspec-report"><div class="heading">                                   \
-      <span class="passes">Passes: <em>' + results.stats.passes + '</em></span>       \
-      <span class="failures">Failures: <em>' + results.stats.failures + '</em></span> \
-      </div><div class="suites">'
-    
-      results.each(results.suites, function(description, suite){
-        if (suite.ran) {
-          markup += '<div class="suite"><h2>' + description + '</h2>'
-          results.each(suite.specs, function(spec){
-            var assertionCount = ' (<span class="assertion-count">' + spec.assertions.length + '</span>)'
-            if (spec.requiresImplementation()) { 
-              markup += '<p class="requires-implementation">' + spec.description + '</p>'
-            }
-            else if (spec.passed()) {
-              markup += '<p class="pass">' + spec.description + assertionCount + '</p>'
-            }
-            else {
-              markup += '<p class="fail">' + spec.description + assertionCount + ' <em>' + spec.failure().message + '</em>' + '</p>' 
-            }
-          })
-          markup += '</div>'
-        }
-      })
+    formatters : {
+      
+      /**
+       * Default formatter, outputting to the DOM.
+       * 
+       * Options:
+       *   - reportToId  id of element to output reports to, defaults to 'jspec'
+       *
+       * @api public
+       */
 
-      markup += '</div></div>'
+      DOM : function(results, options) {
+        var id = options.reportToId || 'jspec'
+        var markup = '', report = document.getElementById(id)
+        if (!report) error('requires the element #' + id + ' to output its reports')
 
-      report.innerHTML = markup
+        markup += 
+        '<div id="jspec-report"><div class="heading">                                   \
+        <span class="passes">Passes: <em>' + results.stats.passes + '</em></span>       \
+        <span class="failures">Failures: <em>' + results.stats.failures + '</em></span> \
+        </div><div class="suites">'
+
+        results.each(results.suites, function(description, suite){
+          if (suite.ran) {
+            markup += '<div class="suite"><h2>' + description + '</h2>'
+            results.each(suite.specs, function(spec){
+              var assertionCount = ' (<span class="assertion-count">' + spec.assertions.length + '</span>)'
+              if (spec.requiresImplementation()) { 
+                markup += '<p class="requires-implementation">' + spec.description + '</p>'
+              }
+              else if (spec.passed()) {
+                markup += '<p class="pass">' + spec.description + assertionCount + '</p>'
+              }
+              else {
+                markup += '<p class="fail">' + spec.description + assertionCount + ' <em>' + spec.failure().message + '</em>' + '</p>' 
+              }
+            })
+            markup += '</div>'
+          }
+        })
+
+        markup += '</div></div>'
+
+        report.innerHTML = markup
+      },
+      
+      /**
+       * Console formatter, tested with Firebug and Safari 4.
+       * 
+       * @api public
+       */
+
+      Console : function(results, options) {
+        console.log('')
+        console.log('Passes: ' + results.stats.passes + ' Failures: ' + results.stats.failures)
+        results.each(results.suites, function(description, suite){
+          if (suite.ran) {
+            console.group(description)
+            results.each(suite.specs, function(spec){
+              var assertionCount = spec.assertions.length + ':'
+              if (spec.requiresImplementation()) { 
+                console.warn(spec.description)
+              }
+              else if (spec.passed()) {
+                console.log(assertionCount + ' ' + spec.description)
+              }
+              else {
+                console.error(assertionCount + ' ' + spec.description + ', ' + spec.failure().message)
+              }
+            })
+            console.groupEnd()
+          }
+        })
+      }
     },
-  
-    /**
-     * Terminal formatter.
-     * @api public
-     */
-   
-     TerminalFormatter : function(results) {
-       // TODO: me!
-     },
       
     /**
      * Specification Suite block object.
@@ -355,7 +381,7 @@
         var runner = function() { eval(JSpec.preProcessBody(body)) }
         runner.call(this.context || this.defaultContext)
       } 
-      catch(e) { this.throw(errorMessage, e) }
+      catch(e) { error(errorMessage, e) }
     },
   
     /**
@@ -372,6 +398,8 @@
     preProcessBody : function(body) {
       // Allow -{ closure literal
       body = body.replace('-{', 'function(){')
+      // Allow . this. literal
+      body = body.replace(/^ *\./gm, 'this.')
       // Allow optional parens for matchers
       body = body.replace(/\.should_(\w+)(?: |$)(.*)$/gm, '.should_$1($2)')
       // Convert to non-polluting match() invocation
@@ -465,7 +493,7 @@
   
     report : function(options) {
       this.formatter ? new JSpec.formatter(this, options || {}) 
-                     : new JSpec.DOMFormatter(this, options || {})
+                     : new JSpec.formatters.DOM(this, options || {})
       return this
     },
   
@@ -477,9 +505,11 @@
      */
   
     run : function() {
+      if (this.options.profile) console.group('Profile')
       each(this.suites, function(suite) {
         this.runSuite(suite)
       })
+      if (this.options.profile) console.groupEnd()
       return this
     },
   
@@ -514,7 +544,9 @@
     runSpec : function(spec) {
       this.currentSpec = spec
       this.stats.specs++
+      if (this.options.profile) console.time(spec.description)
       this.evalBody(spec.body, "Error in spec '" + spec.description + "': ")
+      if (this.options.profile) console.timeEnd(spec.description)
       this.stats.assertions += spec.assertions.length
     },
   
@@ -528,7 +560,7 @@
   
     requires : function(dependency, message) {
       try { eval(dependency) }
-      catch (e) { this.throw('depends on ' + dependency + ' ' + (message || '')) }
+      catch (e) { error('depends on ' + dependency + ' ' + (message || '')) }
     },
   
     /**
@@ -540,7 +572,7 @@
      * @api public
      */
   
-    throw : function(message, error) {
+    error : function(message, error) {
       throw 'jspec: ' + message + (error ? error.message + '; in ' + error.fileName + ' on line ' + error.lineNumber : '')
     },
   
@@ -577,7 +609,7 @@
         load(file)
       }
       else {
-        this.throw('cannot load ' + file)
+        error('cannot load ' + file)
       }
     },
   
@@ -597,6 +629,7 @@
   // --- Utility functions
   
   var each  = JSpec.each
+  var error  = JSpec.error
   var print = JSpec.print
   var hash  = JSpec.hash
   var addMatchers = JSpec.addMatchers
