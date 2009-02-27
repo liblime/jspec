@@ -63,13 +63,22 @@ end
 
 desc 'Display compression savings of last release'
 task :savings do
+  totals = Hash.new { |h, k|  h[k] = 0 }
   format = '%25s : %0.3f kb'
-  total = %w( pkg/jspec.min.js pkg/jspec.jquery.min.js pkg/jspec.min.css ).inject 0 do |total, file|
-    saved = (File.size(file.sub('.min', '')) - File.size(file)).to_f / 1024
+  totals = %w( pkg/jspec.min.js pkg/jspec.jquery.min.js pkg/jspec.min.css ).inject totals do |total, file|
+    uncompressed = File.size(file.sub('.min', '')).to_f / 1024
+    compressed = File.size(file).to_f / 1024
+    saved = uncompressed - compressed
     puts format % [file.sub('pkg/', ''), saved]
-    total += saved
+    totals[:saved] += saved
+    totals[:uncompressed] += uncompressed
+    totals[:compressed] += compressed
+    totals
   end
-  puts format % ['total', total]
+  puts
+  puts format % ['total uncompressed', totals[:uncompressed]]
+  puts format % ['total compressed', totals[:compressed]]
+  puts format % ['total saved', totals[:saved]]
 end
 
 def minify from, to
