@@ -196,15 +196,15 @@ There is also an alternative closure literal so these are equivalent:
 
 == Formatters
 
-==== DOM
+=== DOM
   
 Clean attractive HTML reporting
 
-==== Console
+=== Console
 
 Reporting utilizing the console object (tested using Firebug and Safari 4)
 
-==== Terminal
+=== Terminal
 
 Coming soon
 
