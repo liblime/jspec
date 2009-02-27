@@ -203,7 +203,7 @@ while referencing 'this.cart' throughout your specs:
     this.cart = new ShoppingCart
   end
 
-Thanks to the pre-processor we can simply use a terse version like below:
+Thanks to the pre-processor we can simply use the terse alternative below:
 
   before
     .cart = new ShoppingCart
