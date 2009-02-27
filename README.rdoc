@@ -18,7 +18,7 @@ and much more.
 * Several helpful formatters (dom, console, terminal, ...)
 * Custom formatters
 * Profiling
-* Tiny (10 kb compressed)
+* Tiny (10 kb compressed, 800-ish LOC)
 
 == Example
 
