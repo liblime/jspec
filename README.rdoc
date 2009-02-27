@@ -15,7 +15,7 @@ and much more.
 * Evaluation contexts for providing helper methods and properties
 * Allows parens to be optional when using matchers ('foobar'.should_include 'foo')
 * Extremely simple matcher declaration
-* Several helpful formatters
+* Several helpful formatters (dom, console, terminal, ...)
 * Custom formatters
 
 == Examples
@@ -72,6 +72,13 @@ using the exec() method, then run specific suite(s), and report.
 
 You may optionally want to use sources in the /pkg directory
 for your project, since it includes compressed alternatives.
+
+== Options
+
+You may alter the way JSpec operates by assigning options via the
+JSpec.options object.
+
+  * profile {bool} when enabled, uses console.time() in order to display profile information in your console log as specs are completed 
   
 == Matchers
 
@@ -187,6 +194,17 @@ There is also an alternative closure literal so these are equivalent:
   -{ throw 'test' }.should_throw_error
   function() { throw 'test' }.should_throw_error
 
+== Formatters
+
+* DOM
+  - Clean attractive HTML reporting
+
+* Console
+  - Reporting utilizing the console object (tested using Firebug and Safari 4)
+
+* Terminal
+  - Coming soon
+
 == Misc
 
 * Place the \_\_END\_\_ token in your document to prevent interpretation of
@@ -198,18 +216,19 @@ There is also an alternative closure literal so these are equivalent:
 
 == Todo
 
+* charts / sparks for DOM formatter
+* nest formatters ... JSpec.formatter.DOM, etc
 * add wait method (inject methods into block scope so this.__ is not required?)
 * add prototype and some matchers / ajax etc
 * add mootools and some matchers / ajax etc
 * have include() match object hashes as well? so [1,2,[1]].should_include [1]  => true
 * always pass matcher args as array (update docs)
-* better printing of objects .. recursive for array, html tag escaped, truncating of final string, etc 
+* better printing of objects .. recursive for array, html tag escaped(only for DOM formatter), truncating of final string, etc 
 * allow chaining of matchers within grammar
 * add formatter hooks to display spinner etc
 * finish terminal formatter / usage / http://github.com/jeresig/env-js/tree/master ? rhino io?
 * nesting / nested display
 * sexier DOM formatter
-* console formatter safari 4 / firebug test both
 * better convention for filenames in spec
 
 == License 
