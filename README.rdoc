@@ -198,14 +198,19 @@ There is also an alternative closure literal so these are equivalent:
 
 == Todo
 
+* add wait method (inject methods into block scope so this.__ is not required?)
+* add prototype and some matchers / ajax etc
+* add mootools and some matchers / ajax etc
 * have include() match object hashes as well? so [1,2,[1]].should_include [1]  => true
 * always pass matcher args as array (update docs)
 * better printing of objects .. recursive for array, html tag escaped, truncating of final string, etc 
 * allow chaining of matchers within grammar
 * add formatter hooks to display spinner etc
-* finish terminal formatter / usage / http://github.com/jeresig/env-js/tree/master ?
+* finish terminal formatter / usage / http://github.com/jeresig/env-js/tree/master ? rhino io?
 * nesting / nested display
+* sexier DOM formatter
 * firebug formatter
+* better convention for filenames in spec
 
 == License 
 

@@ -25,9 +25,9 @@ task :test do
   sh %(js -e "#{js}")
 end
 
-desc 'Open for development in Firefox'
+desc 'Open for development in Safari 4'
 task :open do
-  sh 'open -a Firefox spec/spec.html'
+  sh 'open -a Safari spec/spec.html'
 end
 
 desc 'Clear packaging'
