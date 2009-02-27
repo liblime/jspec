@@ -78,8 +78,7 @@ for your project, since it includes compressed alternatives.
 You may alter the way JSpec operates by assigning options via the
 JSpec.options object.
 
-* profile {bool} when enabled, uses console.time() in order to display performance
-                 information in your console log as specs are completed.
+* profile {bool} when enabled, uses console.time() in order to display performance information in your console log as specs are completed.
   
 == Matchers
 
@@ -197,14 +196,17 @@ There is also an alternative closure literal so these are equivalent:
 
 == Formatters
 
-* DOM
-  - Clean attractive HTML reporting
+==== DOM
+  
+Clean attractive HTML reporting
 
-* Console
-  - Reporting utilizing the console object (tested using Firebug and Safari 4)
+==== Console
 
-* Terminal
-  - Coming soon
+Reporting utilizing the console object (tested using Firebug and Safari 4)
+
+==== Terminal
+
+Coming soon
 
 == Misc
 
