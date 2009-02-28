@@ -245,6 +245,7 @@ Coming soon
 
 == Todo
 
+* fix errors in safari 4, thrown messages dont really work
 * use watcher / bind / auto to automate testing in --browsers
 * more screencasts of features / add them on wiki
 * charts / sparks for DOM formatter / svg, canvas, imgs whatever to show how many failed
