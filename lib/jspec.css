@@ -1,4 +1,6 @@
-
+body.jspec {
+  background: url(images/bg.png) top left repeat-x;
+}
 #jspec-report * {
 	margin: 0;
 	padding: 0;
