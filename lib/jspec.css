@@ -36,7 +36,7 @@ body.jspec {
 #jspec-title em {
   font-size: 10px;
   font-style: normal;
-  color: #C5D0D8;
+  color: #BCC8D1;
 }
 #jspec-report * {
 	margin: 0;
@@ -47,7 +47,7 @@ body.jspec {
 #jspec-report {
   padding: 15px 40px;
 	font: 11px "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
-	color: #7a7a7a;
+	color: #BCC8D1;
 }
 #jspec-report .hidden {
   display: none;
@@ -63,6 +63,47 @@ body.jspec {
 }
 #jspec-report .heading .failures em {
   color: #FA1616;
+}
+#jspec-report table {
+  width: 100%;
+  font-size: 11px;
+  border-collapse: collapse;
+}
+#jspec-report td {
+  padding: 13px;
+  text-indent: 30px;
+  border-top: 1px solid #e3e3e3;
+}
+#jspec-report tr td:first-child em {
+  font-style: normal;
+  color: #FA1616;
+}
+#jspec-report td + td {
+  width: 110px;
+  text-align: right;
+  color: #BCC8D1;
+}
+#jspec-report tr:even {
+  background: url(images/hr.png) top left repeat-x;
+}
+#jspec-report td.pass {
+  background: url(images/sprites.png) 3px -4px no-repeat;
+}
+#jspec-report td.fail {
+  background: url(images/sprites.png) 3px -43px no-repeat;
+}
+#jspec-report td.requires-implementation {
+  background: url(images/sprites.png) 3px -83px no-repeat;
+}
+#jspec-report td.description {
+  padding-top: 25px;
+  font-size: 12px;
+  font-weight: bold;
+  text-indent: 0;
+  color: #1a1a1a;
+}
+#jspec-report td.description:first-child {
+  border-top: none;
 }
 .jspec-sandbox {
   display: none;
