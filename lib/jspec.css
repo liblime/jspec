@@ -87,6 +87,11 @@ body.jspec {
 }
 #jspec-report td.fail {
   background: url(images/sprites.png) 3px -47px no-repeat;
+  font-weight: bold;
+  color: #FC0D0D;
+}
+#jspec-report td.fail em {
+  font-weight: normal;
 }
 #jspec-report td.requires-implementation {
   background: url(images/sprites.png) 3px -87px no-repeat;
