@@ -2,7 +2,7 @@ body.jspec {
   margin: 45px 0;
   text-align: center;
   font: 12px "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
-  background: url(images/bg.png) top left repeat-x;
+  background: #efefef url(images/bg.png) top left repeat-x;
 }
 #jspec {
   margin: 0 auto;
@@ -48,6 +48,9 @@ body.jspec {
   padding: 15px 40px;
 	font: 11px "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
 	color: #7a7a7a;
+}
+#jspec-report .hidden {
+  display: none;
 }
 #jspec-report .heading {
   margin-bottom: 15px;
