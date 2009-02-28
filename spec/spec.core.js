@@ -17,44 +17,6 @@ describe 'Positive specs'
   
 end
 
-describe 'Negative specs'
-
-  it 'should fail'
-    'test'.should_not_eql('test')
-  end
-
-  it 'should fail with one faulty assertion'
-    'test'.should_equal('test')
-    'test'.should_equal('foo')
-  end
-  
-  it 'should fail and print array with square braces'
-    [1,2].should_equal([1,3])
-  end
-  
-  it 'Fail with negative message'
-    '1'.should_not_be_true
-  end
-  
-  it 'Fail with positive message'
-    false.should_be_true
-  end
-  
-  it 'Fail second assertion message'
-    true.should_be_true
-    'bar'.should_include('foo')
-    'bar'.should_match(/foo/)
-  end
-  
-end
-
-describe 'Misc'
-
-  it 'requires implementation'
-  end
-
-end
-
 describe 'Matchers'
 
   it 'eql'
@@ -194,3 +156,42 @@ describe 'Custom Contexts'
   end
 
 end
+
+describe 'Negative specs'
+
+  it 'should fail'
+    'test'.should_not_eql('test')
+  end
+
+  it 'should fail with one faulty assertion'
+    'test'.should_equal('test')
+    'test'.should_equal('foo')
+  end
+  
+  it 'should fail and print array with square braces'
+    [1,2].should_equal([1,3])
+  end
+  
+  it 'Fail with negative message'
+    '1'.should_not_be_true
+  end
+  
+  it 'Fail with positive message'
+    false.should_be_true
+  end
+  
+  it 'Fail second assertion message'
+    true.should_be_true
+    'bar'.should_include('foo')
+    'bar'.should_match(/foo/)
+  end
+  
+end
+
+describe 'Misc'
+
+  it 'requires implementation'
+  end
+
+end
+
