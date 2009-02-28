@@ -81,6 +81,11 @@ describe 'Matchers'
     {}.should_be_type('object')
     function(){}.should_be_type('function')
   end
+  
+  it 'be_within'
+    5.should_be_within 1..10
+    15.should_not_be_within 10..5
+  end
 
 end
 

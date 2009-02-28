@@ -97,6 +97,7 @@ JSpec.options object.
   - be_type          be type of x
   - be_greater_than  >
   - be_less_than     <
+  - be_within        checks if x is within the range passed
   - have_length      length of x
   - include          include substring, array element, or hash key
   - match            string should match regexp x
@@ -217,7 +218,6 @@ Thanks to the pre-processor we can simply use the terse alternative below:
     .cart.products.should_have_length 4
   end
 
-
 == Formatters
 
 === DOM
@@ -264,7 +264,6 @@ Coming soon
 * github env for creating javascript/css packages complete with JSpec submodules etc
   and gh-pages as well ... use commander / mack's generator?
   replace mygem with this .. use ERB for templates 
-* add be_within (better name? 2.should_be_within 1..4
 
 == License 
 
