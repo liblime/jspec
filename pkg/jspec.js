@@ -5,7 +5,7 @@
 
   var JSpec = {
   
-    version  : '0.7.0',
+    version  : '0.8.0',
     main     : this,
     suites   : {},
     matchers : {},
@@ -151,7 +151,7 @@
        */
 
       DOM : function(results, options) {
-        var id = options.reportToId || 'jspec'
+        var id = options.reportToId || 'jspec', assertionCount
         var markup = '', report = document.getElementById(id)
         if (!report) error('requires the element #' + id + ' to output its reports')
 
@@ -159,28 +159,29 @@
         '<div id="jspec-report"><div class="heading">                                   \
         <span class="passes">Passes: <em>' + results.stats.passes + '</em></span>       \
         <span class="failures">Failures: <em>' + results.stats.failures + '</em></span> \
-        </div><div class="suites">'
+        </div><table class="suites">'
 
         results.each(results.suites, function(description, suite){
           if (suite.ran) {
-            markup += '<div class="suite"><h2>' + description + '</h2>'
-            results.each(suite.specs, function(spec){
-              var assertionCount = ' (<span class="assertion-count">' + spec.assertions.length + '</span>)'
+            markup += '<tr class="description"><td colspan="2">' + description + '</td></tr>'
+            results.each(suite.specs, function(i, spec){
+              markup += '<tr class="' + (i % 2 ? 'odd' : 'even') + '">'
+              assertionCount = spec.assertions.length + ' assertion(s)'
               if (spec.requiresImplementation()) { 
-                markup += '<p class="requires-implementation">' + spec.description + '</p>'
+                markup += '<td class="requires-implementation">' + spec.description + '</td>'
               }
               else if (spec.passed()) {
-                markup += '<p class="pass">' + spec.description + assertionCount + '</p>'
+                markup += '<td class="pass">' + spec.description+ '</td><td>' + assertionCount + '</td>'
               }
               else {
-                markup += '<p class="fail">' + spec.description + assertionCount + ' <em>' + spec.failure().message + '</em>' + '</p>' 
+                markup += '<td class="fail">' + spec.description + '. <em>' + spec.failure().message + '</em>' + '</td><td>' + assertionCount + '</td>' 
               }
             })
-            markup += '</div>'
+            markup += '</tr>'
           }
         })
 
-        markup += '</div></div>'
+        markup += '</table></div>'
 
         report.innerHTML = markup
       },

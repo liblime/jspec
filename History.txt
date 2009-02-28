@@ -1,4 +1,8 @@
 
+=== 0.8.0 / 2009-02-27
+
+* Added a new style for the DOM formatter (not finished yet)
+
 === 0.7.0 / 2009-02-27
 
 * Added Console formatter (anything implementing the console object. Firebug, Safari 4, etc)
