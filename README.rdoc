@@ -196,6 +196,10 @@ There is also an alternative closure literal so these are equivalent:
   -{ throw 'test' }.should_throw_error
   function() { throw 'test' }.should_throw_error
 
+Inclusive range literals are available as well:
+
+  n.should_be_within 1..5
+
 Commonly throughout using JSpec you will often need to do things like the following,
 while referencing 'this.cart' throughout your specs:
 
@@ -260,6 +264,7 @@ Coming soon
 * github env for creating javascript/css packages complete with JSpec submodules etc
   and gh-pages as well ... use commander / mack's generator?
   replace mygem with this .. use ERB for templates 
+* add be_within (better name? 2.should_be_within 1..4
 
 == License 
 

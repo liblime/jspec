@@ -138,6 +138,13 @@ describe 'Pre-processor'
     this.foo = 'bar'
     .foo.should_eql 'bar'
   end
+  
+  it 'should allow inclusive range literal n..n'
+    1..5.should_eql [1,2,3,4,5]
+    3..4.should_eql [3,4]
+    1..1.should_eql [1]
+    3..1.should_eql [3,2,1]
+  end
 
 end
 
