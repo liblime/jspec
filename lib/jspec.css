@@ -77,6 +77,10 @@ body.jspec {
   font-style: normal;
   color: #8C9CA8;
 }
+#jspec-report tr:not(.description):hover {
+  text-shadow: 1px 1px 1px #fff;
+  background: #E9F1F5;
+}
 #jspec-report td + td {
   width: 110px;
   text-align: right;
