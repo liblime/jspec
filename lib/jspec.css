@@ -47,7 +47,7 @@ body.jspec {
 #jspec-report {
   padding: 15px 40px;
 	font: 11px "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
-	color: #BCC8D1;
+	color: #AAB7C0;
 }
 #jspec-report .hidden {
   display: none;
@@ -81,9 +81,9 @@ body.jspec {
 #jspec-report td + td {
   width: 110px;
   text-align: right;
-  color: #BCC8D1;
+  color: #AAB7C0;
 }
-#jspec-report tr:even {
+#jspec-report tr.even {
   background: url(images/hr.png) top left repeat-x;
 }
 #jspec-report td.pass {
