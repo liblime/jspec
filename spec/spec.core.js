@@ -54,6 +54,10 @@ describe 'Matchers'
     'test'.should_have_length 4
   end
   
+  it 'have_length_within'
+    'foo'.should_have_length_within 2..4
+  end
+  
   it 'respond_to'
     'test'.should_not_respond_to('whatever')
     'test'.should_respond_to('toString')
