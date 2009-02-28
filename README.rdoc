@@ -256,6 +256,9 @@ Coming soon
 * allow chaining of matchers within grammar
 * add formatter hooks to display spinner etc
 * nesting / nested display
+* git integration of some kind for fun? 
+* auto-locate / scrollTo first exception
+* click / show block contents
 * change scoping so that this.* is not needed 
 * better convention for filenames in spec
 * github env for creating javascript/css packages complete with JSpec submodules etc
