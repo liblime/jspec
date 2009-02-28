@@ -241,6 +241,7 @@ Coming soon
 
 == Todo
 
+* use watcher to automate testing
 * more screencasts of features / add them on wiki
 * charts / sparks for DOM formatter / svg, canvas, imgs whatever
 * add wait method (inject methods into block scope so this.__ is not required?)
@@ -256,6 +257,7 @@ Coming soon
 * sexier DOM formatter
 * implement this. literal globally?
 * better convention for filenames in spec
+* github env for creating javascript/css packages complete with JSpec submodules etc
 
 == License 
 
