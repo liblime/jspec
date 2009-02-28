@@ -245,21 +245,17 @@ Coming soon
 
 == Todo
 
-* use watcher to automate testing
+* use watcher / bind / auto to automate testing in --browsers
 * more screencasts of features / add them on wiki
-* charts / sparks for DOM formatter / svg, canvas, imgs whatever
+* charts / sparks for DOM formatter / svg, canvas, imgs whatever to show how many failed
 * add wait method (inject methods into block scope so this.__ is not required?)
-* add prototype and some matchers / ajax etc
-* add mootools and some matchers / ajax etc
 * have include() match object hashes as well? so [1,2,[1]].should_include [1]  => true
 * always pass matcher args as array (update docs)
-* better printing of objects .. recursive for array, html tag escaped(only for DOM formatter), truncating of final string, etc 
+* better printing of objects .. recursive for array, html tag escaped(only for DOM formatter), truncating of final string, etc utilize console printing?
 * allow chaining of matchers within grammar
 * add formatter hooks to display spinner etc
-* finish terminal formatter / usage / http://github.com/jeresig/env-js/tree/master ? rhino io?
 * nesting / nested display
-* sexier DOM formatter
-* implement this. literal globally? would be better to maybe convert grammar to literal closures ... or inject helpers etc into scope
+* change scoping so that this.* is not needed 
 * better convention for filenames in spec
 * github env for creating javascript/css packages complete with JSpec submodules etc
   and gh-pages as well ... use commander / mack's generator?
