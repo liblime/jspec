@@ -6,7 +6,7 @@ body.jspec {
 }
 #jspec {
   margin: 0 auto;
-  padding-top: 35px;
+  padding-top: 25px;
   width: 1008px;
   background: url(images/vr.png) top left repeat-y;
   text-align: left;
@@ -28,10 +28,10 @@ body.jspec {
   position: relative;
   top: 35px;
   left: 20px;
-  width: 180px;
+  width: 160px;
   font-size: 22px;
   font-weight: normal;
-  background: url(images/sprites.png) 0 -85px no-repeat;
+  background: url(images/sprites.png) 0 -126px no-repeat;
 }
 #jspec-title em {
   font-size: 10px;
@@ -46,7 +46,20 @@ body.jspec {
 }
 #jspec-report {
   padding: 15px 40px;
-	font: 12px "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+	font: 11px "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+	color: #7a7a7a;
+}
+#jspec-report .heading {
+  margin-bottom: 15px;
+}
+#jspec-report .heading span {
+  padding-right: 10px;
+}
+#jspec-report .heading .passes em {
+  color: #0ea0eb;
+}
+#jspec-report .heading .failures em {
+  color: #FA1616;
 }
 .jspec-sandbox {
   display: none;
