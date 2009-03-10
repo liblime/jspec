@@ -15,16 +15,6 @@ task :package => [:clear] do
   end
 end
 
-desc 'Test using SpiderMonkey'
-task :test do
-  js = %{
-    load('lib/jspec.js')
-    JSpec.formatter = JSpec.TerminalFormatter
-    JSpec.exec('spec/spec.core.js')
-  }
-  sh %(js -e "#{js}")
-end
-
 desc 'Open for development in Safari 4'
 task :open do
   sh 'open -a Safari spec/spec.html'
