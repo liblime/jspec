@@ -47,7 +47,7 @@ body.jspec {
 #jspec-report {
   padding: 15px 40px;
 	font: 11px "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
-	color: #AAB7C0;
+	color: #7B8D9B;
 }
 #jspec-report .hidden {
   display: none;
@@ -72,10 +72,16 @@ body.jspec {
 #jspec-report td {
   padding: 8px;
   text-indent: 30px;
+  color: #7B8D9B;
 }
 #jspec-report tr td:first-child em {
   font-style: normal;
-  color: #8C9CA8;
+  font-weight: normal;
+  color: #7B8D9B;
+}
+#jspec-report tr:not(.description):hover {
+  text-shadow: 1px 1px 1px #fff;
+  background: #F2F5F7;
 }
 #jspec-report td + td {
   width: 110px;
@@ -87,6 +93,8 @@ body.jspec {
 }
 #jspec-report td.fail {
   background: url(images/sprites.png) 3px -47px no-repeat;
+  font-weight: bold;
+  color: #FC0D0D;
 }
 #jspec-report td.requires-implementation {
   background: url(images/sprites.png) 3px -87px no-repeat;
@@ -97,7 +105,6 @@ body.jspec {
   font-size: 12px;
   font-weight: bold;
   text-indent: 0;
-  border-top: 1px solid #eee;
   color: #1a1a1a;
 }
 #jspec-report tr.description:first-child td {

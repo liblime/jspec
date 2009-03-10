@@ -28,29 +28,6 @@ task :clear do
   end
 end
 
-desc 'Display current version'
-task :version do
-  puts version
-end
-
-desc 'Release to VERSION; Update history first'
-task :release do
-  raise 'VERSION required' unless ENV['VERSION']
-  begin
-    contents = File.read 'lib/jspec.js'
-    contents.sub! /#{version}/, ENV['VERSION']
-    File.open('lib/jspec.js', 'w+') do |file|
-      file.write contents
-    end
-    task(:package).invoke
-    sh "git commit -a -m '- Release #{version}'"
-    sh "git tag #{version} && git push && git push --tags"
-    puts "Release of JSpec-#{version} complete"
-  rescue => e
-    puts "Failed to release: #{e}"
-  end
-end
-
 desc 'Display compression savings of last release'
 task :savings do
   totals = Hash.new { |h, k|  h[k] = 0 }

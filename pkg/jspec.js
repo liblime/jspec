@@ -33,7 +33,7 @@
   
     defaultContext : {
       sandbox : function(name) {
-        var sandbox = document.createElement('div')
+        sandbox = document.createElement('div')
         sandbox.setAttribute('class', 'jspec-sandbox')
         document.body.appendChild(sandbox)
         return sandbox
@@ -59,22 +59,24 @@
      * both the expected, and actual values. Optionally a 'message' method may be used to
      * specify a custom message. Example:
      *
-     * match : function(expected, actual) {
+     * match : function(actual, expected) {
      *   return typeof actual == expected
      * }
      *
      * @param  {string} name
      * @param  {hash, string} matcher
-     * @param  {object} expected
      * @param  {object} actual
+     * @param  {array} expected
      * @param  {bool} negate
      * @return {Matcher}
      * @api private 
      */
   
-    Matcher : function (name, matcher, expected, actual, negate) {
-      var self = this
-      this.name = name, this.message = '', this.passed = false
+    Matcher : function (name, matcher, actual, expected, negate) {
+      self = this
+      this.name = name
+      this.message = ''
+      this.passed = false
     
       // Define matchers from strings
     
@@ -82,7 +84,7 @@
         if (matcher.match(/^alias (\w+)/)) matcher = JSpec.matchers[matcher.match(/^alias (\w+)/)[1]]
         if (matcher.length < 4) body = 'actual ' + matcher + ' expected'
         else body = matcher
-        matcher = { match : function(expected, actual) { return eval(body) } }
+        matcher = { match : function(actual, expected) { return eval(body) } }
       }
     
       // Generate matcher message
@@ -95,7 +97,7 @@
     
       function setMessage() {
         if (typeof matcher.message == 'function')
-          self.message = matcher.message(expected, actual, negate)
+          self.message = matcher.message(actual, expected, negate)
         else
           self.message = generateMessage()
       }
@@ -118,9 +120,9 @@
       // Return result of match
 
       this.match = function() {
-        if (expected != null) expected = expected.valueOf()
-        if (actual != null) actual = actual.valueOf()
-        return matcher.match.call(JSpec, expected, actual)
+        args = expected == null ? [] : expected
+        args.unshift(actual == null ? null : actual.valueOf())
+        return matcher.match.apply(JSpec, args)
       }
     
       // Boolean match result
@@ -151,8 +153,10 @@
        */
 
       DOM : function(results, options) {
-        var id = options.reportToId || 'jspec', assertionCount
-        var markup = '', report = document.getElementById(id)
+        markup = ''
+        id = options.reportToId || 'jspec'
+        report = document.getElementById(id)
+        
         if (!report) error('requires the element #' + id + ' to output its reports')
 
         markup += 
@@ -168,14 +172,15 @@
               markup += '<tr class="' + (i % 2 ? 'odd' : 'even') + '">'
               assertionCount = spec.assertions.length + ' assertion(s)'
               if (spec.requiresImplementation()) { 
-                markup += '<td class="requires-implementation">' + spec.description + '</td>'
+                markup += '<td class="requires-implementation" colspan="2">' + spec.description + '</td>'
               }
               else if (spec.passed()) {
                 markup += '<td class="pass">' + spec.description+ '</td><td>' + assertionCount + '</td>'
               }
               else {
-                markup += '<td class="fail">' + spec.description + '. <em>' + spec.failure().message + '</em>' + '</td><td>' + assertionCount + '</td>' 
+                markup += '<td class="fail">' + spec.description + ' <em>' + spec.failure().message + '</em>' + '</td><td>' + assertionCount + '</td>' 
               }
+              //markup += '<tr class="body hidden"><td>' + spec.body + '</td></tr>'
             })
             markup += '</tr>'
           }
@@ -199,7 +204,7 @@
           if (suite.ran) {
             console.group(description)
             results.each(suite.specs, function(spec){
-              var assertionCount = spec.assertions.length + ':'
+              assertionCount = spec.assertions.length + ':'
               if (spec.requiresImplementation()) { 
                 console.warn(spec.description)
               }
@@ -224,7 +229,8 @@
      */
       
     Suite : function(description) {
-      this.specs = [], this.hooks = {}, this.description = description, this.ran = false
+      this.specs = [], this.hooks = {}
+      this.description = description, this.ran = false
     
       // Add a spec to the suite
     
@@ -286,12 +292,24 @@
      */
   
     hash : function(object) {
-      var buff = ''
+      b = ''
       each(object, function(key ,value){
-        if (value.constructor == Array || value.constructor == Object ) buff += hash(value)
-        else buff += key.toString() + value.toString()
+        if (value.constructor == Array || value.constructor == Object ) b += hash(value)
+        else b += key.toString() + value.toString()
       })
-      return buff
+      return b
+    },
+    
+    /**
+     * Return last element of an array.
+     *
+     * @param  {array} array
+     * @return {object}
+     * @api public
+     */
+    
+    last : function(array) {
+      return array[array.length - 1]
     },
     
     /**
@@ -316,19 +334,19 @@
     /**
      * Invoke a matcher. 
      *
-     * this.match('test', 'should', 'be_a', String)
+     * this.match('test', 'should', 'be_a', [String)]
      * 
      * @param  {object} actual
      * @param  {bool, string} negate
      * @param  {string} name
-     * @param  {object} expected
+     * @param  {array} expected
      * @return {bool}
      * @api public
      */
   
     match : function(actual, negate, name, expected) {
       if (typeof negate == 'string') negate = negate == 'should' ? false : true
-      var matcher = new JSpec.Matcher(name, this.matchers[name], expected, actual, negate)
+      matcher = new JSpec.Matcher(name, this.matchers[name], actual, [expected], negate)
       JSpec.currentSpec.assertions.push(matcher.exec())
       return matcher.result
     },
@@ -343,7 +361,7 @@
      */
   
     each : function(object, callback) {
-      for (var key in object) {
+      for (key in object) {
         if (typeof object[key] == 'function') continue
         if (callback.length == 1)
           callback.call(JSpec, object[key])
@@ -379,7 +397,7 @@
   
     evalBody : function(body, errorMessage) {
       try {
-        var runner = function() { eval(JSpec.preProcessBody(body)) }
+        runner = function() { eval(JSpec.preProcessBody(body)) }
         runner.call(this.context || this.defaultContext)
       } 
       catch(e) { error(errorMessage, e) }
@@ -399,6 +417,8 @@
     preProcessBody : function(body) {
       // Allow -{ closure literal
       body = body.replace('-{', 'function(){')
+      // Allow inclusive range literal n..n
+      body = body.replace(/(\d+)\.\.(\d+)/g, function(_, a, b){ return range(a, b) })
       // Allow . this. literal
       body = body.replace(/^ *\./gm, 'this.')
       // Allow optional parens for matchers
@@ -409,6 +429,22 @@
       body = body.replace(/, \)$/gm, ')')
     
       return body
+    },
+    
+    /**
+     * Create a range.
+     *
+     * @param  {int} start
+     * @param  {int} end
+     * @return {array}
+     * @api public
+     */
+    
+    range : function(start, end) {
+      s = parseInt(start), e = parseInt(end), b = '[' + s
+      if (e > s) while (++s <= e) b += ',' + s
+      else       while (--s >= e) b += ',' + s
+      return b + ']'
     },
   
     /**
@@ -422,7 +458,7 @@
     parse : function(input) {
       var describing, specing, capturing, commenting
       var token, describe, spec, capture, body = []
-      var tokens = this.tokenize(input)
+      tokens = this.tokenize(input)
     
       while (tokens.length) {
         token = tokens.shift()
@@ -433,13 +469,12 @@
           case 'end':
             if (describing) this.suites[describe] = this.suites[describe] || new JSpec.Suite(describe)
             if (specing) {
-              var newSpec = new JSpec.Spec(spec, body.join(''))
+              newSpec = new JSpec.Spec(spec, body.join(''))
               this.suites[describe].addSpec(newSpec)
               body = [], spec = specing = null
             }
             else if (capturing) {
-              var body = body.join('')
-              if (describing) this.suites[describe].hooks[capture] = body
+              if (describing) this.suites[describe].hooks[capture] = body.join('')
               body = [], capturing = capture = null
             }
             else if (describing) {
@@ -480,7 +515,7 @@
   
     tokenize : function(input) {
       if (input.constructor == Array) return input
-      var regexp = /(?:__END__|end|before_each|after_each|before|after|it|describe|'.*?')(?= |\n|$)|\/\/|\n|./gm
+      regexp = /(?:__END__|end|before_each|after_each|before|after|it|describe|'.*?')(?= |\n|$)|\/\/|\n|./gm
       return input.match(regexp)
     },
   
@@ -599,7 +634,7 @@
   
     load : function(file) {
       if ('XMLHttpRequest' in this.main) {
-        var request = new XMLHttpRequest
+        request = new XMLHttpRequest
         request.open('GET', file, false)
         request.send(null)
         if (request.readyState == 4)
@@ -629,43 +664,47 @@
   
   // --- Utility functions
   
-  var each  = JSpec.each
-  var error  = JSpec.error
-  var print = JSpec.print
-  var hash  = JSpec.hash
-  var addMatchers = JSpec.addMatchers
+  last  = JSpec.last
+  range = JSpec.range
+  each  = JSpec.each
+  error = JSpec.error
+  print = JSpec.print
+  hash  = JSpec.hash
+  addMatchers = JSpec.addMatchers
 
   // --- Matchers
 
   addMatchers({
-    be              : "alias eql",
-    equal           : "===",
-    be_greater_than : ">",
-    be_less_than    : "<",
-    be_at_least     : ">=",
-    be_at_most      : "<=",
-    be_a            : "actual.constructor == expected",
-    be_an           : "alias be_a",
-    be_null         : "actual == null",
-    be_empty        : "actual.length == 0",
-    be_true         : "actual == true",
-    be_false        : "actual == false",
-    be_type         : "typeof actual == expected",
-    match           : "typeof actual == 'string' ? actual.match(expected) : false",
-    have_length     : "actual.length == expected",
-    respond_to      : "typeof actual[expected] == 'function'",
+    be                 : "alias eql",
+    equal              : "===",
+    be_greater_than    : ">",
+    be_less_than       : "<",
+    be_at_least        : ">=",
+    be_at_most         : "<=",
+    be_a               : "actual.constructor == expected",
+    be_an              : "alias be_a",
+    be_null            : "actual == null",
+    be_empty           : "actual.length == 0",
+    be_true            : "actual == true",
+    be_false           : "actual == false",
+    be_type            : "typeof actual == expected",
+    match              : "typeof actual == 'string' ? actual.match(expected) : false",
+    respond_to         : "typeof actual[expected] == 'function'",
+    have_length        : "actual.length == expected",
+    be_within          : "actual >= expected[0] && actual <= last(expected)",
+    have_length_within : "actual.length >= expected[0] && actual.length <= last(expected)",
   
-    eql : { match : function(expected, actual) {
+    eql : { match : function(actual, expected) {
       if (actual.constructor == Array || actual.constructor == Object) return hash(actual) == hash(expected)
       else return actual == expected
     }},
 
-    include : { match : function(expected, actual) {
+    include : { match : function(actual, expected) {
       if (typeof actual == 'string') return actual.match(expected)
       else return expected in actual
     }},
   
-    throw_error : { match : function(expected, actual) {
+    throw_error : { match : function(actual, expected) {
       try { actual() }
       catch (e) { return true }
     }}
