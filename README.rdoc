@@ -245,6 +245,12 @@ Coming soon
 
 == Todo
 
+* use this.currentSpec etc not JSpec.currentSpec ...
+* allow running of specific suite via query string
+* progressive output for DOM formatter ... again with the hooks kinda like jsspec?
+* sidebar for DOM allowing you to jump to suites with errors ...
+* check what jsspec does to inject in before/after blocks .. eval body in context of each func?
+* more informative failure messages like jsspec ... use their printer? diffs etc
 * always pass matcher args as array (update docs)
 * have include() match object hashes as well? so [1,2,[1]].should_include [1]  => true
 * more screencasts of features / add them on wiki
@@ -253,9 +259,10 @@ Coming soon
 * better printing of objects .. recursive for array, html tag escaped(only for DOM formatter), truncating of final string, etc utilize console printing?
 * allow chaining of matchers within grammar
 * add formatter hooks to display spinner etc
-* change scoping so that this.* is not needed 
+* change scoping so that this.* is not needed or allow ' *\.' not just beginning of line
 * add global formatter option to display only suites with failing specs, and only those specs
 
+* mocking like rspec with should_receive(:meth).with(Array).once etc
 * fix errors in safari 4, thrown messages dont really work
 * use watcher / bind / auto to automate testing in --browsers
 * charts / sparks for DOM formatter / svg, canvas, imgs whatever to show how many failed
