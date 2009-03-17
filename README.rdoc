@@ -73,7 +73,14 @@ using the exec() method, then run specific suite(s), and report.
   ...
 
 You may optionally want to use sources in the /pkg directory
-for your project, since it includes compressed alternatives.
+for your project, since it includes compressed alternatives. 
+As mentioned throughout the documentation, options may be passed to
+report(), which are in turn passed to the formatter. This includes
+options like failuresOnly, which displays only failing suites / specs,
+etc. 
+
+As an alternative to using runSuite() which can take extra time to 
+alter, you may use the query string key 'suite'.
 
 == Options
 
