@@ -223,6 +223,7 @@ describe 'Misc'
 
   it 'should parse a query string'
     JSpec.query('suite', '?suite=Positive%20specs').should_equal 'Positive specs'
+    JSpec.query('foo', '?suite=Positive%20specs').should_be_null
   end
 
   it 'requires implementation'
