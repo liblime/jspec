@@ -192,6 +192,12 @@ describe 'Negative specs'
     [1, ['foo']].should_equal [1, ['bar', ['whatever', 1.0, { foo : 'bar', bar : { 1 : 2 } }]]]
   end
   
+  it 'should fail and print html elements'
+    a = document.createElement('a')
+    a.setAttribute('href', 'http://vision-media.ca')
+    a.should_not_eql a
+  end
+  
   it 'Fail with negative message'
     '1'.should_not_be_true
   end

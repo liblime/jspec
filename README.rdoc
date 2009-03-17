@@ -258,6 +258,7 @@ Coming soon
 * change scoping so that this.* is not needed or allow ' *\.' not just beginning of line
 * add global formatter option to display only suites with failing specs, and only those specs
 * inject
+* get terminal version working with Rhino ?
 
 * implement failuresOnly at the base formatter level so all inherit this option ( add map function for collection )
 * nesting / nested display
