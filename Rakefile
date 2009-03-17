@@ -20,6 +20,15 @@ task :open do
   sh 'open -a Safari spec/spec.html'
 end
 
+desc 'Bind'
+task :bind do
+  require 'rubygems'
+  require 'bind'
+  action = Bind::Actions::RefreshBrowsers.new 'spec/spec.html', 'Safari'
+  listener = Bind::Listener.new :paths => ['lib/*.js', 'spec/*.js'], :interval => 1, :actions => [action], :debug => $stdout
+  listener.run!
+end
+
 desc 'Clear packaging'
 task :clear do
   if File.directory? 'pkg'
