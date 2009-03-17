@@ -248,17 +248,16 @@ Coming soon
 * progressive output for DOM formatter ... again with the hooks kinda like jsspec?
 * sidebar for DOM allowing you to jump to suites with errors ...
 * check what jsspec does to inject in before/after blocks .. eval body in context of each func?
-* more informative failure messages like jsspec ... use their printer? diffs etc
+* failure message diff
 * always pass matcher args as array (update docs)
 * have include() match object hashes as well? so [1,2,[1]].should_include [1]  => true
 * toggle showing of body on tr click
-* better printing of objects .. recursive for array, html tag escaped(only for DOM formatter), truncating of final string, etc utilize console printing?
+* tag printing with recursive / escaped output
 * allow chaining of matchers within grammar
 * add formatter hooks to display spinner etc
 * change scoping so that this.* is not needed or allow ' *\.' not just beginning of line
 * add global formatter option to display only suites with failing specs, and only those specs
 * inject
-* when using failuresOnly, dont show passing specs
 
 * implement failuresOnly at the base formatter level so all inherit this option ( add map function for collection )
 * nesting / nested display
