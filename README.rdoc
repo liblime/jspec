@@ -257,7 +257,6 @@ Coming soon
 * add formatter hooks to display spinner etc
 * change scoping so that this.* is not needed or allow ' *\.' not just beginning of line
 * add global formatter option to display only suites with failing specs, and only those specs
-* inject
 * better display for failure messages since some can be long, or truncate
 
 * implement failuresOnly at the base formatter level so all inherit this option ( add map function for collection )
