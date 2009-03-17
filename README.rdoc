@@ -260,6 +260,7 @@ Coming soon
 * add global formatter option to display only suites with failing specs, and only those specs
 * inject
 
+* implement failuresOnly at the base formatter level so all inherit this option ( add map function for collection )
 * nesting / nested display
 * mocking like rspec with should_receive(:meth).with(Array).once etc
 * fix errors in safari 4, thrown messages dont really work
