@@ -4,11 +4,7 @@ describe 'jQuery helpers'
   before
     .dom = this.sandbox()
   end
-  
-  it 'should override sandbox, providing a jQuery object'
-    .dom.jquery.should_be_a String
-  end
-  
+    
   it 'should add elements to a sandbox'
     .dom.prepend('<em>test</em>').should_have_text 'test'
   end
