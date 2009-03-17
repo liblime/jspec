@@ -245,7 +245,6 @@ Coming soon
 
 == Todo
 
-* use this.currentSpec etc not JSpec.currentSpec ...
 * allow running of specific suite via query string
 * progressive output for DOM formatter ... again with the hooks kinda like jsspec?
 * sidebar for DOM allowing you to jump to suites with errors ...
@@ -261,6 +260,7 @@ Coming soon
 * add formatter hooks to display spinner etc
 * change scoping so that this.* is not needed or allow ' *\.' not just beginning of line
 * add global formatter option to display only suites with failing specs, and only those specs
+* de-camelize ...
 
 * mocking like rspec with should_receive(:meth).with(Array).once etc
 * fix errors in safari 4, thrown messages dont really work
