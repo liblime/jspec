@@ -259,7 +259,6 @@ Coming soon
 * add global formatter option to display only suites with failing specs, and only those specs
 * inject
 * better display for failure messages since some can be long, or truncate
-* get terminal version working with Rhino ?
 
 * implement failuresOnly at the base formatter level so all inherit this option ( add map function for collection )
 * nesting / nested display
