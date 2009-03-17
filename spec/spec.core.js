@@ -199,7 +199,7 @@ describe 'Negative specs'
   end
   
   it 'should fail with selector for jQuery objects'
-    element = { jquery : '1.3.1', selector : '.foobar' } // Mock jQuery object
+    element = { jquery : '1.3.1', selector : '.foobar' } 
     element.should_eql ''
   end
   

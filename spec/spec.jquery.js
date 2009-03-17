@@ -69,16 +69,16 @@ describe 'jQuery matchers'
   end
   
   it 'have_children'
-    .elem.should_not_have_children('strong')
-    .elem.should_have_children('select')
+    .elem.should_have_children('strong')
+    .elem.should_not_have_children('select')
   end
   
   it 'have_text'
-    .elem.children('label').should_not_have_text('Save?')
+    .elem.children('label').should_have_text('Save?')
   end
   
   it 'have_value'
-    .elem.find('option').get(1).should_not_have_value('1')
+    .elem.find('option').get(1).should_have_value('1')
   end
   
   it 'have_class'
