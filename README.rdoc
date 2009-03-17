@@ -245,6 +245,8 @@ Coming soon
 
 == Todo
 
+* display messages for multi-arg matchers (maybe should include 1, 2, 3, and 4 ? )
+* allow other formatter options via query string like the failuresOnly
 * progressive output for DOM formatter ... again with the hooks kinda like jsspec?
 * sidebar for DOM allowing you to jump to suites with errors ...
 * check what jsspec does to inject in before/after blocks .. eval body in context of each func?
