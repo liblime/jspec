@@ -245,7 +245,6 @@ Coming soon
 
 == Todo
 
-* allow running of specific suite via query string
 * progressive output for DOM formatter ... again with the hooks kinda like jsspec?
 * sidebar for DOM allowing you to jump to suites with errors ...
 * check what jsspec does to inject in before/after blocks .. eval body in context of each func?
@@ -254,14 +253,14 @@ Coming soon
 * have include() match object hashes as well? so [1,2,[1]].should_include [1]  => true
 * more screencasts of features / add them on wiki
 * toggle showing of body on tr click
-* nesting / nested display
 * better printing of objects .. recursive for array, html tag escaped(only for DOM formatter), truncating of final string, etc utilize console printing?
 * allow chaining of matchers within grammar
 * add formatter hooks to display spinner etc
 * change scoping so that this.* is not needed or allow ' *\.' not just beginning of line
 * add global formatter option to display only suites with failing specs, and only those specs
-* de-camelize ...
+* inject
 
+* nesting / nested display
 * mocking like rspec with should_receive(:meth).with(Array).once etc
 * fix errors in safari 4, thrown messages dont really work
 * use watcher / bind / auto to automate testing in --browsers
@@ -271,6 +270,7 @@ Coming soon
   and gh-pages as well ... use commander / mack's generator?
   replace mygem with this .. use ERB for templates
 * low constrast alternative DOM theme / use interface buuilder
+* de-camelize ...
 
 == License 
 
