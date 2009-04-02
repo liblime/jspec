@@ -64,10 +64,18 @@ describe 'Matchers'
   end
   
   it 'include'
-    'hey there'.should_include 'hey'
-    [1, 2, 3].should_include 2
-    [1, 2, 3].should_not_include 5
+    123.should_include 1, 2, 3
     { hey : 'there' }.should_include 'hey'
+    /(foo)?bar/.should_include '(foo)'
+    function(){ return 'foo' }.should_include "return 'foo'"
+    [1, 2, 3].should_include 2
+    [1, 2].should_include 1, 2
+    [1, [2]].should_include [2]
+    [1, 2, 3].should_not_include 5, 6
+    ['foo', 'bar'].should_include 'foo', 'bar'
+    ['foo', 'bar'].should_include 'bar', 'foo'
+    ['foo', 'bar'].should_not_include 'foo', 'rawr'
+    ['foo', 'bar'].should_not_include 'rawr', 'foo'
   end
   
   it 'be_a'
