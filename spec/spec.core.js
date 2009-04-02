@@ -224,18 +224,22 @@ describe 'Negative specs'
     element.should_eql 'foo'
   end
   
-  it 'Fail with negative message'
+  it 'should fail with negative message'
     '1'.should_not_be_true
   end
   
-  it 'Fail with positive message'
+  it 'should fail with positive message'
     false.should_be_true
   end
   
-  it 'Fail second assertion message'
+  it 'should fail with message of first failure'
     true.should_be_true
     'bar'.should_include 'foo'
     'bar'.should_match(/foo/)
+  end
+  
+  it 'should fail with list'
+    ['foo', 'bar'].should.include 'foo', 'car'
   end
   
 end
