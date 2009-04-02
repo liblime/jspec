@@ -1,4 +1,9 @@
 
+=== 0.9.2 / 2009-04-02
+
+* Added support for multi-arg failure messages [#2]
+* Better printing of jQuery objects [#15]
+
 === 0.9.1 / 2009-04-02
 
 * Added support for dotted negation of assertions (foo.should.not.equal bar)
