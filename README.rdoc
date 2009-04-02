@@ -247,37 +247,7 @@ Coming soon
 
 * Get the TextMate bundle at https://github.com/visionmedia/jspec.tmbundle/tree
 
-* For more information consult the JSpec source code documentation.
-
-* Dont forget to watch the screencasts in the wiki :)
-
-== Todo
-
-* display messages for multi-arg matchers (maybe should include 1, 2, 3, and 4 ? )
-* sidebar for DOM allowing you to jump to suites with errors ...
-* check what jsspec does to inject in before/after blocks .. eval body in context of each func?
-* always pass matcher args as array (update docs)
-* have include() match object hashes as well? so [1,2,[1]].should_include [1]  => true
-* toggle showing of body on tr click
-* allow chaining of matchers within grammar
-* change scoping so that this.* is not needed or allow ' *\.' not just beginning of line
-* add global formatter option to display only suites with failing specs, and only those specs
-* better display for failure messages since some can be long, or truncate
-
-* allow other formatter options via query string like the failuresOnly
-* progressive output for DOM formatter ... again with the hooks
-* add formatter hooks to display spinner etc
-* implement failuresOnly at the base formatter level so all inherit this option ( add map function for collection )
-* nesting / nested display
-* mocking like rspec with should_receive(:meth).with(Array).once etc
-* fix errors in safari 4, thrown messages dont really work
-* charts / sparks for DOM formatter / svg, canvas, imgs whatever to show how many failed
-* better convention for filenames in spec
-* github env for creating javascript/css packages complete with JSpec submodules etc
-  and gh-pages as well ... use commander / mack's generator?
-  replace mygem with this .. use ERB for templates
-* low constrast alternative DOM theme / use interface buuilder
-* de-camelize ...
+* For more information consult the JSpec source code documentation or visit http://visionmedia.github.com/jspec
 
 == License 
 
