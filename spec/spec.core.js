@@ -170,6 +170,11 @@ describe 'Pre-processor'
     'bar'.should_not.equal('foo')
     'bar'.should_not.equal 'foo'
   end
+  
+  it 'should allow dotted negation'
+    'bar'.should.not.equal('foo')
+    'bar'.should.not.equal 'foo'
+  end
 
 end
 
