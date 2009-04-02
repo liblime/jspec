@@ -67,7 +67,7 @@ describe 'Matchers'
     123.should_include 1, 2, 3
     { hey : 'there' }.should_include 'hey'
     /(foo)?bar/.should_include '(foo)'
-    function(){ return 'foo' }.should_include "return 'foo'"
+    function(){ return foo }.should_include "return foo"
     [1, 2, 3].should_include 2
     [1, 2].should_include 1, 2
     [1, [2]].should_include [2]
