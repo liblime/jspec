@@ -52,15 +52,17 @@ describe 'jQuery matchers'
   it 'should fail with pretty print of element'
   end
   
-  it 'have_tag'
+  it 'have_tag / have_one'
     .elem.should_have_tag('label')
     .elem.should_have_tag('em')
+    .elem.should_have_one('label')
     .elem.should_not_have_tag('input')
   end
   
-  it 'have_tags'
+  it 'have_tags / have_many'
     .elem.should_have_tags('option')
     .elem.should_not_have_tags('label')
+    .elem.should_have_many('option')
   end
   
   it 'have_child'
