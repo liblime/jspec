@@ -38,7 +38,7 @@ end
 describe 'jQuery matchers'
 
   before_each
-    var html = '<p><label><em>Save?</em></label>    \
+    html = '<p><label><em>Save?</em></label>        \
     <select class="save" style="display: none;">    \
     <option value="0">No</option>                   \
     <option value="1">Yes</option>                  \
@@ -91,6 +91,15 @@ describe 'jQuery matchers'
   
   it 'be_hidden'
     .elem.children('select').should_be_hidden
+  end
+  
+  it 'have_attr'
+    elem = '<input type="button" title="some foo" value="Foo" />'
+    elem.should_have_attr 'title'
+    elem.should_have_attr 'title', 'some foo'
+    elem.should_not_have_attr 'rawr'
+    elem.should_not_have_attr 'some', 'rawr'
+    elem.should_not_have_attr 'title', 'bar'
   end
   
 end
