@@ -1,4 +1,9 @@
 
+=== 0.9.1 / 2009-04-02
+
+* Added support for dotted negation of assertions (foo.should.not.equal bar)
+* Added support for dot-style assertions [#17] (foo.should_not.equal bar)
+
 === 0.9.0 / 2009-04-01
 
 * Added spec for strip()
