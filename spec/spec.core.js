@@ -233,7 +233,12 @@ describe 'Misc'
     JSpec.query('suite', '?suite=Positive%20specs').should_equal 'Positive specs'
     JSpec.query('foo', '?suite=Positive%20specs').should_be_null
   end
-
+  
+  it 'should strip whitespace or characters specified'
+    JSpec.strip(" foo \n\n").should_equal 'foo'
+    JSpec.strip('[foo]', '\\[\\]').should_equal 'foo'
+  end
+  
   it 'requires implementation'
   end
 
