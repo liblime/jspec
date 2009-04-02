@@ -221,7 +221,7 @@ describe 'Negative specs'
   
   it 'should fail with selector for jQuery objects'
     element = { jquery : '1.3.1', selector : '.foobar' } 
-    element.should_eql ''
+    element.should_eql 'foo'
   end
   
   it 'Fail with negative message'

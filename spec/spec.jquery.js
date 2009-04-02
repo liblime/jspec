@@ -50,6 +50,7 @@ describe 'jQuery matchers'
   end
   
   it 'should fail with pretty print of element'
+    .elem.should_not_have_tag 'label'
   end
   
   it 'have_tag / have_one'
@@ -105,4 +106,3 @@ describe 'jQuery matchers'
   end
   
 end
-
