@@ -141,6 +141,7 @@ describe 'Pre-processor'
   
   it 'should allow parens to be optional with args'
     'foobar'.should_include 'foo'
+    'rawr'.should_not_include 'foo'
   end
   
   it 'should allow literals without assigning as variables'
@@ -161,6 +162,13 @@ describe 'Pre-processor'
     3..4.should_eql [3,4]
     1..1.should_eql [1]
     3..1.should_eql [3,2,1]
+  end
+  
+  it 'should allow dot style assertions'
+    'foo'.should.equal('foo')
+    'foo'.should.equal 'foo'
+    'bar'.should_not.equal('foo')
+    'bar'.should_not.equal 'foo'
   end
 
 end
