@@ -102,6 +102,18 @@ describe 'jQuery matchers'
     '<input type="button" disabled="disabled" />'.should_be_disabled
   end
   
+  it 'be_a_TYPE_input'
+    '<input type="checkbox"/>'.should.be_a_checkbox_input
+    '<input type="text"/>'.should.be_a_text_input
+    '<input type="radio"/>'.should.be_a_radio_input
+    '<input type="file"/>'.should.be_a_file_input
+    '<input type="password"/>'.should.be_a_password_input
+    '<input type="submit"/>'.should.be_a_submit_input
+    '<input type="image"/>'.should.be_a_image_input
+    '<input type="reset"/>'.should.be_a_reset_input
+    '<input type="button"/>'.should.be_a_button_input
+  end
+  
   it 'be_hidden'
     .elem.children('select').should_be_hidden
   end
