@@ -97,6 +97,11 @@ describe 'jQuery matchers'
     '<input type="button" disabled="disabled" />'.should_not_be_enabled
   end
   
+  it 'be_disabled'
+    '<input type="button"/>'.should_not_be_disabled
+    '<input type="button" disabled="disabled" />'.should_be_disabled
+  end
+  
   it 'be_hidden'
     .elem.children('select').should_be_hidden
   end
