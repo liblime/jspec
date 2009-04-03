@@ -119,6 +119,13 @@ describe 'Matchers'
     person.should.not.have_at_most(1, 'pets')
   end
   
+  it 'have_within'
+    person = { pets : ['izzy', 'niko'] }
+    person.should.have_within(1..2, 'pets')
+    person.should.have_within(2..5, 'pets')
+    person.should.not.have_within(5..10, 'pets')
+  end
+  
 end
 
 describe 'Position hooks'
