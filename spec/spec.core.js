@@ -348,39 +348,39 @@ end
 describe 'Negative specs'
 
   it 'should fail'
-    'test'.should_not_eql 'test' 
+    'test'.should.not_eql 'test' 
   end
 
   it 'should fail with one faulty assertion'
-    'test'.should_equal 'test' 
-    'test'.should_equal 'foo' 
+    'test'.should.equal 'test' 
+    'test'.should.equal 'foo' 
   end
   
   it 'should fail and print array with square braces'
-    [1,2].should_equal [1,3] 
+    [1,2].should.equal [1,3] 
   end
   
   it 'should fail and print nested array'
-    [1, ['foo']].should_equal [1, ['bar', ['whatever', 1.0, { foo : 'bar', bar : { 1 : 2 } }]]]
+    [1, ['foo']].should.equal [1, ['bar', ['whatever', 1.0, { foo : 'bar', bar : { 1 : 2 } }]]]
   end
   
   it 'should fail and print html elements'
-    a = document.createElement('a')
-    a.setAttribute('href', 'http://vision-media.ca')
-    a.should_not_eql a
+    elem = document.createElement('a')
+    elem.setAttribute('href', 'http://vision-media.ca')
+    elem.should.not.eql elem
   end
   
   it 'should fail with selector for jQuery objects'
-    element = { jquery : '1.3.1', selector : '.foobar' } 
-    element.should_eql 'foo'
+    elem = { jquery : '1.3.1', selector : '.foobar' } 
+    elem.should.eql 'foo'
   end
   
   it 'should fail with negative message'
-    '1'.should_not_be_true
+    '1'.should.not.be_true
   end
   
   it 'should fail with positive message'
-    false.should_be_true
+    false.should.be_true
   end
   
   it 'should fail with function body'
@@ -388,9 +388,9 @@ describe 'Negative specs'
   end
   
   it 'should fail with message of first failure'
-    true.should_be_true
-    'bar'.should_match(/foo/gm)
-    'bar'.should_include 'foo'
+    true.should.be_true
+    'bar'.should.match(/foo/gm)
+    'bar'.should.include 'foo'
   end
   
   it 'should fail with list'
