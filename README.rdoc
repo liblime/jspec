@@ -17,6 +17,7 @@ and much more.
 * Extremely simple matcher declaration
 * Several helpful formatters (dom, console, terminal, ...)
 * Custom formatters
+* Assertion graphs displaying how many, and which assertions pass or failed
 * Profiling
 * Tiny (10 kb compressed, 800-ish LOC)
 
