@@ -84,8 +84,12 @@ describe 'Matchers'
   end
   
   it 'throw_error'
-    function() { throw 'error' }.should_throw_error
-    function() { return 'test' }.should_not_throw_error
+    -{ throw 'error' }.should_throw_error
+    -{ return 'test' }.should_not_throw_error
+    -{ throw 'some foo bar' }.should.throw_error('some foo bar')
+    -{ throw 'some foo bar' }.should.throw_error(/foo bar/)
+    -{ throw 'some foo bar' }.should.not.throw_error(/rawr/)
+    -{ throw 'some foo bar' }.should.not.throw_error('rawr')
   end
   
   it 'be_type'
