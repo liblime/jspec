@@ -21,7 +21,7 @@ body.jspec {
 #jspec-bottom {
   margin: 0 auto;
   width: 1008px;
-  height: 40px;
+  height: 15px;
   background: url(images/sprites.bg.png) bottom left no-repeat;
 }
 #jspec-title {
@@ -48,6 +48,9 @@ body.jspec {
   padding: 15px 40px;
 	font: 11px "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
 	color: #7B8D9B;
+}
+#jspec-report.has-failures {
+  padding-bottom: 30px;
 }
 #jspec-report .hidden {
   display: none;
