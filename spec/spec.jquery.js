@@ -46,85 +46,119 @@ describe 'jQuery'
     end
 
     it 'should fail with pretty print of element'
-      .elem.should_not_have_tag 'label'
+      .elem.should.not.have_tag 'label'
+    end
+    
+    describe 'have_tag / have_one'
+      it 'should check if a single child is present'
+        .elem.should.have_tag 'label'
+        .elem.should.have_tag 'em'
+        .elem.should.have_one 'label'
+        .elem.should.not.have_tag 'input'
+      end
     end
 
-    it 'have_tag / have_one'
-      .elem.should_have_tag('label')
-      .elem.should_have_tag('em')
-      .elem.should_have_one('label')
-      .elem.should_not_have_tag('input')
+    describe 'have_tags / have_many'
+      it 'should check if more than one child is present'
+        .elem.should.have_tags 'option'
+        .elem.should.have_many 'option'
+        .elem.should.not.have_many 'label'
+      end
     end
 
-    it 'have_tags / have_many'
-      .elem.should_have_tags('option')
-      .elem.should_not_have_tags('label')
-      .elem.should_have_many('option')
+    describe 'have_child'
+      it 'should check if a direct child is present'
+        .elem.should.have_child 'label'
+        .elem.should.not.have_child 'em'
+      end
     end
 
-    it 'have_child'
-      .elem.should_have_child('label')
-      .elem.should_not_have_child('em')
+    describe 'have_children'
+      it 'should check if more than one direct children are present'
+        .elem.should.have_children 'strong'
+        .elem.should.not.have_children 'select'
+      end
+    end
+    
+    describe 'have_text'
+      it 'should check for plain text'
+        .elem.children('label').should.have_text 'Save?'
+      end
+    end
+    
+    describe 'have_value'
+      it 'should check if an element has the given value'
+        .elem.find('option').get(1).should.have_value '1'  
+      end
     end
 
-    it 'have_children'
-      .elem.should_have_children('strong')
-      .elem.should_not_have_children('select')
+    describe 'have_class'
+      it 'should check if an element has the given class'
+        .elem.children('select').should.have_class 'save'
+      end
     end
 
-    it 'have_text'
-      .elem.children('label').should_have_text('Save?')
+    describe 'be_visible'
+      it 'should check that an element is not hidden or set to display of none'
+        .element('#jspec-report').should.be_visible
+        '#jspec-report'.should.be_visible
+        '<input style="visibility: hidden;"/>'.should.not.be_visible
+        '<input style="display: none;"/>'.should.not.be_visible
+        '<input />'.should.be_visible
+      end
+    end
+    
+    describe 'be_enabled'
+      it 'should check that an element is currently enabled'
+        '<input type="button"/>'.should.be_enabled
+        '<input type="button" disabled="disabled" />'.should.not.be_enabled
+      end
+    end
+    
+    describe 'be_disabled'
+      it 'should check that an element is currently disabled'
+        '<input type="button"/>'.should.not.be_disabled
+        '<input type="button" disabled="disabled" />'.should.be_disabled
+      end
+    end
+    
+    describe 'be_a_TYPE_input'
+      it 'should check that an element is the given TYPE'
+        '<input type="checkbox"/>'.should.be_a_checkbox_input
+        '<input type="text"/>'.should.be_a_text_input
+        '<input type="radio"/>'.should.be_a_radio_input
+        '<input type="file"/>'.should.be_a_file_input
+        '<input type="password"/>'.should.be_a_password_input
+        '<input type="submit"/>'.should.be_a_submit_input
+        '<input type="image"/>'.should.be_a_image_input
+        '<input type="reset"/>'.should.be_a_reset_input
+        '<input type="button"/>'.should.be_a_button_input
+      end
+    end
+    
+    describe 'be_hidden'
+      it 'should check if an element is hidden'
+        '<input style="display: none;" />'.should.be_hidden
+        '<input style="visibility: hidden;" />'.should.be_hidden
+        '<input />'.should.not.be_hidden
+      end
     end
 
-    it 'have_value'
-      .elem.find('option').get(1).should_have_value('1')
-    end
-
-    it 'have_class'
-      .elem.children('select').should_have_class('save')
-    end
-
-    it 'be_visible'
-      .element('#jspec-report').should_be_visible
-      '#jspec-report'.should_be_visible
-      '<input style="visibility: hidden;"/>'.should_not_be_visible
-      '<input style="display: none;"/>'.should_not_be_visible
-      '<input />'.should_be_visible
-    end
-
-    it 'be_enabled'
-      '<input type="button"/>'.should_be_enabled
-      '<input type="button" disabled="disabled" />'.should_not_be_enabled
-    end
-
-    it 'be_disabled'
-      '<input type="button"/>'.should_not_be_disabled
-      '<input type="button" disabled="disabled" />'.should_be_disabled
-    end
-
-    it 'be_a_TYPE_input'
-      '<input type="checkbox"/>'.should.be_a_checkbox_input
-      '<input type="text"/>'.should.be_a_text_input
-      '<input type="radio"/>'.should.be_a_radio_input
-      '<input type="file"/>'.should.be_a_file_input
-      '<input type="password"/>'.should.be_a_password_input
-      '<input type="submit"/>'.should.be_a_submit_input
-      '<input type="image"/>'.should.be_a_image_input
-      '<input type="reset"/>'.should.be_a_reset_input
-      '<input type="button"/>'.should.be_a_button_input
-    end
-
-    it 'be_hidden'
-      .elem.children('select').should_be_hidden
-    end
-
-    it 'have_attr'
-      elem = '<input type="button" title="some foo" value="Foo" />'
-      elem.should_have_attr 'title'
-      elem.should_have_attr 'title', 'some foo'
-      elem.should_not_have_attr 'rawr'
-      elem.should_not_have_attr 'some', 'rawr'
-      elem.should_not_have_attr 'title', 'bar'
+    describe 'have_attr'
+      before_each 
+        .elem = '<input type="button" title="some foo" value="Foo" />' 
+      end
+      
+      it 'should check that an element has the given attribute'
+        .elem.should.have_attr 'title'
+        .elem.should.not_have_attr 'rawr'
+      end
+      
+      it 'should check that the given attribute has a specific value'
+        .elem.should.have_attr 'title', 'some foo'
+        .elem.should.not_have_attr 'some', 'rawr'
+        .elem.should.not_have_attr 'title', 'bar'
+      end
     end
   end
   
