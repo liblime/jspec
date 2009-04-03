@@ -90,6 +90,7 @@ describe 'jQuery matchers'
   
   it 'be_visible'
     .element('#jspec-report').should_be_visible
+    '#jspec-report'.should_be_visible
   end
   
   it 'be_enabled'
