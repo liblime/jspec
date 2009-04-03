@@ -111,7 +111,14 @@ describe 'Matchers'
     person.should.have_at_least(2, 'pets')
     person.should.not.have_at_least(3, 'pets')
   end
-
+  
+  it 'have_at_most'
+    person = { pets : ['izzy', 'niko'] }
+    person.should.have_at_most(2, 'pets')
+    person.should.have_at_most(3, 'pets')
+    person.should.not.have_at_most(1, 'pets')
+  end
+  
 end
 
 describe 'Position hooks'

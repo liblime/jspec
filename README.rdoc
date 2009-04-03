@@ -104,7 +104,9 @@ JSpec.options object.
   - be_type          be type of x
   - be_greater_than  >
   - be_less_than     <
-  - have             object should have n of property (person.should.have(2, 'pets')) 
+  - have             object should have n of property (person.should.have(2, 'pets'))
+  - have_at_least    object should have at least n of property
+  - have_at_most     object should have a maximum n of property
   - be_within        checks if n is within the range passed
   - have_length      length of n
   - include          include substring, array element, or hash key
