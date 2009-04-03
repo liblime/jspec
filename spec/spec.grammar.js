@@ -1,5 +1,5 @@
 
-describe 'JSpec grammar'
+describe 'Grammar'
 
   it 'should allow "it" spec literal'
     true.should.be_true

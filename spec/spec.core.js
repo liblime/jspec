@@ -1,21 +1,4 @@
 
-describe 'Positive specs'
-  before_each
-    .one = true
-  end
-
-  it 'should pass'
-    'test'.should_equal('test')
-  end
-  
-  it 'should pass with several assertions'
-    'foo'.should_equal('foo')
-    'bar'.should_equal('bar')
-    'bar'.should_not_equal('foo')
-  end
-  
-end
-
 describe 'Matchers'
 
   describe 'eql'
@@ -200,22 +183,6 @@ describe 'Matchers'
   
 end
 
-describe 'Custom Contexts'
-
-  before 
-    JSpec.context = { iLike : 'cookies' }
-  end
-  
-  after
-    JSpec.context = null
-  end
-
-  it 'should allow helpers'
-    .iLike.should_equal 'cookies'
-  end
-
-end
-
 describe 'Negative specs'
 
   it 'should fail'
@@ -270,20 +237,44 @@ describe 'Negative specs'
   
 end
 
-describe 'Misc'
+describe 'Utility'
+  describe 'query'
+    it 'should return a pairs value'
+      JSpec.query('suite', '?suite=Positive%20specs').should.equal 'Positive specs'
+    end
+    
+    it 'should return null when key is not present'
+      JSpec.query('foo', '?suite=Positive%20specs').should.be_null
+    end
+  end
+  
+  describe 'strip'
+    it 'should strip whitespace by default'
+      JSpec.strip(" foo \n\n").should.equal 'foo'
+    end
+    
+    it 'should strip the characters passed'
+      JSpec.strip('[foo]', '\\[\\]').should.equal 'foo'
+    end
+  end
+end
 
-  it 'should parse a query string'
-    JSpec.query('suite', '?suite=Positive%20specs').should_equal 'Positive specs'
-    JSpec.query('foo', '?suite=Positive%20specs').should_be_null
+describe 'Contexts'
+  before 
+    JSpec.context = { iLike : 'cookies' }
   end
-  
-  it 'should strip whitespace or characters specified'
-    JSpec.strip(" foo \n\n").should_equal 'foo'
-    JSpec.strip('[foo]', '\\[\\]').should_equal 'foo'
+
+  after
+    JSpec.context = null
   end
-  
+
+  it 'should be replacable'
+    .iLike.should.equal 'cookies'
+  end
+end
+
+describe 'Misc'
   it 'requires implementation'
   end
-
 end
 
