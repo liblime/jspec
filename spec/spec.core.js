@@ -36,7 +36,7 @@ describe 'Positive specs'
       .foobar2.should.be_true
     end
     
-    describe 'should'
+    describe 'when nested further'
       before 
         .bar = true
       end
@@ -46,7 +46,7 @@ describe 'Positive specs'
         .foobar2 = false
       end
       
-      it 'allow multiple levels of nesting'
+      it 'should allow multiple levels of nesting'
         true.should.be_true
       end
       
