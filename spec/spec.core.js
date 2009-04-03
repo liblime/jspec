@@ -222,25 +222,31 @@ describe 'Matchers'
     end
   end
   
-  it 'have_at_least'
-    person = { pets : ['izzy', 'niko'] }
-    person.should.have_at_least(1, 'pets')
-    person.should.have_at_least(2, 'pets')
-    person.should.not.have_at_least(3, 'pets')
+  describe 'have_at_least'
+    it 'should check if a object has at least n of a property'
+      person = { pets : ['izzy', 'niko'] }
+      person.should.have_at_least 1, 'pets'
+      person.should.have_at_least 2, 'pets'
+      person.should.not.have_at_least 3, 'pets'
+    end
   end
   
-  it 'have_at_most'
-    person = { pets : ['izzy', 'niko'] }
-    person.should.have_at_most(2, 'pets')
-    person.should.have_at_most(3, 'pets')
-    person.should.not.have_at_most(1, 'pets')
+  describe 'have_at_most'
+    it 'should check if an object has at most n of a property'
+      person = { pets : ['izzy', 'niko'] }
+      person.should.have_at_most(2, 'pets')
+      person.should.have_at_most(3, 'pets')
+      person.should.not.have_at_most(1, 'pets')
+    end
   end
   
-  it 'have_within'
-    person = { pets : ['izzy', 'niko'] }
-    person.should.have_within(1..2, 'pets')
-    person.should.have_within(2..5, 'pets')
-    person.should.not.have_within(5..10, 'pets')
+  describe 'be_within'
+    it 'should check that an object has within n..n of a property'
+      person = { pets : ['izzy', 'niko'] }
+      person.should.have_within(1..2, 'pets')
+      person.should.have_within(2..5, 'pets')
+      person.should.not.have_within(5..10, 'pets')
+    end
   end
   
 end
