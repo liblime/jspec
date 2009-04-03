@@ -91,7 +91,6 @@ describe 'Matchers'
     
     it 'should check if a function body includes a string'
       -{ return [foo, bar] }.should.include 'foo', 'bar'
-      -{ return foo }.should.include(/foo|bar/)
     end
     
     it 'should check if an array contains element(s)'
