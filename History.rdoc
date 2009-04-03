@@ -1,4 +1,14 @@
 
+=== 0.9.6 / 2009-04-03
+
+* Added nesting support
+* Added printing of nested specs
+* Added assertion graphs to DOM formatter
+* Refactored preprocess()
+* Refactored most of the specs
+* Renamed preProcess() to preprocess()
+* Removed running of a single suite via ?suite= for now
+
 === 0.9.5 / 2009-04-02
 
 * Added support for printing of function bodies and regexps [#27]
