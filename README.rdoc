@@ -19,6 +19,7 @@ and much more.
 * Several helpful formatters (dom, console, terminal, ...)
 * Assertion graphs displaying how many, and which assertions pass or failed
 * Default / customizable evaluation contexts
+* DOM sandbox support
 * Great looking default DOM theme
 * Profiling
 * Tiny (10 kb compressed, 1000-ish LOC)
