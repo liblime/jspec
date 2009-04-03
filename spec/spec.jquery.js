@@ -91,6 +91,9 @@ describe 'jQuery matchers'
   it 'be_visible'
     .element('#jspec-report').should_be_visible
     '#jspec-report'.should_be_visible
+    '<input style="visibility: hidden;"/>'.should_not_be_visible
+    '<input style="display: none;"/>'.should_not_be_visible
+    '<input />'.should_be_visible
   end
   
   it 'be_enabled'
