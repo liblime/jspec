@@ -156,8 +156,8 @@ describe 'jQuery'
       
       it 'should check that the given attribute has a specific value'
         .elem.should.have_attr 'title', 'some foo'
-        .elem.should.not_have_attr 'some', 'rawr'
-        .elem.should.not_have_attr 'title', 'bar'
+        .elem.should.not.have_attr 'some', 'rawr'
+        .elem.should.not.have_attr 'title', 'bar'
       end
     end
   end
