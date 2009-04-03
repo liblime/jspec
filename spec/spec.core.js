@@ -263,10 +263,14 @@ describe 'Negative specs'
     false.should_be_true
   end
   
+  it 'should fail with function body'
+    -{ rawr }.should.not.throw_error
+  end
+  
   it 'should fail with message of first failure'
     true.should_be_true
+    'bar'.should_match(/foo/gm)
     'bar'.should_include 'foo'
-    'bar'.should_match(/foo/)
   end
   
   it 'should fail with list'
