@@ -203,14 +203,20 @@ We can do:
  
   { foo : 'bar' }.should.include 'foo'
 
-There is also an alternative closure literal so these are equivalent:
+=== Closure Literal
+
+These are equivalent:
 
   -{ throw 'test' }.should.throw_error
   function() { throw 'test' }.should.throw_error
 
-Inclusive range literals are available as well:
+=== Inclusive Range Literal
+
+The following expands to the array of [1,2,3,4,5]
 
   n.should.be_within 1..5
+
+=== This Literal
 
 Commonly throughout using JSpec you will often need to do things like the following,
 while referencing 'this.cart' throughout your specs:
