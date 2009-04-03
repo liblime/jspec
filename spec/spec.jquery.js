@@ -92,6 +92,11 @@ describe 'jQuery matchers'
     .element('#jspec-report').should_be_visible
   end
   
+  it 'be_enabled'
+    '<input type="button"/>'.should_be_enabled
+    '<input type="button" disabled="disabled" />'.should_not_be_enabled
+  end
+  
   it 'be_hidden'
     .elem.children('select').should_be_hidden
   end

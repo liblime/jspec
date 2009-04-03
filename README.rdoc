@@ -125,6 +125,7 @@ JSpec.options object.
   - have_class
   - be_visible
   - be_hidden
+  - be_enabled
 
 == Helpers
 
