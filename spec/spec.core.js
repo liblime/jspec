@@ -104,6 +104,13 @@ describe 'Matchers'
     person.should.have 2, 'pets'
     person.should.not.have 3, 'pets'
   end
+  
+  it 'have_at_least'
+    person = { pets : ['izzy', 'niko'] }
+    person.should.have_at_least(1, 'pets')
+    person.should.have_at_least(2, 'pets')
+    person.should.not.have_at_least(3, 'pets')
+  end
 
 end
 
