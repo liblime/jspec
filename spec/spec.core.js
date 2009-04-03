@@ -98,6 +98,12 @@ describe 'Matchers'
     5.should_be_within 1..10
     15.should_not_be_within 10..5
   end
+  
+  it 'have'
+    person = { pets : ['izzy', 'niko'] }
+    person.should.have 2, 'pets'
+    person.should.not.have 3, 'pets'
+  end
 
 end
 
