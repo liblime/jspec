@@ -127,6 +127,15 @@ JSpec.options object.
   - be_hidden
   - be_enabled
   - be_disabled
+  - be_a_submit_input
+  - be_a_text_input
+  - be_a_image_input
+  - be_a_submit_input
+  - be_a_reset_input
+  - be_a_password_input
+  - be_a_file_input
+  - be_a_radio_input
+  - be_a_checkbox_input
 
 == Helpers
 
