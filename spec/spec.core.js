@@ -1,6 +1,5 @@
 
 describe 'Positive specs'
-
   before_each
     .one = true
   end
