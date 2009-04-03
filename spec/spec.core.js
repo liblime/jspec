@@ -1,6 +1,10 @@
 
 describe 'Positive specs'
 
+  before_each
+    .one = true
+  end
+
   it 'should pass'
     'test'.should_equal('test')
   end
@@ -11,9 +15,56 @@ describe 'Positive specs'
     'bar'.should_not_equal('foo')
   end
   
-  // it 'should pass using chaining of assertions'
-  //   'foo'.should_equal('foo').should_be true
-  // end
+  describe 'with nesting'
+    before
+      .foo = true
+    end
+    
+    before_each
+      .foobar = true
+      .foobar2 = true
+    end
+    
+    it 'should allow assertions'
+      true.should.be_true
+    end
+    
+    it 'should allow before blocks'
+      .one.should.be_true
+      .foo.should.be_true
+      .foobar.should.be_true
+      .foobar2.should.be_true
+    end
+    
+    describe 'should'
+      before 
+        .bar = true
+      end
+      
+      before_each 
+        .barfoo = true
+        .foobar2 = false
+      end
+      
+      it 'allow multiple levels of nesting'
+        true.should.be_true
+      end
+      
+      it 'should allow before blocks'
+        .bar.should.be_true
+        .barfoo.should.be_true
+      end
+      
+      it 'should inherit before blocks from previous suites'
+        .foo.should.be_true
+        .foobar.should.be_true
+      end
+      
+      it 'should trump previous suite before blocks'
+        .foobar2.should.be_false
+      end
+    end
+  end
   
 end
 
