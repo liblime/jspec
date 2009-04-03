@@ -87,9 +87,8 @@ body.jspec {
   background: #F2F5F7;
 }
 #jspec-report td + td {
-  width: 30px;
-  text-align: right;
-  color: #AAB7C0;
+  padding-right: 0;
+  width: 15px;
 }
 #jspec-report td.pass {
   background: url(images/sprites.png) 3px -7px no-repeat;
