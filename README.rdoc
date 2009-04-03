@@ -9,32 +9,34 @@ and much more.
 == Features
 
 * Sexiest syntax of them all
+* Framework / DOM independent
+* Nested describes
 * Does not pollute core object prototypes
-* Async support (jQuery only at the moment)
-* Evalute any number of suites (or cherry pick specific suites loaded)
-* Evaluation contexts for providing helper methods and properties
-* Allows parens to be optional when using matchers ('foobar'.should_include 'foo')
-* Extremely simple matcher declaration
+* Async support
+* Extremely simple and intuitive matcher declaration
+* Over 45 core matchers
+* Allows parens to be optional when using matchers to increase readability
 * Several helpful formatters (dom, console, terminal, ...)
-* Custom formatters
 * Assertion graphs displaying how many, and which assertions pass or failed
+* Default / customizable evaluation contexts
+* Great looking default DOM theme
 * Profiling
-* Tiny (10 kb compressed, 800-ish LOC)
+* Tiny (10 kb compressed, 1000-ish LOC)
 
 == Example
 
-  describe 'Shopping cart'
-
+  describe 'ShoppingCart'
     before_each
       .cart = new ShoppingCart
     end
     
-    it 'should add products'
-      .cart.addProduct('cookie')
-      .cart.products.should_include 'cookie'
-      .cart.should_not_be_empty
+    describe 'addProducts'
+      it 'should add several products'
+        .cart.addProduct('cookie')
+        .cart.addProduct('icecream')
+        .cart.should.have 2, 'products'
+      end
     end
-    
   end
 
 == Installation
@@ -61,27 +63,12 @@ loaded using the exec method. Below is an example:
   <body onLoad="runSuites()">
   ...
 
-To run specific suites we first load and evaluate a JSpec script,
-using the exec() method, then run specific suite(s), and report.
-  
-  ...
-  function runSuites() {
-    JSpec
-    .exec('spec.core.js')
-    .runSuite('Matchers')
-    .report()
-  }
-  ...
-
 You may optionally want to use sources in the /pkg directory
 for your project, since it includes compressed alternatives. 
 As mentioned throughout the documentation, options may be passed to
 report(), which are in turn passed to the formatter. This includes
 options like failuresOnly, which displays only failing suites / specs,
-etc. 
-
-As an alternative to using runSuite() which can take extra time to 
-alter, you may use the query string key 'suite'.
+etc.
 
 == Options
 
@@ -197,33 +184,33 @@ The pre-processing capability of JSpec is extremely powerful. Your JavaScript
 code is not necessarily what it seems. For example when you seemingly invoke a
 object's prototype like below:
 
-  'foobar'.should_include 'bar'
+  'foobar'.should.include 'bar'
 
 First parens are added:
 
-  'foobar'.should_include('bar')
+  'foobar'.should.include('bar')
 
-Secondly the matcher invocation is converted:
+Secondly the matcher invocation is converted to a non-polluting match() call:
 
   JSpec.match('foobar', 'should', 'include', 'bar')
 
 This also means instead of:
 
   var object = { foo : 'bar' }
-  object.should_include 'foo'
+  object.should.include 'foo'
 
 We can do:
  
-  { foo : 'bar' }.should_include 'foo'
+  { foo : 'bar' }.should.include 'foo'
 
 There is also an alternative closure literal so these are equivalent:
 
-  -{ throw 'test' }.should_throw_error
-  function() { throw 'test' }.should_throw_error
+  -{ throw 'test' }.should.throw_error
+  function() { throw 'test' }.should.throw_error
 
 Inclusive range literals are available as well:
 
-  n.should_be_within 1..5
+  n.should.be_within 1..5
 
 Commonly throughout using JSpec you will often need to do things like the following,
 while referencing 'this.cart' throughout your specs:
@@ -234,13 +221,25 @@ while referencing 'this.cart' throughout your specs:
 
 Thanks to the pre-processor we can simply use the terse alternative below:
 
+  ...
   before
     .cart = new ShoppingCart
   end
 
   it '...'
-    .cart.products.should_have_length 4
+    .cart.should.have 4, 'products'
   end
+  ...
+
+Alternatively you may utilize literal javascript outside of the closures:
+
+  ...
+  cart = new ShoppingCart
+
+  it '...'
+    cart.should.have 4, 'products'
+  end
+  ...
 
 == Formatters
 
@@ -256,10 +255,7 @@ Reporting utilizing the console object (tested using Firebug and Safari 4)
 
 Coming soon
 
-== Misc
-
-* Place the \_\_END\_\_ token in your document to prevent interpretation of
-  the below it code. Useful for quickly debugging or speeding up suites.
+== More Information
 
 * Get the TextMate bundle at https://github.com/visionmedia/jspec.tmbundle/tree
 
