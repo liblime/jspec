@@ -1,4 +1,13 @@
 
+=== 0.9.5 / 2009-04-02
+
+* Added support for printing of function bodies and regexps [#27]
+* Added support for strings / regexp with should_throw_error [#26]
+* Added have_within matcher
+* Added have_at_most matcher
+* Added have_at_least matcher
+* Added have matcher [#24]
+
 === 0.9.4 / 2009-04-02
 
 * Added be_a_TYPE_input matchers (be_a_checkbox_input, be_a_text_input, etc)
