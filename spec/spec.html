@@ -6,6 +6,7 @@
 		<script src="../lib/jspec.jquery.js"></script>
 		<script>
 			function runSuites() {
+				JSpec.options.profile = true
 				JSpec
 				.exec('spec.grammar.js')
 				.exec('spec.core.js')
