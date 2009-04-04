@@ -6,12 +6,12 @@ describe 'jQuery'
     end
 
     it 'should add elements to a sandbox'
-      .dom.prepend('<em>test</em>').should_have_text 'test'
+      .dom.prepend('<em>test</em>').should.have_text 'test'
     end
 
     it 'should retain visibility within a sandbox'
-      .dom.children('em').hide().should_be_hidden
-      .dom.children('em').show().should_be_visible
+      .dom.children('em').hide().should.be_hidden
+      .dom.children('em').show().should.be_visible
     end
   end
   
@@ -24,10 +24,10 @@ describe 'jQuery'
 
     it 'should load mah cookies twice (ensure multiple async requests work)'
       $.post('async', function(text){
-        text.should_eql 'cookies!'
+        text.should.eql 'cookies!'
       })
       $.post('async', function(text){
-        text.should_not_eql 'rawr'
+        text.should.not.eql 'rawr'
       })
     end 
   end
