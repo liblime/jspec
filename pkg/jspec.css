@@ -21,7 +21,7 @@ body.jspec {
 #jspec-bottom {
   margin: 0 auto;
   width: 1008px;
-  height: 40px;
+  height: 15px;
   background: url(images/sprites.bg.png) bottom left no-repeat;
 }
 #jspec-title {
@@ -48,6 +48,9 @@ body.jspec {
   padding: 15px 40px;
 	font: 11px "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
 	color: #7B8D9B;
+}
+#jspec-report.has-failures {
+  padding-bottom: 30px;
 }
 #jspec-report .hidden {
   display: none;
@@ -84,9 +87,8 @@ body.jspec {
   background: #F2F5F7;
 }
 #jspec-report td + td {
-  width: 110px;
-  text-align: right;
-  color: #AAB7C0;
+  padding-right: 0;
+  width: 15px;
 }
 #jspec-report td.pass {
   background: url(images/sprites.png) 3px -7px no-repeat;
@@ -109,6 +111,18 @@ body.jspec {
 }
 #jspec-report tr.description:first-child td {
   border-top: none;  
+}
+#jspec-report .assertion {
+  display: block;
+  float: left;
+  margin: 0 0 0 1px;
+  padding: 0;
+  width: 1px;
+  height: 5px;
+  background: #7B8D9B;
+}
+#jspec-report .assertion.failed {
+  background: red;
 }
 .jspec-sandbox {
   display: none;
