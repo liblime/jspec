@@ -22,7 +22,7 @@ and much more.
 * DOM sandbox support
 * Great looking default DOM theme
 * Profiling
-* Tiny (10 kb compressed, 1000-ish LOC)
+* Tiny (15 kb compressed, 1000-ish LOC)
 
 == Example
 
