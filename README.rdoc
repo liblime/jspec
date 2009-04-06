@@ -254,6 +254,11 @@ Alternatively you may utilize literal javascript outside of the closures:
 
 == Formatters
 
+To change a formatter simply alter the options hash like below, assigning
+a new constructor:
+
+  JSpec.options.formatter = JSpec.formatters.Console
+
 === DOM
   
 Clean attractive HTML reporting
