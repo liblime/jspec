@@ -146,6 +146,17 @@ will both work.
   - element     same as invoking jQuery, just reads better and no need to worry about $ collisions
   - elements    alias of element
 
+== Hooks
+
+Currently the following hooks are supported, and may be utilized any number of times as they
+are simply pushed to a stack. So for instance you may have two before_each blocks within the same
+scope, they will both run, but this can help keep your specs readable.
+
+  * before       run once before the suite is executed
+  * after        run once after the suite is executed
+  * before_each  run before each specification
+  * after_each   run after each specification
+
 == Custom Contexts
 
 Custom contexts can be applied to supply helper
