@@ -5,7 +5,7 @@
 
   JSpec = {
 
-    version  : '0.9.6',
+    version  : '1.0.0',
     main     : this,
     suites   : [],
     matchers : {},
@@ -154,7 +154,7 @@
        */
 
       DOM : function(results, options) {
-        id = options.reportToId || 'jspec'
+        id = option('reportToId') || 'jspec'
         report = document.getElementById(id)
         classes = results.stats.failures ? 'has-failures' : ''
         if (!report) error('requires the element #' + id + ' to output its reports')
@@ -166,15 +166,16 @@
         </div><table class="suites">'
           
         function renderSuite(suite) {
-          displaySuite = options.failuresOnly ? suite.ran && !suite.passed() : suite.ran
+          failuresOnly = option('failuresOnly')
+          displaySuite = failuresOnly ? suite.ran && !suite.passed() : suite.ran
           if (displaySuite && suite.hasSpecs()) {
             markup += '<tr class="description"><td colspan="2">' + suite.description + '</td></tr>'
             each(suite.specs, function(i, spec){
               markup += '<tr class="' + (i % 2 ? 'odd' : 'even') + '">'
-              if (spec.requiresImplementation() && !options.failuresOnly) {
+              if (spec.requiresImplementation() && !failuresOnly) {
                 markup += '<td class="requires-implementation" colspan="2">' + spec.description + '</td>'
               }
-              else if (spec.passed() && !options.failuresOnly) {
+              else if (spec.passed() && !failuresOnly) {
                 markup += '<td class="pass">' + spec.description+ '</td><td>' + spec.assertionsGraph() + '</td>'
               }
               else if(!spec.passed()) {
@@ -209,9 +210,10 @@
       Console : function(results, options) {
         console.log('')
         console.log('Passes: ' + results.stats.passes + ' Failures: ' + results.stats.failures)
-        results.each(results.suites, function(description, suite){
+        
+        function renderSuite(suite) {
           if (suite.ran) {
-            console.group(description)
+            console.group(suite.description)
             results.each(suite.specs, function(spec){
               assertionCount = spec.assertions.length + ':'
               if (spec.requiresImplementation())
@@ -222,8 +224,17 @@
                 console.error(assertionCount + ' ' + spec.description + ', ' + spec.failure().message)
             })
             console.groupEnd()
-          }
-        })
+          }          
+        }
+        
+        function renderSuites(suites) {
+          each(suites, function(suite){
+            renderSuite(suite)
+            if (suite.hasSuites()) renderSuites(suite.suites)
+          })
+        }
+        
+        renderSuites(results.suites)
       }
     },
 
@@ -338,20 +349,33 @@
       
       this.assertionsGraph = function() {
         return map(this.assertions, function(assertion){
-          return assertion.passed ? 
-            '<span class="assertion passed"></span>':
-            '<span class="assertion failed"></span>' 
+          return '<span class="assertion ' + (assertion.passed ? 'passed' : 'failed') + '"></span>'
         }).join('')
       }
     },
 
     // --- Methods
+    
+    /**
+     * Get option value. This method first checks if
+     * the option key has been set via the query string,
+     * otherwise returning the options hash value.
+     *
+     * @param  {string} key
+     * @return {mixed}
+     * @api public
+     */
+     
+     option : function(key) {
+       if ((value = query(key)) !== null) return value
+       else return JSpec.options[key] || null
+     },
 
     /**
      * Generates a hash of the object passed.
      *
      * @param  {object} object
-     * @return string
+     * @return {string}
      * @api private
      */
 
@@ -596,24 +620,15 @@
 
     preprocess : function(input) {
       return input.
-        // Describe literal
         replace(/describe (.*?)$/m, 'JSpec.addSuite($1, function(){').
         replace(/describe (.*?)$/gm, 'this.addSuite($1, function(){').
-        // Spec literal
         replace(/it (.*?)$/gm, 'this.addSpec($1, function(){').
-        // Before / After 
         replace(/^(?: *)(before_each|after_each|before|after)(?= |\n|$)/gm, 'this.addHook("$1", function(){').
-        // End literal
         replace(/end(?= |\n|$)/gm, '});').
-        // -{ closure literal
         replace(/-{/g, 'function(){').
-        // Inclusive range literal n..n
         replace(/(\d+)\.\.(\d+)/g, function(_, a, b){ return range(a, b) }).
-        // . this. literal
         replace(/([\s\(]+)\./gm, '$1this.').
-        // Optional parens for matchers
         replace(/\.should([_\.]not)?[_\.](\w+)(?: |$)(.*)$/gm, '.should$1_$2($3)').
-        // Convert to non-polluting match() invocation
         replace(/(.+?)\.(should(?:[_\.]not)?)[_\.](\w+)\((.*)\)$/gm, 'JSpec.match($1, "$2", "$3", [$4]);')
     },
 
@@ -634,16 +649,16 @@
     },
 
     /**
-     * Report on the results. Options are passed to formatter.
+     * Report on the results. 
      *
-     * @param  {hash} options
      * @return {JSpec}
      * @api public
      */
 
-    report : function(options) {
-      this.formatter ? new this.formatter(this, options || {})
-                     : new this.formatters.DOM(this, options || {})
+    report : function() {
+      this.options.formatter ? 
+        new this.options.formatter(this, this.options):
+        new this.formatters.DOM(this, this.options)
       return this
     },
 
@@ -655,9 +670,9 @@
      */
 
     run : function() {
-      if (this.options.profile) console.group('Profile')
-      else each(this.suites, function(suite) { this.runSuite(suite) })
-      if (this.options.profile) console.groupEnd()
+      if (option('profile')) console.group('Profile')
+      each(this.suites, function(suite) { this.runSuite(suite) })
+      if (option('profile')) console.groupEnd()
       return this
     },
 
@@ -697,9 +712,9 @@
     runSpec : function(spec) {
       this.currentSpec = spec
       this.stats.specs++
-      if (this.options.profile) console.time(spec.description)
+      if (option('profile')) console.time(spec.description)
       this.evalBody(spec.body, "Error in spec '" + spec.description + "': ")
-      if (this.options.profile) console.timeEnd(spec.description)
+      if (option('profile')) console.timeEnd(spec.description)
       this.stats.assertions += spec.assertions.length
     },
 
@@ -759,8 +774,7 @@
         request = new XMLHttpRequest
         request.open('GET', file, false)
         request.send(null)
-        if (request.readyState == 4)
-          return request.responseText
+        if (request.readyState == 4) return request.responseText
       }
       else if ('load' in this.main) {
         // TODO: workaround for IO issue / preprocessing
@@ -792,6 +806,7 @@
   last   = JSpec.last
   range  = JSpec.range
   each   = JSpec.each
+  option = JSpec.option
   inject = JSpec.inject
   error  = JSpec.error
   escape = JSpec.escape

@@ -1,4 +1,11 @@
 
+=== 1.0.0 / 2009-04-06
+
+* Added option() which gives the query string option precedence [#39]
+* Changed; Using JSpec.options.formatter not JSpec.formatter [#44]
+* Fixed Console formatter, now displays nested suites
+* Check out http://visionmedia.github.com/jspec for additional documentation!
+
 === 0.9.6 / 2009-04-03
 
 * Added nesting support
