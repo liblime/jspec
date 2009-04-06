@@ -74,9 +74,13 @@ etc.
 == Options
 
 You may alter the way JSpec operates by assigning options via the
-JSpec.options object.
+JSpec.options object, or by passing string-based option values via the 
+query string. For example JSpec.options.failuresOnly = true, and ?failuresOnly=1 
+will both work.
 
 * profile {bool} when enabled, uses console.time() in order to display performance information in your console log as specs are completed.
+* failuresOnly {bool} displays only failing specs, making them quick to discover and fix
+* reportToId {string} an element id to report to when using the DOM formatter
   
 == Matchers
 
