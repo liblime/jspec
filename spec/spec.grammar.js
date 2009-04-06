@@ -71,54 +71,55 @@ describe 'Grammar'
   end
   
   describe 'before / after blocks'
+    var n, o
+    
     before
-      .n = 1
+      n = 1
     end
     
     after 
-      .n = 0
+      n = 0
     end
     
     it 'should work'
-      .n.should.eql 1
-      .n++
+      n.should.eql 1
+      n++
     end
     
     it 'should persist'
-      .n.should.eql 2
+      n.should.eql 2
     end
     
     describe 'with nested describe'
       it 'should be accessable'
-        .n.should.eql 0
+        n.should.eql 0
       end
     end
   end
   
   describe 'before_each / after_each blocks'
     before_each
-      .n = 1
+      n = 1
     end
     
     after_each
-      .o = 2
+      o = 2
     end
     
     it 'should work'
-      .n.should.eql 1
-      .n = 2
-      .o.should.be_null
+      n.should.eql 1
+      n = 2
     end
     
     it 'should not persist'
-      .n.should.eql 1
-      .o.should.eql 2
+      n.should.eql 1
+      o.should.eql 2
     end
     
     describe 'with nested describe'
       it 'should be accessable'
-        .n.should.eql 1
-        .o.should.eql 2
+        n.should.eql 1
+        o.should.eql 2
       end
     end
   end
