@@ -6,6 +6,7 @@
 		<script src="../lib/jspec.jquery.js"></script>
 		<script>
 			function runSuites() {
+				JSpec.options.formatter = JSpec.formatters.Console
 				JSpec
 				.exec('spec.grammar.js')
 				.exec('spec.core.js')
