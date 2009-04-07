@@ -72,6 +72,25 @@ describe 'Matchers'
     end
   end
   
+  describe 'have_property'
+    it 'should check if a property exists'
+      'foo'.should.have_property 'length'
+    end
+    
+    it 'should check that a property has a specific value'
+      'foo'.should.have_property 'length', 3
+    end
+    
+    it 'should fail when the property does not exist'
+      'foo'.should.not.have_property 'foo'
+      'foo'.should.not.have_property 'foo', 'bar'
+    end
+    
+    it 'should fail when it is a function'
+      'foo'.should.not.have_property 'toString'
+    end
+  end
+  
   describe 'respond_to'
     it 'should check if an object contains a method'
       'test'.should.respond_to('toString')

@@ -102,8 +102,9 @@ will both work.
   - have_at_least    object should have at least n of property
   - have_at_most     object should have a maximum n of property
   - have_within      object should have within n..n of property (person.should.have_within(1..3, 'pets')
-  - be_within        checks if n is within the range passed
   - have_length      length of n
+  - have_property    object should have property x, optionally supplying a value to compare using ===
+  - be_within        checks if n is within the range passed
   - include          include substring, array element, or hash key
   - match            string should match regexp x
   - respond_to       property x should be a function
