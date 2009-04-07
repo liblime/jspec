@@ -5,7 +5,7 @@
 
   JSpec = {
 
-    version  : '1.0.0',
+    version  : '1.0.1',
     main     : this,
     suites   : [],
     matchers : {},
@@ -891,6 +891,11 @@
     have_within : { match : function(actual, range, property) {
       length = actual[property].length
       return length >= range.shift() && length <= range.pop()
+    }},
+    
+    have_property : { match : function(actual, property, value) {
+      if (actual[property] == null || typeof actual[property] == 'function') return false
+      return value == null ? true : hash(value) == hash(actual[property])
     }}
   })
 

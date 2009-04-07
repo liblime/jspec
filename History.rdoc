@@ -1,4 +1,8 @@
 
+=== 1.0.1 / 2009-04-07
+
+* Added have_property matcher [#53]
+
 === 1.0.0 / 2009-04-06
 
 * Added option() which gives the query string option precedence [#39]
