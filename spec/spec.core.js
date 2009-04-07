@@ -81,6 +81,10 @@ describe 'Matchers'
       'foo'.should.have_property 'length', 3
     end
     
+    it 'should check object hashes'
+      { foo : 1..3 }.should.have_property 'foo',  1..3
+    end
+    
     it 'should fail when the property does not exist'
       'foo'.should.not.have_property 'foo'
       'foo'.should.not.have_property 'foo', 'bar'
