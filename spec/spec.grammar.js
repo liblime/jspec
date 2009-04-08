@@ -67,6 +67,12 @@ describe 'Grammar'
       it 'should still work'
         true.should.be_true
       end
+      
+      describe '.fooBar'
+        it 'should not have spaces in this description title'
+          true.should.be_true
+        end
+      end
     end
   end
   
