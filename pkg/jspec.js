@@ -851,7 +851,7 @@
           case Number:
           case RegExp:
           case Function:
-            state = !!actual.toString().match(arg.toString())
+            state = actual.toString().match(arg.toString())
             break
          
           case Object:

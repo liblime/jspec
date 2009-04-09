@@ -37,7 +37,7 @@
     
     have_attr : { match : function(actual, attr, value) {
         if (value) return $(actual).attr(attr) == value
-        else return !! $(actual).attr(attr)
+        else return $(actual).attr(attr)
       }
     }
   })
