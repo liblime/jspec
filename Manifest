@@ -1,5 +1,6 @@
 bin/jspec
 History.rdoc
+jspec.gemspec
 lib/images/bg.png
 lib/images/hr.png
 lib/images/sprites.bg.png
@@ -8,6 +9,7 @@ lib/images/vr.png
 lib/jspec.css
 lib/jspec.jquery.js
 lib/jspec.js
+Manifest
 Rakefile
 README.rdoc
 spec/async
@@ -22,4 +24,3 @@ templates/default/lib/yourlib.core.js
 templates/default/README.rdoc
 templates/default/spec/spec.core.js
 templates/default/spec/spec.html
-Manifest
