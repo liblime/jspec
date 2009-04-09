@@ -9,9 +9,8 @@ JSPEC_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 program :name, 'JSpec'
 program :version, '1.0.1'
 program :description, 'JavaScript BDD Testing Framework'
-
 default_command :bind
- 
+
 command :init do |c|
   c.syntax = 'jspec init [dest] [options]'
   c.summary = 'Initialize a JSpec project template'
@@ -36,11 +35,15 @@ command :run do |c|
   c.summary = ''
   c.description = ''
   c.example 'description', 'command example'
-  c.option '-b', '--browsers', 'Specify browsers to test, defaults to Safari'
+  c.option '-b', '--browsers BROWSERS', Array, 'Specify browsers to test, defaults to Safari'
+  c.option '-p', '--paths PATHS', Array, 'Specify paths when binding, defaults to js within ./lib and ./spec'
   c.option '-B', '--bind', 'Auto-run tests when source files or specs are altered'
   c.when_called do |args, options|
-    # Do something or c.when_called Jspec::Commands::Run
+    require 'bind'
+    options.default :browsers => %w( Safari ), :paths => ['lib/**/*.js', 'spec/**/*.js']
+    action = Bind::Actions::RefreshBrowsers.new 'spec/spec.html', *options.browsers
+    listener = Bind::Listener.new :paths => options.paths, :interval => 1, :actions => [action], :debug => $stdout
+    listener.run!
   end
 end
-alias_command :run, :bind, '--bind'
-
+alias_command :bind, :run, '--bind'
