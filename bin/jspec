@@ -2,24 +2,37 @@
 
 require 'rubygems'
 require 'commander'
+require 'fileutils'
+
+JSPEC_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 
 program :name, 'JSpec'
 program :version, '1.0.1'
 program :description, 'JavaScript BDD Testing Framework'
+
+default_command :bind
  
 command :init do |c|
-  c.syntax = 'JSpec init [options]'
-  c.summary = ''
-  c.description = ''
-  c.example 'description', 'command example'
-  c.option '-f', '--formatter NAME', 'Name of formatter to use, defaults to DOM'
+  c.syntax = 'jspec init [dest] [options]'
+  c.summary = 'Initialize a JSpec project template'
+  c.description = 'Initialize a JSpec project template. Defaults to the current directory when <dest> is not specified.'
+  c.example 'Create a directory foo, initialized with a jspec template', 'jspec init foo'
   c.when_called do |args, options|
-    # Do something or c.when_called Jspec::Commands::Init
+    dest = args.shift || '.'
+    unless Dir[dest + '/*'].empty?
+      abort unless agree "'#{dest}' is not empty; continue? "
+    end
+    FileUtils.mkdir_p dest
+    FileUtils.cp_r File.join(JSPEC_ROOT, 'templates', 'default', '.'), dest
+    spec = File.join dest, 'spec', 'spec.html'
+    contents = File.read spec
+    File.open(spec, 'w') { |file| file.write contents.gsub('JSPEC_ROOT', JSPEC_ROOT) }
+    say "Template initialized at '#{dest}'."
   end
 end
 
 command :run do |c|
-  c.syntax = 'JSpec run [options]'
+  c.syntax = 'jspec run [options]'
   c.summary = ''
   c.description = ''
   c.example 'description', 'command example'
