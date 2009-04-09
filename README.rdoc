@@ -27,15 +27,23 @@ and much more.
 == Example
 
   describe 'ShoppingCart'
+    var cart
+  
     before_each
-      .cart = new ShoppingCart
+      cart = new ShoppingCart
     end
     
     describe 'addProducts'
       it 'should add several products'
-        .cart.addProduct('cookie')
-        .cart.addProduct('icecream')
-        .cart.should.have 2, 'products'
+        cart.addProduct('cookie')
+        cart.addProduct('icecream')
+        cart.should.have 2, 'products'
+      end
+    end
+  
+    describe 'checkout'
+      it 'throw an error when checking out with no products'
+        -{ cart.clear().checkout() }.should.throw_error
       end
     end
   end
