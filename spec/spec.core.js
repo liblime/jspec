@@ -72,6 +72,29 @@ describe 'Matchers'
     end
   end
   
+  describe 'have_prop'
+    it 'should check if a property exists'
+      'foo'.should.have_prop 'length'
+    end
+    
+    it 'should check that a property has a specific value'
+      'foo'.should.have_prop 'length', 3
+    end
+    
+    it 'should check object hashes'
+      { foo : 1..3 }.should.have_prop 'foo',  1..3
+    end
+    
+    it 'should fail when the property does not exist'
+      'foo'.should.not.have_prop 'foo'
+      'foo'.should.not.have_prop 'foo', 'bar'
+    end
+    
+    it 'should fail when it is a function'
+      'foo'.should.not.have_prop 'toString'
+    end
+  end
+  
   describe 'have_property'
     it 'should check if a property exists'
       'foo'.should.have_property 'length'
@@ -79,10 +102,7 @@ describe 'Matchers'
     
     it 'should check that a property has a specific value'
       'foo'.should.have_property 'length', 3
-    end
-    
-    it 'should check object hashes'
-      { foo : 1..3 }.should.have_property 'foo',  1..3
+      { length : '3' }.should.not.have_property 'length', 3
     end
     
     it 'should fail when the property does not exist'
