@@ -50,11 +50,9 @@ and much more.
 
 == Installation
 
-Simply download JSpec and include JSpec.css and JSpec.js in your markup
-( head to the downloads section on Github, or clone this public repo).
-A div with the id of #jspec should be present for displaying when using
-the default DOM formatter, or you may pass options to report() to alter
-these default settings (view source code documentation for options). 
+Simply download JSpec and include JSpec.css and JSpec.js in your markup.
+Head over to the downloads section on Github, clone this public repo, or 
+add JSpec as a git submodule with in your project.
 
 JSpec scripts should NOT be referenced via the <script> tag, they should be
 loaded using the exec method. Below is an example:
@@ -73,16 +71,13 @@ loaded using the exec method. Below is an example:
   ...
 
 You may optionally want to use sources in the /pkg directory
-for your project, since it includes compressed alternatives. 
-As mentioned throughout the documentation, options may be passed to
-report(), which are in turn passed to the formatter. This includes
-options like failuresOnly, which displays only failing suites / specs,
-etc.
+for your project, since it includes compressed alternatives generated
+each release.
 
 == Options
 
 You may alter the way JSpec operates by assigning options via the
-JSpec.options object, or by passing string-based option values via the 
+JSpec.options hash, or by passing string-based option values via the 
 query string. For example JSpec.options.failuresOnly = true, and ?failuresOnly=1 
 will both work.
 
