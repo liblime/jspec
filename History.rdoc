@@ -1,4 +1,11 @@
 
+=== 1.0.2 / 2009-04-08
+
+* Added be_selected, be_checked matchers
+* Added string support to each() each('some foo bar', ...)
+* Added have_ATTR matchers [#51]
+* Deprected be_a_TYPE_input matchers [#50]
+
 === 1.0.1 / 2009-04-07
 
 * Added have_property matcher [#53]
