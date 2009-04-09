@@ -1,4 +1,16 @@
 
+require 'rubygems'
+require 'rake'
+require 'echoe'
+
+Echoe.new "jspec", version do |p|
+  p.author = "TJ Holowaychuk"
+  p.email = "tj@vision-media.ca"
+  p.summary = "JavaScript BDD Testing Framework"
+  p.url = "http://visionmedia.github.com/jspec"
+  p.runtime_dependencies << "visionmedia-commander >=3.2.9"
+end
+
 desc 'Package'
 task :package => [:clear] do
   begin
