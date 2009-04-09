@@ -323,6 +323,54 @@ is altered.
 
   $ rbind refresh spec/spec.html --paths 'spec/*.js','lib/*.js' --interval 1 --verbose --browsers Safari,Firefox
 
+== Custom Matchers
+
+First lets create a simple equality matcher. In the case below JSpec is smart enough to realize
+this is simply a binary operator, and simply transforms this into 'actual === expected'
+
+  JSpec.addMatchers({
+    equal : '==='
+  })
+
+To alias a method to keep your specs readable you may alias them like below:
+
+  JSpec.addMatchers({
+    be : 'alias equal'
+  })
+
+  'foo'.should.equal 'foo'
+  true.should.be true
+
+Matchers with string bodies implicitly return the expression value.
+The expanded version of the equal matcher would then be:
+
+  JSpec.addMatchers({
+    equal : 'actual === expected'
+  })
+
+Large matchers or those which require several parameters may wish
+to utilize the hash method:
+
+  JSpec.addMatchers({
+    equal : { match : function(actual, expected){
+      return actual === expected
+    }}  
+  })
+
+To keep JSpec tiny, JSpec will default to generating failure messages
+for you, how ever this can be explicitly defined:
+
+  JSpec.addMatchers({
+    equal : { 
+      match : function(actual, expected){
+        return actual === expected
+      },
+      message : function(actual, expected, negate) {
+        return 'a message here'
+      }
+    }
+  })
+
 == More Information
 
 * Get the TextMate bundle at https://github.com/visionmedia/jspec.tmbundle/tree
