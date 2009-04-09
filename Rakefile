@@ -3,6 +3,10 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
 
+def version
+  $1 if File.read('lib/jspec.js').match /version *: *'(.*?)'/
+end
+
 Echoe.new "jspec", version do |p|
   p.author = "TJ Holowaychuk"
   p.email = "tj@vision-media.ca"
@@ -63,8 +67,4 @@ def compress from, to
   File.open(to, 'w+') do |file|
     file.write File.read(from).gsub(/(^[\t ]*)|\n/, '')
   end
-end
-
-def version
-  $1 if File.read('lib/jspec.js').match /version *: *'(.*?)'/
 end
