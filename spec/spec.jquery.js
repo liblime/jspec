@@ -122,17 +122,13 @@ describe 'jQuery'
       end
     end
     
-    describe 'be_a_TYPE_input'
-      it 'should check that an element is the given TYPE'
-        '<input type="checkbox"/>'.should.be_a_checkbox_input
-        '<input type="text"/>'.should.be_a_text_input
-        '<input type="radio"/>'.should.be_a_radio_input
-        '<input type="file"/>'.should.be_a_file_input
-        '<input type="password"/>'.should.be_a_password_input
-        '<input type="submit"/>'.should.be_a_submit_input
-        '<input type="image"/>'.should.be_a_image_input
-        '<input type="reset"/>'.should.be_a_reset_input
-        '<input type="button"/>'.should.be_a_button_input
+    describe 'have_ATTR'
+      it 'should check if an attribute exists'
+        '<input type="checkbox"/>'.should.have_type
+      end
+      
+      it 'should check if an attribute has a specific value'
+        '<input type="checkbox"/>'.should.have_type 'checkbox'
       end
     end
     
