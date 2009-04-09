@@ -21,6 +21,7 @@ and much more.
 * Default / customizable evaluation contexts
 * DOM sandbox support
 * Great looking default DOM theme
+* `jspec` command-line utility for auto-testing specs, and initializing project templates
 * Profiling
 * Tiny (15 kb compressed, 1000-ish LOC)
 
@@ -365,6 +366,24 @@ for you, how ever this can be explicitly defined:
       }
     }
   })
+
+== JSpec Command-line Utility
+
+When installed as a Ruby Gem, the `jspec` executable will become available,
+allowing you to initialize project templates quickly, as well as auto-testing
+specifications when a file is altered.
+
+Initialize JSpec-driven project template in directory 'myproject':
+  $ jspec init myproject
+
+Once within 'myproject' start testing by executing:
+  $ jspec
+
+For additional usage execute:
+  $ jspec help
+
+Or for specific usage:
+  $ jspec help run
 
 == More Information
 
