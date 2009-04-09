@@ -31,19 +31,34 @@ command :init do |c|
 end
 
 command :run do |c|
-  c.syntax = 'jspec run [options]'
-  c.summary = ''
-  c.description = ''
-  c.example 'description', 'command example'
+  c.syntax = 'jspec run [path] [options]'
+  c.summary = 'Run specifications'
+  c.description = 'Run specifications, defaulting <path> to spec/spec.html. You will need supply <path> 
+    if your specs do not reside in this location. `run --bind` is the default sub-command of jspec so you
+    may simply execute `jspec` in order to bind execution of your specs when a file is altered.'
+  c.example 'Run once in Safari', 'jspec run'
+  c.example 'Run once in Safari and Firefox', 'jspec run --browsers Safari,Firefox'
+  c.example 'Run custom spec file', 'jspec run foo.html'
+  c.example 'Auto-refresh browsers when a file is altered', 'jspec run --bind --browsers Safari,Firefox'
+  c.example 'Shortcut for the previous example', 'jspec --browsers Safari,Firefox'
   c.option '-b', '--browsers BROWSERS', Array, 'Specify browsers to test, defaults to Safari'
-  c.option '-p', '--paths PATHS', Array, 'Specify paths when binding, defaults to js within ./lib and ./spec'
-  c.option '-B', '--bind', 'Auto-run tests when source files or specs are altered'
+  c.option '-p', '--paths PATHS', Array, 'Specify paths when binding, defaults to javascript within ./lib and ./spec'
+  c.option '-B', '--bind', 'Auto-run specs when source files or specs are altered'
   c.when_called do |args, options|
-    require 'bind'
-    options.default :browsers => %w( Safari ), :paths => ['lib/**/*.js', 'spec/**/*.js']
-    action = Bind::Actions::RefreshBrowsers.new 'spec/spec.html', *options.browsers
-    listener = Bind::Listener.new :paths => options.paths, :interval => 1, :actions => [action], :debug => $stdout
-    listener.run!
+    begin
+      require 'bind'
+      spec = args.shift || 'spec/spec.html'
+      options.default :browsers => %w( Safari ), :paths => ['lib/**/*.js', 'spec/**/*.js']
+      action = Bind::Actions::RefreshBrowsers.new spec, *options.browsers
+      if options.bind
+        listener = Bind::Listener.new :paths => options.paths, :interval => 1, :actions => [action], :debug => $stdout
+        listener.run!
+      else
+        action.call spec
+      end
+    rescue LoadError
+      abort "jspec run requires the visionmedia-bind gem; http://visionmedia.github.com/bind/"
+    end
   end
 end
 alias_command :bind, :run, '--bind'
