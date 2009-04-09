@@ -128,21 +128,23 @@ will both work.
   - have_children         have more than one child
   - have_text             have plain text
   - have_attr             have an attribute, with optional value
+  - have_type
+  - have_id
+  - have_title
+  - have_alt
+  - have_href
+  - have_rel
+  - have_rev
+  - have_name
+  - have_target
   - have_value     
   - have_class
   - be_visible
   - be_hidden
   - be_enabled
   - be_disabled
-  - be_a_submit_input
-  - be_a_text_input
-  - be_a_image_input
-  - be_a_submit_input
-  - be_a_reset_input
-  - be_a_password_input
-  - be_a_file_input
-  - be_a_radio_input
-  - be_a_checkbox_input
+  - be_selected
+  - be_checked
 
 == Helpers
 
