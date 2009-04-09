@@ -115,10 +115,11 @@ describe 'jQuery'
       end
     end
     
-    describe 'be_disabled'
-      it 'should check that an element is currently disabled'
+    describe 'be_BOOLATTR'
+      it 'should check that an element is currently selected, disabled, checked etc'
         '<input type="button"/>'.should.not.be_disabled
         '<input type="button" disabled="disabled" />'.should.be_disabled
+        '<option value="foo" selected="selected">Foo</option>'.should.be_selected
       end
     end
     
