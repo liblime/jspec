@@ -304,21 +304,6 @@ Reporting utilizing the console object (tested using Firebug and Safari 4)
 
 Coming soon
 
-== Automated Testing
-
-The core JSpec team utilizes the visionmedia-bind Ruby gem in order to
-automate testing between several browsers simultaneously. Head over to
-http://visionmedia.github.com/bind for more information or:
-
-  $ sudo gem install visionmedia-bind
-
-Then you may execute commands such as this to get up and running with your
-automated testing. The command below simply refreshes our spec HTML page
-in Firefox and Safari, when any JavaScript file matching spec/*.js or lib/*.js 
-is altered. 
-
-  $ rbind refresh spec/spec.html --paths 'spec/*.js','lib/*.js' --interval 1 --verbose --browsers Safari,Firefox
-
 == Custom Matchers
 
 First lets create a simple equality matcher. In the case below JSpec is smart enough to realize
