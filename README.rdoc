@@ -21,7 +21,7 @@ and much more.
 * Default / customizable evaluation contexts
 * DOM sandbox support
 * Great looking default DOM theme
-* `jspec` command-line utility for auto-testing specs, and initializing project templates
+* `jspec` command-line utility for auto-running specs, and initializing project templates
 * Profiling
 * Tiny (15 kb compressed, 1000-ish LOC)
 
