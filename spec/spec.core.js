@@ -79,6 +79,7 @@ describe 'Matchers'
     
     it 'should check that a property has a specific value'
       'foo'.should.have_prop 'length', 3
+      { length : '3' }.should.have_prop 'length', 3
     end
     
     it 'should check object hashes'
