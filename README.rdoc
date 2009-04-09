@@ -307,7 +307,7 @@ Coming soon
 
 The core JSpec team utilizes the visionmedia-bind Ruby gem in order to
 automate testing between several browsers simultaneously. Head over to
-http://visionmedia.github.com/bind/ for more information or:
+http://visionmedia.github.com/bind for more information or:
 
   $ sudo gem install visionmedia-bind
 
