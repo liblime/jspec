@@ -1,6 +1,5 @@
 bin/jspec
 History.rdoc
-jspec.gemspec
 lib/images/bg.png
 lib/images/hr.png
 lib/images/sprites.bg.png
