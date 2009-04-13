@@ -1,4 +1,8 @@
 
+=== 1.1.1 / 2009-04-12
+
+* Added gemspec
+
 === 1.1.0 / 2009-04-12
 
 * jspec executable fully functional
