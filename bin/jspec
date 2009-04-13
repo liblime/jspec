@@ -12,7 +12,7 @@ program :description, 'JavaScript BDD Testing Framework'
 default_command :bind
 
 command :init do |c|
-  c.syntax = 'jspec init [dest] [options]'
+  c.syntax = 'jspec init [dest]'
   c.summary = 'Initialize a JSpec project template'
   c.description = 'Initialize a JSpec project template. Defaults to the current directory when <dest> is not specified.'
   c.example 'Create a directory foo, initialized with a jspec template', 'jspec init foo'
@@ -33,7 +33,7 @@ end
 command :run do |c|
   c.syntax = 'jspec run [path] [options]'
   c.summary = 'Run specifications'
-  c.description = 'Run specifications, defaulting <path> to spec/spec.html. You will need supply <path> 
+  c.description = 'Run specifications, defaulting [path] to spec/spec.html. You will need supply [path] 
     if your specs do not reside in this location. `run --bind` is the default sub-command of jspec so you
     may simply execute `jspec` in order to bind execution of your specs when a file is altered.'
   c.example 'Run once in Safari', 'jspec run'
