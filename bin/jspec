@@ -14,7 +14,8 @@ default_command :bind
 command :init do |c|
   c.syntax = 'jspec init [dest]'
   c.summary = 'Initialize a JSpec project template'
-  c.description = 'Initialize a JSpec project template. Defaults to the current directory when <dest> is not specified.'
+  c.description = 'Initialize a JSpec project template. Defaults to the current directory when 
+    <dest> is not specified.'
   c.example 'Create a directory foo, initialized with a jspec template', 'jspec init foo'
   c.when_called do |args, options|
     dest = args.shift || '.'
@@ -24,18 +25,36 @@ command :init do |c|
     FileUtils.mkdir_p dest
     FileUtils.cp_r File.join(JSPEC_ROOT, 'templates', 'default', '.'), dest
     spec = File.join dest, 'spec', 'spec.html'
-    contents = File.read spec
-    File.open(spec, 'w') { |file| file.write contents.gsub('JSPEC_ROOT', JSPEC_ROOT) }
-    say "Template initialized at '#{dest}'."
+    contents = File.read(spec).gsub 'JSPEC_ROOT', JSPEC_ROOT
+    File.open(spec, 'w') { |file| file.write contents }
+    say "Template initialized at '#{dest}'"
+  end
+end
+
+command :update do |c|
+  c.syntax = 'jspec update [path ...]'
+  c.summary = 'Update JSpec releases'
+  c.description = 'Update JSpec release in [paths], this will allow you to utilize the latest
+    JSpec features. If you have suites running at a path other than the regular 
+    spec/spec.html simply pass them as arguments to this sub-command.'
+  c.when_called do |args, options|
+    args = %w( spec/spec.html ) if args.empty?
+    args.each do |path|
+      next unless File.exists? path
+      contents = File.read(path).gsub /visionmedia-jspec-(\d+\.\d+\.\d+)/, "visionmedia-jspec-#{program(:version)}"
+      File.open(path, 'r+'){ |file| file.write contents } 
+      say "Updated #{path} to JSpec #{program(:version)}"
+    end
   end
 end
 
 command :run do |c|
   c.syntax = 'jspec run [path] [options]'
   c.summary = 'Run specifications'
-  c.description = 'Run specifications, defaulting [path] to spec/spec.html. You will need supply [path] 
-    if your specs do not reside in this location. `run --bind` is the default sub-command of jspec so you
-    may simply execute `jspec` in order to bind execution of your specs when a file is altered.'
+  c.description = 'Run specifications, defaulting [path] to spec/spec.html. You will need 
+    supply [path] if your specs do not reside in this location. `run --bind` is
+    the default sub-command of jspec so you may simply execute `jspec` in order
+    to bind execution of your specs when a file is altered.'
   c.example 'Run once in Safari', 'jspec run'
   c.example 'Run once in Safari and Firefox', 'jspec run --browsers Safari,Firefox'
   c.example 'Run custom spec file', 'jspec run foo.html'
