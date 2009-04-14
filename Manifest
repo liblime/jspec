@@ -24,3 +24,8 @@ templates/default/lib/yourlib.core.js
 templates/default/README.rdoc
 templates/default/spec/spec.core.js
 templates/default/spec/spec.html
+test/foo/History.rdoc
+test/foo/lib/yourlib.core.js
+test/foo/README.rdoc
+test/foo/spec/spec.core.js
+test/foo/spec/spec.html

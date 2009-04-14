@@ -1,4 +1,8 @@
 
+=== 1.1.2 / 2009-04-14
+
+* Added `jspec update` sub-command [#63]
+
 === 1.1.1 / 2009-04-12
 
 * Added gemspec
