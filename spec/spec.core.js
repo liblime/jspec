@@ -317,6 +317,10 @@ describe 'Contexts'
 end
 
 describe 'Misc'
+  it 'should catch exceptions throw within specs'
+    throw 'oh noes'
+  end
+
   it 'requires implementation'
   end
 end
