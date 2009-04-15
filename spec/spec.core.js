@@ -26,6 +26,14 @@ describe 'Matchers'
     it 'should hash compare objects'
       { foo : 'bar' }.should.eql { foo : 'bar' }
     end
+    
+    it 'should hash compare arbitrary objects'
+      Foo = function(){}, Bar = function(){}
+      Bar.prototype = { doSomething : function(){ }}
+      foo = new Foo, foo2 = new Foo, bar = new Bar
+      foo.should.eql foo2
+      foo.should.not.eql bar
+    end
   end
   
   describe 'equal'
