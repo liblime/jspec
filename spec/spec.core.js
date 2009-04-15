@@ -173,6 +173,12 @@ describe 'Matchers'
       -{ throw 'some foo bar' }.should.not.throw_error(/rawr/)
       -{ throw 'some foo bar' }.should.not.throw_error('rawr')
     end
+    
+    it 'should check if an error of a specific constructor is thrown'
+      -{ throw new Error('foo') }.should.throw_error(Error)
+      -{ throw new TypeError('foo') }.should.throw_error(TypeError)
+      -{ throw 'foo' }.should.not.throw_error(Error)
+    end
   end
   
   describe 'be_type'
