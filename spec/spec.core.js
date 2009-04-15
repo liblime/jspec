@@ -181,6 +181,18 @@ describe 'Matchers'
     end
   end
   
+  describe 'be_an_instance_of'
+    it 'should check that an object is an instance of another'
+      MyObject = function(){}
+      myInstance = new MyObject()
+      {}.should.be_an_instance_of Object
+      [].should.be_an_instance_of Array
+      MyObject.should.be_an_instance_of Function
+      myInstance.should.be_an_instance_of MyObject
+      myInstance.should.be_an_instance_of Object
+    end
+  end
+  
   describe 'be_type'
     it 'should compare the type of an object via typeof'
       'hey'.should.be_type 'string'
