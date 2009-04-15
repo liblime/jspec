@@ -320,6 +320,10 @@ describe 'Misc'
   it 'should catch exceptions throw within specs'
     throw 'oh noes'
   end
+  
+  it 'should catch exceptions again'
+    iDoNotExist
+  end
 
   it 'requires implementation'
   end
