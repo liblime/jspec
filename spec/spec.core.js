@@ -278,6 +278,18 @@ describe 'Negative specs'
     ['foo', 'bar'].should.include 'foo', 'car'
   end
   
+  it 'should catch exceptions throw within specs'
+    throw new Error('Oh noes!')
+  end
+  
+  it 'should catch improper exceptions'
+    throw 'oh noes'
+  end
+  
+  it 'should catch proper exceptions'
+    iDoNotExist
+  end
+  
 end
 
 describe 'Utility'
@@ -317,14 +329,6 @@ describe 'Contexts'
 end
 
 describe 'Misc'
-  it 'should catch exceptions throw within specs'
-    throw 'oh noes'
-  end
-  
-  it 'should catch exceptions again'
-    iDoNotExist
-  end
-
   it 'requires implementation'
   end
 end
