@@ -258,9 +258,74 @@ describe 'Matchers'
   end
   
   describe 'should_receive'
-    it 'should fail when a method is not available'
+    var person, personWithPets
+    
+    before_each
       person = {}
+      personWithPets = { 
+        getPets : function(){ return ['izzy'] },
+        addPet : function(name) { return ['izzy', name] },
+        addPets : function(a, b) { return ['izzy', a, b] },
+      }
+    end
+    
+    it 'should fail when the method does not exist'
       person.should.receive('getPets')
+    end
+    
+    it 'should fail when the method is never invoked'
+      personWithPets.should.receive('getPets')
+    end
+    
+    it 'should pass when the method is invoked'
+      personWithPets.should.receive('getPets')
+      personWithPets.getPets()
+    end
+    
+    it 'should pass when the proper value is returned'
+      person.should.receive('getPets').and_return(['izzy'])
+      personWithPets.getPets()
+    end
+    
+    it 'should fail when not invoked the expected number of times'
+      personWithPets.should.receive('getPets', 'twice').and_return(['izzy'])
+      personWithPets.getPets()
+    end
+    
+    it 'should pass when invoked the expected number of times'
+      personWithPets.should.receive('getPets', 'twice').and_return(['izzy'])
+      personWithPets.getPets()
+      personWithPets.getPets()
+    end
+
+    it 'should fail when not invoked with specific arguments'
+      personWithPets.should.receive('addPet', 'once').with('suki')
+      personWithPets.addPet('rawr')
+    end
+    
+    it 'should pass when a method is invoked with specific arguments'
+      personWithPets.should.receive('addPet', 'once').with('suki')
+      personWithPets.addPet('suki')
+    end
+
+    it 'should fail when expecting multiple arguments'
+      personWithPets.should.receive('addPets').with('suki', 'max')
+      personWithPets.addPets('suki')
+    end
+    
+    it 'should pass with multiple arguments'
+      personWithPets.should.receive('addPets').with('suki', 'max')
+      personWithPets.addPets('suki', 'max')
+    end
+    
+    it 'should pass with arguments and return value'
+      personWithPets.should.receive('addPet').with('suki').and_return(['izzy', 'suki'])
+      personWithPets.addPet('suki')
+    end
+    
+    it 'should fail when argument is of the wrong type'
+      personWithPets.should.receive('addPet').with(an_instance_of(String))
+      personWithPets.addPet(['suki'])
     end
   end
   
