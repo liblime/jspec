@@ -130,7 +130,7 @@ describe 'Matchers'
     end
     
     it 'should check if a regular expression includes a string'
-      /(foo)?bar/.should.include '(foo)'
+      (/(foo)?bar/).should.include '(foo)'
     end
     
     it 'should check if a function body includes a string'

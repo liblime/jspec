@@ -28,6 +28,11 @@ describe 'Grammar'
     -{ throw 'test' }.should.throw_error
   end
   
+  it 'should allow commenting out of conversions'
+    // -{ throw 'foo' }.should.throw_error
+    // foo.should.not.eql 'bar'
+  end
+  
   it 'should allow . this. literal'
     this.foo = 'bar'
     .foo.should.eql 'bar'
