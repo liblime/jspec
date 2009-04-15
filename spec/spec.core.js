@@ -32,6 +32,8 @@ describe 'Matchers'
     it 'should perform strict comparisons'
       'test'.should.equal 'test'
       '1'.should.not.equal 1
+      true.should.be true
+      '1'.should.not.be true
     end
   end
   
