@@ -252,6 +252,13 @@ describe 'Matchers'
     end
   end
   
+  describe 'should_receive'
+    it 'should fail when a method is not available'
+      person = {}
+      person.should.receive('getPets')
+    end
+  end
+  
 end
 
 describe 'Negative specs'
