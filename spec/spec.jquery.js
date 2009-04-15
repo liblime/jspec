@@ -34,13 +34,13 @@ describe 'jQuery'
   
   describe 'matchers'
     before_each
-      html = '<p><label><em>Save?</em></label>        \
-      <select class="save" style="display: none;">    \
-      <option value="0">No</option>                   \
-      <option value="1">Yes</option>                  \
-      </select>                                       \
-      <strong>test</strong>                           \
-      <strong>test</strong>                           \
+      html = '<p><label><em>Save?</em></label>                 \
+      <select class="save form-select" style="display: none;"> \
+      <option value="0">No</option>                            \
+      <option value="1">Yes</option>                           \
+      </select>                                                \
+      <strong>test</strong>                                    \
+      <strong>test</strong>                                    \
       </p>'
       .elem = $(html)
     end
@@ -95,6 +95,12 @@ describe 'jQuery'
     describe 'have_class'
       it 'should check if an element has the given class'
         .elem.children('select').should.have_class 'save'
+      end
+    end
+    
+    describe 'have_classes'
+      it 'should check if an element has the classes given'
+        .elem.children('select').should.have_classes 'save', 'form-select'
       end
     end
 
