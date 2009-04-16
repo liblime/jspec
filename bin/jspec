@@ -111,11 +111,5 @@ end
 
 def start_server options
   require 'server/server'
-  
-  app = Rack::Builder.new do
-    run JSpec::Server.new
-  end
-  
-  puts "JSpec server started, testing browsers #{options.browsers.join(', ')}\n"
-  Rack::Handler::Mongrel.run app, :Port => 4444
+  JSpec::Server.start options
 end

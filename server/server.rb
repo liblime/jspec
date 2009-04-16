@@ -39,5 +39,19 @@ module JSpec
     def color string, code
       "\e[#{code}m#{string}\e[m"
     end
+    
+    def self.start options
+      app = Rack::Builder.new do
+        run JSpec::Server.new
+      end
+      puts "JSpec server started, testing browsers #{options.browsers.join(', ')}\n"
+      fork { run_browsers options.browsers }
+      Rack::Handler::Mongrel.run app, :Port => 4444
+      self
+    end
+    
+    def self.run_browsers browsers
+      
+    end
   end
 end
