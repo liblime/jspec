@@ -26,6 +26,16 @@ and much more.
 * Profiling
 * Tiny (15 kb compressed, 1000-ish LOC)
 
+== Features Coming Soon
+
+* Rhino support (complete, not released) 
+* Terminal formatter (complete, not released)
+* 'Spy' or 'Proxy' assertions. person.should.receive('addPet').with('suki').and_return(['suki'])
+* JSpec server (run several browsers in the background while reporting to the terminal)
+* Grammar-less option. Dislike JSpec's grammar? well we will soon have grammar-less support,
+  which in turn will make your specs look much like traditional JavaScript BDD frameworks:
+  expect(this).to('be_coming, 'soon')  
+
 == Example
 
   describe 'ShoppingCart'
