@@ -5,10 +5,11 @@ require 'server/browsers'
 
 module JSpec
   class Server
-    attr_reader :responses
+    attr_reader :responses, :browsers
     
-    def initialize
+    def initialize options = {}
       @responses = []
+      @browsers = options.delete :browsers
     end
     
     def call env
@@ -48,7 +49,7 @@ module JSpec
       "\e[#{code}m#{string}\e[m"
     end
     
-    def when_finished browsers, &block
+    def when_finished &block
       Thread.new {
         while responses.length < browsers.length
           sleep 0.1
@@ -59,12 +60,12 @@ module JSpec
     
     def self.start options
       app = Rack::Builder.new do
-        server = JSpec::Server.new
-        server.when_finished(options.browsers) { exit }
+        server = JSpec::Server.new :browsers => options.browsers
+        server.when_finished { exit }
         run server
       end
       puts "JSpec server started, testing browsers #{options.browsers.join(', ')}\n"
-      fork { 
+      Thread.new { 
         sleep 1
         run_browsers options.browsers
       }
