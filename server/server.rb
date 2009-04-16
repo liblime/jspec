@@ -41,11 +41,3 @@ module JSpec
     end
   end
 end
-
-app = Rack::Builder.new do
-  run JSpec::Server.new
-end
-
-port = 4444
-puts "JSpec server running with Mongrel on port #{port}\n"
-Rack::Handler::Mongrel.run app, :Port => port

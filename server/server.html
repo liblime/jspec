@@ -23,7 +23,8 @@
 			function report() {
 				post('http://localhost:4444', 'passes=' + JSpec.stats.passes + '&failures=' + JSpec.stats.failures)
 			}
-			// window.close?
+			
+			// TODO: close window
 		</script>
 	</head>
 	<body class="jspec" onLoad="runSuites(); report();">
