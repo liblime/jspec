@@ -54,8 +54,8 @@ and much more.
 Simply download JSpec and include JSpec.css and JSpec.js in your markup.
 Head over to the downloads section on Github, clone this public repo, or 
 add JSpec as a git submodule with in your project. Alternatively JSpec is
-also available as a Ruby Gem, which also provides the `jspec` executable. To
-install as a gem simply:
+also available as a Ruby Gem (though this is not required), which also 
+provides the `jspec` executable. To install as a gem simply:
   $ sudo gem install visionmedia-jspec
 
 At which point you may:
