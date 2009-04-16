@@ -393,6 +393,32 @@ For additional usage execute:
 Or for specific usage:
   $ jspec help run
 
+== Rhino
+
+JSpec provides transparent support for Rhino, while using the Terminal formatter.
+Simply create a JavaScript file with contents similar to below, and then execute
+the command following it:
+
+  load('lib/jspec.js')
+  
+  JSpec.options.formatter = JSpec.formatters.Terminal
+  JSpec.options.failuresOnly = true
+  
+  JSpec
+  .exec('spec/spec.grammar.js')
+  .exec('spec/spec.core.js')
+  .run()
+  .report()
+
+Run with:
+  $ jspec run path_to_your_js.js --rhino
+
+Or bind (automated testing):
+  $ jspec path_to_your_js.js --rhino
+
+The path is assumed to be spec/spec.js so, in that case use:
+  $ jspec --rhino
+
 == More Information
 
 * Syntax comparison with other frameworks http://gist.github.com/92283
