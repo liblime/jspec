@@ -10,9 +10,10 @@ and much more.
 
 * Sexiest syntax of them all
 * Framework / DOM independent
+* Rhino support
+* Async support
 * Nested describes
 * Does not pollute core object prototypes
-* Async support
 * Extremely simple and intuitive matcher declaration
 * Over 45 core matchers
 * Allows parens to be optional when using matchers to increase readability
@@ -358,6 +359,21 @@ for you, how ever this can be explicitly defined:
       }
     }
   })
+
+== Rhino
+
+Rhino support is transparent, simply remove create a JavaScript file to
+define which suites to run, and assign the Terminal formatter like below:
+
+  load('lib/jspec.js')
+  
+  JSpec.options.formatter = JSpec.formatters.Terminal
+  
+  JSpec
+  .exec('spec/spec.grammar.js')
+  .exec('spec/spec.core.js')
+  .run()
+  .report()
 
 == JSpec Command-line Utility
 
