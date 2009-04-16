@@ -411,10 +411,12 @@ The path is assumed to be spec/spec.js so, in that case use:
 == More Information
 
 * Syntax comparison with other frameworks http://gist.github.com/92283
-
 * Get the TextMate bundle at https://github.com/visionmedia/jspec.tmbundle/tree
-
 * For more information consult the JSpec source code documentation or visit http://visionmedia.github.com/jspec
+
+== Known Issues
+
+* Opera likes to break for various reasons ... we are working on fixing these compat issues
 
 == License 
 
