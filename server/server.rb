@@ -77,6 +77,7 @@ module JSpec
         sleep 1
         run_browsers options.browsers
       }
+      puts "JSpec server started\n\n"
       Rack::Handler::Mongrel.run app, :Port => 4444
       self
     end
