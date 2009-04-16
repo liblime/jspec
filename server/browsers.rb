@@ -5,26 +5,20 @@ module JSpec
       `open -g -a #{name} #{url}`
     end
     
+    def name
+      self.class.to_s.split('::').last
+    end
+    
     class Firefox < self
-      def name
-        :Firefox
-      end  
     end
 
     class Safari < self
-      def name
-        :Safari
-      end
     end
 
     class Opera < self
-      def name
-        :Opera
-      end
     end
 
     class MSIE < self
-
     end
   end
 end
