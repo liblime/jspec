@@ -34,7 +34,7 @@ and much more.
 * JSpec server (run several browsers in the background while reporting to the terminal)
 * Grammar-less option. Dislike JSpec's grammar? well we will soon have grammar-less support,
   which in turn will make your specs look much like traditional JavaScript BDD frameworks:
-  expect(this).to('be_coming, 'soon')  
+  expect(this).to('be_coming', 'soon')  
 
 == Example
 
