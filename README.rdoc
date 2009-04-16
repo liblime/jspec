@@ -8,7 +8,7 @@ and much more.
 
 == Features
 
-* Sexiest syntax of them all
+* Highly readable
 * Framework / DOM independent
 * Rhino support
 * Async support
