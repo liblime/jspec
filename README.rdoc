@@ -71,7 +71,7 @@ loaded using the exec method. Below is an example:
       JSpec
       .exec('spec.core.js')
       .exec('spec.jquery.js')
-      .run()
+      .run({ failuresOnly : true })
       .report()
     }
   </script>
@@ -85,13 +85,13 @@ each release.
 == Options
 
 You may alter the way JSpec operates by assigning options via the
-JSpec.options hash, or by passing string-based option values via the 
-query string. For example JSpec.options.failuresOnly = true, and ?failuresOnly=1 
-will both work.
+JSpec.options hash, by passing string-based option values via the 
+query string, or passing a hash to run(). For example 
+JSpec.options.failuresOnly = true, and ?failuresOnly=1 will both work.
 
-* profile {bool} when enabled, uses console.time() in order to display performance information in your console log as specs are completed.
-* failuresOnly {bool} displays only failing specs, making them quick to discover and fix
-* reportToId {string} an element id to report to when using the DOM formatter
+* profile {bool} when enabled, uses console.time() in order to display performance information in your console log as specs are completed. (DOM, Console)
+* failuresOnly {bool} displays only failing specs, making them quick to discover and fix (DOM, Terminal)
+* reportToId {string} an element id to report to when using the DOM formatter (DOM)
   
 == Matchers
 
@@ -296,9 +296,16 @@ Another option is to declare a variable outside of the spec closures:
 == Formatters
 
 To change a formatter simply alter the options hash like below, assigning
-a new constructor:
+a new constructor, or pass it within the hash to run():
 
   JSpec.options.formatter = JSpec.formatters.Console
+
+OR
+
+	JSpec
+	.exec('...')
+	.run({ formatter : JSpec.formatters.Terminal })
+	.report()
 
 === DOM
   
@@ -360,21 +367,6 @@ for you, how ever this can be explicitly defined:
     }
   })
 
-== Rhino
-
-Rhino support is transparent, simply remove create a JavaScript file to
-define which suites to run, and assign the Terminal formatter like below:
-
-  load('lib/jspec.js')
-  
-  JSpec.options.formatter = JSpec.formatters.Terminal
-  
-  JSpec
-  .exec('spec/spec.grammar.js')
-  .exec('spec/spec.core.js')
-  .run()
-  .report()
-
 == JSpec Command-line Utility
 
 When installed as a Ruby Gem, the `jspec` executable will become available,
@@ -401,13 +393,10 @@ the command following it:
 
   load('lib/jspec.js')
   
-  JSpec.options.formatter = JSpec.formatters.Terminal
-  JSpec.options.failuresOnly = true
-  
   JSpec
   .exec('spec/spec.grammar.js')
   .exec('spec/spec.core.js')
-  .run()
+  .run({ formatter : JSpec.formatters.Terminal, failuresOnly : true })
   .report()
 
 Run with:
