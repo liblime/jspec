@@ -22,6 +22,15 @@ module JSpec
 
     def display_results browser, failures, passes
       puts '%s - failures %s passes %s' % [bold(browser), red(failures), green(passes)]
+      require 'rubygems'
+      require 'growl'
+      if failures
+        notify_error "failed #{failures} assertions", :title => browser
+      else
+        notify_ok "#passed #{passes} assertions", :title => browser
+      end
+    rescue
+      # Do nothing
     end
 
     def browser string
@@ -64,7 +73,6 @@ module JSpec
         server.when_finished { exit }
         run server
       end
-      puts "JSpec server started, testing browsers #{options.browsers.join(', ')}\n"
       Thread.new { 
         sleep 1
         run_browsers options.browsers
