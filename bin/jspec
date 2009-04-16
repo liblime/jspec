@@ -64,7 +64,7 @@ command :run do |c|
   c.option '-b', '--browsers BROWSERS', Array, 'Specify browsers to test, defaults to Safari'
   c.option '-p', '--paths PATHS', Array, 'Specify paths when binding, defaults to javascript within ./lib and ./spec'
   c.option '-B', '--bind', 'Auto-run specs when source files or specs are altered'
-  c.option '-R', '--rhino', 'Run specs using Rhino'
+  c.option '-r', '--rhino', 'Run specs using Rhino'
   c.when_called do |args, options|
     begin
       require 'bind'
@@ -84,7 +84,7 @@ command :run do |c|
         listener = Bind::Listener.new :paths => options.paths, :interval => 1, :actions => [action], :debug => $stdout
         listener.run!
       else
-        action.call spec
+        action.call File.new(spec)
       end
       
     rescue LoadError
@@ -96,5 +96,5 @@ alias_command :bind, :run, '--bind'
 
 def rhino file
   abort "#{file} not found" unless File.exists? file
-  system "#{RHINO} #{file}"
+  system "#{RHINO} #{file.path}"
 end
