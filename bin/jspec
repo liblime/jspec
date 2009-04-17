@@ -18,10 +18,12 @@ command :init do |c|
   c.syntax = 'jspec init [dest]'
   c.summary = 'Initialize a JSpec project template'
   c.description = 'Initialize a JSpec project template. Defaults to the current directory
-    when [dest] is not specified. Currently three templates are available,
-    the default being a simple HTML-based DOM runner, the second being a
-    Rhino runner, and third being a Ruby server runner which opens each
-    browser and reports back to the terminal.'
+    when [dest] is not specified. Currently three templates are available:
+    
+    "default" : runs specs in browser(s) using the DOM formatter.
+    "rhino"   : runs specs with Rhino using the Terminal formatter.
+    "server"  : runs specs using a Ruby server/client solution which
+                starts each browser and reports back to the terminal.'
   c.example 'Create a directory foo, initialized with a jspec template', 'jspec init foo'
   c.example 'Initialize a rhino based project in the current directory', 'jspec init --template rhino'
   c.example 'Initialize a server based project in foo', 'jspec init foo --template server'
