@@ -73,11 +73,13 @@ module JSpec
         server.when_finished { exit }
         run server
       end
-      Thread.new { 
-        sleep 2
-        puts "Running browsers: #{options.browsers.join(', ')}\n\n"
-        run_browsers options.browsers, spec
-      }
+      unless options.server_only
+        Thread.new { 
+          sleep 2
+          puts "Running browsers: #{options.browsers.join(', ')}\n\n"
+          run_browsers options.browsers, spec
+        }
+      end
       puts "JSpec server started\n"
       Rack::Handler::Mongrel.run app, :Port => 4444
       self

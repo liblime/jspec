@@ -73,6 +73,7 @@ command :run do |c|
   c.option '-B', '--bind', 'Auto-run specs when source files or specs are altered'
   c.option '-R', '--rhino', 'Run specs using Rhino'
   c.option '-S', '--server', 'Run specs using the JSpec server'
+  c.option '-s', '--server-only', 'Start JSpec server without running browsers'
   c.when_called do |args, options|
     begin
       require 'bind'
