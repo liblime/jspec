@@ -28,14 +28,22 @@ command :init do |c|
   c.option '-T', '--template name', 'Template to use. Valid choices are default, rhino, and server.'
   c.when_called do |args, options|
     dest = args.shift || '.'
+    options.default :template => 'default'
     unless Dir[dest + '/*'].empty?
       abort unless agree "'#{dest}' is not empty; continue? "
     end
     FileUtils.mkdir_p dest
-    FileUtils.cp_r File.join(JSPEC_ROOT, 'templates', 'default', '.'), dest
-    spec = File.join dest, 'spec', 'spec.html'
-    contents = File.read(spec).gsub 'JSPEC_ROOT', JSPEC_ROOT
-    File.open(spec, 'w') { |file| file.write contents }
+    FileUtils.cp_r File.join(JSPEC_ROOT, 'templates', options.template, '.'), dest
+    path = case options.template
+      when 'default' ; 'spec.html'
+      when 'rhino'   ; 'spec.js'
+      else
+      end
+    if path
+      spec = File.join dest, 'spec', path
+      contents = File.read(spec).gsub 'JSPEC_ROOT', JSPEC_ROOT
+      File.open(spec, 'w') { |file| file.write contents }
+    end
     say "Template initialized at '#{dest}'"
   end
 end
