@@ -5,19 +5,35 @@ require 'server/browsers'
 
 module JSpec
   class Server
-    attr_reader :responses, :browsers
+    attr_reader :responses, :browsers, :root
     
     def initialize options = {}
       @responses = []
       @browsers = options.delete :browsers
+      @root = options.delete :root
     end
     
     def call env
       request = Rack::Request.new env
-      agent = env['HTTP_USER_AGENT']
-      responses << browser(agent)
-      display_results browser(agent), request['failures'], request['passes']
-      [200, { 'Content-Type' => 'text/plain', 'Content-Length' => '5' }, 'close']
+      path = request.path_info
+      body = case path
+      when '/'
+        agent = env['HTTP_USER_AGENT']
+        responses << browser(agent)
+        display_results browser(agent), request['failures'], request['passes']
+        type = 'text/plain'
+        'close'
+      when /jspec/
+        type = 'application/javascript'
+        File.read File.join(JSPEC_ROOT, 'lib', request.path_info)
+      when /\.js/
+        type = 'application/javascript'
+        File.read File.join(root, request.path_info)  
+      else  
+        type = 'text/html'
+        File.read File.join(root, request.path_info)
+      end
+      [200, { 'Content-Type' => type, 'Content-Length' => body.length.to_s }, body]
     end
 
     def display_results browser, failures, passes
@@ -27,7 +43,7 @@ module JSpec
       if failures
         notify_error "failed #{failures} assertions", :title => browser
       else
-        notify_ok "#passed #{passes} assertions", :title => browser
+        notify_ok "passed #{passes} assertions", :title => browser
       end
     rescue
       # Do nothing
@@ -69,7 +85,7 @@ module JSpec
     
     def self.start options, spec
       app = Rack::Builder.new do
-        server = JSpec::Server.new :browsers => options.browsers
+        server = JSpec::Server.new :browsers => options.browsers, :root => File.dirname(spec)
         server.when_finished { exit }
         run server
       end
@@ -87,7 +103,7 @@ module JSpec
     
     def self.run_browsers browsers, spec
       browsers.each do |name|
-        browser(name).open spec
+        browser(name).open "http://localhost:4444/#{File.basename(spec)}"
       end
     end
     

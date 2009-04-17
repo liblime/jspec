@@ -1,15 +1,15 @@
 <html>
 	<head>
-		<script src="../spec/jquery-1.3.1.js"></script>
-		<script src="../lib/jspec.js"></script>
-		<script src="../lib/jspec.jquery.js"></script>
+		<script src="jquery-1.3.1.js"></script>
+		<script src="jspec.js"></script>
+		<script src="jspec.jquery.js"></script>
 		<script>
 			function runSuites() {
 				JSpec
-				.exec('../spec/spec.grammar.js')
-				.exec('../spec/spec.core.js')
-				.exec('../spec/spec.core.dom.js')
-				.exec('../spec/spec.jquery.js')
+				.exec('spec.grammar.js')
+				.exec('spec.core.js')
+				.exec('spec.core.dom.js')
+				.exec('spec.jquery.js')
 				.run()
 				.reportToServer()
 			}
