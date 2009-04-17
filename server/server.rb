@@ -67,7 +67,7 @@ module JSpec
       }
     end
     
-    def self.start options
+    def self.start options, spec
       app = Rack::Builder.new do
         server = JSpec::Server.new :browsers => options.browsers
         server.when_finished { exit }
@@ -75,16 +75,16 @@ module JSpec
       end
       Thread.new { 
         sleep 1
-        run_browsers options.browsers
+        run_browsers options.browsers, spec
       }
       puts "JSpec server started\n\n"
       Rack::Handler::Mongrel.run app, :Port => 4444
       self
     end
     
-    def self.run_browsers browsers
+    def self.run_browsers browsers, spec
       browsers.each do |name|
-        browser(name).open File.dirname(__FILE__) + '/server.html'
+        browser(name).open spec
       end
     end
     

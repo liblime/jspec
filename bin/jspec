@@ -83,7 +83,8 @@ command :run do |c|
         spec = args.shift || 'spec/spec.js'
         action = lambda { rhino spec }
       elsif options.server
-        start_server options
+        spec = args.shift || 'spec/spec.html'
+        action = lambda { start_server options, spec }
       else
         spec = args.shift || 'spec/spec.html'
         action = Bind::Actions::RefreshBrowsers.new spec, *options.browsers
@@ -109,7 +110,7 @@ def rhino file
   system "#{RHINO} #{file}"
 end
 
-def start_server options
+def start_server options, spec
   require 'server/server'
-  JSpec::Server.start options
+  JSpec::Server.start options, spec
 end
