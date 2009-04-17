@@ -101,8 +101,8 @@ describe 'Grammar'
     
     describe 'with nested describe'
       it 'should be accessable'
-        n.should.eql 2
-        hits.should.eql ['before']
+        n.should.eql 1
+        hits.should.eql ['before', 'before']
       end
     end
   end
@@ -141,6 +141,20 @@ describe 'Grammar'
       
       it 'should continue hits'
         hits.should.eql ['before_each', 'after_each', 'before_each', 'after_each', 'before_each', 'after_each', 'before_each']
+      end
+      
+      describe 'with more hooks'
+        before_each 
+          hits.push('before_each')
+        end
+        
+        after_each
+          hits.push('after_each')
+        end
+        
+        it 'should continue hits, while cascading properly'
+          hits.should.eql ['before_each', 'after_each', 'before_each', 'after_each', 'before_each', 'after_each', 'before_each', 'after_each', 'before_each', 'before_each']
+        end
       end
     end
   end
