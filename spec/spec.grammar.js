@@ -101,14 +101,14 @@ describe 'Grammar'
     
     describe 'with nested describe'
       it 'should be accessable'
-        n.should.eql 0
+        n.should.eql 2
         hits.should.eql ['before']
       end
     end
   end
   
   describe 'before_each / after_each blocks'
-    var n, o, hits = []
+    hits = []
     
     before_each
       n = 1
