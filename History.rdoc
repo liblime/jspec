@@ -1,4 +1,37 @@
 
+=== 1.1.4 / 2009-04-17
+
+* Added rhino and server template files
+* Added JSpec.hasXhr()
+* Added JSpec.xhr()
+* Added Ruby javascript testing server
+* Added support for options passed to run()
+* Added failuresOnly for Terminal formatter
+* Added terminal assertion graphs
+* Addec color() utility
+* Added main.puts() since we use print() as a utility
+* Added rhino support
+* Added fail() utility function
+* Added JSpec.Assertion
+* Added normalizeMatcherMessage()
+* Added normalizeMatcherBody()
+* Added have_classes [#19]
+* Added extend() utility
+* Added be_an_instance_of matcher
+* Added constructor checking support for throw_error matcher [#72]
+* Added file support for exception messages, making them much easier to debug
+* Added catching of exceptions throw within specs [#46]
+* Changed; executable aborts when template does not exist
+* Changed; matchers now normalized upon creation, accepts function, hash, or string.
+* Changed be() matcher to be strict [#57]
+* Changed error() to conditionally show line number when available
+* Renamed Jspec.addSuite to JSpec.describe and Suite#addSpec to Suite#it
+* Refactored be_a_TYPE_input matchers so that the deprication warning is logged only when calling the method
+* Fixed JSpec.requires() now works with latest version of JSpec.error()
+* Fixed error() now displays exceptions throw that do not respond to .message
+* Fixed commenting bug [#37]
+* Removed JSpec.main, now just using local main
+
 === 1.1.3 / 2009-04-14
 
 * Removed /test used for the executable, causing gem to fail building
