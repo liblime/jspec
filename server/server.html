@@ -4,13 +4,6 @@
 		<script src="../lib/jspec.js"></script>
 		<script src="../lib/jspec.jquery.js"></script>
 		<script>
-	     function post(url, data) {
-	       request = new XMLHttpRequest
-	       request.open('POST', url, false)
-	       request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
-	       request.send(data)
-	     }
-
 			function runSuites() {
 				JSpec
 				.exec('../spec/spec.grammar.js')
@@ -19,14 +12,8 @@
 				.exec('../spec/spec.jquery.js')
 				.run()
 			}
-			
-			function report() {
-				post('http://localhost:4444', 'passes=' + JSpec.stats.passes + '&failures=' + JSpec.stats.failures)
-				if ('close' in window) window.close()
-			}
-			
 		</script>
 	</head>
-	<body class="jspec" onLoad="runSuites(); report();">
+	<body class="jspec" onLoad="runSuites(); JSpec.reportToServer();">
 	</body>
 </html>
