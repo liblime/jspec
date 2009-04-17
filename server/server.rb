@@ -40,10 +40,10 @@ module JSpec
       puts '%s - failures %s passes %s' % [bold(browser), red(failures), green(passes)]
       require 'rubygems'
       require 'growl'
-      if failures
-        notify_error "failed #{failures} assertions", :title => browser
+      if failures.to_i > 0
+        notify_error "failed #{failures} assertion(s)", :title => browser
       else
-        notify_ok "passed #{passes} assertions", :title => browser
+        notify_ok "passed #{passes} assertion(s)", :title => browser
       end
     rescue
       # Do nothing
