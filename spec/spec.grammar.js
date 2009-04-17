@@ -96,13 +96,17 @@ describe 'Grammar'
     
     it 'should persist'
       n.should.eql 2
-      hits.should.eql ['before']
+      hits.should.eql ['before', 'after']
     end
     
     describe 'with nested describe'
       it 'should be accessable'
         n.should.eql 0
-        hits.should.eql ['before', 'after']
+        hits.should.eql ['before', 'after', 'before']
+      end
+      
+      it 'should continue hits'
+        hits.should.eql ['before', 'after', 'before', 'after', 'before']
       end
     end
   end
