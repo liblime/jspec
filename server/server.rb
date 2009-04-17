@@ -31,7 +31,7 @@ module JSpec
         File.read File.join(root, request.path_info)  
       else  
         type = 'text/html'
-        File.read File.join(root, request.path_info)
+        File.read File.join(root, request.path_info) rescue ''
       end
       [200, { 'Content-Type' => type, 'Content-Length' => body.length.to_s }, body]
     end
