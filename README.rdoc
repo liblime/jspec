@@ -12,12 +12,13 @@ and much more.
 * Framework / DOM independent
 * Rhino support
 * Async support
+* Ruby JavaScript testing server
 * Nested describes
 * Does not pollute core object prototypes
 * Extremely simple and intuitive matcher declaration
 * Over 45 core matchers
 * Allows parens to be optional when using matchers to increase readability
-* Several helpful formatters (dom, console, terminal, ...)
+* Several helpful formatters (DOM, Console, Terminal, ...)
 * Assertion graphs displaying how many, and which assertions pass or failed
 * Default / customizable evaluation contexts
 * DOM sandbox support
@@ -28,10 +29,7 @@ and much more.
 
 == Features Coming Soon
 
-* Rhino support (complete, not released) 
-* Terminal formatter (complete, not released)
 * 'Spy' or 'Proxy' assertions. person.should.receive('addPet').with('suki').and_return(['suki'])
-* JSpec server (run several browsers in the background while reporting to the terminal)
 * Grammar-less option. Dislike JSpec's grammar? well we will soon have grammar-less support,
   which in turn will make your specs look much like traditional JavaScript BDD frameworks:
   expect(this).to('be_coming', 'soon')  
@@ -317,18 +315,6 @@ OR
 	.run({ formatter : JSpec.formatters.Terminal })
 	.report()
 
-=== DOM
-  
-Clean attractive HTML reporting
-
-=== Console
-
-Reporting utilizing the console object (tested using Firebug and Safari 4)
-
-=== Terminal
-
-Coming soon
-
 == Custom Matchers
 
 First lets create a simple equality matcher. In the case below JSpec is smart enough to realize
@@ -409,14 +395,28 @@ the command following it:
   .run({ formatter : JSpec.formatters.Terminal, failuresOnly : true })
   .report()
 
+Initialize project with:
+  $ jspec init myproject --template rhino
+
 Run with:
-  $ jspec run path_to_your_js.js --rhino
+  $ jspec run --rhino
 
 Or bind (automated testing):
-  $ jspec path_to_your_js.js --rhino
+  $ jspec --rhino 
 
-The path is assumed to be spec/spec.js so, in that case use:
-  $ jspec --rhino
+== Server
+
+The Ruby JavaScript testing server included with JSpec simply runs
+the spec suites within each browser you specify, while reporting result
+back to the terminal. It is essentially the same as using the DOM formatter
+and auto-testing each browser, however results are centralized to the terminal,
+removing the need to manually view each browser's output.
+
+Initialize project with:
+  $ jspec init myproject --template server
+
+Run with:
+  $ jspec run --server
 
 == More Information
 
