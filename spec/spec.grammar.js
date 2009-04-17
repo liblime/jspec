@@ -76,55 +76,71 @@ describe 'Grammar'
   end
   
   describe 'before / after blocks'
-    var n, o
+    var n, o, hits = []
     
     before
       n = 1
+      hits.push('before')
     end
     
     after 
       n = 0
+      hits.push('after')
     end
     
     it 'should work'
       n.should.eql 1
+      hits.should.eql ['before']
       n++
     end
     
     it 'should persist'
       n.should.eql 2
+      hits.should.eql ['before']
     end
     
     describe 'with nested describe'
       it 'should be accessable'
         n.should.eql 0
+        hits.should.eql ['before', 'after']
       end
     end
   end
   
   describe 'before_each / after_each blocks'
+    var n, o, hits = []
+    
     before_each
       n = 1
+      hits.push('before_each')
     end
     
     after_each
       o = 2
+      hits.push('after_each')
     end
     
     it 'should work'
       n.should.eql 1
+      hits.should.eql ['before_each']
       n = 2
     end
     
     it 'should not persist'
       n.should.eql 1
       o.should.eql 2
+      hits.should.eql ['before_each', 'after_each', 'before_each']
     end
     
     describe 'with nested describe'
       it 'should be accessable'
         n.should.eql 1
         o.should.eql 2
+        hits.should.eql ['before_each', 'after_each', 'before_each', 'after_each', 'before_each']
+      end
+      
+      it 'should continue hits'
+        hits.should.eql ['before_each', 'after_each', 'before_each', 'after_each', 'before_each', 'after_each', 'before_each']
       end
     end
   end
