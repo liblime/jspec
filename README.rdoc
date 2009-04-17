@@ -15,6 +15,7 @@ and much more.
 * Ruby JavaScript testing server
 * Nested describes
 * Does not pollute core object prototypes
+* Cascading before/after/before_each/after_each hooks
 * Extremely simple and intuitive matcher declaration
 * Over 45 core matchers
 * Allows parens to be optional when using matchers to increase readability
