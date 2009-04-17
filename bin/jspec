@@ -32,8 +32,10 @@ command :init do |c|
     unless Dir[dest + '/*'].empty?
       abort unless agree "'#{dest}' is not empty; continue? "
     end
+    template = File.join JSPEC_ROOT, 'templates', options.template, '.'
+    abort "template #{options.template} does not exist" unless File.exists? template
     FileUtils.mkdir_p dest
-    FileUtils.cp_r File.join(JSPEC_ROOT, 'templates', options.template, '.'), dest
+    FileUtils.cp_r template, dest
     path = case options.template
       when 'default' ; 'spec.html'
       when 'rhino'   ; 'spec.js'
