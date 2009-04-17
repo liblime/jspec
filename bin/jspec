@@ -39,7 +39,9 @@ command :update do |c|
   c.summary = 'Update JSpec releases'
   c.description = 'Update JSpec release in [paths], this will allow you to utilize the latest
     JSpec features. If you have suites running at a path other than the regular 
-    spec/spec.html simply pass them as arguments to this sub-command.'
+    spec/spec.html simply pass them as arguments to this sub-command.
+    
+    This is only needed when using the default, or rhino project templates.'
   c.when_called do |args, options|
     args = %w( spec/spec.html ) if args.empty?
     args.each do |path|
