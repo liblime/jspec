@@ -50,7 +50,7 @@ module JSpec
     end
 
     def browser string
-      case
+      case string
       when /Safari/  ; :Safari
       when /Firefox/ ; :Firefox
       when /MSIE/    ; :MSIE
