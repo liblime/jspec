@@ -1,10 +1,12 @@
 #!/usr/bin/env ruby
 
+JSPEC_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+$:.unshift JSPEC_ROOT
+ 
 require 'rubygems'
 require 'commander'
 require 'fileutils'
 
-JSPEC_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 RHINO = 'java org.mozilla.javascript.tools.shell.Main'
 
 program :name, 'JSpec'
@@ -70,18 +72,23 @@ command :run do |c|
   c.option '-p', '--paths PATHS', Array, 'Specify paths when binding, defaults to javascript within ./lib and ./spec'
   c.option '-B', '--bind', 'Auto-run specs when source files or specs are altered'
   c.option '-R', '--rhino', 'Run specs using Rhino'
+  c.option '-S', '--server', 'Run specs using the JSpec server'
+  c.option '-s', '--server-only', 'Start JSpec server without running browsers'
   c.when_called do |args, options|
     begin
       require 'bind'
       options.default :browsers => %w( Safari ), :paths => ['lib/**/*.js', 'spec/**/*.js']
       
       # Actions
-      unless options.rhino
-        spec = args.shift || 'spec/spec.html'
-        action = Bind::Actions::RefreshBrowsers.new spec, *options.browsers
-      else
+      if options.rhino
         spec = args.shift || 'spec/spec.js'
         action = lambda { rhino spec }
+      elsif options.server
+        spec = args.shift || 'spec/spec.html'
+        action = lambda { start_server options, spec }
+      else
+        spec = args.shift || 'spec/spec.html'
+        action = Bind::Actions::RefreshBrowsers.new spec, *options.browsers
       end
       
       # Binding
@@ -102,4 +109,9 @@ alias_command :bind, :run, '--bind'
 def rhino file
   abort "#{file} not found" unless File.exists? file
   system "#{RHINO} #{file}"
+end
+
+def start_server options, spec
+  require 'server/server'
+  JSpec::Server.start options, spec
 end
