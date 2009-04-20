@@ -31,6 +31,7 @@ describe 'Grammar'
   it 'should allow grammar-less assertions'
     expect(true).to('be', true)
     expect([1,2,3]).to('include', 1, 2, 3)
+    expect(true).not_to('be', false)
   end
   
   it 'should allow commenting out of conversions'
