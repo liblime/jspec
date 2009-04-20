@@ -1,7 +1,6 @@
 
 load('lib/jspec.js')
-
-eval(JSpec.load('spec/spec.grammar-less.js'))
+load('spec/spec.grammar-less.js')
 
 JSpec
 .exec('spec/spec.grammar.js')
