@@ -28,6 +28,11 @@ describe 'Grammar'
     -{ throw 'test' }.should.throw_error
   end
   
+  it 'should allow grammar-less assertions'
+    JSpec.expect(true).to('be', true)
+    JSpec.expect([1,2,3]).to('include', 1, 2, 3)
+  end
+  
   it 'should allow commenting out of conversions'
     // -{ throw 'foo' }.should.throw_error
     // foo.should.not.eql 'bar'
