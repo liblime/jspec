@@ -264,7 +264,7 @@ describe 'Matchers'
       person = {}
       personWithPets = { 
         getPets : function(){ return ['izzy'] },
-        addPet : function(name) { return ['izzy', name] },
+        addPet  : function(name) { return ['izzy', name] },
         addPets : function(a, b) { return ['izzy', a, b] },
       }
     end
