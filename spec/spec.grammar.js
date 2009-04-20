@@ -29,8 +29,8 @@ describe 'Grammar'
   end
   
   it 'should allow grammar-less assertions'
-    JSpec.expect(true).to('be', true)
-    JSpec.expect([1,2,3]).to('include', 1, 2, 3)
+    expect(true).to('be', true)
+    expect([1,2,3]).to('include', 1, 2, 3)
   end
   
   it 'should allow commenting out of conversions'
