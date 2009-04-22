@@ -322,7 +322,7 @@ describe 'Negative specs'
   end
   
   it 'should catch proper exceptions'
-    iDoNotExist
+    iDoNotExist.neitherDoI()
   end
   
 end
