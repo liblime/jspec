@@ -300,7 +300,7 @@ describe 'Negative specs'
   end
   
   it 'should fail with function body'
-    -{ rawr }.should.not.throw_error
+    -{ throw 'foo' }.should.not.throw_error
   end
   
   it 'should fail with message of first failure'
