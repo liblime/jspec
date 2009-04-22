@@ -1,7 +1,5 @@
 
 JSpec.describe('Grammar-less', function(){
-  var n
-  
   before(function(){
     n = 1
   })
@@ -12,7 +10,9 @@ JSpec.describe('Grammar-less', function(){
   })
   
   describe('with nested describes', function(){
-    var hits = []
+    before(function(){
+      hits = []
+    })
     
     before_each(function(){
       n++
@@ -25,11 +25,8 @@ JSpec.describe('Grammar-less', function(){
       expect(hits).to('eql', ['before_each'])
     })
     
-    foo = 'bar'
     it('should work again', function(){
       expect(n).to('eql', 3)
-      expect(foo).to('eql', 'bar')
-      expect('foo').to('eql', 'bar')
       expect(hits).to('eql', ['before_each', 'before_each'])
     })
   })
