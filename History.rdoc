@@ -1,4 +1,9 @@
 
+=== 1.1.6 / 2009-04-22
+
+* Fixed typo in requires()
+* Added expect()
+
 === 1.1.5 / 2009-04-17
 
 * Strengthened specs for cascading hooks
