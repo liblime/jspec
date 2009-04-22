@@ -12,8 +12,21 @@ JSpec.describe('Grammar-less', function(){
   })
   
   describe('with nested describes', function(){
+    before_each(function(){
+      n++  
+    })
+    
     it('should work', function(){
       expect(true).not_to('be', false)
+      expect(n).to('eql', 2)
+    })
+    
+    foo = 'bar'
+    
+    it('should work again', function(){
+      expect(n).to('eql', 3)
+      expect(foo).to('eql', 'bar')
+      expect('foo').to('eql', 'bar')
     })
   })
   
