@@ -2,11 +2,11 @@
 describe 'DOM Sandbox'
 
   before_each
-    .dom = this.defaultSandbox() // Normall sandbox() jQuery helpers override this
+    .dom = this.defaultSandbox() // sandbox() is overridden by jQuery
   end
   
   it 'should allow creation of sandboxes'
-    .dom.should_be_a HTMLDivElement
+    .dom.toString().should_include 'HTMLDivElement'
   end
   
 end
