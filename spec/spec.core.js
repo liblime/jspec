@@ -270,15 +270,15 @@ describe 'Matchers'
     it 'should fail when the method does not exist'
       person.should.receive('getPets')
     end
-    // 
-    // it 'should fail when the method is never invoked'
-    //   personWithPets.should.receive('getPets')
-    // end
-    // 
-    // it 'should pass when the method is invoked'
-    //   personWithPets.should.receive('getPets')
-    //   personWithPets.getPets()
-    // end
+    
+    it 'should fail when the method is never invoked'
+      personWithPets.should.receive('getPets')
+    end
+    
+    it 'should pass when the method is invoked'
+      personWithPets.should.receive('getPets')
+      personWithPets.getPets()
+    end
     // 
     // it 'should pass when the proper value is returned'
     //   person.should.receive('getPets').and_return(['izzy'])
