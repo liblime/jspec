@@ -86,6 +86,15 @@ describe 'Utility'
     end
   end
   
+  describe 'select'
+    it 'should return an array of values when the callback evaluates to true'
+      result = select('some foo bar baz stuff', function(value){
+        return value.length > 3
+      })
+      result.should.eql ['some', 'stuff']
+    end
+  end
+  
   describe 'last'
     it 'should return the last element in an array'
       last(['foo', 'bar']).should.eql 'bar'
