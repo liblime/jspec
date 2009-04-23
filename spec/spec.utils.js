@@ -55,13 +55,18 @@ describe 'Utility'
   end
   
   describe 'inject'
-    it 'should provide a memo object while iterating'
-      result = []
-      inject([1,2,3], result, function(memo, value){
+    it 'should provide a memo object while iterating, not expecting returning of memo for composits'
+      result = inject([1,2,3], [], function(memo, value){
         memo.push(value)
-        return memo
       })
       result.should.eql [1,2,3]
+    end
+    
+    it 'should require returning of memo for scalar variables'
+      result = inject([1,2,3], false, function(memo, value){
+        return memo ? memo : value == 2
+      })
+      result.should.be_true
     end
   end
   
