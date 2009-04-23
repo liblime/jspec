@@ -2,21 +2,21 @@
 describe 'Utility'
   describe 'query'
     it 'should return a pairs value'
-      JSpec.query('suite', '?suite=Positive%20specs').should.equal 'Positive specs'
+      query('suite', '?suite=Positive%20specs').should.equal 'Positive specs'
     end
     
     it 'should return null when key is not present'
-      JSpec.query('foo', '?suite=Positive%20specs').should.be_null
+      query('foo', '?suite=Positive%20specs').should.be_null
     end
   end
   
   describe 'strip'
     it 'should strip whitespace by default'
-      JSpec.strip(" foo \n\n").should.equal 'foo'
+      strip(" foo \n\n").should.equal 'foo'
     end
     
     it 'should strip the characters passed'
-      JSpec.strip('[foo]', '\\[\\]').should.equal 'foo'
+      strip('[foo]', '\\[\\]').should.equal 'foo'
     end
   end
   
@@ -91,6 +91,18 @@ describe 'Utility'
     it 'should return an array of arguments'
       func = function(){ return argumentsToArray(arguments) }
       func('foo', 'bar').should.eql ['foo', 'bar']
+    end
+    
+    it 'should return the offset of an arguments array'
+      func = function(){ return argumentsToArray(arguments, 2) }
+      func('foo', 'bar', 'baz').should.eql ['baz']
+    end
+  end
+  
+  describe 'does'
+    it 'should assert without reporting'
+      does('foo', 'eql', 'foo')
+      JSpec.currentSpec.assertions.should.have_length 0
     end
   end
 end
