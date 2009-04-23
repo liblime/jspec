@@ -331,26 +331,36 @@ describe 'Matchers'
       personWithPets.should.receive('addPet').with_args('suki').and_return(['izzy', 'suki'])
       personWithPets.addPet('suki')
     end
-    // 
-    // it 'should fail when argument is of the wrong type'
-    //   personWithPets.should.receive('addPet').with_args(an_instance_of(String))
-    //   personWithPets.addPet(['suki'])
-    // end
-    // 
-    // it 'should pass when argument is the correct type'
-    //   personWithPets.should.receive('addPet').with_args(an_instance_of(String))
-    //   personWithPets.addPet('suki')
-    // end
-    // 
-    // it 'should fail when return type is of the wrong type'
-    //   personWithPets.should.receive('addPet').and_return(an_instance_of(String))
-    //   personWithPets.addPet('suki')
-    // end
-    //     
-    // it 'should pass when return type is correct'
-    //   personWithPets.should.receive('addPet').and_return(an_instance_of(Array))
-    //   personWithPets.addPet('suki')
-    // end
+    
+    it 'should fail when argument is of the wrong type'
+      personWithPets.should.receive('addPet').with_args(an_instance_of(String))
+      personWithPets.addPet(['suki'])
+    end
+    
+    it 'should pass when argument is the correct type'
+      personWithPets.should.receive('addPet').with_args(an_instance_of(String))
+      personWithPets.addPet('suki')
+    end
+    
+    it 'should fail when return type is incorrect'
+      personWithPets.should.receive('addPet').and_return(an_instance_of(String))
+      personWithPets.addPet('suki')
+    end
+        
+    it 'should pass when return type is correct'
+      personWithPets.should.receive('addPet').and_return(an_instance_of(Array))
+      personWithPets.addPet('suki')
+    end
+    
+    it 'should fail when checking the type of multiple args and return types'
+      personWithPets.should.receive('addPets').with_args(an_instance_of(String), an_instance_of(Array)).and_return(an_instance_of(Array))
+      personWithPets.addPets('suki', 'max')
+    end
+        
+    it 'should pass when checking the type of multiple args and return types'
+      personWithPets.should.receive('addPets').with_args(an_instance_of(String), an_instance_of(String)).and_return(an_instance_of(Array))
+      personWithPets.addPets('suki', 'max')
+    end
   end
   
 end
