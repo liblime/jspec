@@ -485,6 +485,22 @@ describe 'Utility'
       result.should.eql ['0-some', '1-foo', '2-bar']
     end
   end
+  
+  describe 'any'
+    it 'should return null when no matches are found'
+      result = any('some foo bar', function(value){
+        return value.length > 5
+      })
+      result.should.be_null
+    end
+    
+    it 'should return the value of the first matching expression'
+      result = any('foo some bar', function(value){
+        return value.length > 3
+      })
+      result.should.eql 'some'
+    end
+  end
 end
 
 describe 'Contexts'
