@@ -9,16 +9,8 @@ module JSpec
       self.class.to_s.split('::').last
     end
     
-    class Firefox < self
-    end
-
-    class Safari < self
-    end
-
-    class Opera < self
-    end
-
-    class MSIE < self
-    end
+    class Firefox < self; end
+    class Safari < self; end
+    class Opera < self; end
   end
 end

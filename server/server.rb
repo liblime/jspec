@@ -67,9 +67,7 @@ module JSpec
     
     def when_finished &block
       Thread.new {
-        while responses.length < browsers.length
-          sleep 0.1
-        end
+        sleep 0.1 while responses.length < browsers.length
         yield
       }
     end
