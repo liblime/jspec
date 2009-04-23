@@ -451,6 +451,24 @@ describe 'Utility'
       JSpec.strip('[foo]', '\\[\\]').should.equal 'foo'
     end
   end
+  
+  describe 'each'
+    it 'should iterate an array'
+      result = []
+      each([1,2,3], function(value){
+        result.push(value)
+      })
+      result.should.eql [1,2,3]
+    end
+    
+    it 'should iterate words in a string'
+      result = []
+      each('some foo bar', function(value){
+        result.push(value)
+      })
+      result.should.eql ['some', 'foo', 'bar']
+    end
+  end
 end
 
 describe 'Contexts'
