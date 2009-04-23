@@ -501,6 +501,12 @@ describe 'Utility'
       result.should.eql 'some'
     end
   end
+  
+  describe 'last'
+    it 'should return the last element in an array'
+      last(['foo', 'bar']).should.eql 'bar'
+    end
+  end
 end
 
 describe 'Contexts'
