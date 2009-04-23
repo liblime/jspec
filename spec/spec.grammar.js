@@ -34,6 +34,13 @@ describe 'Grammar'
     expect(true).not_to(be, false)
   end
   
+  it 'should allow multi-line expect() assertions'
+    expect(' \
+      foo    \
+      bar    \
+    ').to(include, 'foo', 'bar')
+  end
+  
   it 'should allow commenting out of conversions'
     // -{ throw 'foo' }.should.throw_error
     // foo.should.not.eql 'bar'
