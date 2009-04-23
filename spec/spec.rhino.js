@@ -5,5 +5,6 @@ load('spec/spec.grammar-less.js')
 JSpec
 .exec('spec/spec.grammar.js')
 .exec('spec/spec.core.js')
+.exec('spec/spec.core.utils.js')
 .run({ formatter : JSpec.formatters.Terminal, failuresOnly : true })
 .report()
