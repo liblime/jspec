@@ -34,6 +34,11 @@ describe 'Matchers'
       foo.should.eql foo2
       foo.should.not.eql bar
     end
+    
+    it 'should work with constructors'
+      Array.should.eql Array
+      Array.should.not.eql Object
+    end
   end
   
   describe 'equal'
