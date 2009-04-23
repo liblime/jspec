@@ -82,10 +82,9 @@ describe 'Grammar'
   end
   
   describe 'before / after blocks'
-    var n, o, hits = []
-    
     before
       n = 1
+      hits = []
       hits.push('before')
     end
     
@@ -108,7 +107,7 @@ describe 'Grammar'
     describe 'with nested describe'
       it 'should be accessable'
         n.should.eql 1
-        hits.should.eql ['before', 'before']
+        hits.should.eql ['before']
       end
     end
   end
