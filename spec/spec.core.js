@@ -258,14 +258,12 @@ describe 'Matchers'
   end
   
   describe 'should_receive'
-    var person, personWithPets
-    
     before_each
       person = {}
       personWithPets = { 
         getPets : function(){ return ['izzy'] },
         addPet  : function(name) { return ['izzy', name] },
-        addPets : function(a, b) { return ['izzy', a, b] },
+        addPets : function(a, b) { return ['izzy', a, b] }
       }
     end
     
