@@ -518,6 +518,13 @@ describe 'Utility'
       last(['foo', 'bar']).should.eql 'bar'
     end
   end
+  
+  describe 'argumentsToArray'
+    it 'should return an array of arguments'
+      func = function(){ return argumentsToArray(arguments) }
+      func('foo', 'bar').should.eql ['foo', 'bar']
+    end
+  end
 end
 
 describe 'Contexts'
