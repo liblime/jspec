@@ -469,6 +469,22 @@ describe 'Utility'
       result.should.eql ['some', 'foo', 'bar']
     end
   end
+  
+  describe 'map'
+    it 'should return an array of mapped values'
+      result = map([1,2,3], function(value){
+        return value * 2
+      })
+      result.should.eql [2,4,6]
+    end
+    
+    it 'should inherit the ability to iterate words in a string'
+      result = map('some foo bar', function(i, value){
+        return i + '-' + value
+      })
+      result.should.eql ['0-some', '1-foo', '2-bar']
+    end
+  end
 end
 
 describe 'Contexts'
