@@ -359,7 +359,7 @@ describe 'Contexts'
   end
 
   it 'should be replacable'
-    .iLike.should.equal 'cookies'
+    iLike.should.equal 'cookies'
   end
 end
 
