@@ -101,6 +101,8 @@ describe 'jQuery'
     describe 'have_classes'
       it 'should check if an element has the classes given'
         elem.children('select').should.have_classes 'save', 'form-select'
+        elem.children('select').should.not.have_classes 'save', 'foo'
+        elem.children('select').should.not.have_classes 'foo', 'save'
       end
     end
 
