@@ -301,6 +301,12 @@ describe 'Matchers'
       personWithPets.getPets()
     end
     
+    it 'should fail when not invoked many times'
+      personWithPets.should.receive('getPets', 3).and_return(['izzy'])
+      personWithPets.getPets()
+      personWithPets.getPets()
+    end
+    
     it 'should pass when invoked the expected number of times'
       personWithPets.should.receive('getPets', 'twice').and_return(['izzy'])
       personWithPets.getPets()
