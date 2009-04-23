@@ -486,6 +486,17 @@ describe 'Utility'
     end
   end
   
+  describe 'inject'
+    it 'should provide a memo object while iterating'
+      result = []
+      inject([1,2,3], result, function(memo, value){
+        memo.push(value)
+        return memo
+      })
+      result.should.eql [1,2,3]
+    end
+  end
+  
   describe 'any'
     it 'should return null when no matches are found'
       result = any('some foo bar', function(value){
