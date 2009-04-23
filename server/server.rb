@@ -38,15 +38,6 @@ module JSpec
 
     def display_results browser, failures, passes
       puts '%-14s - passes: %s failures: %s' % [bold(browser), green(passes), red(failures)]
-      require 'rubygems'
-      require 'growl'
-      if failures.to_i > 0
-        notify_error "failed #{failures} assertion(s)", :title => browser
-      else
-        notify_ok "passed #{passes} assertion(s)", :title => browser
-      end
-    rescue
-      # Do nothing
     end
 
     def browser string
