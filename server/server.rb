@@ -37,7 +37,7 @@ module JSpec
     end
 
     def display_results browser, failures, passes
-      puts '%s - passes: %s failures: %s' % [bold(browser), green(passes), red(failures)]
+      puts '%-14s - passes: %s failures: %s' % [bold(browser), green(passes), red(failures)]
       require 'rubygems'
       require 'growl'
       if failures.to_i > 0
