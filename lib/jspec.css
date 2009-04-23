@@ -76,6 +76,16 @@ body.jspec {
   text-indent: 30px;
   color: #7B8D9B;
 }
+#jspec-report tr.body {
+  display: none;
+}
+#jspec-report tr.body pre {
+  margin: 0;
+  padding: 0 0 5px 25px;
+}
+#jspec-report tr:not(.body):hover + tr.body {
+  display: block;
+}
 #jspec-report tr td:first-child em {
   font-style: normal;
   font-weight: normal;
