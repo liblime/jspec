@@ -5,8 +5,8 @@ JSpec.describe('Grammar-less', function(){
   })
   
   it('should work', function(){
-    expect(true).to('be', true)
-    expect(n).to('equal', 1)
+    expect(true).to(be, true)
+    expect(n).to(equal, 1)
   })
   
   describe('with nested describes', function(){
@@ -20,14 +20,14 @@ JSpec.describe('Grammar-less', function(){
     })
     
     it('should work', function(){
-      expect(true).not_to('be', false)
-      expect(n).to('eql', 2)
-      expect(hits).to('eql', ['before_each'])
+      expect(true).not_to(be, false)
+      expect(n).to(eql, 2)
+      expect(hits).to(eql, ['before_each'])
     })
     
     it('should work again', function(){
-      expect(n).to('eql', 3)
-      expect(hits).to('eql', ['before_each', 'before_each'])
+      expect(n).to(eql, 3)
+      expect(hits).to(eql, ['before_each', 'before_each'])
     })
   })
   
