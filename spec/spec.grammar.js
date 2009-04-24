@@ -46,11 +46,6 @@ describe 'Grammar'
     // foo.should.not.eql 'bar'
   end
   
-  it 'should allow . this. literal'
-    this.foo = 'bar'
-    .foo.should.eql 'bar'
-  end
-  
   it 'should allow inclusive range literal n..n'
     1..5.should.eql [1,2,3,4,5]
     3..4.should.eql [3,4]
