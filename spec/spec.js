@@ -85,7 +85,7 @@ describe 'Shared Behaviors'
     end
     
     it 'should have access to all permissions'
-      user.may('edit_pages').should.be_true
+      user.may('edit pages').should.be_true
     end
   end
 end
