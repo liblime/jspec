@@ -170,12 +170,26 @@ JSpec.options.failuresOnly = true, and ?failuresOnly=1 will both work.
   - have_target
   - have_value     
   - have_class
+  - have_classes
   - be_visible
   - be_hidden
   - be_enabled
   - be_disabled
   - be_selected
   - be_checked
+
+== Proxy Assertions
+
+Proxy or 'Spy' assertions allow you to assert that a method is called n number
+of times, with x arguments, returning x value. For example:
+
+  person = { getPets : function(species){ return ['izzy'] }}
+  person.should.receive('getPets', 'twice').with_args(an_instance_of(String))and_return(['izzy'])
+  person.getPets('dogs') // This will pass
+  person.getPets()       // This will fail because we asked an instance of String
+
+This is a useful mechanism for testing the behavior of your object, as well as
+how other methods may interact with it. For more examples view spec/spec.matchers.js
 
 == Helpers
 
