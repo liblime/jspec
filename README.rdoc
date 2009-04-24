@@ -25,39 +25,9 @@ and much more.
 * DOM sandbox support
 * Great looking default DOM theme
 * `jspec` command-line utility for auto-running specs, and initializing project templates
+* Proxy or 'Spy' assertions 
 * Profiling
 * Tiny (15 kb compressed, 1000-ish LOC)
-
-== Features Coming Soon
-
-* 'Spy' or 'Proxy' assertions. person.should.receive('addPet').with('suki').and_return(['suki'])
-* Grammar-less option. Dislike JSpec's grammar? well we will soon have grammar-less support,
-  which in turn will make your specs look much like traditional JavaScript BDD frameworks:
-  expect(this).to('be_coming', 'soon')  
-
-== Example
-
-  describe 'ShoppingCart'
-    var cart
-  
-    before_each
-      cart = new ShoppingCart
-    end
-    
-    describe 'addProducts'
-      it 'should add several products'
-        cart.addProduct('cookie')
-        cart.addProduct('icecream')
-        cart.should.have 2, 'products'
-      end
-    end
-  
-    describe 'checkout'
-      it 'throw an error when checking out with no products'
-        -{ cart.clear().checkout() }.should.throw_error
-      end
-    end
-  end
 
 == Installation
 
@@ -90,6 +60,53 @@ loaded using the exec method. Below is an example:
 You may optionally want to use sources in the /pkg directory
 for your project, since it includes compressed alternatives generated
 each release.
+
+== Example
+
+  describe 'ShoppingCart'
+    before_each
+      cart = new ShoppingCart
+    end
+    
+    describe 'addProducts'
+      it 'should add several products'
+        cart.addProduct('cookie')
+        cart.addProduct('icecream')
+        cart.should.have 2, 'products'
+      end
+    end
+  
+    describe 'checkout'
+      it 'should throw an error when checking out with no products'
+        -{ cart.clear().checkout() }.should.throw_error EmptyCart
+      end
+    end
+  end
+
+== Grammar-less Example
+
+JSpec's grammar is optional, you may also use the equivalent grammar-less
+alternative below using pure JavaScript:
+
+  JSpec.describe('ShoppingCart', function(){
+    before_each(function{
+      cart = new ShoppingCart
+    })
+
+    describe('addProducts', function(){
+      it ('should add several products', function(){
+        cart.addProducts('cookie')
+        cart.addProducts('icecream')
+        expect(cart).to(have, 2, 'products')
+      })
+    })
+
+    describe('checkout', function(){
+      it ('should throw an error when checking out with no products', function(){
+        expect(function(){ cart.clear().checkout() }).to(throw_error, EmptyCart)
+      })
+    })
+  }) 
 
 == Options
 
