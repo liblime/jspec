@@ -219,10 +219,9 @@ scope, they will both run, but this can help keep your specs readable.
 Custom contexts can be applied to supply helper
 methods or properties to all subsequent bodies (other hooks, or specs).
 
-In most cases the default context will suffice, in combination with the
-'this' keyword. Keep in mind that when replacing the default context
-you will loose functionality provided by it, unless you manually merge it
-into your custom context.
+Keep in mind that when replacing the default context you will loose 
+functionality provided by it, unless you manually merge it with your 
+custom context.
 
 To reset the context simply assign null to obtain the original context.
 
@@ -236,7 +235,7 @@ To reset the context simply assign null to obtain the original context.
   end
 
   it 'will work ;)'
-    this.foo.should_equal 'bar'
+    foo.should_equal 'bar'
   end
   ...
 
@@ -288,50 +287,6 @@ These are equivalent:
 The following expands to the array of [1,2,3,4,5]
 
   n.should.be_within 1..5
-
-=== This Literal
-
-Commonly throughout using JSpec you will often need to do things like the following,
-while referencing 'this.cart' throughout your specs:
-
-  before
-    this.cart = new ShoppingCart
-  end
-
-Thanks to the pre-processor we can simply use the terse alternative below:
-
-  ...
-  before
-    .cart = new ShoppingCart
-  end
-
-  it '...'
-    .cart.should.have 4, 'products'
-  end
-  ...
-
-Alternatively you may utilize literal javascript outside of the closures:
-
-  ...
-  cart = new ShoppingCart
-
-  it '...'
-    cart.should.have 4, 'products'
-  end
-  ...
-
-Another option is to declare a variable outside of the spec closures:
-
-  var cart
-
-  before
-    cart = new ShoppingCart
-  end
-
-  it '...'
-    cart.should.have 4, 'products'
-  end
-  ...
 
 == Formatters
 
