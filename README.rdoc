@@ -189,7 +189,13 @@ of times, with x arguments, returning x value. For example:
   person.getPets()       // This will fail because we asked an instance of String
 
 This is a useful mechanism for testing the behavior of your object, as well as
-how other methods may interact with it. For more examples view spec/spec.matchers.js
+how other methods may interact with it. Below is another example:
+
+  array = ['foo', 'bar']
+  array.should.receive('toString').and_return('foo,bar')
+  'array: ' + array // This line causes the spec to pass due to calling toString()
+
+For more examples view spec/spec.matchers.js
 
 == Helpers
 

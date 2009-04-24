@@ -367,6 +367,12 @@ describe 'Matchers'
       personWithPets.should.receive('addPets').with_args(an_instance_of(String), an_instance_of(String)).and_return(an_instance_of(Array))
       personWithPets.addPets('suki', 'max')
     end
+    
+    it 'should pass when checking for method calls to core prototypes'
+      array = ['foo', 'bar']
+      array.should.receive('toString').and_return('foo,bar')
+      'array: ' + array
+    end
   end
   
 end
