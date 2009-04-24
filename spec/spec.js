@@ -78,6 +78,8 @@ describe 'Shared Behaviors'
   end
   
   describe 'Administrator'
+    should_behave_like('User')
+    
     before
       Admin = function(name) { this.name = name }
       Admin.prototype.may = function(perm){ return true }
