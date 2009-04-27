@@ -1,5 +1,27 @@
 
 describe 'Shared Behaviors'
+  describe 'findSuite'
+    it 'should find a suite by full description'
+      JSpec.findSuite('Shared Behaviors User', JSpec.suites).should.be_a JSpec.Suite
+    end
+    
+    it 'should find a suite by nested full description'
+      JSpec.findSuite('Shared Behaviors User Administrator Super Administrator', JSpec.suites).should.be_a JSpec.Suite
+    end
+    
+    it 'should find a suite by name'
+      JSpec.findSuite('User', JSpec.suites).should.be_a JSpec.Suite
+    end
+    
+    it 'should traverse until a match is found'
+      JSpec.findSuite('Super Administrator', JSpec.suites).should.be_a JSpec.Suite
+    end
+    
+    it 'should return null when not found'
+      JSpec.findSuite('Rawr', JSpec.suites).should.be_null
+    end
+  end
+
   describe 'User'
     before
       User = function(name) { this.name = name }
@@ -29,7 +51,7 @@ describe 'Shared Behaviors'
       
       before
         SuperAdmin = function(name) { this.name = name }
-        Admin.prototype.may = function(perm){ return true }
+        SuperAdmin.prototype.may = function(perm){ return true }
         user = new SuperAdmin('tj')
       end
     end
