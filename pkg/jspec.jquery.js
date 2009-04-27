@@ -15,8 +15,7 @@
 
   JSpec.defaultContext.element = jQuery
   JSpec.defaultContext.elements = jQuery
-  JSpec.defaultContext.defaultSandbox = JSpec.defaultContext.sandbox
-  JSpec.defaultContext.sandbox = function() { return jQuery(JSpec.defaultContext.defaultSandbox()) }
+  JSpec.defaultContext.sandbox = function() { return jQuery('<div class="sandbox"></div>') }
 
   // --- Matchers
 
@@ -35,9 +34,9 @@
     have_class    : "jQuery(actual).hasClass(expected)",
     
     have_classes : function(actual) {
-      for (i = 1; i < arguments.length; i++)
-        if (!jQuery(actual).hasClass(arguments[i])) return false
-      return true
+      return !JSpec.any(JSpec.argumentsToArray(arguments, 1), function(arg){
+        return !JSpec.does(actual, 'have_class', arg)
+      })
     },
     
     have_attr : function(actual, attr, value) {

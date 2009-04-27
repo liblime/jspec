@@ -23,6 +23,12 @@ body.jspec {
   height: 15px;
   background: url(images/sprites.bg.png) bottom left no-repeat;
 }
+#jspec .loading {
+  margin-top: -45px;
+  width: 1008px;
+  height: 80px;
+  background: url(images/loading.gif) 50% 50% no-repeat;
+}
 #jspec-title {
   position: relative;
   top: 35px;
@@ -75,6 +81,16 @@ body.jspec {
   padding: 8px;
   text-indent: 30px;
   color: #7B8D9B;
+}
+#jspec-report tr.body {
+  display: none;
+}
+#jspec-report tr.body pre {
+  margin: 0;
+  padding: 0 0 5px 25px;
+}
+#jspec-report tr:not(.body):hover + tr.body {
+  display: block;
 }
 #jspec-report tr td:first-child em {
   font-style: normal;

@@ -28,7 +28,7 @@ and much more.
 * Proxy or 'Spy' assertions 
 * Shared behaviors
 * Profiling
-* Tiny (15 kb compressed, 1000-ish LOC)
+* Tiny (15 kb compressed, 1600-ish LOC)
 
 == Installation
 
