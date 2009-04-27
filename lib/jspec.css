@@ -23,6 +23,11 @@ body.jspec {
   height: 15px;
   background: url(images/sprites.bg.png) bottom left no-repeat;
 }
+#jspec .loading {
+  width: 1008px;
+  height: 80px;
+  background: url(images/loading.gif) 50% 50% no-repeat;
+}
 #jspec-title {
   position: relative;
   top: 35px;
@@ -70,6 +75,7 @@ body.jspec {
 #jspec-report table {
   font-size: 11px;
   border-collapse: collapse;
+  background: url(images/loading.gif) 50% 50% no-repeat;
 }
 #jspec-report td {
   padding: 8px;
