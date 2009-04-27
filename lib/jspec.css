@@ -24,6 +24,7 @@ body.jspec {
   background: url(images/sprites.bg.png) bottom left no-repeat;
 }
 #jspec .loading {
+  margin-top: -45px;
   width: 1008px;
   height: 80px;
   background: url(images/loading.gif) 50% 50% no-repeat;
