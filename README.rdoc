@@ -26,6 +26,7 @@ and much more.
 * Great looking default DOM theme
 * `jspec` command-line utility for auto-running specs, and initializing project templates
 * Proxy or 'Spy' assertions 
+* Shared behaviors
 * Profiling
 * Tiny (15 kb compressed, 1000-ish LOC)
 
@@ -209,6 +210,38 @@ For more examples view spec/spec.matchers.js
   - sandbox     used to generate new DOM sandbox, using jQuery object
   - element     same as invoking jQuery, just reads better and no need to worry about $ collisions
   - elements    alias of element
+
+== Shared Behaviors
+
+JSpec's support for shared behaviors allows multiple suites or describe blocks to share
+common functionality. For example an Admin, would inherit all specs of User:
+
+  describe 'User'
+    before
+      User = function(name) { this.name = name }
+      user = new User('joe')
+    end
+    
+    it 'should have a name'
+      user.should.have_property 'name'
+    end
+    
+    describe 'Administrator'
+      should_behave_like('User')
+  
+      before
+        Admin = function(name) { this.name = name }
+        Admin.prototype.may = function(perm){ return true }
+        user = new Admin('tj')
+      end
+  
+      it 'should have access to all permissions'
+        user.may('edit pages').should.be_true
+      end
+    end
+  end
+
+NOTE: both User and Administrator's before hooks implement the 'user' variable
 
 == Hooks
 
