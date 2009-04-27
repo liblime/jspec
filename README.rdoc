@@ -203,7 +203,7 @@ For more examples view spec/spec.matchers.js
 
   * Core
 
-  - sandbox     used to generate new DOM sandbox
+  - an_instance_of   used in conjunction with the 'receive' matcher
                 
   * jQuery      
                 

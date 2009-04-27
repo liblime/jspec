@@ -1,17 +1,13 @@
 
 describe 'jQuery'
-  describe 'helpers'
+  describe 'sandbox'
     before
       dom = sandbox()
     end
-
-    it 'should add elements to a sandbox'
-      dom.prepend('<em>test</em>').should.have_text 'test'
-    end
-
-    it 'should retain visibility within a sandbox'
-      dom.children('em').hide().should.be_hidden
-      dom.children('em').show().should.be_visible
+    
+    it 'should provide an empty DOM sandbox'
+      dom.prepend('<em>test</em>')
+      dom.should.have_text 'test'
     end
   end
   
