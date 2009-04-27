@@ -72,10 +72,6 @@ describe 'Grammar'
       true.should.be_true
     end
     
-    it 'should still allow literal javascript outside of blocks'
-      n.should.eql 10
-    end
-    
     describe 'nested again'
       it 'should still work'
         true.should.be_true
@@ -161,6 +157,20 @@ describe 'Grammar'
         
         it 'should continue hits, while cascading properly'
           hits.should.eql ['before_each', 'after_each', 'before_each', 'after_each', 'before_each', 'after_each', 'before_each', 'after_each', 'before_each', 'before_each']
+        end
+      end
+      
+      describe 'with multiple hooks'
+        before_each
+          hits = []
+        end
+        
+        before_each
+          hits.push('before_each')
+        end
+        
+        it 'should work'
+          hits.should.eql ['before_each']
         end
       end
     end
