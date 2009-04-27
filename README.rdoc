@@ -244,6 +244,19 @@ common functionality. For example an Admin, would inherit all specs of User:
 
 NOTE: both User and Administrator's before hooks implement the 'user' variable
 
+== Async Support Using wait()
+
+When using jQuery with JSpec all requests are switched to sync, allowing specs
+to run naturally, however when testing functionality using setTimeout, setInterval etc
+JSpec supplies the wait() utility to delay a spec from running:
+
+  it 'should wait for n milliseconds'
+    wait(2, 'seconds')
+    setTimeout(function(){
+      true.should.be true
+    }, 1500)
+  end
+
 == Hooks
 
 Currently the following hooks are supported, and may be utilized any number of times as they
