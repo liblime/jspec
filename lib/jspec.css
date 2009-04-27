@@ -75,7 +75,6 @@ body.jspec {
 #jspec-report table {
   font-size: 11px;
   border-collapse: collapse;
-  background: url(images/loading.gif) 50% 50% no-repeat;
 }
 #jspec-report td {
   padding: 8px;
