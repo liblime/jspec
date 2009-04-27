@@ -7,5 +7,6 @@ JSpec
 .exec('spec/spec.js')
 .exec('spec/spec.matchers.js')
 .exec('spec/spec.utils.js')
+.exec('spec/spec.shared-behaviors.js')
 .run({ formatter : JSpec.formatters.Terminal, failuresOnly : true })
 .report()
