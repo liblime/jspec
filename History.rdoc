@@ -1,4 +1,23 @@
 
+=== 2.0.0 / 2009-04-27
+
+* Added DOM loading indicator [#105]
+* Added wait() helper for additional async support
+* Added shared behavior support using should_behave_like('Another Suite')
+* Added CSS body toggling [#1]
+* Added receive matcher for Proxy Assertins
+* Added grammar-less support
+* Added an_instance_of() helper
+* Removed .this literal
+* Removed deprecated be_a_TYPE_input matchers
+
+* Added ProxyAssertion 
+* Added select() util
+* Added does() util for report-less assertions
+* Added find() util 
+* Added JSpec.contentsOf()
+* Added matchers to body evaluation [#90]
+
 === 1.1.7 / 2009-04-22
 
 * Removed trailing commas causing issues with IE (what a suprise ;) )
