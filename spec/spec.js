@@ -37,7 +37,7 @@ describe 'Negative specs'
     false.should.be_true
   end
   
-  it 'should fail with function body'
+  it 'should fail saying an error was throw'
     -{ throw 'foo' }.should.not.throw_error
   end
   
@@ -62,6 +62,16 @@ describe 'Negative specs'
     function Bar(){}
     Bar.prototype.toString = function(){ return 'Bar error: oh no' }
     -{ throw new Bar }.should.throw_error Foo
+  end
+  
+  it 'should fail with function body string'
+    -{ 'foo' }.should.not.include 'foo'
+  end
+  
+  it 'should fail with constructor name'
+    function Foo(){ this.toString = function(){ return '<Foo>' }}
+    foo = new Foo
+    foo.should.not.be_an_instance_of Foo
   end
   
   it 'should fail with message of first failure'
