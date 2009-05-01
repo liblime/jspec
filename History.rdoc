@@ -1,4 +1,9 @@
 
+=== 2.0.1 / 2009-05-01
+
+* Added better failure messages for throw_error matcher
+* Renamed print() to puts() [#108]
+
 === 2.0.0 / 2009-04-27
 
 * Added DOM loading indicator [#105]
