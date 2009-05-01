@@ -41,6 +41,29 @@ describe 'Negative specs'
     -{ throw 'foo' }.should.not.throw_error
   end
   
+  it 'should fail saying which error has been thrown'
+    -{ throw 'foo' }.should.throw_error 'bar'
+  end
+  
+  it 'should fail saying no error was thrown'
+    -{ }.should.throw_error 'foo'
+  end
+  
+  it 'should fail saying no error matching was thrown'
+    -{ throw 'bar' }.should.throw_error(/foo/)
+  end
+  
+  it 'should fail saying no error matching foo should be thrown'
+    -{ throw 'foo' }.should.not.throw_error(/foo/)
+  end
+  
+  it 'should fail with constructor name'
+    function Foo(){}
+    function Bar(){}
+    Bar.prototype.toString = function(){ return 'Bar error: oh no' }
+    -{ throw new Bar }.should.throw_error Foo
+  end
+  
   it 'should fail with message of first failure'
     true.should.be_true
     'bar'.should.match(/foo/gm)
