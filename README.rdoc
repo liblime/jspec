@@ -43,7 +43,8 @@ At which point you may:
   $ jspec init myproject
 
 JSpec scripts should NOT be referenced via the <script> tag, they should be
-loaded using the exec method. Below is an example:
+loaded using the exec method (unless you are using the grammar-less alternative).
+Below is an example:
 
   ...
   <script>
