@@ -68,8 +68,12 @@ describe 'Matchers'
   
   describe 'be_null'
     it 'should check if a value is null'
+      a = 0
+      b = null
       null.should.be_null
       0.should.not.be_null
+      a.should.not.be_null
+      b.should.be_null
     end
   end
   
