@@ -1,4 +1,11 @@
 
+=== 2.0.2 / 2009-05-11
+
+* Added rails integration link http://github.com/bhauman/jspec-rails
+* Changed; puts() now displays constructor name when available
+* Fixed Terminal output which was not displaying due to a recent commit
+* fixed IE bug : DOM elements don't have valueOf() method
+
 === 2.0.1 / 2009-05-01
 
 * Added better failure messages for throw_error matcher

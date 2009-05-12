@@ -10,7 +10,7 @@ require 'fileutils'
 RHINO = 'java org.mozilla.javascript.tools.shell.Main'
 
 program :name, 'JSpec'
-program :version, '2.0.1'
+program :version, '2.0.2'
 program :description, 'JavaScript BDD Testing Framework'
 default_command :bind
 
