@@ -74,6 +74,7 @@ body.jspec {
   color: #FA1616;
 }
 #jspec-report table {
+  width: 100%;
   font-size: 11px;
   border-collapse: collapse;
 }
