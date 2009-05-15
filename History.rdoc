@@ -1,4 +1,9 @@
 
+=== 2.0.3 / 2009-05-15
+
+* Table should span full width
+  (Very week release I know, but improperly styled things bug me :) )
+
 === 2.0.2 / 2009-05-11
 
 * Added rails integration link http://github.com/bhauman/jspec-rails
