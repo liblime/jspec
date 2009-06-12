@@ -1,4 +1,12 @@
 
+=== 2.1.0 / 2009-06-12
+
+* Changed `jspec init` to utilize a single template
+  which allows for all three suite running capabilities
+  within a single template. Now after initializing a 
+  project you may `jspec run --server`, `jspec run --rhino`
+  etc at any time without modifications.
+
 === 2.0.3 / 2009-05-15
 
 * Table should span full width
