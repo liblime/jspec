@@ -439,7 +439,7 @@ the command following it:
   .report()
 
 Initialize project with:
-  $ jspec init myproject --template rhino
+  $ jspec init myproject 
 
 Run with:
   $ jspec run --rhino
@@ -456,7 +456,7 @@ and auto-testing each browser, however results are centralized to the terminal,
 removing the need to manually view each browser's output.
 
 Initialize project with:
-  $ jspec init myproject --template server
+  $ jspec init myproject 
 
 Run with:
   $ jspec run --server
