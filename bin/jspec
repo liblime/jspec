@@ -29,7 +29,8 @@ command :init do |c|
     template = File.join JSPEC_ROOT, 'templates', 'default', '.'
     FileUtils.mkdir_p dest
     FileUtils.cp_r template, dest
-    %w( spec.dom.html spec.rhino.js ).each do |path|
+    %w( spec/spec.dom.html spec/spec.rhino.js ).each do |path|
+      path = File.join dest, path
       contents = File.read(path).gsub 'JSPEC_ROOT', JSPEC_ROOT
       File.open(path, 'w') { |file| file.write contents }
     end
@@ -40,10 +41,12 @@ end
 command :update do |c|
   c.syntax = 'jspec update [path ...]'
   c.summary = 'Update JSpec releases'
-  c.description = 'Update JSpec release in [path], this will allow you to utilize 
-    the latest JSpec features.'
+  c.description = 'Update JSpec release in [paths], this will allow you to utilize 
+    the latest JSpec features. Execute from JSpec project root without [paths] to
+    update the default template spec files.'
   c.when_called do |args, options|
-    %w( spec.dom.html spec.rhino.js ).each do |path|
+    paths = args.empty? ? %w( spec/spec.dom.html spec/spec.rhino.js ) : args
+    paths.each do |path|
       next unless File.exists? path
       contents = File.read(path).gsub /visionmedia-jspec-(\d+\.\d+\.\d+)/, "visionmedia-jspec-#{program(:version)}"
       File.open(path, 'r+'){ |file| file.write contents } 
