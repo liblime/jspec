@@ -18,35 +18,20 @@ command :init do |c|
   c.syntax = 'jspec init [dest]'
   c.summary = 'Initialize a JSpec project template'
   c.description = 'Initialize a JSpec project template. Defaults to the current directory
-    when [dest] is not specified. Currently three templates are available:
-    
-    "default" : runs specs in browser(s) using the DOM formatter.
-    "rhino"   : runs specs with Rhino using the Terminal formatter.
-    "server"  : runs specs using a Ruby server/client solution which
-                starts each browser and reports back to the terminal.'
+    when [dest] is not specified. The template includes several files for 
+    running via Rhino, DOM, and the JSpec Rack server.'
   c.example 'Create a directory foo, initialized with a jspec template', 'jspec init foo'
-  c.example 'Initialize a rhino based project in the current directory', 'jspec init --template rhino'
-  c.example 'Initialize a server based project in foo', 'jspec init foo --template server'
-  c.option '-T', '--template name', 'Template to use. Valid choices are default, rhino, and server.'
   c.when_called do |args, options|
     dest = args.shift || '.'
-    options.default :template => 'default'
     unless Dir[dest + '/*'].empty?
       abort unless agree "'#{dest}' is not empty; continue? "
     end
-    template = File.join JSPEC_ROOT, 'templates', options.template, '.'
-    abort "template #{options.template} does not exist" unless File.exists? template
+    template = File.join JSPEC_ROOT, 'templates', 'default', '.'
     FileUtils.mkdir_p dest
     FileUtils.cp_r template, dest
-    path = case options.template
-      when 'default' ; 'spec.html'
-      when 'rhino'   ; 'spec.js'
-      else
-      end
-    if path
-      spec = File.join dest, 'spec', path
-      contents = File.read(spec).gsub 'JSPEC_ROOT', JSPEC_ROOT
-      File.open(spec, 'w') { |file| file.write contents }
+    %w( spec.dom.html spec.rhino.js ).each do |path|
+      contents = File.read(path).gsub 'JSPEC_ROOT', JSPEC_ROOT
+      File.open(path, 'w') { |file| file.write contents }
     end
     say "Template initialized at '#{dest}'"
   end
@@ -55,14 +40,10 @@ end
 command :update do |c|
   c.syntax = 'jspec update [path ...]'
   c.summary = 'Update JSpec releases'
-  c.description = 'Update JSpec release in [paths], this will allow you to utilize the latest
-    JSpec features. If you have suites running at a path other than the regular 
-    spec/spec.html simply pass them as arguments to this sub-command.
-    
-    This is only needed when using the default, or rhino project templates.'
+  c.description = 'Update JSpec release in [path], this will allow you to utilize 
+    the latest JSpec features.'
   c.when_called do |args, options|
-    args = %w( spec/spec.html ) if args.empty?
-    args.each do |path|
+    %w( spec.dom.html spec.rhino.js ).each do |path|
       next unless File.exists? path
       contents = File.read(path).gsub /visionmedia-jspec-(\d+\.\d+\.\d+)/, "visionmedia-jspec-#{program(:version)}"
       File.open(path, 'r+'){ |file| file.write contents } 
@@ -101,13 +82,13 @@ command :run do |c|
       
       # Actions
       if options.rhino
-        spec = args.shift || 'spec/spec.js'
+        spec = args.shift || 'spec/spec.rhino.js'
         action = lambda { rhino spec }
       elsif options.server
-        spec = args.shift || 'spec/spec.html'
+        spec = args.shift || 'spec/spec.server.html'
         action = lambda { start_server options, spec }
       else
-        spec = args.shift || 'spec/spec.html'
+        spec = args.shift || 'spec/spec.dom.html'
         action = Bind::Actions::RefreshBrowsers.new spec, *options.browsers
       end
       
