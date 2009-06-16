@@ -25,7 +25,7 @@ module JSpec
         'close'
       when /jspec/
         type = 'application/javascript'
-        File.read File.join(JSPEC_ROOT, 'lib', request.path_info)
+        File.read File.join(JSPEC_ROOT, 'lib', File.basename(request.path_info))
       when /\.js/
         type = 'application/javascript'
         File.read File.join(root, request.path_info)  
@@ -74,7 +74,7 @@ module JSpec
     
     def self.start options, spec
       app = Rack::Builder.new do
-        server = JSpec::Server.new :browsers => options.browsers, :root => File.dirname(spec)
+        server = JSpec::Server.new :browsers => options.browsers, :root => '.'
         server.when_finished { exit }
         run server
       end
@@ -92,7 +92,7 @@ module JSpec
     
     def self.run_browsers browsers, spec
       browsers.each do |name|
-        browser(name).open "http://localhost:4444/#{File.basename(spec)}"
+        browser(name).open "http://localhost:4444/#{spec}"
       end
     end
     

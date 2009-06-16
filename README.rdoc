@@ -29,7 +29,7 @@ and much more.
 * Shared behaviors
 * Profiling
 * Rails Integration (http://github.com/bhauman/jspec-rails)
-* Tiny (15 kb compressed, 1600-ish LOC)
+* Tiny (15 kb compressed, 1300-ish LOC)
 
 == Installation
 
