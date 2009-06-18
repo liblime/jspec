@@ -18,14 +18,14 @@ server/server.rb
 spec/async
 spec/env.js
 spec/jquery-1.3.1.js
-spec/server.html
+spec/spec.dom.html
 spec/spec.grammar-less.js
 spec/spec.grammar.js
-spec/spec.html
 spec/spec.jquery.js
 spec/spec.js
 spec/spec.matchers.js
 spec/spec.rhino.js
+spec/spec.server.html
 spec/spec.shared-behaviors.js
 spec/spec.utils.js
 templates/default/History.rdoc

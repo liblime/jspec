@@ -1,4 +1,13 @@
 
+=== 2.2.0 / 2009-06-18
+
+* Added link to JSpec in JSMag June 2009
+* Added Github gem source location to docs
+* Changed throw_error matcher; now accepts two arguments
+* Changed --server; serves from current working directory. 
+  This allows files in ../lib/* to be served rather than ./spec/* only.
+* Refactored argumentsToArray()
+
 === 2.1.0 / 2009-06-12
 
 * Changed `jspec init` to utilize a single template
