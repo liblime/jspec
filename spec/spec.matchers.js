@@ -203,6 +203,7 @@ describe 'Matchers'
       -{ throw new TypeError('oh no!') }.should.throw_error(TypeError, 'oh no!')
       -{ throw new TypeError('oh no!') }.should.throw_error(TypeError, /oh no/)
       -{ throw new TypeError('oh no!') }.should.not.throw_error(TypeError, /rawr/)
+      -{ throw new TypeError('oh no!') }.should.throw_error(Error, 'sd no!')
       -{ throw new TypeError('oh no!') }.should.not.throw_error(Error, 'oh no!')
     end
   end
