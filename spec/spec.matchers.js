@@ -182,8 +182,8 @@ describe 'Matchers'
 
   describe 'throw_error'
     it 'should check if an error is thrown'
-      -{ throw 'error' }.should_throw_error
-      -{ return 'test' }.should_not_throw_error
+      -{ throw 'error' }.should.throw_error
+      -{ return 'test' }.should.not.throw_error
     end
     
     it 'should check if an error with a specific message is thrown'
@@ -197,6 +197,15 @@ describe 'Matchers'
       -{ throw new Error('foo') }.should.throw_error(Error)
       -{ throw new TypeError('foo') }.should.throw_error(TypeError)
       -{ throw 'foo' }.should.not.throw_error(Error)
+    end
+    
+    it 'should check if an error with a specific constructor and message is thrown'
+      -{ throw new TypeError('oh no!') }.should.throw_error(TypeError, 'oh no!')
+      -{ throw new TypeError('oh no!') }.should.not.throw_error(TypeError, 'foo bar')
+      -{ throw new TypeError('oh no!') }.should.throw_error(TypeError, /oh no/)
+      -{ throw new TypeError('oh no!') }.should.not.throw_error(TypeError, /foo bar/)
+      -{ throw new TypeError('oh no!') }.should.not.throw_error(Error, 'oh no!')
+      -{ throw new TypeError('oh no!') }.should.not.throw_error(Error, 'foo bar')
     end
   end
   
