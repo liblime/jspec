@@ -201,10 +201,11 @@ describe 'Matchers'
     
     it 'should check if an error with a specific constructor and message is thrown'
       -{ throw new TypeError('oh no!') }.should.throw_error(TypeError, 'oh no!')
+      -{ throw new TypeError('oh no!') }.should.not.throw_error(TypeError, 'foo bar')
       -{ throw new TypeError('oh no!') }.should.throw_error(TypeError, /oh no/)
-      -{ throw new TypeError('oh no!') }.should.not.throw_error(TypeError, /rawr/)
-      -{ throw new TypeError('oh no!') }.should.throw_error(Error, 'sd no!')
+      -{ throw new TypeError('oh no!') }.should.not.throw_error(TypeError, /foo bar/)
       -{ throw new TypeError('oh no!') }.should.not.throw_error(Error, 'oh no!')
+      -{ throw new TypeError('oh no!') }.should.not.throw_error(Error, 'foo bar')
     end
   end
   
