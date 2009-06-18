@@ -57,6 +57,14 @@ describe 'Negative specs'
     -{ throw 'foo' }.should.not.throw_error(/foo/)
   end
   
+  it 'should fail saying constructors'
+    -{ throw new TypeError('oh no') }.should.not.throw_error(Error)
+  end
+  
+  it 'should should fail saying multiple arg messages'
+    -{ throw new TypeError('oh no') }.should.not.throw_error(TypeError, /foo/)
+  end
+  
   it 'should fail with constructor name'
     function Foo(){}
     function Bar(){}
