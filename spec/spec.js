@@ -58,11 +58,11 @@ describe 'Negative specs'
   end
   
   it 'should fail saying constructors'
-    -{ throw new TypeError('oh no') }.should.not.throw_error(Error)
+    -{ throw new TypeError('oh no') }.should.throw_error(Error)
   end
   
   it 'should should fail saying multiple arg messages'
-    -{ throw new TypeError('oh no') }.should.not.throw_error(TypeError, /foo/)
+    -{ throw new TypeError('oh no') }.should.throw_error(TypeError, /foo/)
   end
   
   it 'should fail with constructor name'
