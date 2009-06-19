@@ -196,7 +196,8 @@ describe 'Matchers'
     it 'should check if an error of a specific constructor is thrown'
       -{ throw new Error('foo') }.should.throw_error(Error)
       -{ throw new TypeError('foo') }.should.throw_error(TypeError)
-      -{ throw 'foo' }.should.not.throw_error(Error)
+      -{ throw 'foo' }.should.throw_error Error
+      -{ throw 'foo' }.should.not.throw_error TypeError
     end
     
     it 'should check if an error with a specific constructor and message is thrown'
