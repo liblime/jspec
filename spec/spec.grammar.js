@@ -5,7 +5,7 @@ describe 'Grammar'
     true.should.be_true
   end
   
-	it 'should allow tabs'
+	it	'should allow tabs'
     
   end
 
