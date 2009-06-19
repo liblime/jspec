@@ -7,6 +7,7 @@ describe 'Grammar'
 
 	it 	'should allow tabs'	
 	  	true.should.eql	true
+	  	1..5.should.include 1,  3,  4
 			end	
   	
   n = 10
