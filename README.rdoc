@@ -461,6 +461,11 @@ Initialize project with:
 
 Run with:
   $ jspec run --server
+  
+== Known Issues
+
+* Tabs may cause a parse error. To prevent this use 'soft tabs' (setting in your IDE/Editor)
+  or use JSpec's grammar-less alternative (mentioned above).
 
 == More Information
 
