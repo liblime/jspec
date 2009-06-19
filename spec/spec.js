@@ -61,7 +61,7 @@ describe 'Negative specs'
     -{ throw new TypeError('oh no') }.should.throw_error(Error)
   end
   
-  it 'should should fail saying multiple arg messages'
+  it 'should fail saying multiple arg messages'
     -{ throw new TypeError('oh no') }.should.throw_error(TypeError, /foo/)
   end
   
