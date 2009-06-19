@@ -135,4 +135,10 @@ describe 'Utility'
       JSpec.currentSpec.assertions.should.have_length 0
     end
   end
+  
+  describe 'contentsOf'
+    it 'should return a function body'
+      JSpec.contentsOf(-{ return 'foo' }).should.include 'return', 'foo'
+    end
+  end
 end
