@@ -4,12 +4,11 @@ describe 'Grammar'
   it 'should allow "it" spec literal'
     true.should.be_true
   end
+  
+	it 'should allow tabs'
+    
+  end
 
-	it 	'should allow tabs'	
-	  	true.should.eql	true
-	  	1..5.should.include 1,  3,  4
-			end	
-  	
   n = 10
   it 'should allow literal javascript outside of blocks'
     n.should.eql 10
