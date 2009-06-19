@@ -5,10 +5,10 @@ describe 'Grammar'
     true.should.be_true
   end
 
-	it 	'should allow tabs'
-	  true.should.eql	true
-	end	
-  
+	it 	'should allow tabs'	
+	  	true.should.eql	true
+			end	
+  	
   n = 10
   it 'should allow literal javascript outside of blocks'
     n.should.eql 10
