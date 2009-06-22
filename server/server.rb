@@ -25,13 +25,10 @@ module JSpec
         'close'
       when /jspec/
         type = 'application/javascript'
-        File.read File.join(JSPEC_ROOT, 'lib', File.basename(request.path_info))
-      when /\.js/
-        type = 'application/javascript'
-        File.read File.join(root, request.path_info)  
-      else  
-        type = 'text/html'
-        File.read File.join(root, request.path_info) rescue ''
+        File.read File.join(JSPEC_ROOT, 'lib', File.basename(path))
+      else
+        type = Rack::Mime.mime_type File.extname(path)
+        File.read File.join(root, path) rescue ''
       end
       [200, { 'Content-Type' => type, 'Content-Length' => body.length.to_s }, body]
     end
