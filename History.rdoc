@@ -1,4 +1,19 @@
 
+=== 2.2.1 / 2009-06-22
+
+* Changed; reportToServer() now accepts url arg
+
+* Fixed be_empty matcher; now considers {} empty, however { foo : bar } is not
+* Fixed throw_error error messages for Opera
+* Fixed throw_error in Rhino (Opera is broken now)
+* Fixed stray console.log() call
+
+* Fixed some tab issues.
+  When using the JSpec grammar option you should
+  use the 'soft tabs' feature of your IDE or text editor.
+  A patch for tabs is pending and should be available soon,
+  however be aware that a 'parse error' may occur otherwise.
+
 === 2.2.0 / 2009-06-18
 
 * Added link to JSpec in JSMag June 2009
