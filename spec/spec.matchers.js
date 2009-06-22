@@ -64,6 +64,10 @@ describe 'Matchers'
       [].should.be_empty
       { length : 0 }.should.be_empty
       {}.should.be_empty
+      'cookies'.should.not.be_empty
+      [0].should.not.be_empty
+      { length : 1 }.should.not.be_empty
+      { foo : 'bar' }.should.not.be_empty
     end
   end
   
