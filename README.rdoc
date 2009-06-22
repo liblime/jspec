@@ -452,6 +452,9 @@ Run with:
 
 * Tabs may cause a parse error. To prevent this use 'soft tabs' (setting in your IDE/Editor)
   or use JSpec's grammar-less alternative (mentioned above).
+  
+* The negation of the should_receive matcher is currently not available. (ex:
+  foo.should.not.receive('toString()') will not work)
 
 == More Information
 
