@@ -58,11 +58,12 @@ describe 'Matchers'
   end
   
   describe 'be_empty'
-    it 'should consider any object responding to a length of 0 to be empty'
+    it 'should consider any object with zero length to be empty'
       ''.should.be_empty
       ' '.should.not.be_empty
       [].should.be_empty
       { length : 0 }.should.be_empty
+      {}.should.be_empty
     end
   end
   
