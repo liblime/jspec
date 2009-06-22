@@ -5,13 +5,8 @@ describe 'Grammar'
     true.should.be_true
   end
   
-	// describe	'tabs'
-	// 		it 	'should allow tabs within it block'	
-	// 		true.should.be(true)
-	// 	end	
-	// end		
-
   n = 10
+  
   it 'should allow literal javascript outside of blocks'
     n.should.eql 10
   end
