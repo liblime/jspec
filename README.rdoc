@@ -134,7 +134,7 @@ JSpec.options.failuresOnly = true, and ?failuresOnly=1 will both work.
   - be_at_least        >=
   - be_at_most         <=
   - be_null            == null
-  - be_empty           length of 0
+  - be_empty           length < 0 or {}
   - be_true            == true
   - be_false           == false
   - be_type            be type of x
