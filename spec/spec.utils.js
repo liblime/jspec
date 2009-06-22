@@ -1,21 +1,5 @@
 
 describe 'Utility'
-  describe 'wait'
-    it 'should wait for n milliseconds'
-      wait(2000)
-      setTimeout(function(){
-        true.should.be true
-      }, 1500)
-    end
-    
-    it 'should wait for n seconds'
-      wait(3, 'seconds')
-      setTimeout(function(){
-        true.should.be true
-      }, 2500)
-    end
-  end
-  
   describe 'query'
     it 'should return a pairs value'
       query('suite', '?suite=Positive%20specs').should.equal 'Positive specs'

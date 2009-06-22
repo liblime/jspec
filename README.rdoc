@@ -206,7 +206,6 @@ For more examples view spec/spec.matchers.js
 
   * Core
 
-  - wait             delay execution of a spec for the duration set (async support)
   - an_instance_of   used in conjunction with the 'receive' matcher
                 
   * jQuery      
