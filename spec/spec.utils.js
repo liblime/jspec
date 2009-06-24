@@ -4,7 +4,7 @@ describe 'Utility'
     before_each
       object = {
         toString : function() {
-          return '<Object>'
+          return '<Im an object>'
         }
       }
       stub(object, 'toString').and_return('<No im not>')
@@ -16,6 +16,13 @@ describe 'Utility'
 
     it 'should store the old method'
       object.should.respond_to 'old toString'
+    end
+    
+    describe 'destub'
+      it 'should restore old methods'
+        destub(object, 'toString')
+        object.should.receive('toString').and_return('<Im an object>')
+      end
     end
   end
   
