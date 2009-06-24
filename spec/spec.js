@@ -120,25 +120,6 @@ describe 'Contexts'
   end
 end
 
-describe 'Stubs'
-  before_each
-    object = {
-      toString : function() {
-        return '<Object>'
-      }
-    }
-    stub(object, 'toString').and_return('<No im not>')
-  end
-  
-  it 'should stub :)'
-    object.should.receive('toString').and_return('<No im not>')
-  end
-  
-  it 'should store the old method'
-    object.should.respond_to 'old toString'
-  end
-end
-
 describe 'Misc'
   it 'requires implementation'
   end
