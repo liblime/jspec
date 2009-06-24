@@ -2,26 +2,41 @@
 describe 'Utility'
   describe 'stub'
     before_each
+      Object.prototype.stubby = function() {
+        return 'Not stubbed'
+      }
       object = {
         toString : function() {
           return '<Im an object>'
         }
       }
+      stub(object, 'stubby').and_return('Im stubbed')
       stub(object, 'toString').and_return('<No im not>')
     end
 
     it 'should stub :)'
-      object.should.receive('toString').and_return('<No im not>')
+      object.stubby().should.eql 'Im stubbed'
+      object.toString().should.eql '<No im not>'
     end
 
     it 'should store the old method'
+      object.should.respond_to 'stubbed stubby'
       object.should.respond_to 'stubbed toString'
     end
     
     describe 'destub'
       it 'should restore old methods'
         destub(object, 'toString')
-        object.should.receive('toString').and_return('<Im an object>')
+        destub(object, 'stubby')
+        object.toString().should.eql '<Im an object>'
+        object.stubby().should.eql 'Not stubbed'
+      end
+      
+      it 'should restore prototypal methods'
+        Object.prototype.stubby = function() {
+          return 'Oh no im new'
+        }
+        object.stubby().should.eql 'Oh no im new'
       end
     end
   end
