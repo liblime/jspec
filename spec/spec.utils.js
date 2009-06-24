@@ -15,7 +15,7 @@ describe 'Utility'
     end
 
     it 'should store the old method'
-      object.should.respond_to 'old toString'
+      object.should.respond_to 'stubbed toString'
     end
     
     describe 'destub'
