@@ -1,6 +1,6 @@
 
 describe 'jQuery'
-  describe 'sandbox'
+  describe 'sandbox()'
     before
       dom = sandbox()
     end
@@ -8,6 +8,13 @@ describe 'jQuery'
     it 'should provide an empty DOM sandbox'
       dom.prepend('<em>test</em>')
       dom.should.have_text 'test'
+    end
+  end
+  
+  describe 'element() / elements()'
+    it 'should alias jQuery'
+      element.should.be jQuery
+      elements.should.be jQuery
     end
   end
   
