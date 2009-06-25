@@ -1,6 +1,6 @@
 
 describe 'Utility'
-  describe 'stub'
+  describe 'stubbing'
     before_each
       Object.prototype.stubby = function() { return 'Not stubbed' }
       object = { toString : function() { return '<Im an object>' }}
@@ -8,9 +8,11 @@ describe 'Utility'
       stub(object, 'toString').and_return('<No im not>')
     end
 
-    it 'should stub :)'
-      object.stubby().should.eql 'Im stubbed'
-      object.toString().should.eql '<No im not>'
+    describe 'stub'
+      it 'should stub :)'
+        object.stubby().should.eql 'Im stubbed'
+        object.toString().should.eql '<No im not>'
+      end
     end
     
     describe 'destub'
