@@ -29,8 +29,17 @@ describe 'Utility'
         object.stubby().should.eql 'Oh no im new'
       end
       
-      it 'should with a single argument should destub all methods stubbed related to the object passed'
+      it 'should destub all methods stubbed related to the object passed when no method is given'
         destub(object)
+        object.toString().should.eql '<Im an object>'
+        object.stubby().should.eql 'Not stubbed'
+      end
+      
+      it 'should destub everything when no object is given'
+        foo = { bar : function(){ return 'baz' }}
+        stub(foo, 'bar').and_return('wrong!')
+        destub()
+        foo.bar().should.eql 'baz'
         object.toString().should.eql '<Im an object>'
         object.stubby().should.eql 'Not stubbed'
       end
