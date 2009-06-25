@@ -2,14 +2,8 @@
 describe 'Utility'
   describe 'stub'
     before_each
-      Object.prototype.stubby = function() {
-        return 'Not stubbed'
-      }
-      object = {
-        toString : function() {
-          return '<Im an object>'
-        }
-      }
+      Object.prototype.stubby = function() { return 'Not stubbed' }
+      object = { toString : function() { return '<Im an object>' }}
       stub(object, 'stubby').and_return('Im stubbed')
       stub(object, 'toString').and_return('<No im not>')
     end
@@ -33,9 +27,7 @@ describe 'Utility'
       end
       
       it 'should restore prototypal methods'
-        Object.prototype.stubby = function() {
-          return 'Oh no im new'
-        }
+        Object.prototype.stubby = function() { return 'Oh no im new' }
         object.stubby().should.eql 'Oh no im new'
       end
     end
