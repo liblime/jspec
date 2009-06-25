@@ -1,4 +1,10 @@
 
+=== 2.3.0 / 2009-06-25
+
+* Added stub()
+* Added destub()
+* Changed; Server responses utilize Rack::Mime now for arbitrary requests
+
 === 2.2.1 / 2009-06-22
 
 * Changed; reportToServer() now accepts url arg
