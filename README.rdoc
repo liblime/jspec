@@ -423,6 +423,24 @@ for you, how ever this can be explicitly defined:
       }
     }
   })
+  
+When defining matchers that are extremely similar in functionality, however
+require different names, you may use a prefixed list of words like below which
+defines be_disabled, be_selected, be_checked, and have_type, have_id, etc. Each
+function must return the matcher body which will be used.
+
+  JSpec.addMatchers({
+    'be disabled selected checked' : function(attr) {
+      return 'jQuery(actual).attr("' + attr + '")'
+    },
+
+    'have type id title alt href src sel rev name target' : function(attr) {
+      return function(actual, value) {
+        return value ? jQuery(actual).attr(attr) == value:
+                       jQuery(actual).attr(attr)
+      }
+    }
+  })
 
 == JSpec Command-line Utility
 
