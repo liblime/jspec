@@ -1,4 +1,10 @@
 
+=== 2.3.1 / 2009-06-25
+
+* Fixed; all stubs generated with stub() are restored
+  to their original methods after each 'it' block. See
+  README for details.
+
 === 2.3.0 / 2009-06-25
 
 * Added stub()
