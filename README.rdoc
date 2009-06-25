@@ -226,6 +226,12 @@ If you would like to whipe an object clear of stubs simply pass it
 to destub() without an additional method argument:
 
   destub(person)
+  
+Alternatively both these utility functions may be called as methods
+on any object when using the JSpec grammar:
+
+  someObject.stub('method').and_return('whatever')
+  // Converted to stub(someObject, 'method').and_return('whatever')
 
 == Helpers
 

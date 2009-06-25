@@ -13,6 +13,14 @@ describe 'Utility'
         object.stubby().should.eql 'Im stubbed'
         object.toString().should.eql '<No im not>'
       end
+      
+      it 'should allow being called as a core prototype method'
+        foo = { bar : function(){ return 'baz' }}
+        foo.stub('bar').and_return('something else')
+        foo.bar().should.eql 'something else'
+        foo.destub()
+        foo.bar().should.eql 'baz'
+      end
     end
     
     describe 'destub()'
