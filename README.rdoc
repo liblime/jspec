@@ -448,9 +448,9 @@ JSpec provides a hook architecture for extending or analyzing various
 points in its execution, through the use of 'Modules'. For a Module
 example view lib/jspec.jquery.js. Below is a list of hooks and explainations:
 
-  - running(options)                 : started running JSpec with the options passed
-  - loading(file)                    : loading a file
-  - executing(file)                  : executing a file
+  - running(options)                 : started running JSpec with the options passed. When false is returned running will stop.
+  - loading(file)                    : loading a file. When false is returned loading will stop.
+  - executing(file)                  : executing a file. When false is returned executing will stop.
   - requiring(dependency, message)   : requiring a dependency
   - posting(data, url)               : posting data to a url
   - reportingToServer(url)           : reporting to server url
