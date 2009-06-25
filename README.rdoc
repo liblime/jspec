@@ -26,6 +26,7 @@ and much more.
 * Great looking default DOM theme
 * `jspec` command-line utility for auto-running specs, and initializing project templates
 * Proxy or 'Spy' assertions 
+* Method Stubbing
 * Shared behaviors
 * Profiling
 * Rails Integration (http://github.com/bhauman/jspec-rails)
@@ -201,6 +202,22 @@ how other methods may interact with it. Below is another example:
   'array: ' + array // This line causes the spec to pass due to calling toString()
 
 For more examples view spec/spec.matchers.js
+
+== Method Stubbing
+
+JSpec currently provides very simple stubbing support shown below:
+
+  person = { toString : function(){ return '<Person>' } }
+  stub(person, 'toString').and_return('Ive been stubbed!')
+
+To destub a method simply call destub() at any time:
+
+  destub(person, 'toString')
+  
+If you would like to whipe an object clear of stubs simply pass it
+to destub() without an additional method argument:
+
+  destub(person)
 
 == Helpers
 
