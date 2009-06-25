@@ -28,7 +28,23 @@ describe 'Utility'
       
       it 'should restore prototypal methods'
         Object.prototype.stubby = function() { return 'Oh no im new' }
+        destub(object, 'stubby')
         object.stubby().should.eql 'Oh no im new'
+      end
+      
+      it 'should with a single argument should destub all methods stubbed related to the object passed'
+        destub(object)
+        object.toString().should.eql '<Im an object>'
+        object.stubby().should.eql 'Not stubbed'
+      end
+      
+      it 'should destub everything when no arguments are passed'
+        foo = { bar : function(){ return 'baz' }}
+        stub(foo, 'bar').and_return('BAZ')
+        destub()
+        foo.bar().should.eql 'baz'
+        object.toString().should.eql '<Im an object>'
+        object.stubby().should.eql 'Not stubbed'
       end
     end
   end
