@@ -34,6 +34,21 @@ describe 'Utility'
         object.toString().should.eql '<Im an object>'
         object.stubby().should.eql 'Not stubbed'
       end
+      
+      describe 'should restore after each spec'
+        before
+          object = { toString : function(){ return 'Wahoo' }}
+        end
+        
+        it 'should stub'
+          stub(object, 'toString').and_return('Oh no')
+          object.toString().should.eql 'Oh no'
+        end
+        
+        it 'should restore'
+          object.toString().should.eql 'Wahoo'
+        end
+      end
     end
   end
   
