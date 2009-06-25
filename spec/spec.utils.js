@@ -35,27 +35,22 @@ describe 'Utility'
         object.stubby().should.eql 'Not stubbed'
       end
       
-      it 'should destub everything when no object is given'
-        foo = { bar : function(){ return 'baz' }}
-        stub(foo, 'bar').and_return('wrong!')
-        destub()
-        foo.bar().should.eql 'baz'
-        object.toString().should.eql '<Im an object>'
-        object.stubby().should.eql 'Not stubbed'
-      end
-      
       describe 'should restore after each spec'
         before
-          object = { toString : function(){ return 'Wahoo' }}
+          a = { toString : function(){ return 'Wahoo' }}
+          b = { toString : function(){ return 'Wahhhhhooo' }}
         end
         
         it 'should stub'
-          stub(object, 'toString').and_return('Oh no')
-          object.toString().should.eql 'Oh no'
+          stub(a, 'toString').and_return('Oh no')
+          stub(b, 'toString').and_return('Oh noooo')
+          a.toString().should.eql 'Oh no'
+          b.toString().should.eql 'Oh noooo'
         end
         
         it 'should restore'
-          object.toString().should.eql 'Wahoo'
+          a.toString().should.eql 'Wahoo'
+          b.toString().should.eql 'Wahhhhhooo'
         end
       end
     end

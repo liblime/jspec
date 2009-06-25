@@ -209,6 +209,14 @@ JSpec currently provides very simple stubbing support shown below:
 
   person = { toString : function(){ return '<Person>' } }
   stub(person, 'toString').and_return('Ive been stubbed!')
+  
+After each spec all stubs are restored to their original methods so
+there is no reason to explicitly call destub(). To persist stubs, 
+use a before_each hook:
+
+  before_each
+    stub(someObject, 'method').and_return({ some : thing })
+  end
 
 To destub a method simply call destub() at any time:
 
