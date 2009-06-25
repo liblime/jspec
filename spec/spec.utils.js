@@ -12,11 +12,6 @@ describe 'Utility'
       object.stubby().should.eql 'Im stubbed'
       object.toString().should.eql '<No im not>'
     end
-
-    it 'should store the old method'
-      object.should.respond_to 'stubbed stubby'
-      object.should.respond_to 'stubbed toString'
-    end
     
     describe 'destub'
       it 'should restore old methods'
@@ -34,15 +29,6 @@ describe 'Utility'
       
       it 'should with a single argument should destub all methods stubbed related to the object passed'
         destub(object)
-        object.toString().should.eql '<Im an object>'
-        object.stubby().should.eql 'Not stubbed'
-      end
-      
-      it 'should destub everything when no arguments are passed'
-        foo = { bar : function(){ return 'baz' }}
-        stub(foo, 'bar').and_return('BAZ')
-        destub()
-        foo.bar().should.eql 'baz'
         object.toString().should.eql '<Im an object>'
         object.stubby().should.eql 'Not stubbed'
       end
