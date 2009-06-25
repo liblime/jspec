@@ -8,14 +8,14 @@ describe 'Utility'
       stub(object, 'toString').and_return('<No im not>')
     end
 
-    describe 'stub'
+    describe 'stub()'
       it 'should stub :)'
         object.stubby().should.eql 'Im stubbed'
         object.toString().should.eql '<No im not>'
       end
     end
     
-    describe 'destub'
+    describe 'destub()'
       it 'should restore old methods'
         destub(object, 'toString')
         destub(object, 'stubby')
@@ -37,7 +37,7 @@ describe 'Utility'
     end
   end
   
-  describe 'query'
+  describe 'query()'
     it 'should return a pairs value'
       query('suite', '?suite=Positive%20specs').should.equal 'Positive specs'
     end
@@ -47,7 +47,7 @@ describe 'Utility'
     end
   end
   
-  describe 'strip'
+  describe 'strip()'
     it 'should strip whitespace by default'
       strip(" foo \n\n").should.equal 'foo'
     end
@@ -57,7 +57,7 @@ describe 'Utility'
     end
   end
   
-  describe 'each'
+  describe 'each()'
     it 'should iterate an array'
       result = []
       each([1,2,3], function(value){
@@ -75,7 +75,7 @@ describe 'Utility'
     end
   end
   
-  describe 'map'
+  describe 'map()'
     it 'should return an array of mapped values'
       result = map([1,2,3], function(value){
         return value * 2
@@ -91,7 +91,7 @@ describe 'Utility'
     end
   end
   
-  describe 'inject'
+  describe 'inject()'
     it 'should provide a memo object while iterating, not expecting returning of memo for composits'
       result = inject([1,2,3], [], function(memo, value){
         memo.push(value)
@@ -107,7 +107,7 @@ describe 'Utility'
     end
   end
   
-  describe 'any'
+  describe 'any()'
     it 'should return null when no matches are found'
       result = any('some foo bar', function(value){
         return value.length > 5
@@ -123,7 +123,7 @@ describe 'Utility'
     end
   end
   
-  describe 'select'
+  describe 'select()'
     it 'should return an array of values when the callback evaluates to true'
       result = select('some foo bar baz stuff', function(value){
         return value.length > 3
@@ -132,13 +132,13 @@ describe 'Utility'
     end
   end
   
-  describe 'last'
+  describe 'last()'
     it 'should return the last element in an array'
       last(['foo', 'bar']).should.eql 'bar'
     end
   end
   
-  describe 'argumentsToArray'
+  describe 'argumentsToArray()'
     it 'should return an array of arguments'
       func = function(){ return argumentsToArray(arguments) }
       func('foo', 'bar').should.eql ['foo', 'bar']
@@ -150,14 +150,14 @@ describe 'Utility'
     end
   end
   
-  describe 'does'
+  describe 'does()'
     it 'should assert without reporting'
       does('foo', 'eql', 'foo')
       JSpec.currentSpec.assertions.should.have_length 0
     end
   end
   
-  describe 'contentsOf'
+  describe 'contentsOf()'
     it 'should return a function body'
       JSpec.contentsOf(-{ return 'foo' }).should.include 'return', 'foo'
     end
