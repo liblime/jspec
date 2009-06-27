@@ -59,20 +59,25 @@ end
 command :run do |c|
   c.syntax = 'jspec run [path] [options]'
   c.summary = 'Run specifications'
-  c.description = 'Run specifications, defaulting [path] to spec/spec.html. You will need 
-    supply [path] if your specs do not reside in this location. `run --bind` is
-    the default sub-command of jspec so you may simply execute `jspec` in order
-    to bind execution of your specs when a file is altered.
+  c.description = 'Run specifications, defaulting [path] to spec/spec.dom.html.
+    You will need to supply [path] if your specs do not reside 
+    in this location. `run --bind` is the default sub-command of
+    jspec so you may simply execute `jspec` in order to bind execution
+    of your specs when a file is altered.
     
-    JSpec supports Rhino execution when installed. The [path] is assumed to be 
-    spec/spec.js unless specified. See examples below for using the --rhino switch.'
+    JSpec supports Rhino execution when installed. The [path] is assumed
+    to be spec/spec.rhino.js unless specified. See examples below for
+    using the --rhino switch.
+    
+    JSpec\'s server is also available via --server, which defaults 
+    the [path] to spec/server.html '
   c.example 'Run once in Safari', 'jspec run'
   c.example 'Run once in Safari and Firefox', 'jspec run --browsers Safari,Firefox'
   c.example 'Run custom spec file', 'jspec run foo.html'
   c.example 'Auto-run browsers when a file is altered', 'jspec run --bind --browsers Safari,Firefox'
   c.example 'Shortcut for the previous example', 'jspec --browsers Safari,Firefox'
   c.example 'Auto-run rhino when a file is altered', 'jspec --rhino'
-  c.example 'Run Rhino specs once', 'jspec run --rhino'
+  c.example 'Run Rhino specs once', 'jspec run specs/something.js --rhino'
   c.option '-b', '--browsers BROWSERS', Array, 'Specify browsers to test, defaults to Safari'
   c.option '-p', '--paths PATHS', Array, 'Specify paths when binding, defaults to javascript within ./lib and ./spec'
   c.option '-B', '--bind', 'Auto-run specs when source files or specs are altered'
