@@ -152,8 +152,8 @@ describe 'Utility'
     describe 'isFalse'
       it 'should check if a value is false'
         any([true, false], isFalse).should.be_true
-        any([true, true], isFalse).should.be_false
-        any([true, null], isFalse).should.be_false
+        any([true, true], isFalse).should.be_null
+        any([true, null], isFalse).should.be_null
       end
     end
   end
