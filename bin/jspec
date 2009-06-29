@@ -5,6 +5,7 @@ $:.unshift JSPEC_ROOT
  
 require 'rubygems'
 require 'commander'
+require 'bind'
 require 'fileutils'
 
 RHINO = 'java org.mozilla.javascript.tools.shell.Main'
@@ -79,32 +80,26 @@ command :run do |c|
   c.option '-S', '--server', 'Run specs using the JSpec server'
   c.option '-s', '--server-only', 'Start JSpec server without running browsers'
   c.when_called do |args, options|
-    begin
-      require 'bind'
-      options.default :browsers => %w( Safari ), :paths => ['lib/**/*.js', 'spec/**/*.js']
-      
-      # Actions
-      if options.rhino
-        spec = args.shift || 'spec/spec.rhino.js'
-        action = lambda { rhino spec }
-      elsif options.server
-        spec = args.shift || 'spec/spec.server.html'
-        action = lambda { start_server options, spec }
-      else
-        spec = args.shift || 'spec/spec.dom.html'
-        action = Bind::Actions::RefreshBrowsers.new spec, *options.browsers
-      end
-      
-      # Binding
-      if options.bind
-        listener = Bind::Listener.new :paths => options.paths, :interval => 1, :actions => [action], :debug => $stdout
-        listener.run!
-      else
-        action.call File.new(spec)
-      end
-      
-    rescue LoadError
-      abort "jspec run requires the visionmedia-bind gem; http://visionmedia.github.com/bind/"
+    options.default :browsers => %w( Safari ), :paths => ['lib/**/*.js', 'spec/**/*.js']
+    
+    # Actions
+    if options.rhino
+      spec = args.shift || 'spec/spec.rhino.js'
+      action = lambda { rhino spec }
+    elsif options.server
+      spec = args.shift || 'spec/spec.server.html'
+      action = lambda { start_server options, spec }
+    else
+      spec = args.shift || 'spec/spec.dom.html'
+      action = Bind::Actions::RefreshBrowsers.new spec, *options.browsers
+    end
+    
+    # Binding
+    if options.bind
+      listener = Bind::Listener.new :paths => options.paths, :interval => 1, :actions => [action], :debug => $stdout
+      listener.run!
+    else
+      action.call File.new(spec)
     end
   end
 end
