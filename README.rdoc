@@ -10,6 +10,7 @@ and much more.
 
 * Highly readable
 * Framework / DOM independent
+* Modular via JSpec Module's and hooks
 * Rhino support
 * Async support
 * Ruby JavaScript testing server
