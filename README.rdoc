@@ -482,6 +482,17 @@ executing method like below. This example will stop execution of any file matchi
   }
   JSpec.include(MyModule)
   
+Immutable values may also be passed to hooks using hookImmutable() internally. This allows
+for simple numbers, strings, etc to be utilized or altered within a hook implementation. Below
+is an example module which adds functionality to the JSpec grammar by converting SomeObject.stub('method')
+to stub(SomeObject, 'method'):
+
+  JSpec.include({
+    preprocessing : function(input) {
+      return input.replace(/(\w+)\.(stub|destub)\((.*?)\)$/gm, '$2($1, $3)')
+    }
+  })
+  
 == JSpec Command-line Utility
 
 When installed as a Ruby Gem, the `jspec` executable will become available,
