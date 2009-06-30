@@ -452,6 +452,7 @@ The following methods or properties are utilized by JSpec:
 
   - init      : called to initialize a module
   - utilities : hash of utility functions merged with JSpec.defaultContext
+  - matchers  : hash of matchers merged with JSpec's core matchers via JSpec.addMatchers()
 
 Below is a list of hooks, descriptions, and valid return values which
 may simply be implemented as module methods.
@@ -459,15 +460,19 @@ may simply be implemented as module methods.
   - running(options)                 : started running JSpec with the options passed    : returning 'stop' will halt running
   - loading(file)                    : loading a file                                   : returning 'stop' will prevent loading
   - executing(file)                  : executing a file                                 : returning 'stop' will prevent execution 
-  - requiring(dependency, message)   : requiring a dependency                           : (no return value) 
   - posting(data, url)               : posting data to a url                            : returning 'stop' will prevent request
   - reportingToServer(url)           : reporting to server url                          : returning 'stop' will prevent reporting to server
   - preprocessing(input)             : before input string is preprocessed              : return input string for next hook to preprocess
+  - stubbing(object, method, result) : called when stubbing an object's method, and return value (result). : (no return value)
+  - requiring(dependency, message)   : requiring a dependency                           : (no return value) 
   - beforeAssertion(assertion)       : before an assertion has been made                : (no return value)
   - afterAssertion(assertion)        : after an assertion has been made                 : (no return value)
-  - stubbing(object, method, result) : called when stubbing an object's method, and return value (result). : return value irrelevant
   - addingMatcher(name, body)        : unprocessed matcher name and body                : (no return value)
   - addingSuite(suite)               : adding Suite instance to JSpec                   : (no return value)
+  - beforeSuite(suite)               : before running of suite                          : (no return value)
+  - afterSuite(suite)                : after running of suite                           : (no return value)
+  - beforeSpec(spec)                 : before running of spec                           : (no return value)
+  - afterSpec(spec)                  : after running of spec                            : (no return value)
   - reporting(options)               : called before reporting                          : (no return value)
   - evaluatingBody(dsl, matchers, context, contents) : evaluating body contents, with the given context, matchers and dsl. : (no return value)
   
