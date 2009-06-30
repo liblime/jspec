@@ -1,4 +1,9 @@
 
+=== 2.4.1 / 2009-06-30
+
+* Moved beforeSpec and afterSpec hook into proper positions
+  allowing for additional assertions within afterSpec.
+
 === 2.4.0 / 2009-06-30
 
 * Added hook() and hookImmutable()
