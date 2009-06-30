@@ -459,17 +459,17 @@ may simply be implemented as module methods.
   - running(options)                 : started running JSpec with the options passed    : returning 'stop' will halt running
   - loading(file)                    : loading a file                                   : returning 'stop' will prevent loading
   - executing(file)                  : executing a file                                 : returning 'stop' will prevent execution 
-  - requiring(dependency, message)   : requiring a dependency
-  - posting(data, url)               : posting data to a url
-  - reportingToServer(url)           : reporting to server url
-  - beforeAssertion(assertion)       : before an assertion has been made
-  - afterAssertion(assertion)        : after an assertion has been made
-  - stubbing(object, method, result) : called when stubbing an object's method, and return value (result).
-  - addingMatcher(name, body)        : unprocessed matcher name and body
-  - addingSuite(suite)               : adding Suite instance to JSpec
-  - preprocessing(input)             : before input string is preprocessed
-  - reporting(options)               : called before reporting
-  - evaluatingBody(dsl, matchers, context, contents) : evaluating body contents, with the given context, matchers and dsl.
+  - requiring(dependency, message)   : requiring a dependency                           : (no return value) 
+  - posting(data, url)               : posting data to a url                            : returning 'stop' will prevent request
+  - reportingToServer(url)           : reporting to server url                          : returning 'stop' will prevent reporting to server
+  - preprocessing(input)             : before input string is preprocessed              : return input string for next hook to preprocess
+  - beforeAssertion(assertion)       : before an assertion has been made                : (no return value)
+  - afterAssertion(assertion)        : after an assertion has been made                 : (no return value)
+  - stubbing(object, method, result) : called when stubbing an object's method, and return value (result). : return value irrelevant
+  - addingMatcher(name, body)        : unprocessed matcher name and body                : (no return value)
+  - addingSuite(suite)               : adding Suite instance to JSpec                   : (no return value)
+  - reporting(options)               : called before reporting                          : (no return value)
+  - evaluatingBody(dsl, matchers, context, contents) : evaluating body contents, with the given context, matchers and dsl. : (no return value)
   
 For example you may wish to proxy files which are being executed, simply implement the 
 executing method like below. This example will stop execution of any file matching /matchers/.
