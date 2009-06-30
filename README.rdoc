@@ -456,9 +456,9 @@ The following methods or properties are utilized by JSpec:
 Below is a list of hooks, descriptions, and valid return values which
 may simply be implemented as module methods.
 
-  - running(options)                 : started running JSpec with the options passed    : false will halt running
-  - loading(file)                    : loading a file                                   : false will prevent loading
-  - executing(file)                  : executing a file                                 : false will prevent execution / loading
+  - running(options)                 : started running JSpec with the options passed    : returning 'stop' will halt running
+  - loading(file)                    : loading a file                                   : returning 'stop' will prevent loading
+  - executing(file)                  : executing a file                                 : returning 'stop' will prevent execution 
   - requiring(dependency, message)   : requiring a dependency
   - posting(data, url)               : posting data to a url
   - reportingToServer(url)           : reporting to server url

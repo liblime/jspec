@@ -149,11 +149,11 @@ describe 'Utility'
       result.should.eql 'some'
     end
     
-    describe 'isFalse'
-      it 'should check if a value is false'
-        any([true, false], isFalse).should.be_true
-        any([true, true], isFalse).should.be_null
-        any([true, null], isFalse).should.be_null
+    describe 'haveStopped'
+      it 'should check if "stop" has been returned by a callback hook'
+        any([true, 'stop'], haveStopped).should.be_true
+        any([true, true], haveStopped).should.be_null
+        any([true, null], haveStopped).should.be_null
       end
     end
   end
