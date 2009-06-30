@@ -471,6 +471,17 @@ may simply be implemented as module methods.
   - reporting(options)               : called before reporting
   - evaluatingBody(dsl, matchers, context, contents) : evaluating body contents, with the given context, matchers and dsl.
   
+For example you may wish to proxy files which are being executed, simply implement the 
+executing method like below. This example will stop execution of any file matching /matchers/.
+
+  MyModule = {
+    executing : function(file) {
+      if (file.match(/matchers/))
+        return 'stop'
+    }
+  }
+  JSpec.include(MyModule)
+  
 == JSpec Command-line Utility
 
 When installed as a Ruby Gem, the `jspec` executable will become available,
