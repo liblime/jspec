@@ -1,4 +1,16 @@
 
+=== 2.4.0 / 2009-06-30
+
+* Added hook() and hookImmutable()
+* Added support for matcher lists ('be enabled disabled selected') == be_enabled, be_disabled etc
+* Added JSpec.include()
+* Added several hooks
+* Added Module support
+* Added grammar conversion of Foo.stub('method') to stub(Foo, 'method') 
+* Added grammar conversion of Foo.destub() to destub(Foo) 
+* Require bind gem
+* Fixed `jspec` bin docs
+
 === 2.3.1 / 2009-06-25
 
 * Fixed; all stubs generated with stub() are restored
