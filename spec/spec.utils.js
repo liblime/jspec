@@ -151,7 +151,7 @@ describe 'Utility'
     
     describe 'haveStopped'
       it 'should check if "stop" has been returned by a callback hook'
-        any([true, 'stop'], haveStopped).should.be_true
+        any([true, 'stop'], haveStopped).should.eql 'stop'
         any([true, true], haveStopped).should.be_null
         any([true, null], haveStopped).should.be_null
       end
