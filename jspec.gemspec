@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{jspec}
-  s.version = "2.4.2"
+  s.version = "2.4.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["TJ Holowaychuk"]
-  s.date = %q{2009-06-30}
+  s.date = %q{2009-07-02}
   s.default_executable = %q{jspec}
   s.description = %q{JavaScript BDD Testing Framework}
   s.email = %q{tj@vision-media.ca}
