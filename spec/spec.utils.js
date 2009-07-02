@@ -1,5 +1,18 @@
 
 describe 'Utility'
+  describe 'fail()'
+    it 'should fail the current spec'
+      fail('I failed!')
+    end
+  end
+  
+  describe 'pass()'
+    it 'should pass the current spec'
+      pass('yay')
+      pass('wahoo')
+    end
+  end
+  
   describe 'stubbing'
     before_each
       Object.prototype.stubby = function() { return 'Not stubbed' }
