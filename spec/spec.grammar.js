@@ -16,6 +16,12 @@ describe 'Grammar'
     true.should.be_true()
   end
   
+  it 'should allow semicolons'
+    true.should.be_true;
+    true.should.be_true();
+    true.should.be_true() ;
+  end
+  
   it 'should allow parens to be optional with args'
     'foobar'.should.include 'foo'
     'rawr'.should.not_include 'foo'
