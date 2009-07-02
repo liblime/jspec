@@ -7,6 +7,10 @@ describe 'Utility'
       stub(object, 'stubby').and_return('Im stubbed')
       stub(object, 'toString').and_return('<No im not>')
     end
+    
+    after_each
+      delete Object.prototype.stubby
+    end
 
     describe 'stub()'
       it 'should stub :)'
