@@ -54,6 +54,13 @@ describe 'Utility'
         object.destub()
         object['foo bar']().should.eql 'rawr'
       end
+      
+      it 'should stub with arbitrary method when no return value is set'
+        object.stub(' super cool ')
+        object[' super cool '].should.be_a Function
+        destub(object)
+        object[' super cool '].should.be_null
+      end
     end
     
     describe 'destub()'
