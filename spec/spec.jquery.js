@@ -10,7 +10,7 @@ describe 'jQuery'
       dom.should.have_text 'test'
     end
   end
-  
+
   describe 'element() / elements()'
     it 'should alias jQuery'
       element.should.be jQuery

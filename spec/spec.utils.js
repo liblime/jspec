@@ -69,6 +69,16 @@ describe 'Utility'
         object.foo.bar.destub()
         object.foo.bar.should.not.respond_to('kitten')
       end
+      
+      it 'should allow functions to be passed as a method'
+        stub(object, 'post').and_return(function(url, callback){
+          if (url == 'http://jspec.info')
+            callback('is awesome')
+        })
+        object.post('http://jspec.info', function(text){
+          text.should_eql 'is awesome'
+        })
+      end
     end
     
     describe 'destub()'
