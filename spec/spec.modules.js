@@ -8,6 +8,7 @@ describe 'JSpec'
       end
 
       it 'should run in context with afterSpec'
+        addedBeforeSpec.should.be_true
         addedAfterSpec.should.be_true
       end
 
@@ -23,10 +24,17 @@ describe 'JSpec'
       end
     end
     
+    describe '.hook()'
+      it 'should invoke hooks, returning an array of results'
+        results = hook('randomHook', 'foo', 'bar')
+        results.should.eql [['foo', 'bar']]
+      end
+    end
+    
     describe '.utilities'
       it 'should be merged with the default utilities'
-        foo().should.eql 'foo'
-        bar().should.eql 'bar'
+        doFoo().should.eql 'foo'
+        doBar().should.eql 'bar'
       end
     end
     

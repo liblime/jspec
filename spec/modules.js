@@ -1,8 +1,11 @@
 
 ExampleModule = {
   utilities : {
-    foo : function(){ return 'foo' },
-    bar : function(){ return 'bar' }
+    doFoo : function(){ return 'foo' },
+    doBar : function(){ return 'bar' }
+  },
+  randomHook : function(a, b) {
+    return [a, b]
   },
   beforeSpec  : function() { addedBeforeSpec = true },
   afterSpec   : function() { addedAfterSpec = true },
