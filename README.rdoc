@@ -458,7 +458,9 @@ The following methods or properties are utilized by JSpec:
                 Where as DSLs.camel may contain beforeEach, afterEach, etc.
 
 Below is a list of hooks, descriptions, and valid return values which
-may simply be implemented as module methods.
+may simply be implemented as module methods. beforeSuite, afterSuite, beforeSpec, and afterSpec have lower
+precedence than before_each, after_each etc within the specs themselves, allowing them to override or undo
+anything that has been done by a Module.
 
   - running(options)                 : started running JSpec with the options passed    : returning 'stop' will halt running
   - loading(file)                    : loading a file                                   : returning 'stop' will prevent loading
