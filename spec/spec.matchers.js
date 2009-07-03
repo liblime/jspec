@@ -337,12 +337,6 @@ describe 'Matchers'
       personWithPets.addPets('suki', 'max')
     end
     
-    it 'should pass when checking for method calls to core prototypes'
-      array = ['foo', 'bar']
-      array.should.receive('toString').and_return('foo,bar')
-      'array: ' + array
-    end
-    
     it 'should pass with negation when a method is not called'
       personWithPets.should.not.receive('addPets')
     end
