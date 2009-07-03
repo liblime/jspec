@@ -34,6 +34,34 @@ describe 'Shared Behaviors'
       end
     end
   end
+  
+  describe 'User with toString()'
+    before
+      user = { toString : function() { return '<User tj>' }}
+    end
+    
+    it 'should return <User NAME>'
+      user.toString().should.match(/\<User/)
+    end
+  end
+  
+  describe 'Manager'
+    should_behave_like('User')
+    should_behave_like('User with toString()')
+    
+    before
+      Manager = function(name) { this.name = name }
+      Manager.prototype.may = function(perm){ return perm == 'hire' || perm == 'fire' }
+      Manager.prototype.toString = function(){ return '<User ' + this.name + '>' }
+      user = new Manager('tj')
+    end
+    
+    it 'should have access to hire or fire employees'
+      user.may('hire').should.be_true
+      user.may('fire').should.be_true
+      user.may('do anything else').should.be_false
+    end
+  end
 
   describe 'findSuite'
     it 'should find a suite by full description'
