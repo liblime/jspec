@@ -2,14 +2,31 @@
 describe 'JSpec'
   describe 'module'
     describe 'hooks'
+      before_each
+        addedBeforeSpecHook = true
+      end
+      
+      after_each
+        addedAfterSpecHook = true
+      end
+      
       it 'should run in context with beforeSpec'
         addedBeforeSpec.should.be_true
         addedAfterSpec.should.be_false
+        addedAfterSpecHook.should.be_false
+      end
+      
+      it 'should run beforeSpec BEFORE the before_each blocks'
+        addedBeforeSpecHook.should.be_true
       end
 
       it 'should run in context with afterSpec'
         addedBeforeSpec.should.be_true
         addedAfterSpec.should.be_true
+      end
+      
+      it 'should run afterSpec BEFORE after_each blocks'
+        addedAfterSpecHook.should.be_true
       end
 
       it 'should run in context with beforeSuite'

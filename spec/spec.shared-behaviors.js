@@ -41,7 +41,7 @@ describe 'Shared Behaviors'
       user = { toString : function() { return '<User tj>' }}
     end
     
-    it 'should return <User NAME>'
+    it 'should return &lt;User NAME&gt;'
       user.toString().should.match(/\<User/)
     end
   end
@@ -63,7 +63,7 @@ describe 'Shared Behaviors'
       user.may('do anything else').should.be_false
     end
   end
-
+  
   describe 'findSuite'
     it 'should find a suite by full description'
       JSpec.findSuite('Shared Behaviors User Administrator').should.be_a JSpec.Suite

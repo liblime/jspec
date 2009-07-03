@@ -7,8 +7,8 @@ ExampleModule = {
   randomHook : function(a, b) {
     return [a, b]
   },
-  beforeSpec  : function() { addedBeforeSpec = true },
-  afterSpec   : function() { addedAfterSpec = true },
+  beforeSpec  : function() { addedBeforeSpec = true, addedBeforeSpecHook = false },
+  afterSpec   : function() { addedAfterSpec = true, addedAfterSpecHook = false },
   beforeSuite : function() { addedBeforeSuite = true },
   afterSuite  : function() {
     addedAfterSuite = true
