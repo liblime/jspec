@@ -21,6 +21,7 @@ describe 'Shared Behaviors'
 
       it 'should have access to all permissions'
         user.may('edit pages').should.be_true
+        user.may('delete users').should.be_true
       end
 
       describe 'Super Administrator'
