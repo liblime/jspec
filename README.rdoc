@@ -454,6 +454,8 @@ The following methods or properties are utilized by JSpec:
   - init      : called to initialize a module
   - utilities : hash of utility functions merged with JSpec.defaultContext
   - matchers  : hash of matchers merged with JSpec's core matchers via JSpec.addMatchers()
+  - DSLs      : hash of DSL methods; for example DSLs.snake contains before_each, after_each, etc.
+                Where as DSLs.camel may contain beforeEach, afterEach, etc.
 
 Below is a list of hooks, descriptions, and valid return values which
 may simply be implemented as module methods.

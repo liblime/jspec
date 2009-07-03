@@ -42,5 +42,12 @@ describe 'JSpec'
         'test'.should.be_foo_bar
       end
     end
+    
+    describe '.DSLs'
+      it 'should be merged with default DSLs'
+        JSpec.DSLs.snake.some_snake_case_stuff().should.be_true
+        JSpec.DSLs.camel.someCamelCaseStuff().should.be_true
+      end
+    end
   end
 end

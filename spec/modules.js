@@ -18,6 +18,18 @@ ExampleModule = {
     be_foo_bar : function() {
       return true
     }
+  },
+  DSLs : {
+    snake : {
+      some_snake_case_stuff : function(){
+        return true
+      }
+    },
+    camel : {
+      someCamelCaseStuff : function() {
+        return true
+      }
+    }
   }
 }
 
