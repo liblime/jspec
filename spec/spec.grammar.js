@@ -17,7 +17,7 @@ describe 'Grammar'
   end
   
   it 'should not mess up with words like it or append in descriptions'
-    -{ element.append().end() }.should.not.include '});'
+    -{ element.append().end() }.should.throw_error
   end
   
   it 'should allow semicolons'
