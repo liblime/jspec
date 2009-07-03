@@ -65,7 +65,7 @@ describe 'Utility'
       it 'should stub sub properties using the JSpec grammar'
         object = { foo : { bar : {}}}
         object.foo.bar.stub('kitten').and_return('meow')
-        object.foo.bar.kitten.should.eql 'meow'
+        object.foo.bar.kitten().should.eql 'meow'
         object.foo.bar.destub()
         object.foo.bar.should.not.respond_to('kitten')
       end
