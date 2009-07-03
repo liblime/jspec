@@ -2,7 +2,7 @@
 describe 'Negative specs'
 
   it 'should fail'
-    'test'.should.not_eql 'test' 
+    'test'.should.not_eql 'test'
   end
 
   it 'should fail with one faulty assertion'

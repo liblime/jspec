@@ -3,6 +3,7 @@
 		<script src="jquery-1.3.1.js"></script>
 		<script src="jspec.js"></script>
 		<script src="jspec.jquery.js"></script>
+		<script src="modules.js"></script>
 		<script src="spec.grammar-less.js"></script>
 		<script>
 			function runSuites() {
@@ -13,6 +14,7 @@
 				.exec('spec.utils.js')
 				.exec('spec.shared-behaviors.js')
 				.exec('spec.jquery.js')
+				.exec('spec.modules.js')
 				.run()
 				.reportToServer()
 			}
