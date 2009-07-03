@@ -23,6 +23,7 @@ describe 'JSpec'
     it 'should populate textStatus'
       mockRequest.and_return('bar', 'text/plain', 404)
       $.getJSON('foo', function(response, textStatus){
+        response.should.eql 'bar'
         textStatus.should.eql 'Not Found'
       })
     end
