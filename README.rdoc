@@ -573,7 +573,8 @@ Run with:
 == Contributors
 
 Many ideas and bug reports were contributed by
-the following developers:
+the following developers, thankyou for making
+JSpec more enjoyable, and bug free ;)
 
 * mpd@jesters-court.ne
 * kevin.gisi@gmail.com
