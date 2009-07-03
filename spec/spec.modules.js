@@ -20,5 +20,18 @@ describe 'JSpec'
         addedAfterSuite.should.be_true
       end
     end
+    
+    describe '.utilities'
+      it 'should be merged with the default utilities'
+        foo().should.eql 'foo'
+        bar().should.eql 'bar'
+      end
+    end
+    
+    describe '.matchers'
+      it 'should be merged with default matchers'
+        'test'.should.be_foo_bar
+      end
+    end
   end
 end
