@@ -286,15 +286,6 @@ describe 'Matchers'
         addPets  : function(a, b) { return ['izzy', a, b] }
       }
     end
-    
-    it 'should fail when the method does not exist'
-      person.should.receive('getPets')
-    end
-    
-    it 'should fail when the method is never invoked'
-      personWithPets.should.receive('getPets')
-    end
-    
     it 'should pass when the method is invoked'
       personWithPets.should.receive('getPets')
       personWithPets.getPets()
@@ -310,11 +301,80 @@ describe 'Matchers'
       personWithPets.getPets()
     end
     
+    it 'should pass when invoked the expected number of times'
+      personWithPets.should.receive('getPets', 'twice').and_return(['izzy'])
+      personWithPets.getPets()
+      personWithPets.getPets()
+    end
+    
+    it 'should pass when a method is invoked with specific arguments'
+      personWithPets.should.receive('addPet', 'once').with_args('suki')
+      personWithPets.addPet('suki')
+    end
+    
+    it 'should pass with multiple arguments'
+      personWithPets.should.receive('addPets').with_args('suki', 'max')
+      personWithPets.addPets('suki', 'max')
+    end
+    
+    it 'should pass with arguments and return value'
+      personWithPets.should.receive('addPet').with_args('suki').and_return(['izzy', 'suki'])
+      personWithPets.addPet('suki')
+    end 
+     
+    it 'should pass when argument is the correct type'
+      personWithPets.should.receive('addPet').with_args(an_instance_of(String))
+      personWithPets.addPet('suki')
+    end
+    
+    it 'should pass when return type is correct'
+      personWithPets.should.receive('addPet').and_return(an_instance_of(Array))
+      personWithPets.addPet('suki')
+    end
+    
+    it 'should pass when checking the type of multiple args and return types'
+      personWithPets.should.receive('addPets').with_args(an_instance_of(String), an_instance_of(String)).and_return(an_instance_of(Array))
+      personWithPets.addPets('suki', 'max')
+    end
+    
+    it 'should pass when checking for method calls to core prototypes'
+      array = ['foo', 'bar']
+      array.should.receive('toString').and_return('foo,bar')
+      'array: ' + array
+    end
+    
+    it 'should pass with negation when a method is not called'
+      personWithPets.should.not.receive('addPets')
+    end
+    
+    it 'should pass with negation with args'
+      personWithPets.should.not.receive('addPets').with_args('izzy')
+      personWithPets.addPets('max')
+    end
+    
+    it 'should pass with negation with return values'
+      personWithPets.should.not.receive('addPets').with_args('izzy').and_return('test')
+      personWithPets.addPets('izzy')
+    end
+                            
+    it 'should fail when the method does not exist'
+      person.should.receive('getPets')
+    end
+    
+    it 'should fail when the method is never invoked'
+      personWithPets.should.receive('getPets')
+    end
+    
     it 'should fail when improper value is returned'
       personWithPets.should.receive('getPets').and_return(['niko'])
       personWithPets.getPets()
     end
     
+    it 'should fail when checking the type of multiple args and return types'
+      personWithPets.should.receive('addPets').with_args(an_instance_of(String), an_instance_of(Array)).and_return(an_instance_of(Array))
+      personWithPets.addPets('suki', 'max')
+    end
+        
     it 'should fail when not invoked the expected number of times'
       personWithPets.should.receive('getPets', 'twice').and_return(['izzy'])
       personWithPets.getPets()
@@ -326,20 +386,9 @@ describe 'Matchers'
       personWithPets.getPets()
     end
     
-    it 'should pass when invoked the expected number of times'
-      personWithPets.should.receive('getPets', 'twice').and_return(['izzy'])
-      personWithPets.getPets()
-      personWithPets.getPets()
-    end
-    
     it 'should fail when not invoked with specific arguments'
       personWithPets.should.receive('addPet', 'once').with_args('suki')
       personWithPets.addPet('niko')
-    end
-    
-    it 'should pass when a method is invoked with specific arguments'
-      personWithPets.should.receive('addPet', 'once').with_args('suki')
-      personWithPets.addPet('suki')
     end
     
     it 'should fail when expecting multiple arguments'
@@ -347,24 +396,9 @@ describe 'Matchers'
       personWithPets.addPets('suki')
     end
     
-    it 'should pass with multiple arguments'
-      personWithPets.should.receive('addPets').with_args('suki', 'max')
-      personWithPets.addPets('suki', 'max')
-    end
-    
-    it 'should pass with arguments and return value'
-      personWithPets.should.receive('addPet').with_args('suki').and_return(['izzy', 'suki'])
-      personWithPets.addPet('suki')
-    end
-    
     it 'should fail when argument is of the wrong type'
       personWithPets.should.receive('addPet').with_args(an_instance_of(String))
       personWithPets.addPet(['suki'])
-    end
-    
-    it 'should pass when argument is the correct type'
-      personWithPets.should.receive('addPet').with_args(an_instance_of(String))
-      personWithPets.addPet('suki')
     end
     
     it 'should fail when return type is incorrect'
@@ -372,25 +406,19 @@ describe 'Matchers'
       personWithPets.addPet('suki')
     end
         
-    it 'should pass when return type is correct'
-      personWithPets.should.receive('addPet').and_return(an_instance_of(Array))
-      personWithPets.addPet('suki')
+    it 'should fail with negation when a method is called'
+      personWithPets.should.not.receive('addPets')
+      personWithPets.addPets('izzy')
+    end
+
+    it 'should fail with negation with args'
+      personWithPets.should.not.receive('addPets').with_args('izzy')
+      personWithPets.addPets('izzy')
     end
     
-    it 'should fail when checking the type of multiple args and return types'
-      personWithPets.should.receive('addPets').with_args(an_instance_of(String), an_instance_of(Array)).and_return(an_instance_of(Array))
-      personWithPets.addPets('suki', 'max')
-    end
-        
-    it 'should pass when checking the type of multiple args and return types'
-      personWithPets.should.receive('addPets').with_args(an_instance_of(String), an_instance_of(String)).and_return(an_instance_of(Array))
-      personWithPets.addPets('suki', 'max')
-    end
-    
-    it 'should pass when checking for method calls to core prototypes'
-      array = ['foo', 'bar']
-      array.should.receive('toString').and_return('foo,bar')
-      'array: ' + array
+    it 'should fail with negation with return values'
+      personWithPets.should.not.receive('addPets').with_args('izzy').and_return(an_instance_of(Array))
+      personWithPets.addPets('izzy')
     end
   end
   
