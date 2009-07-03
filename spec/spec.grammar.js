@@ -16,6 +16,10 @@ describe 'Grammar'
     true.should.be_true()
   end
   
+  it 'should not mess up with words like it or append in descriptions'
+    
+  end
+  
   it 'should allow semicolons'
     true.should.be_true;
     true.should.be_true();
