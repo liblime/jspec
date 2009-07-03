@@ -38,6 +38,22 @@ describe 'Utility'
         foo.destub()
         foo.bar().should.eql 'baz'
       end
+      
+      it 'should stub methods starting with an underscore'
+        object._foo = function(){ return 'bar' }
+        object.stub('_foo').and_return('something else')
+        object._foo().should.eql 'something else'
+        object.destub()
+        object._foo().should.eql 'bar'
+      end
+      
+      it 'should stub methods with whitespace'
+        object['foo bar'] = function(){ return 'rawr' }
+        object.stub('foo bar').and_return('baz')
+        object['foo bar']().should.eql 'baz'
+        object.destub()
+        object['foo bar']().should.eql 'rawr'
+      end
     end
     
     describe 'destub()'
