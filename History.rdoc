@@ -1,4 +1,17 @@
 
+=== 2.5.0 / 2009-07-03
+
+* Added contrib in README (thanks to anyone who has helped)
+* Added more shared behavior specs
+* Added Module.DSLs support for extending / adding new DSLs (DSL exchange not yet fully implemented)
+* Added spec to make sure methods like end() will not fail due to the grammar
+* Changed; giving hook precedence to suite hooks (before_each, etc) over module hooks (beforeSuite, etc) ; (thanks mpd)
+* Changed; calls to stub() without and_return() now simply stub an arbitrary method with no return value
+* Changed JSpec.include(); now returns JSpec allowing chaining
+* Fixed having "end" in descriptions which would be replaced with '});'
+* Fixed negation of should.receive('foo') matcher
+* Fixed shared behavior assertion count issue
+
 === 2.4.3 / 2009-07-02
 
 * Fixed matcher semicolon matcher issue when using the JSpec grammar
