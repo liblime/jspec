@@ -10,7 +10,10 @@ ExampleModule = {
   beforeSpec  : function() { addedBeforeSpec = true },
   afterSpec   : function() { addedAfterSpec = true },
   beforeSuite : function() { addedBeforeSuite = true },
-  afterSuite  : function() { addedAfterSuite = true },
+  afterSuite  : function() {
+    addedAfterSuite = true
+    addedBeforeSuite = addedBeforeSpec = addedAfterSpec = false
+  },
   matchers : {
     be_foo_bar : function() {
       return true

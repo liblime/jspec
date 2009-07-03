@@ -14,7 +14,6 @@ describe 'JSpec'
 
       it 'should run in context with beforeSuite'
         addedBeforeSuite.should.be_true
-        addedAfterSuite.should.be_false
       end
 
       describe 'another suite'
