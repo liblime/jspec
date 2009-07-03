@@ -356,6 +356,11 @@ describe 'Matchers'
       personWithPets.should.not.receive('addPets').with_args('izzy').and_return('test')
       personWithPets.addPets('izzy')
     end
+    
+    it 'should pass with negation with times'
+      personWithPets.should.not.receive('addPets', 'twice')
+      personWithPets.addPets('izzy')
+    end
                             
     it 'should fail when the method does not exist'
       person.should.receive('getPets')
@@ -419,6 +424,12 @@ describe 'Matchers'
     it 'should fail with negation with return values'
       personWithPets.should.not.receive('addPets').with_args('izzy').and_return(an_instance_of(Array))
       personWithPets.addPets('izzy')
+    end
+    
+    it 'should fail with negation with times'
+      personWithPets.should.not.receive('addPets', 'twice')
+      personWithPets.addPets('izzy')
+      personWithPets.addPets('max')
     end
   end
   
