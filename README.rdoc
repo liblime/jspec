@@ -143,6 +143,7 @@ JSpec.options.failuresOnly = true, and ?failuresOnly=1 will both work.
   - be_type            be type of x
   - be_greater_than    >
   - be_less_than       <
+  - be_undefined       check if variable passed is undefined
   - throw_error        should throw an error, optionally supply the error string or regexp for message comparison
   - have               object should have n of property (person.should.have(2, 'pets'))
   - have_at_least      object should have at least n of property

@@ -82,6 +82,13 @@ describe 'Matchers'
     end
   end
   
+  describe 'be_undefined'
+    it 'should check if a var is defined'
+      var foo
+      foo.should.be_undefined
+    end
+  end
+  
   describe 'have_length'
     it 'should compare the length of an object'
       'foo'.should.have_length 3
