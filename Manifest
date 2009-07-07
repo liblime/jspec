@@ -26,6 +26,7 @@ spec/spec.jquery.js
 spec/spec.js
 spec/spec.matchers.js
 spec/spec.modules.js
+spec/spec.node.js
 spec/spec.rhino.js
 spec/spec.server.html
 spec/spec.shared-behaviors.js

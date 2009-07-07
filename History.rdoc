@@ -1,4 +1,9 @@
 
+=== 2.5.1 / 2009-07-07
+
+* Added intermediate node.js support
+* Fixed; grammar now allows foo.bar.baz.stub() etc to convert to stub(foo.bar.baz)
+
 === 2.5.0 / 2009-07-03
 
 * Added contrib in README (thanks to anyone who has helped)
