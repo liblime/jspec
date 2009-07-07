@@ -12,6 +12,7 @@ and much more.
 * Framework / DOM independent
 * Modular via JSpec Module's and hooks
 * Rhino support
+* Node.js support
 * Async support
 * Ruby JavaScript testing server
 * Nested describes
