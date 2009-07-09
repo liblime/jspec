@@ -31,7 +31,7 @@ and much more.
 * Method Stubbing
 * Shared behaviors
 * Profiling
-* Rails Integration (http://github.com/bhauman/jspec-rails)
+* Ruby on Rails Integration
 * Tiny (15 kb compressed, 1300-ish LOC)
 
 == Installation
@@ -559,6 +559,29 @@ Initialize project with:
 
 Run with:
   $ jspec run --server
+  
+  
+== Ruby on Rails
+
+No additional gems are required for JSpec to work with rails, although 
+http://github.com/bhauman/jspec-rails has been created by 'bhauman'. JSpec
+supports Rails out of the box, simply execute:
+
+  $ jspec init --rails
+  
+Then while still in the root directory of your Rails project, run the following
+command which will bind to, and refresh your browsers automatically when any changes 
+are made to ./public/javascripts/*.js or ./jspec/*.js
+
+  $ jspec
+  
+Or just like regular JSpec applications, run once:
+
+  $ jspec run
+  
+Or run via the terminal using Rhino:
+
+  $ jspec run --rhino
   
 == Known Issues
 
