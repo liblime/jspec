@@ -22,23 +22,13 @@ command :init do |c|
     when [dest] is not specified. The template includes several files for 
     running via Rhino, DOM, and the JSpec Rack server.'
   c.example 'Create a directory foo, initialized with a jspec template', 'jspec init foo'
-  c.option '-R', '--rails', 'Initialize rails template to ./jspec or [dest]'
+  c.option '-R', '--rails', 'Initialize rails template'
   c.when_called do |args, options|
     dest = args.shift || '.'
-    dest = options.rails ? 'jspec' : dest
-    unless Dir[dest + '/*'].empty?
-      abort unless agree "'#{dest}' is not empty; continue? "
-    end
-    if options.rails && !looks_like_rails_root?
-      abort unless agree "This does not look like root of a rails project; continue? "
-    end
-    template = File.join JSPEC_ROOT, 'templates', (options.rails ? 'rails' : 'default'), '.'
-    FileUtils.mkdir_p dest
-    FileUtils.cp_r template, dest
     if options.rails
-      replace_root_in dest, 'spec.dom.html', 'spec.rhino.js'
+      initialize_rails_to dest
     else
-      replace_root_in dest, 'spec/spec.dom.html', 'spec/spec.rhino.js'
+      initialize_to dest
     end
     say "Template initialized at '#{dest}'"
   end
@@ -118,6 +108,31 @@ command :run do |c|
 end
 alias_command :bind, :run, '--bind'
 
+def initialize_to dest
+  unless Dir[dest + '/*'].empty?
+    abort unless agree "'#{dest}' is not empty; continue? "
+  end
+  copy_template_to 'default', dest
+  replace_root_in dest, 'spec/spec.dom.html', 'spec/spec.rhino.js'
+end
+
+def initialize_rails_to dest
+  unless looks_like_rails_root?(dest)
+    abort unless agree "'#{dest}' does not look like root of a rails project; continue? "
+  end
+  copy_template_to 'rails', "#{dest}/jspec"
+  replace_root_in "#{dest}/jspec", 'spec.dom.html', 'spec.rhino.js'
+end
+
+def copy_template_to name, dest
+  FileUtils.mkdir_p dest
+  FileUtils.cp_r path_to_template(name), dest
+end
+
+def path_to_template name
+  File.join JSPEC_ROOT, 'templates', name, '.'
+end
+
 def path_to file
   rails? ? "jspec/#{file}" : "spec/#{file}"
 end
@@ -153,6 +168,6 @@ def update_version_in *paths
   end
 end
 
-def looks_like_rails_root?
-  File.directory?('app') && File.directory?('config') && File.directory?('vendor')  
+def looks_like_rails_root? path = '.'
+  File.directory? "#{path}/vendor"
 end
