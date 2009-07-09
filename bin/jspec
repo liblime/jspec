@@ -119,3 +119,7 @@ def start_server options, spec
   require 'server/server'
   JSpec::Server.start options, spec
 end
+
+def rails?
+  File.directory? 'jspec'  
+end
