@@ -83,7 +83,13 @@ command :run do |c|
   c.option '-S', '--server', 'Run specs using the JSpec server'
   c.option '-s', '--server-only', 'Start JSpec server without running browsers'
   c.when_called do |args, options|
-    options.default :browsers => %w( Safari ), :paths => ['lib/**/*.js', 'spec/**/*.js']
+    
+    # Rails
+    if rails?
+      options.default :browsers => %w( Safari ), :paths => ['public/javascripts/**/*.js', 'jspec/**/*.js']
+    else
+      options.default :browsers => %w( Safari ), :paths => ['lib/**/*.js', 'spec/**/*.js']
+    end
     
     # Actions
     if options.rhino
