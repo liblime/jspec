@@ -22,18 +22,20 @@ command :init do |c|
     when [dest] is not specified. The template includes several files for 
     running via Rhino, DOM, and the JSpec Rack server.'
   c.example 'Create a directory foo, initialized with a jspec template', 'jspec init foo'
+  c.option '-R', '--rails', 'Initialize rails template to ./jspec or [dest]'
   c.when_called do |args, options|
     dest = args.shift || '.'
+    dest = options.rails ? 'jspec' : dest
     unless Dir[dest + '/*'].empty?
       abort unless agree "'#{dest}' is not empty; continue? "
     end
-    template = File.join JSPEC_ROOT, 'templates', 'default', '.'
+    template = File.join JSPEC_ROOT, 'templates', (options.rails ? 'rails ' : 'default'), '.'
     FileUtils.mkdir_p dest
     FileUtils.cp_r template, dest
-    %w( spec/spec.dom.html spec/spec.rhino.js ).each do |path|
-      path = File.join dest, path
-      contents = File.read(path).gsub 'JSPEC_ROOT', JSPEC_ROOT
-      File.open(path, 'w') { |file| file.write contents }
+    if options.rails
+      replace_root_in 'jspec/spec.dom.html', 'jspec/spec.rhino.js'
+    else
+      replace_root_in 'spec/spec.dom.html', 'spec/spec.rhino.js'
     end
     say "Template initialized at '#{dest}'"
   end
@@ -46,13 +48,16 @@ command :update do |c|
     the latest JSpec features. Execute from JSpec project root without [paths] to
     update the default template spec files.'
   c.when_called do |args, options|
-    paths = args.empty? ? %w( spec/spec.dom.html spec/spec.rhino.js ) : args
-    paths.each do |path|
-      next unless File.exists? path
-      contents = File.read(path).gsub /visionmedia-jspec-(\d+\.\d+\.\d+)/, "visionmedia-jspec-#{program(:version)}"
-      File.open(path, 'r+'){ |file| file.write contents } 
-      say "Updated #{path} to JSpec #{program(:version)}"
+    if args.empty?
+      if rails?
+        paths = 'jspec/spec.dom.html', 'jspec/spec.rhino.js'
+      else
+        paths = 'spec/spec.dom.html', 'spec/spec.rhino.js'
+      end
+    else
+      paths = args
     end
+    update_version_in *paths
   end
 end
 
@@ -89,13 +94,13 @@ command :run do |c|
     
     # Actions
     if options.rhino
-      spec = args.shift || 'spec/spec.rhino.js'
+      spec = args.shift || path_to('spec.rhino.js')
       action = lambda { rhino spec }
     elsif options.server
-      spec = args.shift || 'spec/spec.server.html'
+      spec = args.shift || path_to('spec.server.html')
       action = lambda { start_server options, spec }
     else
-      spec = args.shift || 'spec/spec.dom.html'
+      spec = args.shift || path_to('spec.dom.html')
       action = Bind::Actions::RefreshBrowsers.new spec, *options.browsers
     end
     
@@ -110,6 +115,10 @@ command :run do |c|
 end
 alias_command :bind, :run, '--bind'
 
+def path_to file
+  rails? "jspec/#{file}" : "spec/#{file}"
+end
+
 def rhino file
   abort "#{file} not found" unless File.exists? file
   system "#{RHINO} #{file}"
@@ -122,4 +131,21 @@ end
 
 def rails?
   File.directory? 'jspec'  
+end
+
+def replace_root_in *paths
+  paths.each do |path|
+    path = File.join dest, path
+    contents = File.read(path).gsub 'JSPEC_ROOT', JSPEC_ROOT
+    File.open(path, 'w') { |file| file.write contents }
+  end
+end
+
+def update_version_in *paths
+  paths.each do |path|
+    next unless File.exists? path
+    contents = File.read(path).gsub /visionmedia-jspec-(\d+\.\d+\.\d+)/, "visionmedia-jspec-#{program(:version)}"
+    File.open(path, 'r+'){ |file| file.write contents } 
+    say "Updated #{path} to JSpec #{program(:version)}"
+  end
 end
