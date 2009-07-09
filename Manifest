@@ -38,3 +38,7 @@ templates/default/spec/spec.core.js
 templates/default/spec/spec.dom.html
 templates/default/spec/spec.rhino.js
 templates/default/spec/spec.server.html
+templates/rails/spec.application.js
+templates/rails/spec.dom.html
+templates/rails/spec.rhino.js
+templates/rails/spec.server.html

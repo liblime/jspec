@@ -1,4 +1,10 @@
 
+=== 2.6.0 / 2009-07-09
+
+* Added Ruby on Rails support
+* Added exporting of JSpec (node.js etc)
+* Added be_undefined matcher [#134]
+
 === 2.5.1 / 2009-07-07
 
 * Added intermediate node.js support
