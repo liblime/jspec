@@ -29,13 +29,16 @@ command :init do |c|
     unless Dir[dest + '/*'].empty?
       abort unless agree "'#{dest}' is not empty; continue? "
     end
-    template = File.join JSPEC_ROOT, 'templates', (options.rails ? 'rails ' : 'default'), '.'
+    if options.rails && !looks_like_rails_root?
+      abort unless agree "This does not look like root of a rails project; continue? "
+    end
+    template = File.join JSPEC_ROOT, 'templates', (options.rails ? 'rails' : 'default'), '.'
     FileUtils.mkdir_p dest
     FileUtils.cp_r template, dest
     if options.rails
-      replace_root_in 'jspec/spec.dom.html', 'jspec/spec.rhino.js'
+      replace_root_in dest, 'spec.dom.html', 'spec.rhino.js'
     else
-      replace_root_in 'spec/spec.dom.html', 'spec/spec.rhino.js'
+      replace_root_in dest, 'spec/spec.dom.html', 'spec/spec.rhino.js'
     end
     say "Template initialized at '#{dest}'"
   end
@@ -116,7 +119,7 @@ end
 alias_command :bind, :run, '--bind'
 
 def path_to file
-  rails? "jspec/#{file}" : "spec/#{file}"
+  rails? ? "jspec/#{file}" : "spec/#{file}"
 end
 
 def rhino file
@@ -133,7 +136,7 @@ def rails?
   File.directory? 'jspec'  
 end
 
-def replace_root_in *paths
+def replace_root_in dest, *paths
   paths.each do |path|
     path = File.join dest, path
     contents = File.read(path).gsub 'JSPEC_ROOT', JSPEC_ROOT
@@ -148,4 +151,8 @@ def update_version_in *paths
     File.open(path, 'r+'){ |file| file.write contents } 
     say "Updated #{path} to JSpec #{program(:version)}"
   end
+end
+
+def looks_like_rails_root?
+  File.directory?('app') && File.directory?('config') && File.directory?('vendor')  
 end
