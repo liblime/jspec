@@ -164,8 +164,9 @@ def update_version_in *paths
     next unless File.exists? path
     contents = File.read(path).gsub /visionmedia-jspec-(\d+\.\d+\.\d+)/, "visionmedia-jspec-#{program(:version)}"
     File.open(path, 'r+'){ |file| file.write contents } 
-    say "Updated #{path} to JSpec #{program(:version)}"
+    say "Updated #{path}; #{$1} -> #{program(:version)}"
   end
+  say "Finished updating JSpec"
 end
 
 def looks_like_rails_root? path = '.'
