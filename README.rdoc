@@ -14,6 +14,7 @@ and much more.
 * Rhino support
 * Node.js support
 * Async support
+* Fixture support
 * Ruby JavaScript testing server
 * Nested describes
 * Does not pollute core object prototypes
@@ -378,6 +379,23 @@ OR
 	.exec('...')
 	.run({ formatter : JSpec.formatters.Terminal })
 	.report()
+	
+== Fixtures
+
+The fixture() utility function may be used in order to load arbitrary file contents
+for use with your specifications. JSpec will resolve fixture('data') in the following
+manor:
+  
+  - 'data'
+  - 'spec/data'
+  - 'spec/fixtures/data'
+  - 'spec/fixtures/data.html'
+
+So if the file 'spec/fixtures/data.html' exists, we can simply use fixture('data'),
+where as 'spec/fixtures/xml/data.xml' must be specified with fixture('xml/data.xml').
+
+If you prefer not to store fixtures in the 'fixtures' directory you must be more specific
+with the path supplied.
 
 == Custom Matchers
 
