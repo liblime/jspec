@@ -263,5 +263,12 @@ describe 'Utility'
       fixture('test.html').should.eql '<p>test</p>'
       fixture('test').should.eql '<p>test</p>'
     end
+    
+    it 'should cache contents'
+      contents = fixture('test')
+      JSpec.cache['test'].should.eql contents
+      JSpec.cache['test'] = 'foo'
+      fixture('test').should.eql 'foo'
+    end
   end
 end
