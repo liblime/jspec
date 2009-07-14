@@ -255,4 +255,13 @@ describe 'Utility'
       JSpec.contentsOf(-{ return 'foo' }).should.include 'return', 'foo'
     end
   end
+  
+  describe 'fixture()'
+    it 'should return a files contents'
+      fixture('spec/fixtures/test.html').should.eql '<p>test</p>'
+      fixture('fixtures/test.html').should.eql '<p>test</p>'
+      fixture('test.html').should.eql '<p>test</p>'
+      fixture('test').should.eql '<p>test</p>'
+    end
+  end
 end
