@@ -1,4 +1,9 @@
 
+=== 2.7.0 / 2009-07-14
+
+* Added fixture() utility function
+* Templates initialize with example paths to lib
+
 === 2.6.0 / 2009-07-09
 
 * Added Ruby on Rails support
