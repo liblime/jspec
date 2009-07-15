@@ -95,6 +95,8 @@ command :run do |c|
     if options.rhino
       spec = args.shift || path_to('spec.rhino.js')
       action = lambda { rhino spec }
+    elsif options.server_only
+      start_server options, nil
     elsif options.server
       spec = args.shift || path_to('spec.server.html')
       action = lambda { start_server options, spec }

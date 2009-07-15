@@ -70,6 +70,7 @@ module JSpec
     end
     
     def self.start options, spec
+      p 'started'
       app = Rack::Builder.new do
         server = JSpec::Server.new :browsers => options.browsers, :root => '.'
         server.when_finished { exit }
