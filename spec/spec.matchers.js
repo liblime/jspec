@@ -470,11 +470,6 @@ describe 'Matchers'
       foo.bar(false)
     end
     
-    it 'should fail with null args'
-      foo = { bar : function(arg){ return arg }}
-      foo.should.receive('bar').with_args(null)
-      foo.bar(false)
-    end
     it 'should fail with boolean return value true'
       foo = { bar : function(){ return true }}
       foo.should.receive('bar').and_return(false)
@@ -486,12 +481,6 @@ describe 'Matchers'
       foo.should.receive('bar').and_return(true)
       foo.bar()
     end
-    
-    it 'should fail with null return value'
-      foo = { bar : function(){ return null }}
-      foo.should.receive('bar').and_return(false)
-      foo.bar()
-    end    
   end
   
 end
