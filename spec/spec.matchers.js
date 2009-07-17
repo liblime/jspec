@@ -375,7 +375,25 @@ describe 'Matchers'
       foo.should.receive('bar').with_args(null)
       foo.bar(null)
     end
-                            
+    
+    it 'should pass with boolean return value true'
+      foo = { bar : function(){ return true }}
+      foo.should.receive('bar').and_return(true)
+      foo.bar()
+    end
+    
+    it 'should pass with boolean return value false'
+      foo = { bar : function(){ return false }}
+      foo.should.receive('bar').and_return(false)
+      foo.bar()
+    end
+    
+    it 'should pass with null return value'
+      foo = { bar : function(){ return null }}
+      foo.should.receive('bar').and_return(null)
+      foo.bar()
+    end
+                                     
     it 'should fail when the method does not exist'
       person.should.receive('getPets')
     end
