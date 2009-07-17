@@ -362,6 +362,13 @@ describe 'Matchers'
       personWithPets.should.not.receive('addPets', 'twice')
       personWithPets.addPets('izzy')
     end
+    
+    it 'should pass with boolean args'
+      foo = { bar : function(arg){ return arg }}
+      foo.should.receive('bar', 'twice').with_args(true)
+      foo.bar(true)
+      foo.bar(true)
+    end
                             
     it 'should fail when the method does not exist'
       person.should.receive('getPets')
@@ -432,6 +439,13 @@ describe 'Matchers'
       personWithPets.addPets('izzy')
       personWithPets.addPets('max')
     end
+    
+    it 'should fail with boolean args'
+      foo = { bar : function(arg){ return arg }}
+      foo.should.receive('bar').with_args(true)
+      foo.bar(false)
+    end
+    
   end
   
 end
