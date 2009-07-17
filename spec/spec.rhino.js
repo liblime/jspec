@@ -10,5 +10,5 @@ JSpec
 .exec('spec/spec.utils.js')
 .exec('spec/spec.shared-behaviors.js')
 .exec('spec/spec.modules.js')
-.run({ formatter : JSpec.formatters.Terminal, failuresOnly : true })
+.run({ formatter : JSpec.formatters.Terminal, failuresOnly : false })
 .report()
