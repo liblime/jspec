@@ -369,6 +369,12 @@ describe 'Matchers'
       foo.bar(true)
       foo.bar(true)
     end
+    
+    it 'should pass with null args'
+      foo = { bar : function(arg){ return arg }}
+      foo.should.receive('bar').with_args(null)
+      foo.bar(null)
+    end
                             
     it 'should fail when the method does not exist'
       person.should.receive('getPets')
@@ -443,6 +449,12 @@ describe 'Matchers'
     it 'should fail with boolean args'
       foo = { bar : function(arg){ return arg }}
       foo.should.receive('bar').with_args(true)
+      foo.bar(false)
+    end
+    
+    it 'should fail with null args'
+      foo = { bar : function(arg){ return arg }}
+      foo.should.receive('bar').with_args(null)
       foo.bar(false)
     end
     
