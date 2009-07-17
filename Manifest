@@ -20,7 +20,6 @@ spec/env.js
 spec/fixtures/test.html
 spec/fixtures/test.json
 spec/fixtures/test.xml
-spec/jquery-1.3.1.js
 spec/modules.js
 spec/spec.dom.html
 spec/spec.grammar-less.js

@@ -1,4 +1,12 @@
 
+=== 2.7.1 / 2009-07-17
+
+* Changed; hash() now accepts null
+* Fixed should_receive issue with validating boolean args or return values
+* Fixed --server-only switch
+* Fixed jQuery dependency error message when jQuery is not available
+  when using jspec.jquery.js
+
 === 2.7.0 / 2009-07-14
 
 * Added fixture() utility function
