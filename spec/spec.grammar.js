@@ -11,6 +11,10 @@ describe 'Grammar'
     n.should.eql 10
   end
   
+  it 'should escape <html> in <p>descriptions</p> and body'
+    '<p></p>'.should.eql '<p></p>'
+  end
+  
   it 'should allow parens to be optional when no args are passed'
     true.should.be_true
     true.should.be_true()
