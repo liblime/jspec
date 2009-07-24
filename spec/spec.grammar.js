@@ -15,6 +15,11 @@ describe 'Grammar'
     '<p></p>'.should.eql '<p></p>'
   end
   
+  it 'should parse correctly when "it" is within the body'
+    text = 'Get it at Github'
+    text.should.include 'it'
+  end
+  
   it 'should allow parens to be optional when no args are passed'
     true.should.be_true
     true.should.be_true()
