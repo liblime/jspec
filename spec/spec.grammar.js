@@ -20,6 +20,16 @@ describe 'Grammar'
     text.should.include 'it'
   end
   
+  it 'should parse correctly when "describe" is within the body'
+    text = 'It should work with describe'
+    text.should.include 'describe'
+  end
+  
+  it 'should parse correctly when "end" is within the body'
+    text = 'This should not end the parsing :)'
+    text.should.include 'not'
+  end
+  
   it 'should allow parens to be optional when no args are passed'
     true.should.be_true
     true.should.be_true()
@@ -27,6 +37,10 @@ describe 'Grammar'
   
   it 'should not mess up with words like it or append in descriptions'
     -{ element.append().end() }.should.throw_error
+  end
+  
+  it 'should not mess up "end" in strings'
+    'foo end bar'.should.not.eql 'foo }); bar'
   end
   
   it 'should allow semicolons'
