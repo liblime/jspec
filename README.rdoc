@@ -618,6 +618,10 @@ Or run via the terminal using Rhino:
     return 'html'
   })
   
+* be_hidden, be_visible will not work for elements created by strings using jQuery() with
+  jQuery >= 1.3.2 for example $('<input />').should.be_visible will fail. Ticket for this issue
+  is at http://dev.jquery.com/ticket/4909
+  
 == More Information
 
 * Featured article in JSMag: http://www.jsmag.com/main.issues.description/id=21/
