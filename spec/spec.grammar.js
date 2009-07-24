@@ -30,6 +30,11 @@ describe 'Grammar'
     text.should.include 'not'
   end
   
+  it 'should parse correctly with "before" and "after" within the body'
+    text = 'This comes before that, which is after the rest'
+    text.should.include 'before'
+  end
+  
   it 'should allow parens to be optional when no args are passed'
     true.should.be_true
     true.should.be_true()
