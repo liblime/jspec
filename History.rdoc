@@ -1,4 +1,11 @@
 
+=== 2.7.2 / 2009-07-24
+
+* Fixed "end" in spec bodies when using the grammar
+* Fixed "it" in spec bodies when using the grammar [#142]
+* Changed; HTML entities in descriptions are now escaped for DOM formatter [#141]
+* Added enno84@gmx.net as a contributor (thanks for the bug reports)
+
 === 2.7.1 / 2009-07-17
 
 * Changed; hash() now accepts null
