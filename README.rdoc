@@ -397,6 +397,39 @@ where as 'spec/fixtures/xml/data.xml' must be specified with fixture('xml/data.x
 If you prefer not to store fixtures in the 'fixtures' directory you must be more specific
 with the path supplied.
 
+== Testing DOM Elements
+
+When using jQuery testing DOM elements is very easy. Many may think they require specific
+sandbox divs in their html, however you do not. Using the fixture support mentioned above
+you may simply load some HTML, and use the 'elements()' utility which is an alias of jQuery:
+
+  describe 'JSpec DOM testing'
+    describe 'is so easy'
+      before_each
+        list = elements(fixture('users-list'))
+        // or list = jQuery(fixture('users-list'))
+        // or list = $(fixture('users-list'))
+      end
+      
+      it 'should have users'
+        list.should.have_tag 'ul'
+      end
+    end
+  end
+  
+You may also use simple strings, since jQuery's constructor will convert them to DOM elements:
+
+  describe 'Something'
+    before_each
+      html = elements('<p>Foo</p>')
+      // or html = $('<p>Foo</p>') ...
+    end
+    
+    it 'should do something'
+      html.should.have_text 'Foo'
+    end
+  end
+
 == Custom Matchers
 
 First lets create a simple equality matcher. In the case below JSpec is smart enough to realize
