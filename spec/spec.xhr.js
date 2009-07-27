@@ -77,7 +77,6 @@ describe 'JSpec'
       
       it 'should populate responseText'
         request.responseText.should.eql 'bar'
-        JSpec.load('foo').should.eql 'bar'
       end
       
       it 'should populate headers'
