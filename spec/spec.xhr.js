@@ -42,11 +42,7 @@ describe 'JSpec'
       it 'should populate password'
         request.password.should.eql 'bar'
       end
-      
-      it 'should respond with the mock body'
-        request.body.should.eql 'bar'
-      end
-      
+
       it 'should populate method'
         request.method.should.eql 'GET'
       end
@@ -77,6 +73,10 @@ describe 'JSpec'
       
       it 'should populate data'
         request.data.should.eql 'foo=bar'
+      end
+      
+      it 'should populate responseText'
+        request.responseText.should.eql 'bar'
       end
       
       describe '.onreadystatechange()'
