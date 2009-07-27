@@ -60,7 +60,11 @@ describe 'JSpec'
       end
       
       it 'should populate content type response header'
-        request.getResponseHeader('content-type').should.eql 'text/plain'
+        request.getResponseHeader('Content-Type').should.eql 'text/plain'
+      end
+      
+      it 'should populate Content-Length response header'
+        request.getResponseHeader('Content-Length').should.eql 3
       end
       
       describe '.onreadystatechange()'
@@ -89,9 +93,9 @@ describe 'JSpec'
         it 'should set request headers'
           mockRequest.and_return('bar', 'text/plain', 200)
           request.open('GET', 'path', false, 'foo', 'bar')
-          request.setRequestHeader('content-length', 12)
+          request.setRequestHeader('Content-Length', 12)
           request.send(null)
-          request.requestHeaders['content-length'].should.eql 12
+          request.requestHeaders['Content-Length'].should.eql 12
         end
       end
       
