@@ -90,8 +90,17 @@ describe 'JSpec'
           mockRequest.and_return('bar', 'text/plain', 200)
           request.open('GET', 'path', false, 'foo', 'bar')
           request.setRequestHeader('content-length', 12)
-          request.send('foo=bar')
+          request.send(null)
           request.requestHeaders['content-length'].should.eql 12
+        end
+      end
+      
+      describe 'HEAD'
+        it 'should respond with headers only'
+          mockRequest.and_return('bar', 'text/plain', 200)
+          request.open('HEAD', 'path', false)
+          request.send(null)
+          request.body.should.eql ''
         end
       end
     end
