@@ -100,7 +100,7 @@ describe 'JSpec'
           mockRequest.and_return('bar', 'text/plain', 200)
           request.open('HEAD', 'path', false)
           request.send(null)
-          request.body.should.eql ''
+          request.body.should.be_null
         end
       end
     end
