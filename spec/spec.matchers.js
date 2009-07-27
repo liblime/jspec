@@ -27,6 +27,12 @@ describe 'Matchers'
       { foo : 'bar' }.should.eql { foo : 'bar' }
     end
     
+    it 'should hash compare objects with different orders'
+      a = { one : 'two', three : 'four' }
+      b = { three : 'four', one : 'two' }
+      a.should.eql b
+    end
+    
     it 'should hash compare arbitrary objects'
       Foo = function(){}, Bar = function(){}
       Bar.prototype = { doSomething : function(){ }}
