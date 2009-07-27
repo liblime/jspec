@@ -22,6 +22,15 @@ describe 'JSpec'
         request.send('foo=bar')
       end
       
+      it 'should allow setting respose status'
+        mockRequest.and_return('bar', 'text/plain', 404)
+        request = JSpec.xhr()
+        request.open('GET', 'path', false)
+        request.send(null)
+        request.status.should.eql 404
+        request.statusText.should.eql 'Not Found'
+      end
+      
       it 'should default readyState to 0'
         request = JSpec.xhr()
         request.readyState.should.eql 0
