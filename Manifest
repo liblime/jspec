@@ -10,6 +10,7 @@ lib/images/vr.png
 lib/jspec.css
 lib/jspec.jquery.js
 lib/jspec.js
+lib/jspec.xhr.js
 Manifest
 Rakefile
 README.rdoc
@@ -25,6 +26,7 @@ spec/spec.dom.html
 spec/spec.grammar-less.js
 spec/spec.grammar.js
 spec/spec.jquery.js
+spec/spec.jquery.xhr.js
 spec/spec.js
 spec/spec.matchers.js
 spec/spec.modules.js
@@ -33,6 +35,7 @@ spec/spec.rhino.js
 spec/spec.server.html
 spec/spec.shared-behaviors.js
 spec/spec.utils.js
+spec/spec.xhr.js
 templates/default/History.rdoc
 templates/default/lib/yourlib.core.js
 templates/default/README.rdoc

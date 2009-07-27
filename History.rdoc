@@ -1,4 +1,13 @@
 
+=== 2.8.0 / 2009-07-27
+
+* Give readFile precendence over xhr so that fixtures work with mockRequest when using Rhino
+* Give XMLHttpRequest precedence over microsoft crap
+* Added Mock Ajax Support
+* Added mockRequest(), unmockRequest() utilities
+* Added jspec.xhr.js
+* Fixed be_visible, and be_hidden. Now implement the jQuery <= 1.3.1 method
+
 === 2.7.2 / 2009-07-24
 
 * Fixed "end" in spec bodies when using the grammar
