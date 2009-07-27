@@ -75,6 +75,10 @@ describe 'JSpec'
         request.getResponseHeader('Content-Length').should.eql 3
       end
       
+      it 'should populate data'
+        request.data.should.eql 'foo=bar'
+      end
+      
       describe '.onreadystatechange()'
         before_each
           mockRequest.and_return('bar', 'text/plain', 200)
