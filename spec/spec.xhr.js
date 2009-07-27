@@ -2,7 +2,7 @@
 describe 'JSpec'
   describe '.mockRequest'
     it 'should mock XMLHttpRequests if unmockRequest() is called or the spec block has finished'
-      mockRequest.and_return('test')
+      mockRequest().and_return('test')
       XMLHttpRequest.should.eql JSpec.XMLHttpRequest
       unmockRequest()
       XMLHttpRequest.should.not.eql JSpec.XMLHttpRequest
@@ -15,14 +15,14 @@ describe 'JSpec'
     
     describe 'mock response'
       before_each
-        mockRequest.and_return('bar', 'text/plain', 200, { 'x-foo' : 'bar' })
+        mockRequest().and_return('bar', 'text/plain', 200, { 'x-foo' : 'bar' })
         request = JSpec.xhr()
         request.open('GET', 'path', false, 'foo', 'bar')
         request.send('foo=bar')
       end
       
       it 'should allow setting respose status'
-        mockRequest.and_return('bar', 'text/plain', 404)
+        mockRequest().and_return('bar', 'text/plain', 404)
         request = JSpec.xhr()
         request.open('GET', 'path', false)
         request.send(null)
@@ -85,7 +85,7 @@ describe 'JSpec'
       
       describe '.onreadystatechange()'
         before_each
-          mockRequest.and_return('bar', 'text/plain', 200)
+          mockRequest().and_return('bar', 'text/plain', 200)
           request = JSpec.xhr()
         end
         
@@ -107,7 +107,7 @@ describe 'JSpec'
       
       describe '.setRequestHeader()'
         it 'should set request headers'
-          mockRequest.and_return('bar', 'text/plain', 200)
+          mockRequest().and_return('bar', 'text/plain', 200)
           request.open('GET', 'path', false, 'foo', 'bar')
           request.setRequestHeader('Accept', 'foo')
           request.send(null)
@@ -117,7 +117,7 @@ describe 'JSpec'
       
       describe 'HEAD'
         it 'should respond with headers only'
-          mockRequest.and_return('bar', 'text/plain', 200)
+          mockRequest().and_return('bar', 'text/plain', 200)
           request.open('HEAD', 'path', false)
           request.send(null)
           request.body.should.be_null

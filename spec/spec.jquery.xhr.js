@@ -2,7 +2,7 @@
 describe 'jQuery'
   describe '.getJSON()'
     it 'should work with mockRequest'
-      mockRequest.and_return('{ foo : "bar" }')
+      mockRequest().and_return('{ foo : "bar" }')
       $.getJSON('foo', function(response, statusText){
         response.foo.should.eql 'bar'
         statusText.should.eql 'success'
@@ -10,7 +10,7 @@ describe 'jQuery'
     end
     
     it 'should not invoke callback when response status is 4xx'
-      mockRequest.and_return('foo', 'text/plain', 404)
+      mockRequest().and_return('foo', 'text/plain', 404)
       $.getJSON('foo', function(){
         fail('callback was invoked')
       })
@@ -19,7 +19,7 @@ describe 'jQuery'
   
   describe '.post()'
     it 'should work with mockRequest'
-      mockRequest.and_return('<p></p>', 'text/html')
+      mockRequest().and_return('<p></p>', 'text/html')
       $.post('foo', function(response){
         response.should.eql '<p></p>'
       })
