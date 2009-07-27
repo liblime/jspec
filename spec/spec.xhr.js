@@ -17,7 +17,6 @@ describe 'JSpec'
       before_each
         mockRequest.and_return('bar', 'text/plain', 200)
         request = JSpec.xhr()
-        request.setRequestHeader('content-length', 12)
         request.open('GET', 'path', false, 'foo', 'bar')
         request.send('foo=bar')
       end
@@ -102,9 +101,9 @@ describe 'JSpec'
         it 'should set request headers'
           mockRequest.and_return('bar', 'text/plain', 200)
           request.open('GET', 'path', false, 'foo', 'bar')
-          request.setRequestHeader('Content-Length', 12)
+          request.setRequestHeader('Accept', 'foo')
           request.send(null)
-          request.requestHeaders['Content-Length'].should.eql 12
+          request.requestHeaders['accept'].should.eql 'foo'
         end
       end
       
