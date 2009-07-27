@@ -691,6 +691,7 @@ Many ideas and bug reports were contributed by
 the following developers, thankyou for making
 JSpec more enjoyable, and bug free ;)
 
+* Lawrence Pit
 * mpd@jesters-court.ne
 * kevin.gisi@gmail.com
 * enno84@gmx.net
