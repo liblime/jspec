@@ -11,6 +11,7 @@ and much more.
 * Highly readable
 * Framework / DOM independent
 * Modular via JSpec Module's and hooks
+* Mock Ajax Requests
 * Rhino support
 * Node.js support
 * Async support
@@ -242,6 +243,8 @@ on any object when using the JSpec grammar:
   * Core
 
   - an_instance_of   used in conjunction with the 'receive' matcher
+  - mockRequest      mock a request (requires jspec.xhr.js)
+  - unmockRequest    unmock requests (requests jspec.xhr.js)
                 
   * jQuery      
                 
@@ -280,6 +283,27 @@ common functionality. For example an Admin, would inherit all specs of User:
   end
 
 NOTE: both User and Administrator's before hooks implement the 'user' variable
+
+== Mock Ajax Requests
+
+JSpec supports generic Ajax mocking which is usable with any JavaScript framework. The
+API is comprised of two functions, mockRequest() and unmockRequest(). unmockRequest() is
+automatically called after each specification to restore the default functionality of XMLHttpRequest,
+so it is uncommon to call unmockRequest() directly. Below is a jQuery example:
+
+  it 'should mock requests'
+    mockRequest().and_return('{ foo : "bar" }', 'application/json')
+    $.getJSON('foo', function(response, statusText){
+      response.foo.should.eql 'bar'
+    })
+  end
+
+The mockRequest().and_return signature is as follows:
+
+  mockRequest().and_return(<data>, [content-type], [response-status-code], [headers-hash])
+  
+At the moment mockRequest() itself does not accept any arguments, however in the future
+this will be used to target specific uris for mocking.
 
 == Hooks
 
