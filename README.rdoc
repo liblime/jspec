@@ -286,7 +286,7 @@ NOTE: both User and Administrator's before hooks implement the 'user' variable
 
 == Mock Ajax Requests
 
-JSpec supports generic Ajax mocking which is usable with any JavaScript framework. The
+JSpec supports generic Ajax mocking which is usable with any JavaScript framework via 'jspec.xhr.js'. The
 API is comprised of two functions, mockRequest() and unmockRequest(). unmockRequest() is
 automatically called after each specification to restore the default functionality of XMLHttpRequest,
 so it is uncommon to call unmockRequest() directly. Below is a jQuery example:
