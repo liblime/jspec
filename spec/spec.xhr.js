@@ -91,7 +91,7 @@ describe 'JSpec'
           request.open('GET', 'path', false, 'foo', 'bar')
           request.setRequestHeader('content-length', 12)
           request.send('foo=bar')
-          request.requestHeaders['Content-Length'].should.eql 12
+          request.requestHeaders['content-length'].should.eql 12
         end
       end
     end
