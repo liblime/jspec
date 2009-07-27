@@ -15,7 +15,7 @@ describe 'JSpec'
     
     describe 'mock response'
       before_each
-        mockRequest.and_return('bar', 'text/plain', 200)
+        mockRequest.and_return('bar', 'text/plain', 200, { 'x-foo' : 'bar' })
         request = JSpec.xhr()
         request.open('GET', 'path', false, 'foo', 'bar')
         request.send('foo=bar')
@@ -78,6 +78,10 @@ describe 'JSpec'
       it 'should populate responseText'
         request.responseText.should.eql 'bar'
         JSpec.load('foo').should.eql 'bar'
+      end
+      
+      it 'should populate headers'
+        request.getResponseHeader('X-Foo').should.eql 'bar'
       end
       
       describe '.onreadystatechange()'
