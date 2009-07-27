@@ -305,6 +305,8 @@ The mockRequest().and_return signature is as follows:
 At the moment mockRequest() itself does not accept any arguments, however in the future
 this will be used to target specific uris for mocking.
 
+NOTE: works with Rhino as well
+
 == Hooks
 
 Currently the following hooks are supported, and may be utilized any number of times as they
