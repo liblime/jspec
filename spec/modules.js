@@ -24,6 +24,9 @@ ExampleModule = {
   checkModuleContext : function() {
     return this.name
   },
+  checkUtilityContext : function() {
+    return doFoo()
+  },
   matchers : {
     be_foo_bar : function() {
       return true

@@ -28,6 +28,10 @@ describe 'JSpec'
         hook('checkModuleContext')[0].should.eql 'ExampleModule'
       end
       
+      it 'should run in context to the modules utilities'
+        hook('checkUtilityContext')[0].should.eql 'foo'
+      end
+      
       it 'should run beforeSpec BEFORE the before_each blocks'
         addedBeforeSpecHook.should.be_true
       end
