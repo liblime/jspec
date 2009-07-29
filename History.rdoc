@@ -1,4 +1,10 @@
 
+=== 2.8.2 / 2009-07-29
+
+* Added JSpec.tryLoading()
+* Added JSpec.request used to reference the original XMLHttpRequest; used to fix [#149]
+* Fixed Mock XHR issue messing up JSpec request related utilities such as fixture() [#149]
+
 === 2.8.1 / 2009-07-27
 
 * Added Lawrence Pit as a contributor
