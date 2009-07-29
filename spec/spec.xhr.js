@@ -1,6 +1,15 @@
 
 describe 'JSpec'
   describe '.mockRequest'
+    before
+      responseFrom = function(path) {
+        request = new XMLHttpRequest
+        request.open('POST', path, false)
+        request.send(null)
+        return request.responseText
+      }
+    end
+    
     it 'should mock XMLHttpRequests if unmockRequest() is called or the spec block has finished'
       original = XMLHttpRequest
       mockRequest().and_return('test')
@@ -21,7 +30,7 @@ describe 'JSpec'
         request.send('foo=bar')
       end
       
-      it 'should allow setting respose status'
+      it 'should allow setting response status'
         mockRequest().and_return('bar', 'text/plain', 404)
         request = new XMLHttpRequest
         request.open('GET', 'path', false)
@@ -127,7 +136,14 @@ describe 'JSpec'
           mockRequest().and_return('bar', 'text/plain', 200)
           request.open('HEAD', 'path', false)
           request.send(null)
-          request.body.should.be_null
+          request.responseText.should.be_null
+        end
+      end
+      
+      describe 'with uri'
+        it 'should mock only the uri specified'
+          mockRequest('ilike').and_return('cookies')
+          responseFrom('async').should.eql 'cookies'
         end
       end
     end
