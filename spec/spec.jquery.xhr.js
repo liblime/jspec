@@ -9,6 +9,13 @@ describe 'jQuery'
       })
     end
     
+    it 'should work with a json fixture'
+      mockRequest().and_return(fixture('test.json'))
+      $.getJSON('foo', function(response){
+        response.users.tj.email.should.eql 'tj@vision-media.ca'
+      })
+    end
+    
     it 'should not invoke callback when response status is 4xx'
       mockRequest().and_return('foo', 'text/plain', 404)
       $.getJSON('foo', function(){
