@@ -268,6 +268,10 @@ describe 'Utility'
       }
       JSpec.paramsFor(foo).should.eql ['bar']
     end
+    
+    it 'should return empty array when no params are present'
+      JSpec.paramsFor(function(){}).should.eql []
+    end
   end
   
   describe 'fixture()'
