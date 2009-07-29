@@ -2,10 +2,11 @@
 describe 'JSpec'
   describe '.mockRequest'
     it 'should mock XMLHttpRequests if unmockRequest() is called or the spec block has finished'
+      original = XMLHttpRequest
       mockRequest().and_return('test')
-      XMLHttpRequest.should.eql JSpec.XMLHttpRequest
+      XMLHttpRequest.should.not.equal original 
       unmockRequest()
-      XMLHttpRequest.should.not.eql JSpec.XMLHttpRequest
+      XMLHttpRequest.should.equal original
     end
     
     it 'should restore original XMLHttpRequest constructor after each spec'
