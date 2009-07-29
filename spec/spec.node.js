@@ -2,6 +2,12 @@
 __loading__ = []
 __loadDelay__ = 1000
 
+originalPrint = print
+
+print = function(arg) {
+  originalPrint(arg + "\n")
+}
+
 readFile = function(path, callback) {
   __loading__.push(path)
   var promise = node.fs.cat(path, "utf8")
@@ -34,7 +40,7 @@ setTimeout(function(){
   .exec('spec/spec.utils.js')
   .exec('spec/spec.shared-behaviors.js')
   setTimeout(function(){ 
-    JSpec.run({ formatter : JSpec.formatters.Terminal, failuresOnly : true })
+    JSpec.run({ formatter : JSpec.formatters.Terminal, failuresOnly : false })
     setTimeout(function() {
       JSpec.report()
     }, __loadDelay__ / 3)
