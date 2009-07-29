@@ -268,6 +268,7 @@ describe 'Utility'
       JSpec.cache['test'].should.eql contents
       JSpec.cache['test'] = 'foo'
       fixture('test').should.eql 'foo'
+      delete JSpec.cache['test']
     end
   end
 end

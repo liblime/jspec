@@ -83,11 +83,11 @@ describe 'JSpec'
         request.getResponseHeader('X-Foo').should.eql 'bar'
       end
       
-      it 'should not interupt JSpec request related functionality'
+      it 'should not interrupt JSpec request related functionality'
         mockRequest().and_return('fail')
         JSpec.load('async').should.eql 'cookies!'
         fixture('test').should.eql '<p>test</p>'
-        -{ fixture('test.json').user.tj.email }.should.not.throw_error
+        fixture('test.json').should.include '{ user'
       end
       
       describe '.onreadystatechange()'
