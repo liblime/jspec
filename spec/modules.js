@@ -14,7 +14,15 @@ ExampleModule = {
   afterSuite  : function() {
     addedAfterSuite = true
     addedBeforeSuite = addedBeforeSpec = addedAfterSpec = false
-    //this.each('foo bar', function(){})
+  },
+  checkJSpecContext : function(){
+    return each
+  },
+  checkContext : function() {
+    return fixture('test')
+  },
+  checkModuleContext : function() {
+    return this.name
   },
   matchers : {
     be_foo_bar : function() {
