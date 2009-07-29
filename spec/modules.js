@@ -27,6 +27,9 @@ ExampleModule = {
   checkUtilityContext : function() {
     return doFoo()
   },
+  afterSpec : function() {
+    doFoo()
+  },
   matchers : {
     be_foo_bar : function() {
       return true
