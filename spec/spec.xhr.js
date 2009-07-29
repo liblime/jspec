@@ -16,14 +16,14 @@ describe 'JSpec'
     describe 'mock response'
       before_each
         mockRequest().and_return('bar', 'text/plain', 200, { 'x-foo' : 'bar' })
-        request = JSpec.xhr()
+        request = new XMLHttpRequest
         request.open('GET', 'path', false, 'foo', 'bar')
         request.send('foo=bar')
       end
       
       it 'should allow setting respose status'
         mockRequest().and_return('bar', 'text/plain', 404)
-        request = JSpec.xhr()
+        request = new XMLHttpRequest
         request.open('GET', 'path', false)
         request.send(null)
         request.status.should.eql 404
@@ -31,7 +31,7 @@ describe 'JSpec'
       end
       
       it 'should default readyState to 0'
-        request = JSpec.xhr()
+        request = new XMLHttpRequest
         request.readyState.should.eql 0
       end
       
@@ -85,7 +85,7 @@ describe 'JSpec'
       
       it 'should not interupt JSpec request related functionality'
         mockRequest().and_return('fail')
-        JSpec.load('async').should.not.eql 'fail'
+        JSpec.load('async').should.eql 'cookies!'
         fixture('test').should.eql '<p>test</p>'
         -{ fixture('test.json').user.tj.email }.should.not.throw_error
       end
@@ -93,7 +93,7 @@ describe 'JSpec'
       describe '.onreadystatechange()'
         before_each
           mockRequest().and_return('bar', 'text/plain', 200)
-          request = JSpec.xhr()
+          request = new XMLHttpRequest
         end
         
         it 'should be called when opening request in context to the request'
