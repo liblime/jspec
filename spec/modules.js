@@ -1,5 +1,6 @@
 
 ExampleModule = {
+  name : 'ExampleModule',
   utilities : {
     doFoo : function(){ return 'foo' },
     doBar : function(){ return 'bar' }
