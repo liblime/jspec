@@ -9,6 +9,7 @@ JSpec
 .exec('spec/spec.js')
 .exec('spec/spec.matchers.js')
 .exec('spec/spec.utils.js')
+.exec('spec/spec.fixtures.js')
 .exec('spec/spec.shared-behaviors.js')
 .exec('spec/spec.modules.js')
 .exec('spec/spec.xhr.js')

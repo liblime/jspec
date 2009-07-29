@@ -33,7 +33,6 @@ setTimeout(function(){
   .exec('spec/spec.matchers.js')
   .exec('spec/spec.utils.js')
   .exec('spec/spec.shared-behaviors.js')
-  .exec('spec/spec.modules.js')
   setTimeout(function(){ 
     JSpec.run({ formatter : JSpec.formatters.Terminal, failuresOnly : true })
     setTimeout(function() {
