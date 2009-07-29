@@ -2,20 +2,24 @@
 describe 'JSpec'
   describe 'module'
     describe 'hooks'
-      before_each
-        addedBeforeSpecHook = true
-      end
-      
-      after_each
-        addedAfterSpecHook = true
-      end
-
-      it 'should run in context with beforeSpec'
+      it 'should run beforeSpec'
         addedBeforeSpec.should.be_true
-        addedAfterSpec.should.be_false
-        addedAfterSpecHook.should.be_false
       end
       
+      it 'should run afterSpec'
+        addedAfterSpec.should.be_true
+      end
+      
+      describe 'with suites'
+        it 'should run beforeSuite'
+          addedBeforeSuite.should.be_true
+        end
+      end
+      
+      it 'should run afterSuite'
+        addedAfterSuite.should.be_true
+      end
+    
       it 'should run in context with JSpec'
         hook('checkJSpecContext')[0].should.equal JSpec.each
       end
@@ -30,29 +34,6 @@ describe 'JSpec'
       
       it 'should run in context to the modules utilities'
         hook('checkUtilityContext')[0].should.eql 'foo'
-      end
-      
-      it 'should run beforeSpec BEFORE the before_each blocks'
-        addedBeforeSpecHook.should.be_true
-      end
-
-      it 'should run in context with afterSpec'
-        addedBeforeSpec.should.be_true
-        addedAfterSpec.should.be_true
-      end
-      
-      it 'should run afterSpec BEFORE after_each blocks'
-        addedAfterSpecHook.should.be_true
-      end
-
-      it 'should run in context with beforeSuite'
-        addedBeforeSuite.should.be_true
-      end
-
-      describe 'another suite'
-        it 'should run in context with afterSuite'
-          addedAfterSuite.should.be_true
-        end
       end
     end
     

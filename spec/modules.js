@@ -8,28 +8,14 @@ ExampleModule = {
   randomHook : function(a, b) {
     return [a, b]
   },
-  beforeSpec  : function() { addedBeforeSpec = true, addedBeforeSpecHook = false },
-  afterSpec   : function() { addedAfterSpec = true, addedAfterSpecHook = false },
-  beforeSuite : function() { addedBeforeSuite = true },
-  afterSuite  : function() {
-    addedAfterSuite = true
-    addedBeforeSuite = addedBeforeSpec = addedAfterSpec = false
-  },
-  checkJSpecContext : function(){
-    return each
-  },
-  checkContext : function() {
-    return fixture('test')
-  },
-  checkModuleContext : function() {
-    return this.name
-  },
-  checkUtilityContext : function() {
-    return doFoo()
-  },
-  afterSpec : function() {
-    doFoo()
-  },
+  beforeSpec  : function() { addedBeforeSpec  = true; doFoo()  },
+  afterSpec   : function() { addedAfterSpec   = true  },
+  beforeSuite : function() { addedBeforeSuite = true  },
+  afterSuite  : function() { addedAfterSuite  = true  },
+  checkJSpecContext : function(){ return each },
+  checkContext : function() { return fixture('test') },
+  checkModuleContext : function() { return this.name },
+  checkUtilityContext : function() { return doFoo() },
   matchers : {
     be_foo_bar : function() {
       return true
