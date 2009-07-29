@@ -3,10 +3,7 @@ __loading__ = []
 __loadDelay__ = 1000
 
 originalPrint = print
-
-print = function(arg) {
-  originalPrint(arg + "\n")
-}
+print = puts
 
 readFile = function(path, callback) {
   __loading__.push(path)
