@@ -9,7 +9,6 @@ describe 'JSpec'
     end
     
     it 'should restore original XMLHttpRequest constructor after each spec'
-      XMLHttpRequest.should.eql JSpec.defaultXMLHttpRequest
       XMLHttpRequest.should.not.eql JSpec.XMLHttpRequest
     end
     
