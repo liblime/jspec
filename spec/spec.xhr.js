@@ -83,6 +83,13 @@ describe 'JSpec'
         request.getResponseHeader('X-Foo').should.eql 'bar'
       end
       
+      it 'should not interupt JSpec request related functionality'
+        mockRequest().and_return('fail')
+        JSpec.load('async').should.not.eql 'fail'
+        fixture('test').should.eql '<p>test</p>'
+        -{ fixture('test.json').user.tj.email }.should.not.throw_error
+      end
+      
       describe '.onreadystatechange()'
         before_each
           mockRequest().and_return('bar', 'text/plain', 200)
