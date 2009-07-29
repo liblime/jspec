@@ -13,6 +13,7 @@ ExampleModule = {
   afterSuite  : function() {
     addedAfterSuite = true
     addedBeforeSuite = addedBeforeSpec = addedAfterSpec = false
+    //this.each('foo bar', function(){})
   },
   matchers : {
     be_foo_bar : function() {

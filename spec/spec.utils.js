@@ -256,6 +256,20 @@ describe 'Utility'
     end
   end
   
+  describe 'paramsFor()'
+    it 'should return an array of function parameter names'
+      JSpec.paramsFor(function(foo, bar){}).should.eql ['foo', 'bar']
+    end
+    
+    it 'should return only the params for the root function'
+      foo = function(bar){
+        function baz(test) {}
+        var something = function(foo, bar){}
+      }
+      JSpec.paramsFor(foo).should.eql ['bar']
+    end
+  end
+  
   describe 'fixture()'
     it 'should return a files contents'
       fixture('fixtures/test.html').should.eql '<p>test</p>'
