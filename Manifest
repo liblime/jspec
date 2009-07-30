@@ -23,6 +23,7 @@ spec/fixtures/test.json
 spec/fixtures/test.xml
 spec/modules.js
 spec/spec.dom.html
+spec/spec.fixtures.js
 spec/spec.grammar-less.js
 spec/spec.grammar.js
 spec/spec.jquery.js

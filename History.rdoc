@@ -1,4 +1,13 @@
 
+=== 2.8.3 / 2009-07-30
+
+* Added JSpec.evalHook() 
+* Added JSpec.paramsFor()
+* Refactored jspec.xhr.js
+* Fixed mock xhr HEAD method
+* Fixed node.js print() newline issue
+* Fixed specs preventing spec/spec.node.js from running
+
 === 2.8.2 / 2009-07-29
 
 * Added JSpec.tryLoading()
