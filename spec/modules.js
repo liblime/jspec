@@ -36,3 +36,10 @@ ExampleModule = {
 }
 
 JSpec.include(ExampleModule)
+
+JSpec.include({
+  name : 'EmptyModule',
+  beforeSuite : function(spec) {},
+  afterSuite  : function(spec) {},
+  beforeSpec  : function(spec) {}
+})
