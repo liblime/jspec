@@ -1,4 +1,8 @@
 
+=== 2.8.4 / 2009-08-02
+
+* Fixed error thrown when a module has no utilities
+
 === 2.8.3 / 2009-07-30
 
 * Added JSpec.evalHook() 
