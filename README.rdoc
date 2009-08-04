@@ -677,6 +677,10 @@ Or run via the terminal using Rhino:
     return 'html'
   })
   
+== Additional JSpec Modules
+
+* JSocka stubbing http://github.com/gisikw/jsocka/tree/master
+  
 == More Information
 
 * Featured article in JSMag: http://www.jsmag.com/main.issues.description/id=21/
