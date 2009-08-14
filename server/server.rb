@@ -39,6 +39,7 @@ module JSpec
 
     def browser string
       case string
+      when /Chrome/  ; :Chrome
       when /Safari/  ; :Safari
       when /Firefox/ ; :Firefox
       when /MSIE/    ; :MSIE
