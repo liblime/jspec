@@ -677,6 +677,10 @@ Or run via the terminal using Rhino:
     return 'html'
   })
   
+* Some command-line options will not currently work on Windows (due to opening
+  browsers using `open -g -a`. Feel free to fork JSpec, and I will
+  merge any commits which help JSpec's exectuable work on additional platforms.
+  
 == Additional JSpec Modules
 
 * JSocka stubbing http://github.com/gisikw/jsocka/tree/master
