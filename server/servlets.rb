@@ -66,11 +66,16 @@ module JSpec
       '/'
     end
     
+    ##
+    # Handle requests.
+    
     def do_GET request, response
       raise WEBrick::HTTPStatus::OK
     end
     alias :do_POST :do_GET
-    
+    alias :do_PUT :do_GET
+    alias :do_HEAD :do_GET
+    alias :do_DELETE :do_GET
     
     ##
     # Prevent caching of _response_.
