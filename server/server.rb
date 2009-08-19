@@ -1,7 +1,7 @@
 
 $:.unshift File.dirname(__FILE__) 
 
-require 'sinatra'
+require 'sinatra/base'
 require 'thread'
 require 'browsers'
 
@@ -47,9 +47,6 @@ module JSpec
     
     def start browsers = nil
       say "Starting server at #{uri} ( Press CTRL + C to shutdown )"
-      set :run, true
-      set :port, port
-      set :public, Dir.pwd
       browsers ||= Browser.subclasses.map{ |b| b.new }
       trap('INT') { shutdown }
       thread = Thread.new { run! }

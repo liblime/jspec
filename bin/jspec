@@ -150,7 +150,11 @@ end
 
 def start_server options, suite
   require 'server/server'
-  JSpec::Server.new(suite, options.port).start browsers_for(options.browsers)
+  JSpec::Server.class_eval do
+    set :port, options.port
+    set :public, Dir.pwd
+    new(suite, options.port).start browsers_for(options.browsers)
+  end
 end
 
 def browsers_for names
