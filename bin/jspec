@@ -152,6 +152,7 @@ def start_server suite, options
   require 'server/server'
   set :port, options.port
   set :public, Dir.pwd
+  set :server, 'Mongrel'
   enable :sessions
   disable :logging
   JSpec::Server.new(suite, options.port).start browsers_for(options.browsers)
