@@ -2,11 +2,11 @@
 helpers do
   def browser
     case env['HTTP_USER_AGENT']
-    when /Safari/i    ; 'Safari'
-    when /Opera/i     ; 'Opera'
-    when /Google/i    ; 'Chrome'
-    when /Firefox/i   ; 'Firefox'
-    when /Microsoft/i ; 'IE'
+    when /safari/i    ; 'Safari'
+    when /opera/i     ; 'Opera'
+    when /google/i    ; 'Chrome'
+    when /firefox/i   ; 'Firefox'
+    when /microsoft/i ; 'IE'
     else                'Unknown'
     end
   end

@@ -58,8 +58,22 @@ module JSpec
           end
         }
       end.push(Thread.new {
-        Sinatra::Application.run!
+        start!
       }).each { |thread| thread.join }
+    end
+    
+    def start!
+      Sinatra::Application.class_eval do
+        begin
+          detect_rack_handler.run self, :Host => host, :Port => port do |server|
+            trap 'INT' do
+              server.respond_to?(:stop!) ? server.stop! : server.stop
+            end
+          end
+        rescue Errno::EADDRINUSE => e
+          puts "Port `#{port}' already in use"
+        end
+      end
     end
     
   end
