@@ -82,6 +82,8 @@ command :run do |c|
   c.option '-R', '--rhino', 'Run specs using Rhino'
   c.option '-S', '--server', 'Run specs using the JSpec server'
   c.option '-s', '--server-only', 'Start JSpec server without running browsers'
+  c.option '-P', '--port NUMBER', Integer, 'Start JSpec server using the given port number'
+  c.option '-H', '--host NAME', 'Start JSpec server using the given hostname'
   c.when_called do |args, options|
     
     # Rails
@@ -152,7 +154,7 @@ end
 
 def start_server options, spec
   require 'server/server'
-  JSpecServer.new.start
+  JSpec::Server.new(options.host || :localhost, options.port || 4444).start
 end
 
 def rails?

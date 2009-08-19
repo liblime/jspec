@@ -1,8 +1,5 @@
 
-require 'webrick'
 require 'rbconfig'
-require 'fileutils'
-include FileUtils
 
 #--
 # Browser
