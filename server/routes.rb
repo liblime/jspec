@@ -4,7 +4,6 @@
 #++
 
 get '/jspec/*' do |path|
-  headers['Cache-Control'] = 'no-cache'
   send_file JSPEC_ROOT + '/lib/' + path
 end
 
