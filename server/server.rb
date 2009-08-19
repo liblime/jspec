@@ -51,7 +51,6 @@ module JSpec
       browsers.map do |browser|
         Thread.new {
           if browser.supported?
-            $stderr.puts "Running #{browser}"
             browser.setup
             browser.visit uri + '/' + suite
             browser.teardown

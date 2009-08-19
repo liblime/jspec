@@ -153,6 +153,7 @@ def start_server suite, options
   set :port, options.port
   set :public, Dir.pwd
   enable :sessions
+  disable :logging
   JSpec::Server.new(suite, options.port).start browsers_for(options.browsers)
 end
 
