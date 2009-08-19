@@ -20,7 +20,7 @@
 				.exec('spec.xhr.js')
 				.exec('spec.jquery.xhr.js')
 				.run()
-				.reportToServer()
+				.reportToServer('http://' + window.location.host + '/results')
 			}
 		</script>
 	</head>
