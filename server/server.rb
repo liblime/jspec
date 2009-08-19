@@ -42,8 +42,9 @@ module JSpec
     # Start the server with _browsers_ which defaults to all supported browsers.
     
     def start browsers = Browser.subclasses.map{ |b| b.new }
+      browsers = []
       @server = WEBrick::HTTPServer.new :Port => port, :Host => host, :DocumentRoot => Dir.pwd
-      trap('INT') { server.shutdown }
+      trap('INT') { shutdown }
       mount_servlets_to server
       thread = Thread.new { server.start }
       browsers.each do |browser|
@@ -66,6 +67,15 @@ module JSpec
       Servlet.subclasses.each do |servlet|
         server.mount *servlet.mount
       end
+    end
+    
+    ##
+    # Shutdown.
+    
+    def shutdown
+      say "\nShutting down server"
+      server.shutdown
+      exit 1
     end
     
   end
