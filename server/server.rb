@@ -58,7 +58,7 @@ module JSpec
         }
       end.push(Thread.new {
         start!
-      }).each { |thread| thread.join }
+      }).reverse.each { |thread| thread.join }
     end
     
     private
