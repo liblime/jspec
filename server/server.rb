@@ -1,153 +1,385 @@
 
-require 'rubygems'
-require 'rack'
-require 'server/browsers'
-
-module JSpec
-  class Server
-    
-    ##
-    # Array of responses.
-    
-    attr_reader :responses
-    
-    ##
-    # Array of browser names to launch.
-    
-    attr_reader :browsers
-    
-    ##
-    # Server root.
-    
-    attr_reader :root
-    
-    ##
-    # Initialize with _options_.
-    
-    def initialize options = {}
-      @responses = []
-      @browsers = options.delete :browsers
-      @root = options.delete :root
-    end
-    
-    ##
-    # Handle rack requests.
-    
-    def call env
-      request = Rack::Request.new env
-      path = request.path_info
-      body = case path
-      when '/'
-        agent = env['HTTP_USER_AGENT']
-        responses << browser(agent)
-        display_results browser(agent), request['failures'], request['passes']
-        type = 'text/plain'
-        'close'
-      when /jspec/
-        type = 'application/javascript'
-        File.read File.join(JSPEC_ROOT, 'lib', File.basename(path))
-      else
-        type = Rack::Mime.mime_type File.extname(path)
-        File.read File.join(root, path) rescue ''
+require 'thread'
+require 'webrick'
+require 'fileutils'
+include FileUtils
+ 
+class Browser
+  def supported?; true; end
+  def setup ; end
+  def open(url) ; end
+  def teardown ; end
+ 
+  def host
+    require 'rbconfig'
+    Config::CONFIG['host']
+  end
+  
+  def macos?
+    host.include?('darwin')
+  end
+  
+  def windows?
+    host.include?('mswin')
+  end
+  
+  def linux?
+    host.include?('linux')
+  end
+  
+  def applescript(script)
+    raise "Can't run AppleScript on #{host}" unless macos?
+    system "osascript -e '#{script}' 2>&1 >/dev/null"
+  end
+end
+ 
+class FirefoxBrowser < Browser
+  def initialize(path=File.join(ENV['ProgramFiles'] || 'c:\Program Files', '\Mozilla Firefox\firefox.exe'))
+    @path = path
+  end
+ 
+  def visit(url)
+    system("open -a Firefox '#{url}'") if macos?
+    system("#{@path} #{url}") if windows? 
+    system("firefox #{url}") if linux?
+  end
+ 
+  def to_s
+    "Firefox"
+  end
+end
+ 
+class SafariBrowser < Browser
+  def supported?
+    macos?
+  end
+  
+  def setup
+    applescript('tell application "Safari" to make new document')
+  end
+  
+  def visit(url)
+    applescript('tell application "Safari" to set URL of front document to "' + url + '"')
+  end
+ 
+  def teardown
+    #applescript('tell application "Safari" to close front document')
+  end
+ 
+  def to_s
+    "Safari"
+  end
+end
+ 
+class IEBrowser < Browser
+  def setup
+    require 'win32ole' if windows?
+  end
+ 
+  def supported?
+    windows?
+  end
+  
+  def visit(url)
+    if windows?
+      ie = WIN32OLE.new('InternetExplorer.Application')
+      ie.visible = true
+      ie.Navigate(url)
+      while ie.ReadyState != 4 do
+        sleep(1)
       end
-      [200, { 'Content-Type' => type, 'Content-Length' => body.length.to_s }, body]
     end
-    
-    ##
-    # Output results with the given _browser_, number
-    # of _failures_ and _passes_.
-
-    def display_results browser, failures, passes
-      puts '%-14s - passes: %s failures: %s' % [bold(browser), green(passes), red(failures)]
+  end
+ 
+  def to_s
+    "Internet Explorer"
+  end
+end
+ 
+class KonquerorBrowser < Browser
+  @@configDir = File.join((ENV['HOME'] || ''), '.kde', 'share', 'config')
+  @@globalConfig = File.join(@@configDir, 'kdeglobals')
+  @@konquerorConfig = File.join(@@configDir, 'konquerorrc')
+ 
+  def supported?
+    linux?
+  end
+ 
+  # Forces KDE's default browser to be Konqueror during the tests, and forces
+  # Konqueror to open external URL requests in new tabs instead of a new
+  # window.
+  def setup
+    cd @@configDir, :verbose => false do
+      copy @@globalConfig, "#{@@globalConfig}.bak", :preserve => true, :verbose => false
+      copy @@konquerorConfig, "#{@@konquerorConfig}.bak", :preserve => true, :verbose => false
+      # Too lazy to write it in Ruby...  Is sed dependency so bad?
+      system "sed -ri /^BrowserApplication=/d  '#{@@globalConfig}'"
+      system "sed -ri /^KonquerorTabforExternalURL=/s:false:true: '#{@@konquerorConfig}'"
     end
-    
-    ##
-    # Return brower name symbol from user agent _string_.
-
-    def browser string
-      case string
-      when /Chrome/  ; :Chrome
-      when /Safari/  ; :Safari
-      when /Firefox/ ; :Firefox
-      when /MSIE/    ; :MSIE
-      when /Opera/   ; :Opera
-      end
+  end
+ 
+  def teardown
+    cd @@configDir, :verbose => false do
+      copy "#{@@globalConfig}.bak", @@globalConfig, :preserve => true, :verbose => false
+      copy "#{@@konquerorConfig}.bak", @@konquerorConfig, :preserve => true, :verbose => false
     end
-    
-    ##
-    # Bold _string_.
-
-    def bold string
-      color string, 1
-    end
-    
-    ##
-    # Red _string_.
-
-    def red string
-      color string, 31
-    end
-    
-    ##
-    # Green _string_.
-
-    def green string
-      color string, 32
-    end
-    
-    ##
-    # Color _string_ with ansi escape _code_.
-
-    def color string, code
-      "\e[#{code}m#{string}\e[m"
-    end
-    
-    ##
-    # Call _block_ when all servers have responded.
-    
-    def when_finished &block
-      Thread.new {
-        sleep 0.1 while responses.length < browsers.length
-        yield
+  end
+  
+  def visit(url)
+    system("kfmclient openURL #{url}")
+  end
+  
+  def to_s
+    "Konqueror"
+  end
+end
+ 
+class OperaBrowser < Browser
+  def initialize(path='c:\Program Files\Opera\Opera.exe')
+    @path = path
+  end
+  
+  def setup
+    if windows?
+      puts %{
+        MAJOR ANNOYANCE on Windows.
+        You have to shut down Opera manually after each test
+        for the script to proceed.
+        Any suggestions on fixing this is GREATLY appreciated!
+        Thank you for your understanding.
       }
     end
+  end
+  
+  def visit(url)
+    applescript('tell application "Opera" to GetURL "' + url + '"') if macos? 
+    system("#{@path} #{url}") if windows? 
+    system("opera #{url}")  if linux?
+  end
+ 
+  def to_s
+    "Opera"
+  end
+end
+ 
+# shut up, webrick :-)
+class ::WEBrick::HTTPServer
+  def access_log(config, req, res)
+    # nop
+  end
+end
+ 
+class ::WEBrick::BasicLog
+  def log(level, data)
+    # nop
+  end
+end
+ 
+class WEBrick::HTTPResponse
+  alias send send_response
+  def send_response(socket)
+    send(socket) unless fail_silently?
+  end
+  
+  def fail_silently?
+    @fail_silently
+  end
+  
+  def fail_silently
+    @fail_silently = true
+  end
+end
+ 
+class WEBrick::HTTPRequest
+  def to_json
+    headers = []
+    each { |k, v| headers.push "#{k.inspect}: #{v.inspect}" }
+    headers = "{" << headers.join(', ') << "}"
+    %({ "headers": #{headers}, "body": #{body.inspect}, "method": #{request_method.inspect} })
+  end
+end
+ 
+class WEBrick::HTTPServlet::AbstractServlet
+  def prevent_caching(res)
+    res['ETag'] = nil
+    res['Last-Modified'] = Time.now + 100**4
+    res['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0'
+    res['Pragma'] = 'no-cache'
+    res['Expires'] = Time.now - 100**4
+  end
+end
+ 
+class BasicServlet < WEBrick::HTTPServlet::AbstractServlet
+  def do_GET(req, res)
+    prevent_caching(res)
+    res['Content-Type'] = "text/plain"
     
-    ##
-    # Start new JSpec server with _options_.
-    
-    def self.start options, spec
-      app = Rack::Builder.new do
-        server = JSpec::Server.new :browsers => options.browsers, :root => '.'
-        server.when_finished { exit }
-        run server
-      end
-      unless options.server_only
-        Thread.new { 
-          sleep 2
-          puts "Running browsers: #{options.browsers.join(', ')}\n\n"
-          run_browsers options.browsers, spec
-        }
-      end
-      puts "JSpec server started\n"
-      Rack::Handler::Mongrel.run app, :Port => 4444
-      self
+    req.query.each do |k, v|
+      res[k] = v unless k == 'responseBody'
     end
+    res.body = req.query["responseBody"]
     
-    ##
-    # Run _browsers_.
+    raise WEBrick::HTTPStatus::OK
+  end
+  
+  def do_POST(req, res)
+    do_GET(req, res)
+  end
+end
+ 
+class SlowServlet < BasicServlet
+  def do_GET(req, res)
+    sleep(2)
+    super
+  end
+end
+ 
+class DownServlet < BasicServlet
+  def do_GET(req, res)
+    res.fail_silently
+  end
+end
+ 
+class InspectionServlet < BasicServlet
+  def do_GET(req, res)
+    prevent_caching(res)
+    res['Content-Type'] = "application/json"
+    res.body = req.to_json
+    raise WEBrick::HTTPStatus::OK
+  end
+end
+ 
+class NonCachingFileHandler < WEBrick::HTTPServlet::FileHandler
+  def do_GET(req, res)
+    super
+    set_default_content_type(res, req.path)
+    prevent_caching(res)
+  end
+  
+  def set_default_content_type(res, path)
+    res['Content-Type'] = case path
+      when /\.js$/   then 'text/javascript'
+      when /\.html$/ then 'text/html'
+      when /\.css$/  then 'text/css'
+      else 'text/plain'
+    end
+  end
+end
+ 
+class JSpecServer
+  def initialize(port=4444)
+    @tests = []
+    @browsers = []
+    @port = port
+    @queue = Queue.new
+    @server = WEBrick::HTTPServer.new(:Port => @port)
+    @server.mount_proc("/results") do |req, res|
+      @queue.push({
+        :tests => req.query['tests'].to_i,
+        :assertions => req.query['assertions'].to_i,
+        :failures => req.query['failures'].to_i,
+        :errors => req.query['errors'].to_i,
+        :warnings => req.query['warnings'].to_i
+      })
+      res.body = "OK"
+    end
+    @server.mount("/response", BasicServlet)
+    @server.mount("/slow", SlowServlet)
+    @server.mount("/down", DownServlet)
+    @server.mount("/inspect", InspectionServlet)
+    yield self if block_given?
+    define
+  end
+ 
+  def define
+    trap("INT") { @server.shutdown }
+    t = Thread.new { @server.start }
     
-    def self.run_browsers browsers, spec
-      browsers.each do |name|
-        browser(name).open "http://localhost:4444/#{spec}"
+    # run all combinations of browsers and tests
+    @browsers.each do |browser|
+      if browser.supported?
+        t0 = Time.now
+        results = {:tests => 0, :assertions => 0, :failures => 0, :errors => 0, :warnings => 0}
+        errors = []
+        failures = []
+        warnings = []
+        browser.setup
+        puts "\nStarted tests in #{browser}"
+        @tests.each do |test|
+          params = "resultsURL=http://localhost:#{@port}/results&t=" + ("%.6f" % Time.now.to_f)
+          if test.is_a?(Hash)
+            params << "&tests=#{test[:testcases]}" if test[:testcases]
+            test = test[:url]
+          end
+          browser.visit("http://localhost:#{@port}#{test}?#{params}")
+
+          result = @queue.pop
+          result.each { |k, v| results[k] += v }
+          value = "."
+          
+          if result[:failures] > 0
+            value = "F"
+            failures.push(test)
+          end
+          
+          if result[:errors] > 0
+            value = "E"
+            errors.push(test)
+          end
+          
+          if result[:warnings] > 0
+            value = "W"
+            warnings.push(test)
+          end
+          
+          print value
+        end
+        
+        puts "\nFinished in #{(Time.now - t0).round.to_s} seconds."
+        puts "  Failures: #{failures.join(', ')}" unless failures.empty?
+        puts "  Errors:   #{errors.join(', ')}" unless errors.empty?
+        puts "  Warnings: #{warnings.join(', ')}" unless warnings.empty?
+        puts "#{results[:tests]} tests, #{results[:assertions]} assertions, #{results[:failures]} failures, #{results[:errors]} errors, #{results[:warnings]} errors"
+        browser.teardown
+      else
+        puts "\nSkipping #{browser}, not supported on this OS"
       end
     end
-    
-    ##
-    # Return browser class for _name_.
-    
-    def self.browser name
-      JSpec::Browser.const_get(name.to_sym).new
-    end
-    
+
+    @server.shutdown
+    t.join
+  end
+ 
+  def mount(path, dir=nil)
+    dir = Dir.pwd + path unless dir
+ 
+    # don't cache anything in our tests
+    @server.mount(path, NonCachingFileHandler, dir)
+  end
+ 
+  # test should be specified as a url or as a hash of the form
+  # {:url => "url", :testcases => "testFoo,testBar"}
+  def run(test)
+    @tests<<test
+  end
+ 
+  def browser(browser)
+    browser =
+      case(browser)
+        when :firefox
+          FirefoxBrowser.new
+        when :safari
+          SafariBrowser.new
+        when :ie
+          IEBrowser.new
+        when :konqueror
+          KonquerorBrowser.new
+        when :opera
+          OperaBrowser.new
+        else
+          browser
+      end
+ 
+    @browsers<<browser
   end
 end

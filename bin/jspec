@@ -152,7 +152,7 @@ end
 
 def start_server options, spec
   require 'server/server'
-  JSpec::Server.start options, spec
+  JSpecServer.new
 end
 
 def rails?
