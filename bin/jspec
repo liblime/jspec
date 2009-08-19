@@ -2,7 +2,7 @@
 
 JSPEC_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 $:.unshift JSPEC_ROOT
- 
+
 require 'rubygems'
 require 'commander'
 require 'bind'
@@ -97,7 +97,7 @@ command :run do |c|
       action = lambda { rhino suite }
     elsif options.server
       suite = args.shift || path_to('spec.server.html')
-      action = lambda { start_server options, suite }
+      action = lambda { start_server suite, options }
     else
       suite = args.shift || path_to('spec.dom.html')
       action = Bind::Actions::RefreshBrowsers.new suite, *options.browsers
@@ -148,13 +148,12 @@ def rhino file
   system "#{RHINO} #{file}"
 end
 
-def start_server options, suite
+def start_server suite, options
   require 'server/server'
-  JSpec::Server.class_eval do
-    set :port, options.port
-    set :public, Dir.pwd
-    new(suite, options.port).start browsers_for(options.browsers)
-  end
+  set :port, options.port
+  set :public, Dir.pwd
+  enable :sessions
+  JSpec::Server.new(suite, options.port).start browsers_for(options.browsers)
 end
 
 def browsers_for names

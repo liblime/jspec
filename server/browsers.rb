@@ -111,6 +111,24 @@ class Browser
   end
   
   #--
+  # Chrome
+  #++
+  
+  class Chrome < self
+    def supported?
+      macos?
+    end
+    
+    def visit uri
+      system "open -g -a Chromium #{uri}" if macos?
+    end
+    
+    def to_s
+      'Chrome'
+    end
+  end
+  
+  #--
   # Internet Explorer
   #++
   
