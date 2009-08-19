@@ -37,7 +37,7 @@ module JSpec
     end
     
     ##
-    # Uri.
+    # URI formed by the given host and port.
     
     def uri
       'http://%s:%d' % [host, port]
@@ -59,7 +59,7 @@ module JSpec
           browser.teardown
         end
       end
-      say "Starting server at #{uri} ( Press CTRL+C to shutdown )"
+      say "Starting server at #{uri} ( Press CTRL + C to shutdown )"
       server.shutdown
       thread.join
       sleep 5000
