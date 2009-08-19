@@ -12,7 +12,7 @@ Echoe.new "jspec", version do |p|
   p.email = "tj@vision-media.ca"
   p.summary = "JavaScript BDD Testing Framework"
   p.url = "http://visionmedia.github.com/jspec"
-  p.runtime_dependencies << "rack"
+  p.runtime_dependencies << "sinatra"
   p.runtime_dependencies << "visionmedia-commander >=3.2.9"
   p.runtime_dependencies << "visionmedia-bind >=0.2.6"
 end

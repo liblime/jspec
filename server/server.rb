@@ -1,13 +1,12 @@
 
 $:.unshift File.dirname(__FILE__) 
 
-require 'webrick'
+require 'sinatra'
 require 'thread'
 require 'browsers'
-require 'servlets'
 
 module JSpec
-  class Server
+  class Server < Sinatra::Base
     
     ##
     # Suite HTML.
@@ -32,8 +31,8 @@ module JSpec
     ##
     # Initialize.
     
-    def initialize suite, host, port
-      @suite, @host, @port = suite, host, port
+    def initialize suite, port
+      @suite, @port, @host = suite, port, :localhost
     end
     
     ##
@@ -47,31 +46,23 @@ module JSpec
     # Start the server with _browsers_ which defaults to all supported browsers.
     
     def start browsers = nil
+      say "Starting server at #{uri} ( Press CTRL + C to shutdown )"
+      set :run, true
+      set :port, port
+      set :public, Dir.pwd
       browsers ||= Browser.subclasses.map{ |b| b.new }
-      @server = WEBrick::HTTPServer.new :Port => port, :Host => host, :DocumentRoot => Dir.pwd
       trap('INT') { shutdown }
-      mount_servlets_to server
-      thread = Thread.new { server.start }
+      thread = Thread.new { run! }
       browsers.each do |browser|
         if browser.supported?
+          say "Running suite in #{browser}"
           browser.setup
           browser.visit uri + '/' + suite
           browser.teardown
         end
       end
-      say "Starting server at #{uri} ( Press CTRL + C to shutdown )"
-      server.shutdown
       thread.join
       sleep 5000
-    end
-    
-    ##
-    # Mount all servlets extending JSpec::Servlet to _server_.
-    
-    def mount_servlets_to server
-      Servlet.subclasses.unshift(Servlet).each do |servlet|
-        server.mount *servlet.mount
-      end
     end
     
     ##
@@ -79,8 +70,15 @@ module JSpec
     
     def shutdown
       say "\nShutting down server"
-      server.shutdown
       exit 1
+    end
+    
+    #--
+    # Routes
+    #++
+    
+    get '/*' do |a|
+      p a
     end
     
   end
