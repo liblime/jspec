@@ -1,6 +1,8 @@
 
 $:.unshift File.dirname(__FILE__) 
+
 require 'webrick'
+require 'thread'
 require 'browsers'
 require 'servlets'
 
@@ -30,18 +32,31 @@ module JSpec
     end
     
     ##
-    # Start the server
+    # Uri.
     
-    def start
+    def uri
+      'http://%s:%d' % [host, port]
+    end
+    
+    ##
+    # Start the server with _browsers_ which defaults to all supported browsers.
+    
+    def start browsers = Browser.subclasses.map{ |b| b.new }
+      @server = WEBrick::HTTPServer.new :Port => port, :Host => host, :DocumentRoot => Dir.pwd
       trap('INT') { server.shutdown }
-      say 'Starting server at http://%s:%d' % [host, port]
-      @server = WEBrick::HTTPServer.new(
-        :Port => port,
-        :Host => host,
-        :DocumentRoot => Dir.pwd
-      )
       mount_servlets_to server
-      server.start
+      thread = Thread.new { server.start }
+      browsers.each do |browser|
+        if browser.supported?
+          browser.setup
+          say "Started testing in #{browser}"
+          browser.visit uri
+          browser.teardown
+        end
+      end
+      say "Starting server at #{uri}"
+      server.shutdown
+      thread.join
     end
     
     ##

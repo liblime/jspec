@@ -8,6 +8,20 @@ require 'rbconfig'
 class Browser
   
   ##
+  # Subclasses.
+  
+  def self.subclasses
+    @subclasses ||= []
+  end
+  
+  ##
+  # Stack subclasses.
+  
+  def self.inherited subclass
+    subclasses << subclass
+  end
+  
+  ##
   # Weither or not the browser is supported.
   
   def supported?; true end
