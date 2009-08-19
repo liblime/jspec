@@ -48,17 +48,18 @@ module JSpec
     
     def start browsers = nil
       browsers ||= Browser.subclasses.map { |browser| browser.new }
-      Sinatra::Application.run!
       browsers.map do |browser|
         Thread.new {
           if browser.supported?
-              browser.setup
+            $stderr.puts "Running #{browser}"
+            browser.setup
             browser.visit uri + '/' + suite
             browser.teardown
           end
         }
-      end.each { |thread| thread.join }
-      sleep 5000
+      end.push(Thread.new {
+        Sinatra::Application.run!
+      }).each { |thread| thread.join }
     end
     
   end
