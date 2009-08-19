@@ -62,6 +62,10 @@ module JSpec
       }).each { |thread| thread.join }
     end
     
+    private
+    
+    #:nodoc:
+    
     def start!
       Sinatra::Application.class_eval do
         begin
