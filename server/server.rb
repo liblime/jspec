@@ -69,13 +69,16 @@ module JSpec
     def start!
       Sinatra::Application.class_eval do
         begin
+          $stderr.puts 'Started JSpec server at http://%s:%d' % [host, port.to_i]
           detect_rack_handler.run self, :Host => host, :Port => port do |server|
             trap 'INT' do
               server.respond_to?(:stop!) ? server.stop! : server.stop
             end
           end
-        rescue Errno::EADDRINUSE => e
-          puts "Port `#{port}' already in use"
+        rescue Errno::EADDRINUSE
+          abort "Port #{port} already in use"
+        rescue Errno::EACCES
+          abort "Permission Denied on port #{port}"
         end
       end
     end

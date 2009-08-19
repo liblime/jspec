@@ -161,7 +161,7 @@ class Browser
   
   class Opera < self
     def visit uri
-      applescript 'tell application "Opera" to GetURL "' + uri + '"' if macos? 
+      system "open -g -a Opera #{uri}" if macos?
       system "c:\Program Files\Opera\Opera.exe #{uri}" if windows? 
       system "opera #{uri}" if linux?
     end

@@ -8,7 +8,7 @@ get '/jspec/*' do |path|
 end
 
 post '/results' do
-  puts "%20s - %s : %s" % [browser, passes, failures]
+  puts "%20s: %s %s" % [browser, passes, failures]
 end
 
 #--
