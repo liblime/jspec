@@ -55,21 +55,21 @@ module JSpec
       browsers.each do |browser|
         if browser.supported?
           browser.setup
-          say "Started testing in #{browser}"
           browser.visit uri + '/' + suite
           browser.teardown
         end
       end
-      say "Starting server at #{uri}"
+      say "Starting server at #{uri} ( Press CTRL+C to shutdown )"
       server.shutdown
       thread.join
+      sleep 5000
     end
     
     ##
     # Mount all servlets extending JSpec::Servlet to _server_.
     
     def mount_servlets_to server
-      Servlet.subclasses.each do |servlet|
+      Servlet.subclasses.unshift(Servlet).each do |servlet|
         server.mount *servlet.mount
       end
     end

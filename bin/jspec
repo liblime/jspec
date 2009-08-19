@@ -94,14 +94,14 @@ command :run do |c|
     
     # Actions
     if options.rhino
-      spec = args.shift || path_to('spec.rhino.js')
-      action = lambda { rhino spec }
+      suite = args.shift || path_to('spec.rhino.js')
+      action = lambda { rhino suite }
     elsif options.server
-      spec = args.shift || 'spec/spec.server.html'
-      action = lambda { start_server options, spec }
+      suite = args.shift || path_to('spec.server.html')
+      action = lambda { start_server options, suite }
     else
-      spec = args.shift || path_to('spec.dom.html')
-      action = Bind::Actions::RefreshBrowsers.new spec, *options.browsers
+      suite = args.shift || path_to('spec.dom.html')
+      action = Bind::Actions::RefreshBrowsers.new suite, *options.browsers
     end
     
     # Binding
@@ -109,7 +109,7 @@ command :run do |c|
       listener = Bind::Listener.new :paths => options.paths, :interval => 1, :actions => [action], :debug => $stdout
       listener.run!
     else
-      action.call File.new(spec)
+      action.call File.new(suite)
     end
   end
 end

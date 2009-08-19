@@ -47,21 +47,21 @@ class Browser
   # Check if we are using macos.
   
   def macos?
-    host.include?('darwin')
+    host.include? 'darwin'
   end
   
   ##
   # Check if we are using windows.
   
   def windows?
-    host.include?('mswin')
+    host.include? 'mswin'
   end
   
   ##
   # Check if we are using linux.
   
   def linux?
-    host.include?('linux')
+    host.include? 'linux'
   end
   
   ##

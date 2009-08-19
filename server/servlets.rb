@@ -60,7 +60,7 @@ module JSpec
     end
     
     ##
-    # Path to mount.
+    # Mounting path.
 
     def self.path
       '/'
@@ -70,6 +70,7 @@ module JSpec
     # Handle requests.
     
     def do_GET request, response
+      p request.path
       raise WEBrick::HTTPStatus::OK
     end
     alias :do_POST :do_GET
@@ -86,6 +87,23 @@ module JSpec
       response['Cache-Control'] = 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0'
       response['Pragma'] = 'no-cache'
       response['Expires'] = Time.now - 100**4
+    end
+    
+    #--
+    # Output results to terminal.
+    #++
+    
+    class TerminalResults < self
+      def self.path
+        '/results'
+      end
+      
+      def do_GET request, response
+        require 'pp'
+        pp request
+        pp response
+        super
+      end
     end
     
     #--
