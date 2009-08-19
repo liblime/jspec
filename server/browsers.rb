@@ -78,7 +78,7 @@ class Browser
   
   class Firefox < self
     def visit uri
-      system "open -a Firefox '#{uri}'" if macos?
+      system "open -g -a Firefox '#{uri}'" if macos?
       system "firefox #{uri}" if linux?
       system "#{File.join(ENV['ProgramFiles'] || 'c:\Program Files', '\Mozilla Firefox\firefox.exe')} #{uri}" if windows? 
     end

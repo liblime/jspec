@@ -50,6 +50,7 @@ module JSpec
       browsers ||= Browser.subclasses.map { |browser| browser.new }
       browsers.map do |browser|
         Thread.new {
+          sleep 1
           if browser.supported?
             browser.setup
             browser.visit uri + '/' + suite

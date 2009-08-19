@@ -18,9 +18,9 @@ end
 helpers do
   def browser_name
     case env['HTTP_USER_AGENT']
-    when /safari/i    ; 'Safari'
     when /opera/i     ; 'Opera'
-    when /google/i    ; 'Chrome'
+    when /chrome/i    ; 'Chrome'
+    when /safari/i    ; 'Safari'
     when /firefox/i   ; 'Firefox'
     when /microsoft/i ; 'IE'
     else                'Unknown'

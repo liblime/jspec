@@ -164,6 +164,7 @@ def browsers_for names
     when /firefox/i     ; Browser::Firefox
     when /ie|explorer/i ; Browser::IE
     when /opera/i       ; Browser::Opera
+    when /chrome/i      ; Browser::Chrome
     else                ; raise "Unsupported browser `#{name}'"
     end.new
   end
