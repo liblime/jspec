@@ -10,6 +10,11 @@ module JSpec
   class Server
     
     ##
+    # Suite HTML.
+    
+    attr_accessor :suite
+    
+    ##
     # Host string.
     
     attr_reader :host
@@ -25,10 +30,10 @@ module JSpec
     attr_reader :server
     
     ##
-    # Initialize with _host_ and _port_.
+    # Initialize.
     
-    def initialize host, port
-      @host, @port = host, port
+    def initialize suite, host, port
+      @suite, @host, @port = suite, host, port
     end
     
     ##
@@ -41,8 +46,8 @@ module JSpec
     ##
     # Start the server with _browsers_ which defaults to all supported browsers.
     
-    def start browsers = Browser.subclasses.map{ |b| b.new }
-      browsers = []
+    def start browsers = nil
+      browsers ||= Browser.subclasses.map{ |b| b.new }
       @server = WEBrick::HTTPServer.new :Port => port, :Host => host, :DocumentRoot => Dir.pwd
       trap('INT') { shutdown }
       mount_servlets_to server
@@ -51,7 +56,7 @@ module JSpec
         if browser.supported?
           browser.setup
           say "Started testing in #{browser}"
-          browser.visit uri
+          browser.visit uri + '/' + suite
           browser.teardown
         end
       end
