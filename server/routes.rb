@@ -20,6 +20,11 @@ post '/results' do
   halt 200
 end
 
+get '/*' do |path|
+  pass unless File.exists?(path)
+  send_file path
+end
+
 #--
 # Simulation Routes
 #++

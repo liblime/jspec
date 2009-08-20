@@ -180,7 +180,6 @@ end
 
 def start_server suite, options
   set :port, options.port
-  set :public, Dir.pwd
   set :server, 'Mongrel'
   enable :sessions
   disable :logging
