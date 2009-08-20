@@ -545,7 +545,6 @@ anything that has been done by a Module.
   - loading(file)                    : loading a file                                   : returning 'stop' will prevent loading
   - executing(file)                  : executing a file                                 : returning 'stop' will prevent execution 
   - posting(data, url)               : posting data to a url                            : returning 'stop' will prevent request
-  - reportingToServer(url)           : reporting to server url                          : returning 'stop' will prevent reporting to server
   - preprocessing(input)             : before input string is preprocessed              : return input string for next hook to preprocess
   - stubbing(object, method, result) : called when stubbing an object's method, and return value (result). : (no return value)
   - requiring(dependency, message)   : requiring a dependency                           : (no return value) 

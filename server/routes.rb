@@ -10,7 +10,17 @@ end
 post '/results' do
   require 'json'
   data = JSON.parse request.body.read
-  puts "%20s: %s %s" % [browser, color(data['passes'], 32), color(data['failures'], 31)]
+  puts "\n\n  --- %s Passes: %s Failures: %s ---" % [bold(browser_name), green(data['stats']['passes']), red(data['stats']['failures'])]
+  if not data['options'].include?('verbose') || data['options']['verbose']
+    data['results'].compact.each do |suite|
+      puts "\n  " + bold(suite['description'])
+      suite['specs'].compact.each do |spec|
+        next if spec['status'] == 'pass' && data['options'].include?('failuresOnly') && data['options']['failuresOnly'] 
+        puts '    ' +  green(spec['description'])
+        puts '      ' +  red(spec['message']) if spec['message']
+      end
+    end
+  end
 end
 
 #--
@@ -74,9 +84,23 @@ helpers do
   end
   
   ##
-  # Colored browser name.
+  # Bold _string_.
   
-  def browser
-    color browser_name, 1
+  def bold string
+    color string, 1
+  end
+  
+  ##
+  # Color _string_ red.
+  
+  def red string  
+    color string, 31
+  end
+  
+  ##
+  # Color _string_ green.
+  
+  def green string
+    color string, 32
   end
 end

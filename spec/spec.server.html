@@ -19,8 +19,8 @@
 				.exec('spec.modules.js')
 				.exec('spec.xhr.js')
 				.exec('spec.jquery.xhr.js')
-				.run()
-				.reportToServer()
+				.run({ formatter : JSpec.formatters.Server })
+				.report()
 			}
 		</script>
 	</head>
