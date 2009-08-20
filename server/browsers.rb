@@ -13,6 +13,11 @@ class Browser
   def self.matches_agent? string; end
   
   ##
+  # Check if the browser matches the name _string_.
+  
+  def self.matches_name? string; end
+    
+  ##
   # Subclasses.
   
   def self.subclasses
@@ -86,6 +91,10 @@ class Browser
       string =~ /firefox/i
     end
     
+    def self.matches_name? string
+      string =~ /ff|firefox|mozilla/i
+    end
+    
     def visit uri
       system "open -g -a Firefox '#{uri}'" if macos?
       system "firefox #{uri}" if linux?
@@ -104,6 +113,10 @@ class Browser
   class Safari < self
     def self.matches_agent? string
       string =~ /safari/i && string !~ /chrome/i
+    end
+    
+    def self.matches_name? string
+      string =~ /safari/i
     end
     
     def supported?
@@ -136,6 +149,10 @@ class Browser
       string =~ /chrome/i
     end
     
+    def self.matches_name? string
+      string =~ /google|chrome/i
+    end
+    
     def supported?
       macos?
     end
@@ -156,6 +173,10 @@ class Browser
   class IE < self
     def self.matches_agent? string
       string =~ /microsoft/i
+    end
+    
+    def self.matches_name? string
+      string =~ /ie|explorer/i
     end
     
     def supported?
@@ -186,6 +207,10 @@ class Browser
   
   class Opera < self
     def self.matches_agent? string
+      string =~ /opera/i
+    end
+    
+    def self.matches_name? string
       string =~ /opera/i
     end
     

@@ -160,14 +160,13 @@ end
 
 def browsers_for names
   names.map do |name|
-    case name
-    when /safari/i      ; Browser::Safari
-    when /firefox/i     ; Browser::Firefox
-    when /ie|explorer/i ; Browser::IE
-    when /opera/i       ; Browser::Opera
-    when /chrome/i      ; Browser::Chrome
-    else                ; raise "Unsupported browser `#{name}'"
-    end.new
+    begin
+      Browser.subclasses.find do |browser|
+        browser.matches_name? name
+      end.new
+    rescue
+      raise "Unsupported browser `#{name}'"
+    end
   end
 end
 
