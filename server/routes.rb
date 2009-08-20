@@ -9,6 +9,7 @@ end
 
 post '/results' do
   require 'json'
+  # TODO: add #option helper .. switch / json
   data = JSON.parse request.body.read
   puts "\n\n  --- %s Passes: %s Failures: %s ---" % [bold(browser_name), green(data['stats']['passes']), red(data['stats']['failures'])]
   if not data['options'].include?('verbose') || data['options']['verbose']
