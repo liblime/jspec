@@ -12,6 +12,27 @@ post '/results' do
 end
 
 #--
+# Simulation Routes
+#++
+
+get '/slow/*' do |seconds|
+  sleep seconds.to_i
+end
+
+get '/status/*' do |code|
+  halt code.to_i
+end
+
+get '/content' do
+  if params[:type] && params[:body]
+    content_type params[:type]
+    params[:body]
+  else
+    not_found 'Content type and body required'
+  end
+end
+
+#--
 # Helpers
 #++
 
