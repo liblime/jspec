@@ -184,7 +184,8 @@ def start_server suite, options
   set :server, 'Mongrel'
   enable :sessions
   disable :logging
-  load File.dirname(suite) + '/server.rb' if File.exists?(File.dirname(suite) + '/server.rb')
+  hook = File.expand_path path_to('server.rb')
+  load hook if File.exists? hook
   JSpec::Server.new(suite, options.port).start browsers_for(options.browsers)
 end
 
