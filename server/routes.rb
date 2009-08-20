@@ -7,7 +7,7 @@ post '/results' do
   require 'json'
   data = JSON.parse request.body.read
   puts "\n\n  --- %s Passes: %s Failures: %s ---" % [bold(browser_name), green(data['stats']['passes']), red(data['stats']['failures'])]
-  if not data['options'].include?('verbose') || data['options']['verbose']
+  if data['options'].include?('verbose') && data['options']['verbose']
     data['results'].compact.each do |suite|
       puts "\n  " + bold(suite['description'])
       suite['specs'].compact.each do |spec|
