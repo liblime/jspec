@@ -17,7 +17,7 @@ post '/results' do
       puts "\n  " + bold(suite['description'])
       suite['specs'].compact.each do |spec|
         next if spec['status'] == 'pass' && data['options'].include?('failuresOnly') && data['options']['failuresOnly'] 
-        puts '    ' +  green(spec['description'])
+        puts '    ' +  send(spec['status'] == 'pending' ? :blue : :green, spec['description'])
         puts '      ' +  red(spec['message']) if spec['message']
       end
     end
@@ -103,5 +103,12 @@ helpers do
   
   def green string
     color string, 32
+  end
+  
+  ##
+  # Color _string_ blue.
+  
+  def blue string
+    color string, 34
   end
 end
