@@ -37,9 +37,13 @@ end
 #++
 
 helpers do
+  
+  ##
+  # Override Sinatra's #send_file to prevent caching.
+  
   def send_file path, opts = {}
     stat = File.stat(path)
-
+    response['Cache-Control'] = 'no-cache'
     content_type media_type(opts[:type]) ||
       media_type(File.extname(path)) ||
       response['Content-Type'] ||
@@ -58,6 +62,9 @@ helpers do
     not_found
   end
   
+  ##
+  # Find the browser name for the current user agent.
+  
   def browser_name
     Browser.subclasses.find do |browser|
       browser.matches_agent? env['HTTP_USER_AGENT']
@@ -66,17 +73,29 @@ helpers do
     'Unknown'
   end
   
-  def color str, code
-    "\e[#{code}m#{str}\e[0m"
+  ##
+  # Wrap _string_ with ansi escape sequence using _code_.
+  
+  def color string, code
+    "\e[#{code}m#{string}\e[0m"
   end
+  
+  ##
+  # Colored browser name.
   
   def browser
     color browser_name, 1
   end
   
+  ##
+  # Colored passes.
+  
   def passes
     color params[:passes], 32
   end
+  
+  ##
+  # Colored failures.
   
   def failures
     color params[:failures], 31
