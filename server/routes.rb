@@ -17,14 +17,11 @@ end
 
 helpers do
   def browser_name
-    case env['HTTP_USER_AGENT']
-    when /opera/i     ; 'Opera'
-    when /chrome/i    ; 'Chrome'
-    when /safari/i    ; 'Safari'
-    when /firefox/i   ; 'Firefox'
-    when /microsoft/i ; 'IE'
-    else                'Unknown'
-    end
+    Browser.subclasses.find do |browser|
+      browser.matches_agent? env['HTTP_USER_AGENT']
+    end.new
+  rescue
+    'Unknown'
   end
   
   def color str, code

@@ -8,6 +8,11 @@ require 'rbconfig'
 class Browser
   
   ##
+  # Check if the user agent _string_ matches this browser.
+  
+  def self.matches_agent? string; end
+  
+  ##
   # Subclasses.
   
   def self.subclasses
@@ -77,12 +82,16 @@ class Browser
   #++
   
   class Firefox < self
+    def self.matches_agent? string
+      string =~ /firefox/i
+    end
+    
     def visit uri
       system "open -g -a Firefox '#{uri}'" if macos?
       system "firefox #{uri}" if linux?
       system "#{File.join(ENV['ProgramFiles'] || 'c:\Program Files', '\Mozilla Firefox\firefox.exe')} #{uri}" if windows? 
     end
-
+    
     def to_s
       'Firefox'
     end
@@ -93,6 +102,10 @@ class Browser
   #++
   
   class Safari < self
+    def self.matches_agent? string
+      string =~ /safari/i && string !~ /chrome/i
+    end
+    
     def supported?
       macos?
     end
@@ -103,6 +116,10 @@ class Browser
                   
     def visit uri 
       applescript 'tell application "Safari" to set URL of front document to "' + uri + '"'
+    end
+    
+    def matches_agent? string
+      string =~ /safari/i
     end
 
     def to_s
@@ -115,6 +132,10 @@ class Browser
   #++
   
   class Chrome < self
+    def self.matches_agent? string
+      string =~ /chrome/i
+    end
+    
     def supported?
       macos?
     end
@@ -133,6 +154,10 @@ class Browser
   #++
   
   class IE < self
+    def self.matches_agent? string
+      string =~ /microsoft/i
+    end
+    
     def supported?
       windows?
     end
@@ -160,6 +185,10 @@ class Browser
   #++
   
   class Opera < self
+    def self.matches_agent? string
+      string =~ /opera/i
+    end
+    
     def visit uri
       system "open -g -a Opera #{uri}" if macos?
       system "c:\Program Files\Opera\Opera.exe #{uri}" if windows? 
