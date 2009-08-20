@@ -4,6 +4,7 @@ $:.unshift File.dirname(__FILE__)
 require 'sinatra'
 require 'thread'
 require 'browsers'
+require 'helpers'
 require 'routes'
 
 module JSpec
