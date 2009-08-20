@@ -26,9 +26,9 @@ command :init do |c|
   c.when_called do |args, options|
     dest = args.shift || '.'
     if options.rails
-      initialize_rails_to dest
+      initialize_rails_at dest
     else
-      initialize_to dest
+      initialize_at dest
     end
     say "Template initialized at '#{dest}'"
   end
@@ -114,7 +114,10 @@ command :run do |c|
 end
 alias_command :bind, :run, '--bind'
 
-def initialize_to dest
+##
+# Initialize template at _dest_. 
+
+def initialize_at dest
   unless Dir[dest + '/*'].empty?
     abort unless agree "'#{dest}' is not empty; continue? "
   end
@@ -122,7 +125,10 @@ def initialize_to dest
   replace_root_in dest, 'spec/spec.dom.html', 'spec/spec.rhino.js'
 end
 
-def initialize_rails_to dest
+##
+# Initialize rails template at _dest_.
+
+def initialize_rails_at dest
   unless looks_like_rails_root?(dest)
     abort unless agree "'#{dest}' does not look like root of a rails project; continue? "
   end
@@ -130,23 +136,38 @@ def initialize_rails_to dest
   replace_root_in "#{dest}/jspec", 'spec.dom.html', 'spec.rhino.js'
 end
 
+##
+# Copy template _name_ to _dest_.
+
 def copy_template_to name, dest
   FileUtils.mkdir_p dest
   FileUtils.cp_r path_to_template(name), dest
 end
 
+##
+# Return path to template _name_.
+
 def path_to_template name
   File.join JSPEC_ROOT, 'templates', name, '.'
 end
+
+##
+# Resolve path to _file_. Supports rails and unbound projects.
 
 def path_to file
   rails? ? "jspec/#{file}" : "spec/#{file}"
 end
 
+##
+# Execute _file_ with Rhino.
+
 def rhino file
   abort "#{file} not found" unless File.exists? file
   system "#{RHINO} #{file}"
 end
+
+##
+# Start server with _suite_ html and _options_.
 
 def start_server suite, options
   require 'server/server'
@@ -158,6 +179,9 @@ def start_server suite, options
   load File.dirname(suite) + '/server.rb' if File.exists?(File.dirname(suite) + '/server.rb')
   JSpec::Server.new(suite, options.port).start browsers_for(options.browsers)
 end
+
+##
+# Return array of browser instances for the given _names_.
 
 def browsers_for names
   names.map do |name|
@@ -171,9 +195,15 @@ def browsers_for names
   end
 end
 
+##
+# Check if the current directory looks like a rails app.
+
 def rails?
   File.directory? 'jspec'  
 end
+
+##
+# Replace JSPEC_ROOT placeholder in _paths_ relative to _dest_.
 
 def replace_root_in dest, *paths
   paths.each do |path|
@@ -182,6 +212,9 @@ def replace_root_in dest, *paths
     File.open(path, 'w') { |file| file.write contents }
   end
 end
+
+##
+# Update JSpec version in _paths_. Matches visionmedia-jspec-TRIPLE
 
 def update_version_in *paths
   paths.each do |path|
@@ -192,6 +225,9 @@ def update_version_in *paths
   end
   say "Finished updating JSpec"
 end
+
+##
+# Check if _path_ looks like a rails root directory.
 
 def looks_like_rails_root? path = '.'
   File.directory? "#{path}/vendor"
