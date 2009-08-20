@@ -8,7 +8,9 @@ get '/jspec/*' do |path|
 end
 
 post '/results' do
-  puts "%20s: %s %s" % [browser, passes, failures]
+  require 'json'
+  data = JSON.parse request.body.read
+  puts "%20s: %s %s" % [browser, color(data['passes'], 32), color(data['failures'], 31)]
 end
 
 #--
@@ -76,19 +78,5 @@ helpers do
   
   def browser
     color browser_name, 1
-  end
-  
-  ##
-  # Colored passes.
-  
-  def passes
-    color params[:passes], 32
-  end
-  
-  ##
-  # Colored failures.
-  
-  def failures
-    color params[:failures], 31
   end
 end
