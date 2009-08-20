@@ -37,6 +37,27 @@ end
 #++
 
 helpers do
+  def send_file path, opts = {}
+    stat = File.stat(path)
+
+    content_type media_type(opts[:type]) ||
+      media_type(File.extname(path)) ||
+      response['Content-Type'] ||
+      'application/octet-stream'
+
+    response['Content-Length'] ||= (opts[:length] || stat.size).to_s
+
+    if opts[:disposition] == 'attachment' || opts[:filename]
+      attachment opts[:filename] || path
+    elsif opts[:disposition] == 'inline'
+      response['Content-Disposition'] = 'inline'
+    end
+
+    halt ::Sinatra::Application::StaticFile.open(path, 'rb')
+  rescue Errno::ENOENT
+    not_found
+  end
+  
   def browser_name
     Browser.subclasses.find do |browser|
       browser.matches_agent? env['HTTP_USER_AGENT']
