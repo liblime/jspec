@@ -7,6 +7,7 @@ require 'rubygems'
 require 'commander'
 require 'bind'
 require 'fileutils'
+require 'server/server'
 
 RHINO = 'java org.mozilla.javascript.tools.shell.Main'
 
@@ -100,7 +101,12 @@ command :run do |c|
       action = lambda { start_server suite, options }
     else
       suite = args.shift || path_to('spec.dom.html')
-      action = Bind::Actions::RefreshBrowsers.new suite, *options.browsers
+      browsers = browsers_for options.browsers
+      action = lambda do
+        browsers.each do |browser|
+          browser.visit suite
+        end
+      end
     end
     
     # Binding
@@ -170,7 +176,6 @@ end
 # Start server with _suite_ html and _options_.
 
 def start_server suite, options
-  require 'server/server'
   set :port, options.port
   set :public, Dir.pwd
   set :server, 'Mongrel'
