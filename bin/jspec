@@ -72,10 +72,12 @@ command :run do |c|
     the [path] to spec/server.html'
   c.example 'Run once in Safari', 'jspec run'
   c.example 'Run once in Safari and Firefox', 'jspec run --browsers Safari,Firefox'
+  c.example 'Run once in Opera, Firefox, and Chrome', 'jspec run --browsers opera,ff,chrome'
   c.example 'Run custom spec file', 'jspec run foo.html'
   c.example 'Auto-run browsers when a file is altered', 'jspec run --bind --browsers Safari,Firefox'
   c.example 'Shortcut for the previous example', 'jspec --browsers Safari,Firefox'
   c.example 'Auto-run rhino when a file is altered', 'jspec --rhino'
+  c.example 'Run Rhino specs at spec/rhino.js', 'jspec run --rhino'
   c.example 'Run Rhino specs once', 'jspec run specs/something.js --rhino'
   c.option '-b', '--browsers BROWSERS', Array, 'Specify browsers to test'
   c.option '-p', '--paths PATHS', Array, 'Specify paths when binding, defaults to javascript within ./lib and ./spec'
@@ -97,6 +99,7 @@ command :run do |c|
       suite = args.shift || path_to('spec.rhino.js')
       action = lambda { rhino suite }
     elsif options.server
+      raise 'Cannot use --server with --bind' if options.bind
       suite = args.shift || path_to('spec.server.html')
       action = lambda { start_server suite, options }
     else
@@ -168,7 +171,7 @@ end
 # Execute _file_ with Rhino.
 
 def rhino file
-  abort "#{file} not found" unless File.exists? file
+  raise "#{file} not found" unless File.exists? file
   system "#{RHINO} #{file}"
 end
 

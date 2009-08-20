@@ -76,9 +76,9 @@ module JSpec
             end
           end
         rescue Errno::EADDRINUSE
-          abort "Port #{port} already in use"
+          raise "Port #{port} already in use"
         rescue Errno::EACCES
-          abort "Permission Denied on port #{port}"
+          raise "Permission Denied on port #{port}"
         end
       end
     end
