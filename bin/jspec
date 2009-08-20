@@ -155,6 +155,7 @@ def start_server suite, options
   set :server, 'Mongrel'
   enable :sessions
   disable :logging
+  load File.dirname(suite) + '/jspec.rb' if File.exists?(File.dirname(suite) + '/jspec.rb')
   JSpec::Server.new(suite, options.port).start browsers_for(options.browsers)
 end
 
