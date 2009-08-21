@@ -15,6 +15,8 @@ Manifest
 Rakefile
 README.rdoc
 server/browsers.rb
+server/helpers.rb
+server/routes.rb
 server/server.rb
 spec/async
 spec/env.js
@@ -22,6 +24,7 @@ spec/fixtures/test.html
 spec/fixtures/test.json
 spec/fixtures/test.xml
 spec/modules.js
+spec/server.rb
 spec/spec.dom.html
 spec/spec.fixtures.js
 spec/spec.grammar-less.js
@@ -40,10 +43,12 @@ spec/spec.xhr.js
 templates/default/History.rdoc
 templates/default/lib/yourlib.core.js
 templates/default/README.rdoc
+templates/default/spec/server.rb
 templates/default/spec/spec.core.js
 templates/default/spec/spec.dom.html
 templates/default/spec/spec.rhino.js
 templates/default/spec/spec.server.html
+templates/rails/server.rb
 templates/rails/spec.application.js
 templates/rails/spec.dom.html
 templates/rails/spec.rhino.js

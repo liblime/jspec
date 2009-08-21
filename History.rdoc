@@ -1,4 +1,25 @@
 
+=== 2.9.0 / 2009-08-21
+
+* Server output matching Rhino when using verbose or failuresOnly options
+* Added mock_request() and unmock_request() as aliases for mockRequest() and unmockRequest()
+* Added JSpec.JSON.encode()
+* Added default Sinatra routes /slow/NUMBER and /status/NUMBER for simulating
+  slow reponses and HTTP status codes.
+* Added server support for loading spec/jspec.rb (or jspec/jspec.rb for rails)
+  Allowing additional browser support to be plugged in, as well as Sinatra routes.
+* Added dependency for Sinatra (new server)
+* Added a new Ruby server
+* Added support for --bind and --server on various platforms
+* Added Google Chrome support
+* Added Internet Explorer support
+* Change; --server without --browsers defaults to all supported browsers
+* Removed JSpec.reportToServer()
+  Now utilizes JSpec.formatters.Server to handle this 
+  functionality.
+* Fixed Server output escaping (removed html escaping from puts()) [#13]
+* Fixed JSpec.load(); returns responseText when 2xx or 0 (for file://)
+
 === 2.8.4 / 2009-08-02
 
 * Fixed error thrown when a module has no utilities
