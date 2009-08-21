@@ -12,7 +12,7 @@ post '/results' do
       puts "\n  " + bold(suite['description'])
       suite['specs'].compact.each do |spec|
         next if spec['status'] == 'pass' && data['options'].include?('failuresOnly') && data['options']['failuresOnly'] 
-        puts '    ' +  send(spec['status'] == 'pending' ? :blue : :green, spec['description'])
+        puts '    ' +  send(spec['status'] == 'pending' ? :blue : :green, spec['description']) + (assertion_graph_for(spec['assertions']) || '')
         puts '      ' +  red(spec['message']) if spec['message']
       end
     end

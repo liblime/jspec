@@ -2,6 +2,16 @@
 helpers do
   
   ##
+  # Return dotted assertion graph for _assertions_.
+  
+  def assertion_graph_for assertions
+    return if assertions.empty?
+    assertions.map do |assertion|
+      assertion['passed'] ? green('.') : red('.')
+    end.join
+  end
+  
+  ##
   # Override Sinatra's #send_file to prevent caching.
   
   def send_file path, opts = {}
