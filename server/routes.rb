@@ -7,24 +7,32 @@ post '/results' do
   require 'json'
   data = JSON.parse request.body.read
   if data['options'].include?('verbose') && data['options']['verbose']
-    puts "\n\n %s Passes: %s Failures: %s\n\n" % [bold(browser_name), green(data['stats']['passes']), red(data['stats']['failures'])]
+    puts "\n\n %s Passes: %s Failures: %s\n\n" % [
+      bold(browser_name), 
+      green(data['stats']['passes']), 
+      red(data['stats']['failures'])]
     data['results'].compact.each do |suite|
-      puts "\n " + bold(suite['description'])
-      suite['specs'].compact.each do |spec|
+      specs = suite['specs'].compact.map do |spec|
         case spec['status'].to_sym
         when :pass 
           next if data['options'].include?('failuresOnly') && data['options']['failuresOnly']
-          puts '  ' + green(spec['description']) + assertion_graph_for(spec['assertions']).to_s
+          '  ' + green(spec['description']) + assertion_graph_for(spec['assertions']).to_s + "\n"
         when :fail
-          puts '  ' + red(spec['description'])
-          puts '  ' + spec['message'] + "\n\n" if spec['message']
+          "  #{red(spec['description'])}\n  #{spec['message']}\n\n"
         else
-          puts '  ' + blue(spec['description'])
+          "  #{blue(spec['description'])}\n" 
         end
+      end.join
+      unless specs.strip.empty?
+        puts "\n " + bold(suite['description']) 
+        puts specs
       end
     end
   else
-    puts "%20s Passes: %s Failures: %s" % [bold(browser_name), green(data['stats']['passes']), red(data['stats']['failures'])]
+    puts "%20s Passes: %s Failures: %s" % [
+      bold(browser_name), 
+      green(data['stats']['passes']), 
+      red(data['stats']['failures'])]
   end
   halt 200
 end
