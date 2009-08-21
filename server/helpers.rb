@@ -21,7 +21,6 @@ helpers do
       media_type(File.extname(path)) ||
       response['Content-Type'] ||
       'application/octet-stream'
-
     response['Content-Length'] ||= (opts[:length] || stat.size).to_s
 
     if opts[:disposition] == 'attachment' || opts[:filename]
