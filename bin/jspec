@@ -185,7 +185,7 @@ def start_server suite, options
   disable :logging
   hook = File.expand_path path_to('server.rb')
   load hook if File.exists? hook
-  JSpec::Server.new(suite, options.port).start browsers_for(options.browsers)
+  JSpec::Server.new(suite, options.port).start(options.browsers ? browsers_for(options.browsers) : nil)
 end
 
 ##
