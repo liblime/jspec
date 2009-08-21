@@ -5,7 +5,6 @@ end
 
 post '/results' do
   require 'json'
-  require 'pp'
   data = JSON.parse request.body.read
   if data['options'].include?('verbose') && data['options']['verbose']
     puts "\n\n%20s Passes: %s Failures: %s\n\n" % [bold(browser_name), green(data['stats']['passes']), red(data['stats']['failures'])]
