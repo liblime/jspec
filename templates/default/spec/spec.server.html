@@ -6,7 +6,7 @@
 			function runSuites() {
 				JSpec
 				.exec('spec.core.js')
-				.run({ formatter : JSpec.formatters.Server })
+				.run({ formatter : JSpec.formatters.Server, verbose: true, failuresOnly: true })
 				.report()
 			}
 		</script>
