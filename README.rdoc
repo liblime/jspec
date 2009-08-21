@@ -630,12 +630,34 @@ back to the terminal. It is essentially the same as using the DOM formatter
 and auto-testing each browser, however results are centralized to the terminal,
 removing the need to manually view each browser's output.
 
-Initialize project with:
-  $ jspec init myproject 
+When utilizing the server if a file named spec/jspec.rb (or jspec/jspec.rb for rails)
+is present, then it will be loaded before the server is started. This allows you to
+add Sinatra routes, support additional Browsers, etc.
 
-Run with:
+Run with all supported browsers:
   $ jspec run --server
   
+Run with specific browsers:
+  $ jspec run --browsers Safari,Firefox,Chrome,Explorer
+  
+Run with alternative browser names:
+  $ jspec run --browsers safari,ff,chrome,ie
+  
+Browsers supported in core:
+  Browser::Safari
+  Browser::Chrome
+  Browser::Opera
+  Browser::Firefox
+  Browser::IE
+  
+Supplied routes:
+  /slow/NUMBER
+  /status/NUMBER
+  
+For example $.get('/slow/4', function(){}) will take 4 seconds
+to reply, where as $.get('/status/404', function(){}) will respond
+with an 404 status code. Add additional Sinatra routes to the jspec.rb
+file to add your own functionality.
   
 == Ruby on Rails
 

@@ -48,6 +48,7 @@ end
 
 get '/slow/*' do |seconds|
   sleep seconds.to_i
+  halt 200
 end
 
 get '/status/*' do |code|
