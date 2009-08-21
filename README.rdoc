@@ -125,9 +125,10 @@ JSpec.options hash, by passing string-based option values via the
 query string, or passing a hash to run(). For example 
 JSpec.options.failuresOnly = true, and ?failuresOnly=1 will both work.
 
-* profile {bool} when enabled, uses console.time() in order to display performance information in your console log as specs are completed. (DOM, Console)
-* failuresOnly {bool} displays only failing specs, making them quick to discover and fix (DOM, Terminal)
-* reportToId {string} an element id to report to when using the DOM formatter (DOM)
+* profile       {bool} when enabled, uses console.time() in order to display performance information in your console log as specs are completed. (DOM, Console)
+* failuresOnly {bool} displays only failing specs, making them quick to discover and fix (DOM, Terminal, Server)
+* reportToId   {string} an element id to report to when using the DOM formatter (DOM)
+* verbose      {bool} verbose server output, defaults to false (Server)
   
 == Matchers
 
@@ -658,7 +659,7 @@ For example $.get('/slow/4', function(){}) will take 4 seconds
 to reply, where as $.get('/status/404', function(){}) will respond
 with an 404 status code. Add additional Sinatra routes to the jspec.rb
 file to add your own functionality.
-  
+
 == Ruby on Rails
 
 No additional gems are required for JSpec to work with rails, although 

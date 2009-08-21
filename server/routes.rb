@@ -6,7 +6,8 @@ end
 post '/results' do
   require 'json'
   data = JSON.parse request.body.read
-  if data['options'].include?('verbose') && data['options']['verbose']
+  if data['options'].include?('verbose') && data['options']['verbose'] ||
+     data['options'].include?('failuresOnly') && data['options']['failuresOnly']
     puts "\n\n %s Passes: %s Failures: %s\n\n" % [
       bold(browser_name), 
       green(data['stats']['passes']), 
