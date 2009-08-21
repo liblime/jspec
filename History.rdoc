@@ -1,4 +1,8 @@
 
+=== 2.9.1 / 2009-08-21
+
+* Added module support for formatters
+
 === 2.9.0 / 2009-08-21
 
 * Server output matching Rhino when using verbose or failuresOnly options
