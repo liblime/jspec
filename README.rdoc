@@ -707,6 +707,7 @@ Or run via the terminal using Rhino:
   
 == More Information
 
+* IRC Channel irc://irc.freenode.net#jspec
 * Featured article in JSMag: http://www.jsmag.com/main.issues.description/id=21/
 * Syntax comparison with other frameworks http://gist.github.com/92283
 * Get the TextMate bundle at https://github.com/visionmedia/jspec.tmbundle/tree
