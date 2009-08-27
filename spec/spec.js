@@ -1,13 +1,43 @@
 
+JSpec.include({
+  utilities : {
+    mock_it : function(body) {
+      var spec = new Spec('mock', body)
+      var prev = JSpec.currentSpec
+      runSpec(spec)
+      JSpec.currentSpec = prev
+      return spec
+    }
+  },
+  
+  matchers : {
+    have_failure_message : function(spec, expected) {
+      return any(spec.assertions, function(assertion){
+        switch (expected.constructor) {
+          case String: return assertion.message == expected
+          case Regexp: return expected.test(assertion.message)
+          default    : return false
+        }
+      })
+    }
+  }
+})
+
 describe 'Negative specs'
 
   it 'should fail'
-    'test'.should.not_eql 'test'
+    spec = mock_it(function(){
+      'test'.should.not.eql 'test'
+    })
+    spec.should.have_failure_message("expected 'test' to not eql 'test'")
   end
 
   it 'should fail with one faulty assertion'
-    'test'.should.equal 'test' 
-    'test'.should.equal 'foo' 
+    spec = mock_it(function() {
+      'test'.should.equal 'test' 
+      'test'.should.equal 'foo'
+    })
+    spec.should.have_failure_message("expected 'test' to be 'foo'")
   end
   
   it 'should fail and print array with square braces'
