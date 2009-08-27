@@ -10,6 +10,7 @@ lib/images/vr.png
 lib/jspec.css
 lib/jspec.jquery.js
 lib/jspec.js
+lib/jspec.timers.js
 lib/jspec.xhr.js
 Manifest
 Rakefile
