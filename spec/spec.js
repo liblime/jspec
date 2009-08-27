@@ -15,7 +15,7 @@ JSpec.include({
       return any(spec.assertions, function(assertion){
         switch (expected.constructor) {
           case String: return assertion.message == expected
-          case Regexp: return expected.test(assertion.message)
+          case RegExp: return expected.test(assertion.message)
           default    : return false
         }
       })
@@ -23,7 +23,7 @@ JSpec.include({
   }
 })
 
-describe 'Negative specs'
+describe 'Failing specs'
 
   it 'should fail'
     spec = mock_it(function(){
@@ -41,30 +41,48 @@ describe 'Negative specs'
   end
   
   it 'should fail and print array with square braces'
-    [1,2].should.equal [1,3] 
+    spec = mock_it(function() {
+      [1,2].should.equal [1,3]
+    })
+    spec.should.have_failure_message("expected [ 1, 2 ] to be [ 1, 3 ]")
   end
   
   it 'should fail and print nested array'
-    [1, ['foo']].should.equal [1, ['bar', ['whatever', 1.0, { foo : 'bar', bar : { 1 : 2 } }]]]
+    spec = mock_it(function() {
+      [1, ['foo']].should.equal [1, ['bar', ['whatever', 1.0, { foo : 'bar', bar : { 1 : 2 } }]]]
+    })
+    spec.should.have_failure_message("expected [ 1, [ 'foo' ] ] to be [ 1, [ 'bar', [ 'whatever', 1, { 'foo' : 'bar', 'bar' : { '1' : 2 } } ] ] ]")
   end
   
   it 'should fail and print html elements'
-    elem = document.createElement('a')
-    elem.setAttribute('href', 'http://vision-media.ca')
-    elem.should.not.eql elem
+    spec = mock_it(function() {
+      elem = document.createElement('a')
+      elem.setAttribute('href', 'http://vision-media.ca')
+      elem.should.not.eql elem
+    })
+    spec.should.have_failure_message('expected <a href="http://vision-media.ca"></a> to not eql <a href="http://vision-media.ca"></a>')
   end
   
   it 'should fail with selector for jQuery objects'
-    elem = { jquery : '1.3.1', selector : '.foobar' } 
-    elem.should.eql 'foo'
+    spec = mock_it(function() {
+      elem = { jquery : '1.3.1', selector : '.foobar' } 
+      elem.should.eql 'foo'  
+    })
+    spec.should.have_failure_message("expected selector '.foobar' to eql 'foo'")
   end
   
-  it 'should fail with negative message'
-    '1'.should.not.be_true
+  it 'should fail with negated message'
+    spec = mock_it(function(){
+      '1'.should.not.be_true
+    })
+    spec.should.have_failure_message(/expected '1' to not be true/)
   end
   
   it 'should fail with positive message'
-    false.should.be_true
+    spec = mock_it(function() {
+      false.should.be_true
+    })
+    spec.should.have_failure_message(/expected false to be true/)
   end
   
   it 'should fail saying an error was throw'
