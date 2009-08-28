@@ -49,7 +49,10 @@ describe 'jQuery'
     end
 
     it 'should fail with pretty print of element'
-      elem.should.not.have_tag 'label'
+      spec = mock_it(function() {
+        elem.should.not.have_tag 'label'
+      })
+      spec.should.have_failure_message(/<label>\s*<em>Save?/i)
     end
     
     describe 'have_tag / have_one'

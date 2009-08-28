@@ -21,7 +21,7 @@
         .exec('spec.modules.js')
         .exec('spec.xhr.js')
         .exec('spec.jquery.xhr.js')
-				.run()
+				.run({ failuresOnly: true })
 				.report()
 			}
 		</script>
