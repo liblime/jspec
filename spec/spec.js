@@ -97,15 +97,6 @@ describe 'Failing specs'
     spec.should.have_failure_message("expected Foo to be thrown, but got Bar: oh no")
   end
   
-  it 'should fail with function body string'
-      console.log(function(){ 'foo' }.toString());
-    spec = mock_it(function() {
-      -{ 'foo' }.should.not.include 'foo'
-    })
-    spec.should.have_failure_message(/^expected \s*function\s*\(\s*\)/)
-    spec.should.have_failure_message(/to not include ('foo'|"foo")/)
-  end
-  
   it 'should fail with constructor name'
     spec = mock_it(function() {
       function Foo(){ this.toString = function(){ return '<Foo>' }}
