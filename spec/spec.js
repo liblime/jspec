@@ -13,6 +13,7 @@ JSpec.include({
   matchers : {
     have_failure_message : function(spec, expected) {
       return any(spec.assertions, function(assertion){
+        if (assertion.passed) return
         switch (expected.constructor) {
           case String: return assertion.message == expected
           case RegExp: return expected.test(assertion.message)
@@ -86,70 +87,109 @@ describe 'Failing specs'
   end
   
   it 'should fail saying an error was throw'
-    -{ throw 'foo' }.should.not.throw_error
+    spec = mock_it(function() {
+      -{ throw 'foo' }.should.not.throw_error
+    })
+    spec.should.have_failure_message("expected exception not to be thrown, but got 'foo'")
   end
   
   it 'should fail saying which error has been thrown'
-    -{ throw 'foo' }.should.throw_error 'bar'
+    spec = mock_it(function() {
+      -{ throw 'foo' }.should.throw_error 'bar'
+    })
+    spec.should.have_failure_message("expected exception of 'bar' to be thrown, but got 'foo'")
   end
   
   it 'should fail saying no error was thrown'
-    -{ }.should.throw_error 'foo'
+    spec = mock_it(function() {
+      -{ }.should.throw_error 'foo'
+    })
+    spec.should.have_failure_message("expected exception of 'foo' to be thrown, but nothing was")
   end
   
   it 'should fail saying no error matching was thrown'
-    -{ throw 'bar' }.should.throw_error(/foo/)
-  end
-  
-  it 'should fail saying no error matching foo should be thrown'
-    -{ throw 'foo' }.should.not.throw_error(/foo/)
+    spec = mock_it(function() {
+      -{ throw 'bar' }.should.throw_error(/foo/)
+    })
+    spec.should.have_failure_message("expected exception matching /foo/ to be thrown, but got 'bar'")
   end
   
   it 'should fail saying constructors'
-    -{ throw new TypeError('oh no') }.should.throw_error(Error)
+    spec = mock_it(function() {
+      -{ throw new TypeError('oh no') }.should.throw_error(Error)
+    })
+    spec.should.have_failure_message("expected Error to be thrown, but got TypeError: oh no")
   end
   
   it 'should fail saying multiple arg messages'
-    -{ throw new TypeError('oh no') }.should.throw_error(TypeError, /foo/)
+    spec = mock_it(function() {
+      -{ throw new TypeError('oh no') }.should.throw_error(TypeError, /foo/)
+    })
+    spec.should.have_failure_message("expected TypeError and exception matching /foo/ to be thrown, but got TypeError: oh no")
   end
   
   it 'should fail with constructor name'
-    function Foo(){}
-    function Bar(){}
-    Bar.prototype.toString = function(){ return 'Bar error: oh no' }
-    -{ throw new Bar }.should.throw_error Foo
+    spec = mock_it(function() {
+      function Foo(){}
+      function Bar(){}
+      Bar.prototype.toString = function(){ return 'Bar: oh no' }
+      -{ throw new Bar }.should.throw_error Foo
+    })
+    spec.should.have_failure_message("expected Foo to be thrown, but got Bar: oh no")
   end
   
   it 'should fail with function body string'
-    -{ 'foo' }.should.not.include 'foo'
+    spec = mock_it(function() {
+      -{ 'foo' }.should.not.include 'foo'
+    })
+    spec.should.have_failure_message(/expected function/)
+    spec.should.have_failure_message(/to not include 'foo'/)
   end
   
   it 'should fail with constructor name'
-    function Foo(){ this.toString = function(){ return '<Foo>' }}
-    foo = new Foo
-    foo.should.not.be_an_instance_of Foo
+    spec = mock_it(function() {
+      function Foo(){ this.toString = function(){ return '<Foo>' }}
+      foo = new Foo
+      foo.should.not.be_an_instance_of Foo
+    })
+    spec.should.have_failure_message("expected <Foo> to not be an instance of Foo")
   end
   
   it 'should fail with message of first failure'
-    true.should.be_true
-    'bar'.should.match(/foo/gm)
-    'bar'.should.include 'foo'
+    spec = mock_it(function() {
+      true.should.be_true
+      'bar'.should.match(/foo/gm)
+      'bar'.should.include 'foo'
+    })
+    spec.should.have_failure_message("expected 'bar' to match /foo/gm")
   end
   
   it 'should fail with list'
-    ['foo', 'bar'].should.include 'foo', 'car'
+    spec = mock_it(function() {
+      ['foo', 'bar'].should.include 'foo', 'car'
+    })
+    spec.should.have_failure_message("expected [ 'foo', 'bar' ] to include 'foo', 'car'")
   end
   
   it 'should catch exceptions throw within specs'
-    throw new Error('Oh noes!')
+    spec = mock_it(function() {
+      throw new Error('Oh noes!')
+    })
+    spec.should.have_failure_message(/Error: Oh noes!/)
   end
   
-  it 'should catch improper exceptions'
-    throw 'oh noes'
+  it 'should catch exceptions without constructors'
+    spec = mock_it(function() {
+      throw 'oh noes'
+    })
+    spec.should.have_failure_message(/oh noes/)
   end
   
-  it 'should catch proper exceptions'
-    iDoNotExist.neitherDoI()
+  it 'should catch indirect exceptions'
+    spec = mock_it(function() {
+      iDoNotExist.neitherDoI()
+    })
+    spec.should.have_failure_message(/iDoNotExist/)
   end
   
 end
