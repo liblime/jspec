@@ -86,13 +86,6 @@ describe 'Failing specs'
     spec.should.have_failure_message(/expected false to be true/)
   end
   
-  it 'should fail saying an error was throw'
-    spec = mock_it(function() {
-      -{ throw 'foo' }.should.not.throw_error
-    })
-    spec.should.have_failure_message("expected exception not to be thrown, but got 'foo'")
-  end
-  
   it 'should fail saying which error has been thrown'
     spec = mock_it(function() {
       -{ throw 'foo' }.should.throw_error 'bar'
