@@ -98,6 +98,7 @@ describe 'Failing specs'
   end
   
   it 'should fail with function body string'
+      console.log(function(){ 'foo' }.toString());
     spec = mock_it(function() {
       -{ 'foo' }.should.not.include 'foo'
     })
