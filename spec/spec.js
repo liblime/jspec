@@ -27,16 +27,7 @@ describe 'Failing specs'
     spec = mock_it(function() {
       [1, ['foo']].should.equal [1, ['bar', ['whatever', 1.0, { foo : 'bar', bar : { 1 : 2 } }]]]
     })
-    spec.should.have_failure_message("expected [ 1, [ 'foo' ] ] to be [ 1, [ 'bar', [ 'whatever', 1, { 'foo' : 'bar', 'bar' : { '1' : 2 } } ] ] ]")
-  end
-  
-  it 'should fail and print html elements'
-    spec = mock_it(function() {
-      elem = document.createElement('a')
-      elem.setAttribute('href', 'http://vision-media.ca')
-      elem.should.not.eql elem
-    })
-    spec.should.have_failure_message('expected <a href="http://vision-media.ca"></a> to not eql <a href="http://vision-media.ca"></a>')
+    spec.should.have_failure_message(/^expected \[\s*1,\s*\[\s*'foo'/)
   end
   
   it 'should fail with selector for jQuery objects'
@@ -110,8 +101,8 @@ describe 'Failing specs'
     spec = mock_it(function() {
       -{ 'foo' }.should.not.include 'foo'
     })
-    spec.should.have_failure_message(/expected function/)
-    spec.should.have_failure_message(/to not include 'foo'/)
+    spec.should.have_failure_message(/^expected \s*function\s*\(\s*\)/)
+    spec.should.have_failure_message(/to not include ('foo'|"foo")/)
   end
   
   it 'should fail with constructor name'
