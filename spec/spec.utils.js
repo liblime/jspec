@@ -2,7 +2,10 @@
 describe 'Utility'
   describe 'fail()'
     it 'should fail the current spec'
-      fail('I failed!')
+      spec = mock_it(function() {
+        fail('I failed!')
+      })
+      spec.should.have_failure_message('I failed!')
     end
   end
   

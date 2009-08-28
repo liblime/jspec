@@ -1,6 +1,32 @@
 
-ExampleModule = {
-  name : 'ExampleModule',
+JSpec.include({
+  name: 'Helpers',
+  utilities : {
+    mock_it : function(body) {
+      var spec = new JSpec.Spec('mock', body)
+      var prev = JSpec.currentSpec
+      JSpec.runSpec(spec)
+      JSpec.currentSpec = prev
+      return spec
+    }
+  },
+  
+  matchers : {
+    have_failure_message : function(spec, expected) {
+      return JSpec.any(spec.assertions, function(assertion){
+        if (assertion.passed) return
+        switch (expected.constructor) {
+          case String: return assertion.message == expected
+          case RegExp: return expected.test(assertion.message)
+          default    : return false
+        }
+      })
+    }
+  }
+})
+
+JSpec.include({
+  name: 'ExampleModule',
   utilities : {
     doFoo : function(){ return 'foo' },
     doBar : function(){ return 'bar' }
@@ -33,9 +59,7 @@ ExampleModule = {
       }
     }
   }
-}
-
-JSpec.include(ExampleModule)
+})
 
 JSpec.include({
   name : 'EmptyModule'
