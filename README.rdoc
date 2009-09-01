@@ -722,6 +722,14 @@ Or run via the terminal using Rhino:
 
   $ jspec run --rhino
   
+== Support Browsers
+
+* Safari
+* Chrome
+* Firefox
+* Opera
+* Internet Explorer
+  
 == Known Issues
 
 * Tabs may cause a parse error. To prevent this use 'soft tabs' (setting in your IDE/Editor)
