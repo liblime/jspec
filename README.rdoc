@@ -724,6 +724,9 @@ Or run via the terminal using Rhino:
   
 == Support Browsers
 
+Browsers below are supported and can be found in server/browsers.rb, however
+your spec/server.rb file may support additional browsers.
+
 * Safari
 * Chrome
 * Firefox
