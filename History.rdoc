@@ -1,4 +1,9 @@
 
+=== 2.10.1 / 2009-09-02
+
+* Added `jspec shell` sub command (interactive Rhino shell through JSpec)
+* Added jspec.shell.js
+
 === 2.10.0 / 2009-08-27
 
 * Added Async support via mock timers (lib/jspec.timers.js) [#19]

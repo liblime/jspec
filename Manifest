@@ -1,5 +1,8 @@
-bin/jspec
 History.rdoc
+Manifest
+README.rdoc
+Rakefile
+bin/jspec
 jspec.gemspec
 lib/images/bg.png
 lib/images/hr.png
@@ -10,11 +13,9 @@ lib/images/vr.png
 lib/jspec.css
 lib/jspec.jquery.js
 lib/jspec.js
+lib/jspec.shell.js
 lib/jspec.timers.js
 lib/jspec.xhr.js
-Manifest
-Rakefile
-README.rdoc
 server/browsers.rb
 server/helpers.rb
 server/routes.rb
@@ -24,7 +25,7 @@ spec/env.js
 spec/fixtures/test.html
 spec/fixtures/test.json
 spec/fixtures/test.xml
-spec/modules.js
+spec/helpers.js
 spec/server.rb
 spec/spec.dom.html
 spec/spec.fixtures.js
@@ -42,8 +43,8 @@ spec/spec.shared-behaviors.js
 spec/spec.utils.js
 spec/spec.xhr.js
 templates/default/History.rdoc
-templates/default/lib/yourlib.core.js
 templates/default/README.rdoc
+templates/default/lib/yourlib.core.js
 templates/default/spec/server.rb
 templates/default/spec/spec.core.js
 templates/default/spec/spec.dom.html
