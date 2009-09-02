@@ -33,6 +33,7 @@ and much more.
 * Method Stubbing
 * Shared behaviors
 * Profiling
+* Interactive Shell
 * Ruby on Rails Integration
 * Tiny (15 kb compressed, 1300-ish LOC)
 
@@ -699,6 +700,20 @@ For example $.get('/slow/4', function(){}) will take 4 seconds
 to reply, where as $.get('/status/404', function(){}) will respond
 with an 404 status code. Add additional Sinatra routes to the jspec.rb
 file to add your own functionality.
+
+== Interactive Shell
+
+JSpec provides an interactive shell through Rhino, utilize with:
+
+$ jspec shell
+
+Or to specify additional files to load:
+
+$ jspec shell lib/*.js
+
+Or view additional shell help
+
+$ jspec help shell
 
 == Ruby on Rails
 
