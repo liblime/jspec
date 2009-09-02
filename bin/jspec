@@ -35,6 +35,29 @@ command :init do |c|
   end
 end
 
+command :shell do |c|
+  c.syntax = 'jspec shell [path ...]'
+  c.summary = 'JSpec interactive shell'
+  c.description = 'Launch interactive shell with jspec.js, jspec.shell.js, 
+    and any [path]s given. Simply type "quit" or "exit" to 
+    terminate the shell.'
+  c.example 'Run shell', 'jspec shell'
+  c.example 'Run shell with glob of files', 'jspec shell lib/*.js'
+  c.example 'Run shell with list of files', 'jspec shell lib/foo.js lib/bar.js'
+  c.when_called do |args, options|
+    paths = ['jspec.js', 'jspec.shell.js'] | args
+    paths.map! do |path|
+      if path.include? 'jspec'
+        "-f #{JSPEC_ROOT}/lib/#{path}"
+      else
+        "-f #{path}"
+      end
+    end
+    say "JSpec #{program(:version)}"
+    `#{RHINO} #{paths.join(' ')} -f -`
+  end
+end
+
 command :update do |c|
   c.syntax = 'jspec update [path ...]'
   c.summary = 'Update JSpec releases'
