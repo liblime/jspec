@@ -9,8 +9,6 @@ require 'bind'
 require 'fileutils'
 require 'server/server'
 
-RHINO = 'java org.mozilla.javascript.tools.shell.Main'
-
 program :name, 'JSpec'
 program :version, '2.11.0'
 program :description, 'JavaScript BDD Testing Framework'
@@ -29,6 +27,7 @@ module JSpec
     #++
     
     BIND_PATHS = 'lib/**/*.js', 'spec/**/*.js'
+    RHINO = 'java org.mozilla.javascript.tools.shell.Main'
     
     ##
     # Destination directory.
@@ -40,6 +39,13 @@ module JSpec
     
     def initialize dest
       @dest = dest || '.'
+    end
+    
+    ##
+    # Execute _file_ with Rhino.
+
+    def rhino file
+      system "#{RHINO} #{file}"
     end
     
     ##
@@ -135,7 +141,7 @@ module JSpec
         :paths => self.class::BIND_PATHS,
         :port => 4444
       }.merge(options)
-      
+
       # Action
       
       case
@@ -317,36 +323,6 @@ command :run do |c|
   end
 end
 alias_command :bind, :run, '--bind'
-
-##
-# Copy template _name_ to _dest_.
-
-def copy_template_to name, dest
-  FileUtils.mkdir_p dest
-  FileUtils.cp_r path_to_template(name), dest
-end
-
-##
-# Return path to template _name_.
-
-def path_to_template name
-  File.join JSPEC_ROOT, 'templates', name, '.'
-end
-
-##
-# Resolve path to _file_. Supports rails and unbound projects.
-
-def path_to file
-  rails? ? "jspec/#{file}" : "spec/#{file}"
-end
-
-##
-# Execute _file_ with Rhino.
-
-def rhino file
-  raise "#{file} not found" unless File.exists? file
-  system "#{RHINO} #{file}"
-end
 
 ##
 # Start server with _suite_ html and _options_.
