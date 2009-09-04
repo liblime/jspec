@@ -3,20 +3,41 @@ include FileUtils
 
 describe "jspec" do
   describe "init" do
+    before :each do
+      @dest = File.dirname(__FILE__) + '/test'
+      mkdir @dest  
+    end
+    
+    after :each do
+      rm_rf @dest
+    end
+    
     it "should initialize a default project at the given path" do
-      dest = File.dirname(__FILE__) + '/test'
-      jspec('init', dest)
-      File.directory?(dest).should be_true
-      rm_rf dest
+      jspec('init', @dest)
+      File.directory?(@dest).should be_true
     end
     
     it "should initialize a rails project when using -R or --rails" do
-      dest = File.dirname(__FILE__) + '/test'
-      mkdir dest
-      mkdir dest + '/vendor'
-      jspec('init', dest, '--rails')
-      File.directory?(dest).should be_true
-      rm_rf dest
+      mkdir @dest + '/vendor'
+      jspec('init', @dest, '--rails')
+      File.directory?(@dest).should be_true
+      File.directory?(@dest + '/jspec').should be_true
+    end
+    
+    it "should vendorize jspec's library to spec/lib when using --freeze" do
+      jspec('init', @dest, '--freeze')
+      File.directory?(@dest).should be_true
+      File.directory?(@dest + '/spec/lib').should be_true
+      File.exists?(@dest + '/spec/lib/jspec.js').should be_true
+    end
+    
+    it "should vendor jspec's library to jspec/lib when using --freeze and --rails" do
+      mkdir @dest + '/vendor'
+      jspec('init', @dest, '--freeze', '--rails')
+      File.directory?(@dest).should be_true
+      File.directory?(@dest + '/jspec').should be_true
+      File.directory?(@dest + '/jspec/lib').should be_true
+      File.exists?(@dest + '/jspec/lib/jspec.js').should be_true
     end
   end
 end
