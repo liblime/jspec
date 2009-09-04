@@ -377,7 +377,7 @@ NOTE: both User and Administrator's before hooks implement the 'user' variable
 
 ## Mock Ajax Requests
 
-JSpec supports generic Ajax mocking which is usable with any JavaScript framework via 'jspec.xhr.js'. The
+JSpec supports generic Ajax mocking which is usable with any JavaScript framework via _jspec.xhr.js_. The
 API is comprised of two functions, `mock_request()` and `unmock_request()`. `unmock_request()` is
 automatically called after each specification to restore the default functionality of XMLHttpRequest,
 so it is uncommon to call `unmock_request()` directly. Below is a jQuery example:
@@ -474,14 +474,14 @@ We can do:
  
     { foo : 'bar' }.should.include 'foo'
 
-##= Closure Literal
+### Closure Literal
 
 These are equivalent:
 
     -{ throw 'test' }.should.throw_error
     function() { throw 'test' }.should.throw_error
 
-##= Inclusive Range Literal
+### Inclusive Range Literal
 
 The following expands to the array of [1,2,3,4,5]
 
@@ -507,10 +507,10 @@ The `fixture()` utility function may be used in order to load arbitrary file con
 for use with your specifications. JSpec will resolve `fixture('data')` in the following
 manor:
   
-  - 'data'
-  - 'spec/data'
-  - 'spec/fixtures/data'
-  - 'spec/fixtures/data.html'
+  - _data_
+  - _spec/data_
+  - _spec/fixtures/data_
+  - _spec/fixtures/data.html_
 
 So if the file _spec/fixtures/data.html_ exists, we can simply use `fixture('data')`,
 where as _spec/fixtures/xml/data.xml_ must be specified with `fixture('xml/data.xml')`.
@@ -631,7 +631,7 @@ The following methods or properties are utilized by JSpec:
   - utilities  : hash of utility functions merged with JSpec.defaultContext
   - matchers   : hash of matchers merged with JSpec's core matchers via JSpec.addMatchers()
   - DSLs       : hash of DSL methods; for example DSLs.snake contains before_each, after_each, etc.
-                 Where as DSLs.camel may contain beforeEach, afterEach, etc.
+    Where as DSLs.camel may contain beforeEach, afterEach, etc.
 
 Below is a list of hooks, descriptions, and valid return values which
 may simply be implemented as module methods. beforeSuite, afterSuite, beforeSpec, and afterSpec have lower
