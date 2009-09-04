@@ -795,6 +795,7 @@ JSpec more enjoyable, and bug free ;)
 * mpd@jesters-court.ne
 * kevin.gisi@gmail.com
 * enno84@gmx.net
+* fnando
 
 == License 
 

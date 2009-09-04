@@ -21,20 +21,23 @@ command :init do |c|
   c.summary = 'Initialize a JSpec project template'
   c.description = 'Initialize a JSpec project template. Defaults to the current directory
     when [dest] is not specified. The template includes several files for 
-    running via Rhino, DOM, and the JSpec Rack server.'
+    running via Rhino, DOM, and the JSpec Rack server.
+    
+    Additional switches --freeze, and --symlink are available in order
+    to preserve the version of JSpec at the time of initialization. Otherwise
+    incompatibilities from later versions may prevent your suite from
+    running properly.'
   c.example 'Create a directory foo, initialized with a jspec template', 'jspec init foo'
-  c.option '-R', '--rails', 'Initialize rails template'
+  c.option '-R', '--rails', 'Initialize rails template from rails root directory'
   c.option '-f', '--freeze', 'Copy the JSpec library'
   c.option '-s', '--symlink', 'Symlink the JSpec library instead of copying it'
   c.when_called do |args, options|
     dest = args.shift || '.'
-    
     if options.rails
       initialize_rails_at dest, options
     else
       initialize_at dest, options
     end
-    
     say "Template initialized at '#{dest}'"
   end
 end
