@@ -50,6 +50,13 @@ provides the `jspec` executable. To install execute:
 At which point you may:
   $ jspec init myproject
 
+By default, the command above will use absolute path for all JSpec library files.
+This behavior can be a problem when you're working across different computers or
+operating systems. You can freeze the library or symlink it.
+
+  $ jspec init myproject --freeze
+  $ jspec init myproject --symlink
+
 JSpec scripts should NOT be referenced via the <script> tag, they should be
 loaded using the exec method (unless you are using the grammar-less alternative).
 Below is an example:

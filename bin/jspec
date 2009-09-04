@@ -12,7 +12,7 @@ require 'server/server'
 RHINO = 'java org.mozilla.javascript.tools.shell.Main'
 
 program :name, 'JSpec'
-program :version, '2.10.1'
+program :version, '2.11.0'
 program :description, 'JavaScript BDD Testing Framework'
 default_command :bind
 
@@ -24,13 +24,17 @@ command :init do |c|
     running via Rhino, DOM, and the JSpec Rack server.'
   c.example 'Create a directory foo, initialized with a jspec template', 'jspec init foo'
   c.option '-R', '--rails', 'Initialize rails template'
+  c.option '-f', '--freeze', 'Copy the JSpec library'
+  c.option '-s', '--symlink', 'Symlink the JSpec library instead of copying it'
   c.when_called do |args, options|
     dest = args.shift || '.'
+    
     if options.rails
-      initialize_rails_at dest
+      initialize_rails_at dest, options
     else
-      initialize_at dest
+      initialize_at dest, options
     end
+    
     say "Template initialized at '#{dest}'"
   end
 end
@@ -149,22 +153,26 @@ alias_command :bind, :run, '--bind'
 ##
 # Initialize template at _dest_. 
 
-def initialize_at dest
+def initialize_at dest, options
   unless Dir[dest + '/*'].empty?
     abort unless agree "'#{dest}' is not empty; continue? "
   end
+  
   copy_template_to 'default', dest
+  setup_lib_dir dest, options
   replace_root_in dest, 'spec/spec.dom.html', 'spec/spec.rhino.js'
 end
 
 ##
 # Initialize rails template at _dest_.
 
-def initialize_rails_at dest
+def initialize_rails_at dest, options
   unless looks_like_rails_root?(dest)
     abort unless agree "'#{dest}' does not look like root of a rails project; continue? "
   end
+  
   copy_template_to 'rails', "#{dest}/jspec"
+  setup_lib_dir "#{dest}/jspec", options
   replace_root_in "#{dest}/jspec", 'spec.dom.html', 'spec.rhino.js'
 end
 
@@ -237,9 +245,17 @@ end
 # Replace JSPEC_ROOT placeholder in _paths_ relative to _dest_.
 
 def replace_root_in dest, *paths
+  if rails? && File.exist?("#{dest}/jspec/lib")
+    root = "."
+  elsif File.exist?("#{dest}/spec/lib")
+    root = "."
+  else
+    root = JSPEC_ROOT
+  end
+  
   paths.each do |path|
     path = File.join dest, path
-    contents = File.read(path).gsub 'JSPEC_ROOT', JSPEC_ROOT
+    contents = File.read(path).gsub 'JSPEC_ROOT', root
     File.open(path, 'w') { |file| file.write contents }
   end
 end
@@ -262,4 +278,27 @@ end
 
 def looks_like_rails_root? path = '.'
   File.directory? "#{path}/vendor"
+end
+
+##
+# Copy or symlink library to the specified path.
+
+def setup_lib_dir dest, options
+  return unless options.symlink || options.freeze
+  
+  if rails?
+    dest = File.join dest, "lib"
+  else
+    dest = File.join dest, "spec", "lib"
+  end
+  
+  from = File.join JSPEC_ROOT, "lib"
+  
+  FileUtils.rm_r dest
+  
+  if options.symlink
+    FileUtils.symlink from, dest, :force => true
+  else
+    FileUtils.cp_r from, dest
+  end
 end
