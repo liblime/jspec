@@ -14,6 +14,101 @@ program :version, '2.11.0'
 program :description, 'JavaScript BDD Testing Framework'
 default_command :bind
 
+command :init do |c|
+  c.syntax = 'jspec init [dest]'
+  c.summary = 'Initialize a JSpec project template'
+  c.description = 'Initialize a JSpec project template. Defaults to the current directory
+    when [dest] is not specified. The template includes several files for 
+    running via Rhino, DOM, and the JSpec Rack server.
+    
+    Additional switches --freeze, and --symlink are available in order
+    to preserve the version of JSpec at the time of initialization. Otherwise
+    incompatibilities from later versions may prevent your suite from
+    running properly.'
+  c.option '-R', '--rails', 'Initialize rails template from rails root directory'
+  c.option '-f', '--freeze', 'Copy the JSpec library'
+  c.option '-s', '--symlink', 'Symlink the JSpec library instead of copying it'
+  c.example 'Create a directory foo, initialized with a jspec template', 'jspec init foo'
+  c.when_called do |args, options|
+    if options.rails
+      JSpec::Project::Rails.new(args.first || '.').init! options.__hash__
+    else
+      JSpec::Project.new(args.first || '.').init! options.__hash__
+    end
+    say "Template initialized at `#{args.first}'"
+  end
+end
+
+command :shell do |c|
+  c.syntax = 'jspec shell [path ...]'
+  c.summary = 'JSpec interactive shell'
+  c.description = 'Launch interactive shell with jspec.js, jspec.shell.js, 
+    and any [path]s given. Simply type "quit" or "exit" to 
+    terminate the shell.'
+  c.example 'Run shell', 'jspec shell'
+  c.example 'Run shell with glob of files', 'jspec shell lib/*.js'
+  c.example 'Run shell with list of files', 'jspec shell lib/foo.js lib/bar.js'
+  c.when_called do |args, options|
+    paths = ['jspec.js', 'jspec.shell.js'] | args
+    paths.map! do |path|
+      if path.include? 'jspec.'
+        "-f #{JSPEC_ROOT}/lib/#{path}"
+      else
+        "-f #{path}"
+      end
+    end
+    say "JSpec #{program(:version)}"
+    `#{RHINO} #{paths.join(' ')} -f -`
+  end
+end
+
+command :update do |c|
+  c.syntax = 'jspec update [dest]'
+  c.summary = 'Update JSpec releases'
+  c.description = 'Update JSpec release relative to [dest], this will allow you to utilize 
+    the latest JSpec features. Execute from JSpec project root without [dest] to
+    update the default template spec files.'
+  c.when_called do |args, options|
+    JSpec::Project.new(args.first).update!
+  end
+end
+
+command :run do |c|
+  c.syntax = 'jspec run [path] [options]'
+  c.summary = 'Run specifications'
+  c.description = 'Run specifications, defaulting [path] to spec/environments/dom.html.
+    You will need to supply [path] if your specs do not reside 
+    in this location. `run --bind` is the default sub-command of
+    jspec so you may simply execute `jspec` in order to bind execution
+    of your specs when a file is altered.
+    
+    JSpec supports Rhino execution when installed. The [path] is assumed
+    to be spec/environments/rhino.js unless specified. See examples below for
+    using the --rhino switch.
+    
+    JSpec\'s server is also available via --server, which defaults 
+    the [path] to spec/environments/server.html'
+  c.example 'Run once in Safari', 'jspec run'
+  c.example 'Run once in Safari and Firefox', 'jspec run --browsers Safari,Firefox'
+  c.example 'Run once in Opera, Firefox, and Chrome', 'jspec run --browsers opera,ff,chrome'
+  c.example 'Run custom spec file', 'jspec run foo.html'
+  c.example 'Auto-run browsers when a file is altered', 'jspec run --bind --browsers Safari,Firefox'
+  c.example 'Shortcut for the previous example', 'jspec --browsers Safari,Firefox'
+  c.example 'Run Rhino specs', 'jspec run --rhino'
+  c.example 'Auto-run rhino when a file is altered', 'jspec --rhino'
+  c.option '-b', '--browsers BROWSERS', Array, 'Specify browsers to test'
+  c.option '-p', '--paths PATHS', Array, 'Specify paths when binding, defaults to javascript within ./lib and ./spec'
+  c.option '-B', '--bind', 'Auto-run specs when source files or specs are altered'
+  c.option '-R', '--rhino', 'Run specs using Rhino'
+  c.option '-S', '--server', 'Run specs using the JSpec server'
+  c.option '-P', '--port NUMBER', Integer, 'Start JSpec server using the given port number'
+  c.when_called do |args, options|
+    base = options.rails ? JSpec::Project::Rails : JSpec::Project
+    base.new('.').run! args.first, options.__hash__
+  end
+end
+alias_command :bind, :run, '--bind'
+
 module JSpec
   
   #--
@@ -159,14 +254,14 @@ module JSpec
       disable :logging
       hook = File.expand_path normalize('environments/server.rb')
       load hook if File.exists? hook
-      browsers = browsers_for(*options[:browsers]) if options.include? :browsers
+      browsers = browsers_for(options[:browsers]) if options.include? :browsers
       JSpec::Server.new(path, options.port).start(browsers)
     end
 
     ##
     # Return array of browser instances for the given _names_.
 
-    def browsers_for *names
+    def browsers_for names
       names.map do |name|
         begin
           Browser.subclasses.find do |browser|
@@ -269,102 +364,4 @@ module JSpec
     
   end
 end
-
-command :init do |c|
-  c.syntax = 'jspec init [dest]'
-  c.summary = 'Initialize a JSpec project template'
-  c.description = 'Initialize a JSpec project template. Defaults to the current directory
-    when [dest] is not specified. The template includes several files for 
-    running via Rhino, DOM, and the JSpec Rack server.
-    
-    Additional switches --freeze, and --symlink are available in order
-    to preserve the version of JSpec at the time of initialization. Otherwise
-    incompatibilities from later versions may prevent your suite from
-    running properly.'
-  c.option '-R', '--rails', 'Initialize rails template from rails root directory'
-  c.option '-f', '--freeze', 'Copy the JSpec library'
-  c.option '-s', '--symlink', 'Symlink the JSpec library instead of copying it'
-  c.example 'Create a directory foo, initialized with a jspec template', 'jspec init foo'
-  c.when_called do |args, options|
-    if options.rails
-      JSpec::Project::Rails.new(args.first || '.').init! options.__hash__
-    else
-      JSpec::Project.new(args.first || '.').init! options.__hash__
-    end
-    say "Template initialized at `#{args.first}'"
-  end
-end
-
-command :shell do |c|
-  c.syntax = 'jspec shell [path ...]'
-  c.summary = 'JSpec interactive shell'
-  c.description = 'Launch interactive shell with jspec.js, jspec.shell.js, 
-    and any [path]s given. Simply type "quit" or "exit" to 
-    terminate the shell.'
-  c.example 'Run shell', 'jspec shell'
-  c.example 'Run shell with glob of files', 'jspec shell lib/*.js'
-  c.example 'Run shell with list of files', 'jspec shell lib/foo.js lib/bar.js'
-  c.when_called do |args, options|
-    paths = ['jspec.js', 'jspec.shell.js'] | args
-    paths.map! do |path|
-      if path.include? 'jspec.'
-        "-f #{JSPEC_ROOT}/lib/#{path}"
-      else
-        "-f #{path}"
-      end
-    end
-    say "JSpec #{program(:version)}"
-    `#{RHINO} #{paths.join(' ')} -f -`
-  end
-end
-
-command :update do |c|
-  c.syntax = 'jspec update [dest]'
-  c.summary = 'Update JSpec releases'
-  c.description = 'Update JSpec release relative to [dest], this will allow you to utilize 
-    the latest JSpec features. Execute from JSpec project root without [dest] to
-    update the default template spec files.'
-  c.when_called do |args, options|
-    JSpec::Project.new(args.first).update!
-  end
-end
-
-command :run do |c|
-  c.syntax = 'jspec run [path] [options]'
-  c.summary = 'Run specifications'
-  c.description = 'Run specifications, defaulting [path] to spec/environments/dom.html.
-    You will need to supply [path] if your specs do not reside 
-    in this location. `run --bind` is the default sub-command of
-    jspec so you may simply execute `jspec` in order to bind execution
-    of your specs when a file is altered.
-    
-    JSpec supports Rhino execution when installed. The [path] is assumed
-    to be spec/environments/rhino.js unless specified. See examples below for
-    using the --rhino switch.
-    
-    JSpec\'s server is also available via --server, which defaults 
-    the [path] to spec/environments/server.html'
-  c.example 'Run once in Safari', 'jspec run'
-  c.example 'Run once in Safari and Firefox', 'jspec run --browsers Safari,Firefox'
-  c.example 'Run once in Opera, Firefox, and Chrome', 'jspec run --browsers opera,ff,chrome'
-  c.example 'Run custom spec file', 'jspec run foo.html'
-  c.example 'Auto-run browsers when a file is altered', 'jspec run --bind --browsers Safari,Firefox'
-  c.example 'Shortcut for the previous example', 'jspec --browsers Safari,Firefox'
-  c.example 'Run Rhino specs', 'jspec run --rhino'
-  c.example 'Auto-run rhino when a file is altered', 'jspec --rhino'
-  c.option '-b', '--browsers BROWSERS', Array, 'Specify browsers to test'
-  c.option '-p', '--paths PATHS', Array, 'Specify paths when binding, defaults to javascript within ./lib and ./spec'
-  c.option '-B', '--bind', 'Auto-run specs when source files or specs are altered'
-  c.option '-R', '--rhino', 'Run specs using Rhino'
-  c.option '-S', '--server', 'Run specs using the JSpec server'
-  c.option '-P', '--port NUMBER', Integer, 'Start JSpec server using the given port number'
-  c.when_called do |args, options|
-    if rails?
-      JSpec::Project::Rails.new('.').run! args.first, options.__hash__
-    else
-      JSpec::Project.new('.').run! args.first, options.__hash__
-    end
-  end
-end
-alias_command :bind, :run, '--bind'
 
