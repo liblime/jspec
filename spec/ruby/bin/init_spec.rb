@@ -24,6 +24,20 @@ describe "jspec" do
       File.directory?(@dest + '/jspec').should be_true
     end
     
+    it "should symlink jspec's library to spec/lib when using --symlink" do
+      jspec('init', @dest, '--symlink')
+      File.directory?(@dest).should be_true
+      File.symlink?(@dest + '/spec/lib').should be_true
+    end
+    
+    it "should symlink jspec's library to jspec/lib when using --symlink and --rails" do
+      mkdir @dest + '/vendor'
+      jspec('init', @dest, '--symlink', '--rails')
+      File.directory?(@dest).should be_true
+      File.directory?(@dest + '/jspec').should be_true
+      File.symlink?(@dest + '/jspec/lib').should be_true
+    end
+    
     it "should vendorize jspec's library to spec/lib when using --freeze" do
       jspec('init', @dest, '--freeze')
       File.directory?(@dest).should be_true
