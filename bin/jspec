@@ -73,9 +73,11 @@ module JSpec
     ##
     # Copy template _name_ to the destination.
     
-    def copy_template name
+    def copy_template name, options = {}
       FileUtils.mkdir_p dest
-      FileUtils.cp_r path_to_template(name), dest
+      FileUtils.cp_r path_to_template(name), options[:to] ?
+        "#{dest}/#{options[:to]}" :
+          dest
     end
     
     ##
@@ -123,7 +125,7 @@ module JSpec
     
     def verify_empty!
       unless Dir[dest + '/*'].empty?
-        abort unless agree "'#{dest}' is not empty; continue? "
+        abort unless agree "`#{dest}' is not empty; continue? "
       end
     end
     
@@ -142,6 +144,48 @@ module JSpec
         File.open(path, 'r+'){ |file| file.write contents } 
         say "updated #{path}; #{$1} -> #{program(:version)}"
       end
+    end
+    
+    #--
+    # Rails project
+    #++
+    
+    class Rails < self
+      
+      ##
+      # Initialize the project.
+
+      def init!
+        verify_rails!
+        copy_template :rails, :to => :jspec
+        replace_root
+      end
+      
+      ##
+      # Normalize _path_.
+
+      def normalize path
+        "#{dest}/jspec/#{path}"
+      end
+      
+      ##
+      # Verify that the current directory is rails, otherwise 
+      # prompt for continuation.
+
+      def verify_rails!
+        unless rails?
+          abort unless agree "`#{dest}' does not appear to be a rails app; continue? "
+        end
+      end
+      
+      ##
+      # Check if the destination is the root of 
+      # a rails application.
+      
+      def rails?
+        File.directory? dest + '/vendor'
+      end
+      
     end
     
   end
@@ -163,7 +207,11 @@ command :init do |c|
   c.option '-s', '--symlink', 'Symlink the JSpec library instead of copying it'
   c.example 'Create a directory foo, initialized with a jspec template', 'jspec init foo'
   c.when_called do |args, options|
-    JSpec::Project.new(args.first || '.', options.__hash__).init!
+    if options.rails
+      JSpec::Project::Rails.new(args.first || '.', options.__hash__).init!
+    else
+      JSpec::Project.new(args.first || '.', options.__hash__).init!
+    end
     say "Template initialized at `#{args.first}'"
   end
 end
