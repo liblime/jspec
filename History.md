@@ -1,24 +1,29 @@
 
-### 2.11.0 / 2009-09-04
+2.11.0 / 2009-09-04
+-------------------
 
   * Added --symlink switch (links the current version of JSpec to ./spec/lib) [#4]
   * Added --freeze switch (copies the current version of JSpec to ./spec/lib) [#4]
 
-### 2.10.1 / 2009-09-02
+2.10.1 / 2009-09-02
+-------------------
 
   * Added `jspec shell` sub command (interactive Rhino shell through JSpec)
   * Added jspec.shell.js
 
-### 2.10.0 / 2009-08-27
+2.10.0 / 2009-08-27
+-------------------
 
   * Added Async support via mock timers (lib/jspec.timers.js) [#19]
   * IRC channel up and running! irc://irc.freenode.net#jspec
 
-### 2.9.1 / 2009-08-21
+2.9.1 / 2009-08-21
+------------------
 
   * Added module support for formatters
 
-### 2.9.0 / 2009-08-21
+2.9.0 / 2009-08-21
+------------------
 
   * Server output matching Rhino when using verbose or failuresOnly options
   * Added mock_request() and unmock_request() as aliases for mockRequest() and unmockRequest()
@@ -39,11 +44,13 @@
   * Fixed Server output escaping (removed html escaping from puts()) [#13]
   * Fixed JSpec.load(); returns responseText when 2xx or 0 (for file://)
 
-### 2.8.4 / 2009-08-02
+2.8.4 / 2009-08-02
+------------------
 
   * Fixed error thrown when a module has no utilities
 
-### 2.8.3 / 2009-07-30
+2.8.3 / 2009-07-30
+------------------
 
   * Added JSpec.evalHook() 
   * Added JSpec.paramsFor()
@@ -52,20 +59,23 @@
   * Fixed node.js print() newline issue
   * Fixed specs preventing spec/spec.node.js from running
 
-### 2.8.2 / 2009-07-29
+2.8.2 / 2009-07-29
+------------------
 
   * Added JSpec.tryLoading()
   * Added JSpec.request used to reference the original XMLHttpRequest; used to fix [#149]
   * Fixed Mock XHR issue messing up JSpec request related utilities such as fixture() [#149]
 
-### 2.8.1 / 2009-07-27
+2.8.1 / 2009-07-27
+------------------
 
   * Added Lawrence Pit as a contributor
   * Fixed object hash equality [#146]
   { a : '1', b : '2' } is now the same as:
   { b : '2', a : '1' }
 
-### 2.8.0 / 2009-07-27
+2.8.0 / 2009-07-27
+------------------
 
   * Give readFile precendence over xhr so that fixtures work with mockRequest when using Rhino
   * Give XMLHttpRequest precedence over microsoft crap
@@ -74,14 +84,16 @@
   * Added jspec.xhr.js
   * Fixed be_visible, and be_hidden. Now implement the jQuery <= 1.3.1 method
 
-### 2.7.2 / 2009-07-24
+2.7.2 / 2009-07-24
+------------------
 
   * Fixed "end" in spec bodies when using the grammar
   * Fixed "it" in spec bodies when using the grammar [#142]
   * Changed; HTML entities in descriptions are now escaped for DOM formatter [#141]
   * Added enno84@gmx.net as a contributor (thanks for the bug reports)
 
-### 2.7.1 / 2009-07-17
+2.7.1 / 2009-07-17
+------------------
 
   * Changed; hash() now accepts null
   * Fixed should_receive issue with validating boolean args or return values
@@ -89,23 +101,27 @@
   * Fixed jQuery dependency error message when jQuery is not available
   when using jspec.jquery.js
 
-### 2.7.0 / 2009-07-14
+2.7.0 / 2009-07-14
+------------------
 
   * Added fixture() utility function
   * Templates initialize with example paths to lib
 
-### 2.6.0 / 2009-07-09
+2.6.0 / 2009-07-09
+------------------
 
   * Added Ruby on Rails support
   * Added exporting of JSpec (node.js etc)
   * Added be_undefined matcher [#134]
 
-### 2.5.1 / 2009-07-07
+2.5.1 / 2009-07-07
+------------------
 
   * Added intermediate node.js support
   * Fixed; grammar now allows foo.bar.baz.stub() etc to convert to stub(foo.bar.baz)
 
-### 2.5.0 / 2009-07-03
+2.5.0 / 2009-07-03
+------------------
 
   * Added contrib in README (thanks to anyone who has helped)
   * Added more shared behavior specs
@@ -118,22 +134,26 @@
   * Fixed negation of should.receive('foo') matcher
   * Fixed shared behavior assertion count issue
 
-### 2.4.3 / 2009-07-02
+2.4.3 / 2009-07-02
+------------------
 
   * Fixed matcher semicolon matcher issue when using the JSpec grammar
   * Added pass() util; Spec#pass() and Spec#fail() (thanks gisikw)
   * Removing Object.prototype.stubby() after specs are finished to prevent pollution
 
-### 2.4.2 / 2009-06-30
+2.4.2 / 2009-06-30
+------------------
 
   * Fixed trailing comma (thanks Kevin)
 
-### 2.4.1 / 2009-06-30
+2.4.1 / 2009-06-30
+------------------
 
   * Moved beforeSpec and afterSpec hook into proper positions
   allowing for additional assertions within afterSpec.
 
-### 2.4.0 / 2009-06-30
+2.4.0 / 2009-06-30
+------------------
 
   * Added hook() and hookImmutable()
   * Added support for matcher lists ('be enabled disabled selected') == be_enabled, be_disabled etc
@@ -145,19 +165,22 @@
   * Require bind gem
   * Fixed `jspec` bin docs
 
-### 2.3.1 / 2009-06-25
+2.3.1 / 2009-06-25
+------------------
 
   * Fixed; all stubs generated with stub() are restored
   to their original methods after each 'it' block. See
   README for details.
 
-### 2.3.0 / 2009-06-25
+2.3.0 / 2009-06-25
+------------------
 
   * Added stub()
   * Added destub()
   * Changed; Server responses utilize Rack::Mime now for arbitrary requests
 
-### 2.2.1 / 2009-06-22
+2.2.1 / 2009-06-22
+------------------
 
   * Changed; reportToServer() now accepts url arg
 
@@ -172,7 +195,8 @@
   A patch for tabs is pending and should be available soon,
   however be aware that a 'parse error' may occur otherwise.
 
-### 2.2.0 / 2009-06-18
+2.2.0 / 2009-06-18
+------------------
 
   * Added link to JSpec in JSMag June 2009
   * Added Github gem source location to docs
@@ -181,7 +205,8 @@
   This allows files in ../lib/  * to be served rather than ./spec/  * only.
   * Refactored argumentsToArray()
 
-### 2.1.0 / 2009-06-12
+2.1.0 / 2009-06-12
+------------------
 
   * Changed `jspec init` to utilize a single template
   which allows for all three suite running capabilities
@@ -189,24 +214,28 @@
   project you may `jspec run --server`, `jspec run --rhino`
   etc at any time without modifications.
 
-### 2.0.3 / 2009-05-15
+2.0.3 / 2009-05-15
+------------------
 
   * Table should span full width
   (Very week release I know, but improperly styled things bug me :) )
 
-### 2.0.2 / 2009-05-11
+2.0.2 / 2009-05-11
+------------------
 
   * Added rails integration link http://github.com/bhauman/jspec-rails
   * Changed; puts() now displays constructor name when available
   * Fixed Terminal output which was not displaying due to a recent commit
   * fixed IE bug : DOM elements don't have valueOf() method
 
-### 2.0.1 / 2009-05-01
+2.0.1 / 2009-05-01
+------------------
 
   * Added better failure messages for throw_error matcher
   * Renamed print() to puts() [#108]
 
-### 2.0.0 / 2009-04-27
+2.0.0 / 2009-04-27
+------------------
 
   * Added DOM loading indicator [#105]
   * Added wait() helper for additional async support
@@ -225,21 +254,25 @@
   * Added JSpec.contentsOf()
   * Added matchers to body evaluation [#90]
 
-### 1.1.7 / 2009-04-22
+1.1.7 / 2009-04-22
+------------------
 
   * Removed trailing commas causing issues with IE (what a suprise ;) )
 
-### 1.1.6 / 2009-04-22
+1.1.6 / 2009-04-22
+------------------
 
   * Fixed typo in requires()
   * Added expect()
 
-### 1.1.5 / 2009-04-17
+1.1.5 / 2009-04-17
+------------------
 
   * Strengthened specs for cascading hooks
   * Fixed cascading hooks
 
-### 1.1.4 / 2009-04-17
+1.1.4 / 2009-04-17
+------------------
 
   * Added rhino and server template files
   * Added JSpec.hasXhr()
@@ -272,23 +305,28 @@
   * Fixed commenting bug [#37]
   * Removed JSpec.main, now just using local main
 
-### 1.1.3 / 2009-04-14
+1.1.3 / 2009-04-14
+------------------
 
   * Removed /test used for the executable, causing gem to fail building
 
-### 1.1.2 / 2009-04-14
+1.1.2 / 2009-04-14
+------------------
 
   * Added `jspec update` sub-command [#63]
 
-### 1.1.1 / 2009-04-12
+1.1.1 / 2009-04-12
+------------------
 
   * Added gemspec
 
-### 1.1.0 / 2009-04-12
+1.1.0 / 2009-04-12
+------------------
 
   * jspec executable fully functional
 
-### 1.0.4 / 2009-04-09
+1.0.4 / 2009-04-09
+------------------
 
   * Added `jspec bind`
   * Added `jspec run`
@@ -299,29 +337,34 @@
   * Added custom matchers documentation
   * Removed double negation
 
-### 1.0.3 / 2009-04-08
+1.0.3 / 2009-04-08
+------------------
 
   * Added have_prop matcher, have_property is now strict [#56]
 
-### 1.0.2 / 2009-04-08
+1.0.2 / 2009-04-08
+------------------
 
   * Added be_selected, be_checked matchers
   * Added string support to each() each('some foo bar', ...)
   * Added have_ATTR matchers [#51]
   * Deprected be_a_TYPE_input matchers [#50]
 
-### 1.0.1 / 2009-04-07
+1.0.1 / 2009-04-07
+------------------
 
   * Added have_property matcher [#53]
 
-### 1.0.0 / 2009-04-06
+1.0.0 / 2009-04-06
+------------------
 
   * Added option() which gives the query string option precedence [#39]
   * Changed; Using JSpec.options.formatter not JSpec.formatter [#44]
   * Fixed Console formatter, now displays nested suites
   * Check out http://visionmedia.github.com/jspec for additional documentation!
 
-### 0.9.6 / 2009-04-03
+0.9.6 / 2009-04-03
+------------------
 
   * Added nesting support
   * Added printing of nested specs
@@ -331,7 +374,8 @@
   * Renamed preProcess() to preprocess()
   * Removed running of a single suite via ?suite= for now
 
-### 0.9.5 / 2009-04-02
+0.9.5 / 2009-04-02
+------------------
 
   * Added support for printing of function bodies and regexps [#27]
   * Added support for strings / regexp with should_throw_error [#26]
@@ -340,24 +384,28 @@
   * Added have_at_least matcher
   * Added have matcher [#24]
 
-### 0.9.4 / 2009-04-02
+0.9.4 / 2009-04-02
+------------------
 
   * Added be_a_TYPE_input matchers (be_a_checkbox_input, be_a_text_input, etc)
   * Added be_disabled matcher [#21]
   * Added be_enabled matcher [#20]
   * Refactored be_visible and be_hidden with $(elem).is()
 
-### 0.9.2 / 2009-04-02
+0.9.2 / 2009-04-02
+------------------
 
   * Added support for multi-arg failure messages [#2]
   * Better printing of jQuery objects [#15]
 
-### 0.9.1 / 2009-04-02
+0.9.1 / 2009-04-02
+------------------
 
   * Added support for dotted negation of assertions (foo.should.not.equal bar)
   * Added support for dot-style assertions [#17] (foo.should_not.equal bar)
 
-### 0.9.0 / 2009-04-01
+0.9.0 / 2009-04-01
+------------------
 
   * Added spec for strip()
   * Added strip()
@@ -382,11 +430,13 @@
   * Changed; preprocessor passing array of args (multi-arg matcher support)
   * Changed jQuery to $ for internal usage
 
-### 0.8.0 / 2009-02-27
+0.8.0 / 2009-02-27
+------------------
 
   * Added a new style for the DOM formatter (not finished yet)
 
-### 0.7.0 / 2009-02-27
+0.7.0 / 2009-02-27
+------------------
 
   * Added Console formatter (anything implementing the console object. Firebug, Safari 4, etc)
   * Added JSpec.options.profile for optional profiling of specs
@@ -396,24 +446,28 @@
   * Added savings raketask
   * Fixed parse error bug in Safari 4
 
-### 0.6.3 / 2009-02-26
+0.6.3 / 2009-02-26
+------------------
 
   * Added minification for jspec.jquery.js when packaging before release
   * Added compression of css when packaging before release
 
-### 0.6.2 / 2009-02-26
+0.6.2 / 2009-02-26
+------------------
 
   * Changed; using $ in jspec.jquery.js for JSpec, take that jQuery ;)
   * Added addMatchers, print, hash, and each as 'utility functions' this allows 
   JSpec to do each(...) internally instead of JSpec.each(...), while still preventing
   pollution of the global scope.
 
-### 0.6.1 / 2009-02-26
+0.6.1 / 2009-02-26
+------------------
 
   * Added closrue literal -{ (view README)
   * Added option to DOM formatter, now allows you to specify which element id to output to
 
-### 0.6.0 / 2009-02-24
+0.6.0 / 2009-02-24
+------------------
 
   * Added JSpec.hash 
   * Added be_null matcher
@@ -421,11 +475,13 @@
   For example [1, 2, [3]].should_eql([1, 2, [3]]) is true, works with object
   'hashes' as well.
 
-### 0.5.1 / 2009-02-24
+0.5.1 / 2009-02-24
+------------------
 
   * Damn auto-release messed up
 
-### 0.5.0 / 2009-02-24
+0.5.0 / 2009-02-24
+------------------
 
   * Added async support for jQuery
   * Added JSpec.requires for dependencies
@@ -435,30 +491,35 @@
   * Fixed evalBody exceptions, previously was not showing exception message
   * Fixed bug of JSpec interpreting // in a string such as http:// to be a comment.
 
-### 0.4.1 / 2009-02-22
+0.4.1 / 2009-02-22
+------------------
 
   * Added elements() alias of element()
   * Added support for string passed to runSuite; runSuite('Matchers') is the same as
   runSuite(JSpec.suites['Matchers']).
   * Fixed some documentation
 
-### 0.4.0 / 2009-02-20
+0.4.0 / 2009-02-20
+------------------
 
   * Added comment literal (//)
   * Added pre-processor for convering matchers.
   For example 'test'.should_be_true becomes JSpec.match('test', 'should_be', 'true'),
   preventing pollution of core prototypes.
 
-### 0.3.2 / 2009-02-19
+0.3.2 / 2009-02-19
+------------------
 
   * Added TM bundle (go checkout my jspec.tmbundle repo on github)
   * Renamed have_length_of to have_length
 
-### 0.3.1 / 2009-02-19
+0.3.1 / 2009-02-19
+------------------
 
   * Added jquery js to package
 
-### 0.3.0 / 2009-02-19
+0.3.0 / 2009-02-19
+------------------
 
   * Added JSpec.match
   * Added options to report() which are passed to formatter
@@ -468,21 +529,25 @@
   * Changed exec to only load / eval file
   * Fixed parser token issue, was previously matching things like end() as literal end
 
-### 0.2.3 / 2009-02-18
+0.2.3 / 2009-02-18
+------------------
 
   * Changed test dir to spec
   * Changed test.js to core.spec.js
 
-### 0.2.2 / 2009-02-18
+0.2.2 / 2009-02-18
+------------------
 
   * Added contexts
 
-### 0.2.0 / 2009-02-18
+0.2.0 / 2009-02-18
+------------------
 
   * Added release rake task
   * Added package with minified alternative
 
-### 0.1.0 / 2009-02-18
+0.1.0 / 2009-02-18
+------------------
 
   * Added new sexy syntax (warning: you will have to re-write your specs)
   * Added pre-processor for optional matcher parens 
@@ -493,21 +558,25 @@
   * Added yet-to-be-implemented specs 
   * Added loading of suites via JSpec.load
 
-### 0.0.4 / 2008-11-03
+0.0.4 / 2008-11-03
+------------------
 
   * Added ability to pass only a description to it(), meaning not yet implemented
 
-### 0.0.3 / 2008-10-28
+0.0.3 / 2008-10-28
+------------------
 
   * Added should_fail
   * Added should_match
   * Added should_not_match
   * Added should_be and should_not_be
 
-### 0.0.2 / 2008-10-28
+0.0.2 / 2008-10-28
+------------------
 
   * Fixed typo in documentation for pointing to the master repo
 
-### 0.0.1 / 2008-10-28
+0.0.1 / 2008-10-28
+------------------
 
   * Initial release
