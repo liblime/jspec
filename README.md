@@ -2,9 +2,9 @@
 # JSpec
 
 JSpec is a minimalistic JavaScript behavior driven development framework,
-providing simple installation, extremely low learning curve, absolutely no pollution
+providing **simple installatio**n, extremely **low learning curve**, absolutely **no pollution**
 to core prototypes, async request support, and incredibly sexy syntax, tons of matchers
-and much more.
+and **much more**.
 
 ## Features
 
