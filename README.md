@@ -132,7 +132,7 @@ may also use grammar-less assertions):
 
 You may alter the way JSpec operates by assigning options via the
 JSpec.options hash, by passing string-based option values via the 
-query string, or passing a hash to **run()**. For example 
+query string, or passing a hash to `run()`. For example 
 `JSpec.options.failuresOnly = true`, and `?failuresOnly=1` will both work.
 
 - profile       
@@ -202,41 +202,47 @@ query string, or passing a hash to **run()**. For example
         However composites like arrays or 'hashes' are recursively matched,
         meaning that [1, 2, [3]].should_eql([1, 2, [3]]) will be true.
   
-  * jQuery
+* jQuery
   
-    - have_tag, have_one    have exactly one tag   
-    - have_tags, have_many  have more than one tag
-    - have_child            have exactly one child
-    - have_children         have more than one child
-    - have_text             have plain text
-    - have_attr             have an attribute, with optional value
-    - have_type
-    - have_id
-    - have_title
-    - have_alt
-    - have_href
-    - have_rel
-    - have_rev
-    - have_name
-    - have_target
-    - have_value     
-    - have_class
-    - have_classes
-    - be_visible
-    - be_hidden
-    - be_enabled
-    - be_disabled
-    - be_selected
-    - be_checked
+ - have_tag, have_one
+   - have exactly one tag   
+ - have_tags, have_many
+   - have more than one tag
+ - have_child
+   - have exactly one child
+ - have_children
+   - have more than one child
+ - have_text
+   - have plain text
+ - have_attr
+   - have an attribute, with optional value
+ - have_type
+ - have_id
+ - have_title
+ - have_alt
+ - have_href
+ - have_rel
+ - have_rev
+ - have_name
+ - have_target
+ - have_value     
+ - have_class
+ - have_classes
+ - be_visible
+ - be_hidden
+ - be_enabled
+ - be_disabled
+ - be_selected
+ - be_checked
   
 ## Async Support With Mock Timers
 
-The javascript mock timers library is available at http://github.com/visionmedia/js-mock-timers
-although it is already bundled with JSpec at lib/jspec.timers.js
+The javascript mock timers library is available at [http://github.com/visionmedia/js-mock-timers](http://github.com/visionmedia/js-mock-timers)
+although it is already bundled with JSpec at _lib/jspec.timers.js_
 
-Timers return ids and may be passed to clearInterval(), however
+Timers return ids and may be passed to `clearInterval()`, however
 they do not execute in threads, they must be manually scheduled and
-controlled via the tick() function.
+controlled via the `tick()` function.
 
     setTimeout(function(){
       alert('Wahoo!')
@@ -245,8 +251,8 @@ controlled via the tick() function.
     tick(200) // Nothing happens
     tick(400) // Wahoo!
     
-setInterval() works as expected, although it persists, where as setTimeout() 
-is destroyed after a single call. As conveyed by the last tick() call below,
+`setInterval()` works as expected, although it persists, where as `setTimeout()`
+is destroyed after a single call. As conveyed by the last `tick()` call below,
 a large increment in milliseconds may cause the callbacks to be called several times
 to 'catch up'.
 
@@ -284,7 +290,7 @@ how other methods may interact with it. Below is another example:
     array.should.receive('toString').and_return('foo,bar')
     'array: ' + array // This line causes the spec to pass due to calling toString()
 
-For more examples view spec/spec.matchers.js
+For more examples view _spec/spec.matchers.js_
 
 ## Method Stubbing
 
@@ -294,19 +300,19 @@ JSpec currently provides very simple stubbing support shown below:
     stub(person, 'toString').and_return('Ive been stubbed!')
   
 After each spec all stubs are restored to their original methods so
-there is no reason to explicitly call destub(). To persist stubs, 
+there is no reason to explicitly call `destub()`. To persist stubs, 
 use a before_each hook:
 
     before_each
       stub(someObject, 'method').and_return({ some : thing })
     end
 
-To destub a method simply call destub() at any time:
+To destub a method simply call `destub()` at any time:
 
     destub(person, 'toString')
   
 If you would like to whipe an object clear of stubs simply pass it
-to destub() without an additional method argument:
+to `destub()` without an additional method argument:
 
     destub(person)
   
@@ -365,25 +371,25 @@ NOTE: both User and Administrator's before hooks implement the 'user' variable
 ## Mock Ajax Requests
 
 JSpec supports generic Ajax mocking which is usable with any JavaScript framework via 'jspec.xhr.js'. The
-API is comprised of two functions, mockRequest() and unmockRequest(). unmockRequest() is
+API is comprised of two functions, `mock_request()` and `unmock_request()`. `unmock_request()` is
 automatically called after each specification to restore the default functionality of XMLHttpRequest,
-so it is uncommon to call unmockRequest() directly. Below is a jQuery example:
+so it is uncommon to call `unmock_request()` directly. Below is a jQuery example:
 
     it 'should mock requests'
-      mockRequest().and_return('{ foo : "bar" }', 'application/json')
+      mock_request().and_return('{ foo : "bar" }', 'application/json')
       $.getJSON('foo', function(response, statusText){
         response.foo.should.eql 'bar'
       })
     end
 
-The mockRequest().and_return signature is as follows:
+The mock_request().and_return signature is as follows:
 
-    mockRequest().and_return(<data>, [content-type], [response-status-code], [headers-hash])
+    mock_request().and_return(<data>, [content-type], [response-status-code], [headers-hash])
   
-At the moment mockRequest() itself does not accept any arguments, however in the future
+At the moment `mock_request()` itself does not accept any arguments, however in the future
 this will be used to target specific uris for mocking.
 
-NOTE: works with Rhino as well
+**NOTE**: works with Rhino as well
 
 ## Hooks
 
@@ -391,10 +397,14 @@ Currently the following hooks are supported, and may be utilized any number of t
 are simply pushed to a stack. So for instance you may have two before_each blocks within the same
 scope, they will both run, but this can help keep your specs readable.
 
-  * before       run once before the suite is executed
-  * after        run once after the suite is executed
-  * before_each  run before each specification
-  * after_each   run after each specification
+- before       
+  - run once before the suite is executed
+- after
+  - run once after the suite is executed
+- before_each
+  - run before each specification
+- after_each
+  - run after each specification
 
 ## Custom Contexts
 
@@ -423,7 +433,7 @@ To reset the context simply assign null to obtain the original context.
 
 ## Async Support
 
-Currently only jspec.jquery.js supports async requests. JSpec uses jQuery.ajaxSetup and sets all
+Currently only _jspec.jquery.js_ supports async requests. JSpec uses `jQuery.ajaxSetup` and sets all
 requests to sync, which preserves execution order, and reports correctly.
 
     it 'should load mah cookies (textfile)'
@@ -473,7 +483,7 @@ The following expands to the array of [1,2,3,4,5]
 ## Formatters
 
 To change a formatter simply alter the options hash like below, assigning
-a new constructor, or pass it within the hash to run():
+a new constructor, or pass it within the hash to `run()`:
 
     JSpec.options.formatter = JSpec.formatters.Console
 
@@ -486,8 +496,8 @@ OR
 	
 ## Fixtures
 
-The fixture() utility function may be used in order to load arbitrary file contents
-for use with your specifications. JSpec will resolve fixture('data') in the following
+The `fixture()` utility function may be used in order to load arbitrary file contents
+for use with your specifications. JSpec will resolve `fixture('data')` in the following
 manor:
   
   - 'data'
@@ -495,17 +505,17 @@ manor:
   - 'spec/fixtures/data'
   - 'spec/fixtures/data.html'
 
-So if the file 'spec/fixtures/data.html' exists, we can simply use fixture('data'),
-where as 'spec/fixtures/xml/data.xml' must be specified with fixture('xml/data.xml').
+So if the file _spec/fixtures/data.html_ exists, we can simply use `fixture('data')`,
+where as _spec/fixtures/xml/data.xml_ must be specified with `fixture('xml/data.xml')`.
 
-If you prefer not to store fixtures in the 'fixtures' directory you must be more specific
+If you prefer not to store fixtures in the _fixtures_ directory you must be more specific
 with the path supplied.
 
 ## Testing DOM Elements
 
 When using jQuery testing DOM elements is very easy. Many may think they require specific
 sandbox divs in their html, however you do not. Using the fixture support mentioned above
-you may simply load some HTML, and use the 'elements()' utility which is an alias of jQuery:
+you may simply load some HTML, and use the `elements()` utility which is an alias of jQuery:
 
     describe 'JSpec DOM testing'
       describe 'is so easy'
@@ -537,7 +547,7 @@ You may also use simple strings, since jQuery's constructor will convert them to
 ## Custom Matchers
 
 First lets create a simple equality matcher. In the case below JSpec is smart enough to realize
-this is simply a binary operator, and simply transforms this into 'actual ##= expected'
+this is simply a binary operator, and simply transforms this into `actual === expected`
 
     JSpec.addMatchers({
       equal : '##='
@@ -603,8 +613,8 @@ function must return the matcher body which will be used.
 ## Extending Or Hooking Into JSpec
 
 JSpec provides a hook architecture for extending or analyzing various
-points in its execution, through the use of 'Modules'. For a Module
-example view lib/jspec.jquery.js. 
+points in its execution, through the use of modules. For a module
+example view _lib/jspec.jquery.js_. 
 
 The following methods or properties are utilized by JSpec:
 
@@ -652,8 +662,8 @@ executing method like below. This example will stop execution of any file matchi
   
 Immutable values may also be passed to hooks using hookImmutable() internally. This allows
 for simple numbers, strings, etc to be utilized or altered within a hook implementation. Below
-is an example module which adds functionality to the JSpec grammar by converting SomeObject.stub('method')
-to stub(SomeObject, 'method'):
+is an example module which adds functionality to the JSpec grammar by converting `SomeObject.stub('method')`
+to `stub(SomeObject, 'method')`:
 
     JSpec.include({
       preprocessing : function(input) {
@@ -667,7 +677,7 @@ When installed as a Ruby Gem, the `jspec` executable will become available,
 allowing you to initialize project templates quickly, as well as auto-testing
 specifications when a file is altered.
 
-Initialize JSpec-driven project template in directory 'myproject':
+Initialize JSpec-driven project template in directory _myproject_:
     $ jspec init myproject
 
 Once within 'myproject' start testing by executing:
@@ -710,7 +720,7 @@ back to the terminal. It is essentially the same as using the DOM formatter
 and auto-testing each browser, however results are centralized to the terminal,
 removing the need to manually view each browser's output.
 
-When utilizing the server if a file named spec/jspec.rb (or jspec/jspec.rb for rails)
+When utilizing the server if a file named _spec/jspec.rb_ (or _jspec/jspec.rb_ for rails)
 is present, then it will be loaded before the server is started. This allows you to
 add Sinatra routes, support additional Browsers, etc.
 
@@ -724,18 +734,20 @@ Run with alternative browser names:
     $ jspec run --browsers safari,ff,chrome,ie
   
 Browsers supported in core:
-  - Browser::Safari
-  - Browser::Chrome
-  - Browser::Opera
-  - Browser::Firefox
-  - Browser::IE
+
+- Browser::Safari
+- Browser::Chrome
+- Browser::Opera
+- Browser::Firefox
+- Browser::IE
   
 Supplied routes:
-  - /slow/NUMBER
-  - /status/NUMBER
+
+- /slow/NUMBER
+- /status/NUMBER
   
-For example $.get('/slow/4', function(){}) will take 4 seconds
-to reply, where as $.get('/status/404', function(){}) will respond
+For example `$.get('/slow/4', function(){})` will take 4 seconds
+to reply, where as `$.get('/status/404', function(){})` will respond
 with an 404 status code. Add additional Sinatra routes to the jspec.rb
 file to add your own functionality.
 
@@ -756,14 +768,14 @@ Or view additional shell help
 ## Ruby on Rails
 
 No additional gems are required for JSpec to work with rails, although 
-http://github.com/bhauman/jspec-rails has been created by 'bhauman'. JSpec
+[jspec-rails](http://github.com/bhauman/jspec-rails) has been created by 'bhauman'. JSpec
 supports Rails out of the box, simply execute:
 
     $ jspec init --rails
   
 Then while still in the root directory of your Rails project, run the following
 command which will bind to, and refresh your browsers automatically when any changes 
-are made to ./public/javascripts/*.js or ./jspec/*.js
+are made to _./public/javascripts/*.js_ or _./jspec/*.js_
 
     $ jspec
   
@@ -777,21 +789,21 @@ Or run via the terminal using Rhino:
   
 ## Support Browsers
 
-Browsers below are supported and can be found in server/browsers.rb, however
-your spec/server.rb file may support additional browsers.
+Browsers below are supported and can be found in _server/browsers.rb_, however
+your _spec/server.rb_ file may support additional browsers.
 
-* Safari
-* Chrome
-* Firefox
-* Opera
-* Internet Explorer
+- Safari
+- Chrome
+- Firefox
+- Opera
+- Internet Explorer
   
 ## Known Issues
 
-* Tabs may cause a parse error. To prevent this use 'soft tabs' (setting in your IDE/Editor)
+- **Tabs may cause a parse error**. To prevent this use **'soft tabs'** (setting in your IDE/Editor)
   or use JSpec's grammar-less alternative (mentioned above).
   
-* The preprocessor is not (yet) capable of multiline conversions. For example the following is invalid
+- The preprocessor is not (yet) capable of multiline conversions. For example the following is invalid
   
     object.stub('getContentsOfURL').and_return(function(url){
       return 'html'
@@ -805,16 +817,16 @@ your spec/server.rb file may support additional browsers.
   
 ## Additional JSpec Modules
 
-* JSocka stubbing http://github.com/gisikw/jsocka/tree/master
+- JSocka stubbing http://github.com/gisikw/jsocka/tree/master
   
 ## More Information
 
-* IRC Channel irc://irc.freenode.net#jspec
-* Featured article in JSMag: http://www.jsmag.com/main.issues.description/id=21/
-* Syntax comparison with other frameworks http://gist.github.com/92283
-* Get the TextMate bundle at https://github.com/visionmedia/jspec.tmbundle/tree
-* For more information consult the JSpec source code documentation or visit http://visionmedia.github.com/jspec
-* jQuery + HTML fixture example http://gist.github.com/147831
+- IRC Channel irc://irc.freenode.net#jspec
+- Featured article in JSMag: http://www.jsmag.com/main.issues.description/id=21/
+- Syntax comparison with other frameworks http://gist.github.com/92283
+- Get the TextMate bundle at https://github.com/visionmedia/jspec.tmbundle/tree
+- For more information consult the JSpec source code documentation or visit http://visionmedia.github.com/jspec
+- jQuery + HTML fixture example http://gist.github.com/147831
 
 ## Contributors
 
@@ -822,11 +834,11 @@ Many ideas and bug reports were contributed by
 the following developers, thankyou for making
 JSpec more enjoyable, and bug free ;)
 
-* Lawrence Pit
-* mpd@jesters-court.ne
-* kevin.gisi@gmail.com
-* enno84@gmx.net
-* fnando
+- Lawrence Pit
+- mpd@jesters-court.ne
+- kevin.gisi@gmail.com
+- enno84@gmx.net
+- fnando
 
 ## License 
 
