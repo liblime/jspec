@@ -39,15 +39,17 @@ and much more.
 
 ## Installation
 
-Simply download JSpec and include JSpec.css and JSpec.js in your markup.
+Simply download JSpec and include _JSpec.css_ and _JSpec.js_ in your markup.
 Head over to the downloads section on Github, clone this public repo, or 
 add JSpec as a git submodule with in your project. Alternatively JSpec is
 also available as a Ruby Gem (though this is not required), which also 
 provides the `jspec` executable. To install execute:
+
     $ gem sources -a http://gems.github.com    (if you have not previously done so)
     $ sudo gem install visionmedia-jspec 
 
 At which point you may:
+
     $ jspec init myproject
 
 By default, the command above will use absolute path for all JSpec library files.
@@ -57,8 +59,8 @@ operating systems. You can freeze the library or symlink it.
     $ jspec init myproject --freeze
     $ jspec init myproject --symlink
 
-JSpec scripts should NOT be referenced via the <script> tag, they should be
-loaded using the exec method (unless you are using the grammar-less alternative).
+JSpec scripts should NOT be referenced via the `<script>` tag, they should be
+loaded using the exec method (**unless you are using the grammar-less alternative**).
 Below is an example:
 
     ...
@@ -74,7 +76,7 @@ Below is an example:
     <body onLoad="runSuites()">
     ...
 
-You may optionally want to use sources in the /pkg directory
+You may optionally want to use sources in the _/pkg_ directory
 for your project, since it includes compressed alternatives generated
 each release.
 
@@ -130,13 +132,17 @@ may also use grammar-less assertions):
 
 You may alter the way JSpec operates by assigning options via the
 JSpec.options hash, by passing string-based option values via the 
-query string, or passing a hash to run(). For example 
-JSpec.options.failuresOnly = true, and ?failuresOnly=1 will both work.
+query string, or passing a hash to **run()**. For example 
+`JSpec.options.failuresOnly = true`, and `?failuresOnly=1` will both work.
 
-* profile       {bool} when enabled, uses console.time() in order to display performance information in your console log as specs are completed. (DOM, Console)
-* failuresOnly {bool} displays only failing specs, making them quick to discover and fix (DOM, Terminal, Server)
-* reportToId   {string} an element id to report to when using the DOM formatter (DOM)
-* verbose      {bool} verbose server output, defaults to false (Server)
+- profile       
+  - {bool} when enabled, uses console.time() in order to display performance information in your console log as specs are completed. (DOM, Console)
+- failuresOnly 
+  - {bool} displays only failing specs, making them quick to discover and fix (DOM, Terminal, Server)
+- reportToId   
+  - {string} an element id to report to when using the DOM formatter (DOM)
+- verbose
+  - {bool} verbose server output, defaults to false (Server)
   
 ## Matchers
 
