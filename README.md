@@ -146,7 +146,8 @@ query string, or passing a hash to `run()`. For example
   
 ## Matchers
 
-* Core
+### Core
+
   - equal, be          
     - ===
   - be_a, be_an
@@ -154,13 +155,13 @@ query string, or passing a hash to `run()`. For example
   - be_an_instance_of
     - instanceof x
   - be_at_least
-    - >=
+    - &gt;=
   - be_at_most
-    - <=
+    - &lt;=
   - be_null
     - == null
   - be_empty
-    - length < 0 or {}
+    - length &lt; 0 or {}
   - be_true
     - == true
   - be_false
@@ -168,9 +169,9 @@ query string, or passing a hash to `run()`. For example
   - be_type
     - be type of x
   - be_greater_than
-    - >
+    - &gt;
   - be_less_than
-    - <
+    - &lt;
   - be_undefined
     - check if variable passed is undefined
   - throw_error
@@ -202,7 +203,7 @@ query string, or passing a hash to `run()`. For example
         However composites like arrays or 'hashes' are recursively matched,
         meaning that [1, 2, [3]].should_eql([1, 2, [3]]) will be true.
   
-* jQuery
+### jQuery
   
  - have_tag, have_one
    - have exactly one tag   
@@ -326,15 +327,21 @@ on any object when using the JSpec grammar:
 
   * Core
 
-    - an_instance_of                 used in conjunction with the 'receive' matcher
-    - mockRequest, mock_request      mock a request (requires jspec.xhr.js)
-    - unmockRequest, unmock_request  unmock requests (requests jspec.xhr.js)
+    - an_instance_of
+      - used in conjunction with the 'receive' matcher
+    - mockRequest, mock_request
+      - mock a request (requires jspec.xhr.js)
+    - unmockRequest, unmock_request
+      - unmock requests (requests jspec.xhr.js)
                 
   * jQuery      
                 
-    - sandbox     used to generate new DOM sandbox, using jQuery object
-    - element     same as invoking jQuery, just reads better and no need to worry about $ collisions
-    - elements    alias of element
+    - sandbox
+      - used to generate new DOM sandbox, using jQuery object
+    - element
+      - same as invoking jQuery, just reads better and no need to worry about $ collisions
+    - elements
+      - alias of element
 
 ## Shared Behaviors
 
