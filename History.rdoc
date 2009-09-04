@@ -1,4 +1,9 @@
 
+=== 2.11.0 / 2009-09-04
+
+* Added --symlink switch (links the current version of JSpec to ./spec/lib) [#4]
+* Added --freeze switch (copies the current version of JSpec to ./spec/lib) [#4]
+
 === 2.10.1 / 2009-09-02
 
 * Added `jspec shell` sub command (interactive Rhino shell through JSpec)
