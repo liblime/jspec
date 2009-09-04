@@ -373,7 +373,7 @@ common functionality. For example an Admin, would inherit all specs of User:
       end
     end
 
-NOTE: both User and Administrator's before hooks implement the 'user' variable
+**NOTE**: both User and Administrator's before hooks implement the 'user' variable
 
 ## Mock Ajax Requests
 
