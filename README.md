@@ -136,7 +136,7 @@ query string, or passing a hash to **run()**. For example
 `JSpec.options.failuresOnly = true`, and `?failuresOnly=1` will both work.
 
 - profile       
-  - {bool} when enabled, uses console.time() in order to display performance information in your console log as specs are completed. (DOM, Console)
+  - {bool} when enabled, uses `console.time()` in order to display performance information in your console log as specs are completed. (DOM, Console)
 - failuresOnly 
   - {bool} displays only failing specs, making them quick to discover and fix (DOM, Terminal, Server)
 - reportToId   
@@ -146,35 +146,59 @@ query string, or passing a hash to **run()**. For example
   
 ## Matchers
 
-  * Core
-  
-    - equal, be          ##=
-    - be_a, be_an        have constructor of x
-    - be_an_instance_of  instanceof x
-    - be_at_least        >=
-    - be_at_most         <=
-    - be_null            ## null
-    - be_empty           length < 0 or {}
-    - be_true            ## true
-    - be_false           ## false
-    - be_type            be type of x
-    - be_greater_than    >
-    - be_less_than       <
-    - be_undefined       check if variable passed is undefined
-    - throw_error        should throw an error, optionally supply the error string or regexp for message comparison
-    - have               object should have n of property (person.should.have(2, 'pets'))
-    - have_at_least      object should have at least n of property
-    - have_at_most       object should have a maximum n of property
-    - have_within        object should have within n..n of property (person.should.have_within(1..3, 'pets')
-    - have_length        length of n
-    - have_prop          object should have property x, optionally supplying an expected value
-    - have_property      strict version of have_prop
-    - be_within          checks if n is within the range passed
-    - include            include substring, array element, or hash key
-    - match              string should match regexp x
-    - respond_to         property x should be a function
-    - eql                
-      - matches simple literals (strings, numbers) with ## 
+* Core
+  - equal, be          
+    - ===
+  - be_a, be_an
+    - have constructor of x
+  - be_an_instance_of
+    - instanceof x
+  - be_at_least
+    - >=
+  - be_at_most
+    - <=
+  - be_null
+    - == null
+  - be_empty
+    - length < 0 or {}
+  - be_true
+    - == true
+  - be_false
+    - == false
+  - be_type
+    - be type of x
+  - be_greater_than
+    - >
+  - be_less_than
+    - <
+  - be_undefined
+    - check if variable passed is undefined
+  - throw_error
+    - should throw an error, optionally supply the error string or regexp for message comparison
+  - have
+    - object should have n of property (person.should.have(2, 'pets'))
+  - have_at_least
+    - object should have at least n of property
+  - have_at_most
+    - object should have a maximum n of property
+  - have_within
+    - object should have within n..n of property (person.should.have_within(1..3, 'pets')
+  - have_length
+    - length of n
+  - have_prop
+    - object should have property x, optionally supplying an expected value
+  - have_property
+    - strict version of have_prop
+  - be_within
+    - checks if n is within the range passed
+  - include
+    - include substring, array element, or hash key
+  - match
+    - string should match regexp x
+  - respond_to
+    - property x should be a function
+  - eql                
+    - matches simple literals (strings, numbers) with == 
         However composites like arrays or 'hashes' are recursively matched,
         meaning that [1, 2, [3]].should_eql([1, 2, [3]]) will be true.
   
