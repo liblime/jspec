@@ -16,6 +16,120 @@ program :version, '2.11.0'
 program :description, 'JavaScript BDD Testing Framework'
 default_command :bind
 
+
+# ##
+# # Initialize template at _dest_. 
+# 
+# def initialize_at dest, options
+#   
+#   
+#   copy_template_to 'default', dest
+#   setup_lib_dir dest, options
+#   replace_root_in dest, 'spec/environments/dom.html', 'spec/environments/rhino.js'
+# end
+# 
+# ##
+# # Initialize rails template at _dest_.
+# 
+# def initialize_rails_at dest, options
+#   unless looks_like_rails_root?(dest)
+#     abort unless agree "'#{dest}' does not look like root of a rails project; continue? "
+#   end
+#   
+#   copy_template_to 'rails', "#{dest}/jspec"
+#   setup_lib_dir "#{dest}/jspec", options
+#   replace_root_in "#{dest}/jspec", 'environments/dom.html', 'environments/rhino.js'
+# end
+
+module JSpec
+  class Project
+    
+    ##
+    # Destination directory.
+    
+    attr_reader :dest
+    
+    ##
+    # Options hash.
+    
+    attr_reader :options
+    
+    ##
+    # Initialize project with _dest_ and _options_.
+    
+    def initialize dest, options = {}
+      @dest, @options = dest, options
+    end
+    
+    ##
+    # Initialize the project.
+    
+    def init!
+      verify_empty!
+      copy_template :default
+      replace_root
+    end
+    
+    ##
+    # Copy template _name_ to the destination.
+    
+    def copy_template name
+      FileUtils.mkdir_p dest
+      FileUtils.cp_r path_to_template(name), dest
+    end
+    
+    ##
+    # Normalize _path_.
+    
+    def normalize path
+      "#{dest}/spec/#{path}"
+    end
+    
+    ##
+    # Check if we are working with vendorized JSpec.
+    
+    def vendorized?
+      File.exist? normalize(:lib)
+    end
+    
+    ##
+    # Replace absolute JSPEC_ROOT paths.
+    
+    def replace_root
+      replace_root_in 'environments/dom.html', 'environments/rhino.js'
+    end
+    
+    ##
+    # Replace absolute JSPEC_ROOT _paths_.
+    
+    def replace_root_in *paths
+      root = vendorized? ? '.' : JSPEC_ROOT
+      paths.each do |path|
+        contents = File.read(normalize(path)).gsub 'JSPEC_ROOT', root
+        File.open(normalize(path), 'w') { |file| file.write contents }
+      end
+    end
+    
+    ##
+    # Path to template _name_.
+    
+    def path_to_template name
+      "#{JSPEC_ROOT}/templates/#{name}/."
+    end
+    
+    ##
+    # Verify that the current directory is empty, otherwise 
+    # prompt for continuation.
+    
+    def verify_empty!
+      unless Dir[dest + '/*'].empty?
+        abort unless agree "'#{dest}' is not empty; continue? "
+      end
+    end
+    
+  end
+end
+
 command :init do |c|
   c.syntax = 'jspec init [dest]'
   c.summary = 'Initialize a JSpec project template'
@@ -32,13 +146,8 @@ command :init do |c|
   c.option '-s', '--symlink', 'Symlink the JSpec library instead of copying it'
   c.example 'Create a directory foo, initialized with a jspec template', 'jspec init foo'
   c.when_called do |args, options|
-    dest = args.shift || '.'
-    if options.rails
-      initialize_rails_at dest, options
-    else
-      initialize_at dest, options
-    end
-    say "Template initialized at `#{dest}'"
+    JSpec::Project.new(args.first || '.', options.__hash__).init!
+    say "Template initialized at `#{args.first}'"
   end
 end
 
@@ -147,32 +256,6 @@ command :run do |c|
   end
 end
 alias_command :bind, :run, '--bind'
-
-##
-# Initialize template at _dest_. 
-
-def initialize_at dest, options
-  unless Dir[dest + '/*'].empty?
-    abort unless agree "'#{dest}' is not empty; continue? "
-  end
-  
-  copy_template_to 'default', dest
-  setup_lib_dir dest, options
-  replace_root_in dest, 'spec/environments/dom.html', 'spec/environments/rhino.js'
-end
-
-##
-# Initialize rails template at _dest_.
-
-def initialize_rails_at dest, options
-  unless looks_like_rails_root?(dest)
-    abort unless agree "'#{dest}' does not look like root of a rails project; continue? "
-  end
-  
-  copy_template_to 'rails', "#{dest}/jspec"
-  setup_lib_dir "#{dest}/jspec", options
-  replace_root_in "#{dest}/jspec", 'environments/dom.html', 'environments/rhino.js'
-end
 
 ##
 # Copy template _name_ to _dest_.
