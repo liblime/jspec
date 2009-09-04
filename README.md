@@ -1,12 +1,12 @@
 
-= JSpec
+# JSpec
 
 JSpec is a minimalistic JavaScript behavior driven development framework,
 providing simple installation, extremely low learning curve, absolutely no pollution
 to core prototypes, async request support, and incredibly sexy syntax, tons of matchers
 and much more.
 
-== Features
+## Features
 
 * Highly readable
 * Framework / DOM independent
@@ -37,96 +37,96 @@ and much more.
 * Ruby on Rails Integration
 * Tiny (15 kb compressed, 1300-ish LOC)
 
-== Installation
+## Installation
 
 Simply download JSpec and include JSpec.css and JSpec.js in your markup.
 Head over to the downloads section on Github, clone this public repo, or 
 add JSpec as a git submodule with in your project. Alternatively JSpec is
 also available as a Ruby Gem (though this is not required), which also 
 provides the `jspec` executable. To install execute:
-  $ gem sources -a http://gems.github.com    (if you have not previously done so)
-  $ sudo gem install visionmedia-jspec 
+    $ gem sources -a http://gems.github.com    (if you have not previously done so)
+    $ sudo gem install visionmedia-jspec 
 
 At which point you may:
-  $ jspec init myproject
+    $ jspec init myproject
 
 By default, the command above will use absolute path for all JSpec library files.
 This behavior can be a problem when you're working across different computers or
 operating systems. You can freeze the library or symlink it.
 
-  $ jspec init myproject --freeze
-  $ jspec init myproject --symlink
+    $ jspec init myproject --freeze
+    $ jspec init myproject --symlink
 
 JSpec scripts should NOT be referenced via the <script> tag, they should be
 loaded using the exec method (unless you are using the grammar-less alternative).
 Below is an example:
 
-  ...
-  <script>
-    function runSuites() {
-      JSpec
-      .exec('spec.core.js')
-      .exec('spec.jquery.js')
-      .run({ failuresOnly : true })
-      .report()
-    }
-  </script>
-  <body onLoad="runSuites()">
-  ...
+    ...
+    <script>
+      function runSuites() {
+        JSpec
+        .exec('spec.core.js')
+        .exec('spec.jquery.js')
+        .run({ failuresOnly : true })
+        .report()
+      }
+    </script>
+    <body onLoad="runSuites()">
+    ...
 
 You may optionally want to use sources in the /pkg directory
 for your project, since it includes compressed alternatives generated
 each release.
 
-== Example
+## Example
 
-  describe 'ShoppingCart'
-    before_each
-      cart = new ShoppingCart
-    end
+    describe 'ShoppingCart'
+      before_each
+        cart = new ShoppingCart
+      end
+      
+      describe 'addProducts'
+        it 'should add several products'
+          cart.addProduct('cookie')
+          cart.addProduct('icecream')
+          cart.should.have 2, 'products'
+        end
+      end
     
-    describe 'addProducts'
-      it 'should add several products'
-        cart.addProduct('cookie')
-        cart.addProduct('icecream')
-        cart.should.have 2, 'products'
+      describe 'checkout'
+        it 'should throw an error when checking out with no products'
+          -{ cart.clear().checkout() }.should.throw_error EmptyCart
+        end
       end
     end
-  
-    describe 'checkout'
-      it 'should throw an error when checking out with no products'
-        -{ cart.clear().checkout() }.should.throw_error EmptyCart
-      end
-    end
-  end
 
-== Grammar-less Example
+## Grammar-less Example
 
 JSpec's grammar is optional, you may also use the equivalent grammar-less
 alternative below using pure JavaScript (when using the JSpec grammar you
 may also use grammar-less assertions):
 
-  JSpec.describe('ShoppingCart', function(){
-    before_each(function{
-      cart = new ShoppingCart
-    })
-
-    describe('addProducts', function(){
-      it ('should add several products', function(){
-        cart.addProducts('cookie')
-        cart.addProducts('icecream')
-        expect(cart).to(have, 2, 'products')
+    JSpec.describe('ShoppingCart', function(){
+      before_each(function{
+        cart = new ShoppingCart
       })
-    })
-
-    describe('checkout', function(){
-      it ('should throw an error when checking out with no products', function(){
-        expect(function(){ cart.clear().checkout() }).to(throw_error, EmptyCart)
+   
+      describe('addProducts', function(){
+        it ('should add several products', function(){
+          cart.addProducts('cookie')
+          cart.addProducts('icecream')
+          expect(cart).to(have, 2, 'products')
+        })
       })
-    })
-  }) 
+   
+      describe('checkout', function(){
+        it ('should throw an error when checking out with no products', function(){
+          expect(function(){ cart.clear().checkout() }).to(throw_error, EmptyCart)
+        })
+      })
+    }) 
 
-== Options
+## Options
 
 You may alter the way JSpec operates by assigning options via the
 JSpec.options hash, by passing string-based option values via the 
@@ -138,67 +138,67 @@ JSpec.options.failuresOnly = true, and ?failuresOnly=1 will both work.
 * reportToId   {string} an element id to report to when using the DOM formatter (DOM)
 * verbose      {bool} verbose server output, defaults to false (Server)
   
-== Matchers
+## Matchers
 
   * Core
   
-  - equal, be          ===
-  - be_a, be_an        have constructor of x
-  - be_an_instance_of  instanceof x
-  - be_at_least        >=
-  - be_at_most         <=
-  - be_null            == null
-  - be_empty           length < 0 or {}
-  - be_true            == true
-  - be_false           == false
-  - be_type            be type of x
-  - be_greater_than    >
-  - be_less_than       <
-  - be_undefined       check if variable passed is undefined
-  - throw_error        should throw an error, optionally supply the error string or regexp for message comparison
-  - have               object should have n of property (person.should.have(2, 'pets'))
-  - have_at_least      object should have at least n of property
-  - have_at_most       object should have a maximum n of property
-  - have_within        object should have within n..n of property (person.should.have_within(1..3, 'pets')
-  - have_length        length of n
-  - have_prop          object should have property x, optionally supplying an expected value
-  - have_property      strict version of have_prop
-  - be_within          checks if n is within the range passed
-  - include            include substring, array element, or hash key
-  - match              string should match regexp x
-  - respond_to         property x should be a function
-  - eql                matches simple literals (strings, numbers) with == 
-                       However composites like arrays or 'hashes' are recursively matched,
-                       meaning that [1, 2, [3]].should_eql([1, 2, [3]]) will be true.
+    - equal, be          ##=
+    - be_a, be_an        have constructor of x
+    - be_an_instance_of  instanceof x
+    - be_at_least        >=
+    - be_at_most         <=
+    - be_null            ## null
+    - be_empty           length < 0 or {}
+    - be_true            ## true
+    - be_false           ## false
+    - be_type            be type of x
+    - be_greater_than    >
+    - be_less_than       <
+    - be_undefined       check if variable passed is undefined
+    - throw_error        should throw an error, optionally supply the error string or regexp for message comparison
+    - have               object should have n of property (person.should.have(2, 'pets'))
+    - have_at_least      object should have at least n of property
+    - have_at_most       object should have a maximum n of property
+    - have_within        object should have within n..n of property (person.should.have_within(1..3, 'pets')
+    - have_length        length of n
+    - have_prop          object should have property x, optionally supplying an expected value
+    - have_property      strict version of have_prop
+    - be_within          checks if n is within the range passed
+    - include            include substring, array element, or hash key
+    - match              string should match regexp x
+    - respond_to         property x should be a function
+    - eql                matches simple literals (strings, numbers) with ## 
+                         However composites like arrays or 'hashes' are recursively matched,
+                         meaning that [1, 2, [3]].should_eql([1, 2, [3]]) will be true.
   
   * jQuery
   
-  - have_tag, have_one    have exactly one tag   
-  - have_tags, have_many  have more than one tag
-  - have_child            have exactly one child
-  - have_children         have more than one child
-  - have_text             have plain text
-  - have_attr             have an attribute, with optional value
-  - have_type
-  - have_id
-  - have_title
-  - have_alt
-  - have_href
-  - have_rel
-  - have_rev
-  - have_name
-  - have_target
-  - have_value     
-  - have_class
-  - have_classes
-  - be_visible
-  - be_hidden
-  - be_enabled
-  - be_disabled
-  - be_selected
-  - be_checked
+    - have_tag, have_one    have exactly one tag   
+    - have_tags, have_many  have more than one tag
+    - have_child            have exactly one child
+    - have_children         have more than one child
+    - have_text             have plain text
+    - have_attr             have an attribute, with optional value
+    - have_type
+    - have_id
+    - have_title
+    - have_alt
+    - have_href
+    - have_rel
+    - have_rev
+    - have_name
+    - have_target
+    - have_value     
+    - have_class
+    - have_classes
+    - be_visible
+    - be_hidden
+    - be_enabled
+    - be_disabled
+    - be_selected
+    - be_checked
   
-== Async Support With Mock Timers
+## Async Support With Mock Timers
 
 The javascript mock timers library is available at http://github.com/visionmedia/js-mock-timers
 although it is already bundled with JSpec at lib/jspec.timers.js
@@ -207,131 +207,131 @@ Timers return ids and may be passed to clearInterval(), however
 they do not execute in threads, they must be manually scheduled and
 controlled via the tick() function.
 
-  setTimeout(function(){
-    alert('Wahoo!')
-  }, 400)
-  
-  tick(200) // Nothing happens
-  tick(400) // Wahoo!
-  
+    setTimeout(function(){
+      alert('Wahoo!')
+    }, 400)
+    
+    tick(200) // Nothing happens
+    tick(400) // Wahoo!
+    
 setInterval() works as expected, although it persists, where as setTimeout() 
 is destroyed after a single call. As conveyed by the last tick() call below,
 a large increment in milliseconds may cause the callbacks to be called several times
 to 'catch up'.
 
-  progress = ''
-  var id = setInterval(function(){
-    progress += '.'
-  }, 100)
-  
-  tick(50),  print(progress) // ''
-  tick(50),  print(progress) // '.'
-  tick(100), print(progress) // '..'
-  tick(100), print(progress) // '...'
-  tick(300), print(progress) // '......'
-  
-  clearInterval(id)
-  
-  tick(800) // Nothing happens
+    progress = ''
+    var id = setInterval(function(){
+      progress += '.'
+    }, 100)
+    
+    tick(50),  print(progress) // ''
+    tick(50),  print(progress) // '.'
+    tick(100), print(progress) // '..'
+    tick(100), print(progress) // '...'
+    tick(300), print(progress) // '......'
+    
+    clearInterval(id)
+    
+    tick(800) // Nothing happens
   
 You may also reset at any time using resetTimers()
 
-== Proxy Assertions
+## Proxy Assertions
 
 Proxy or 'Spy' assertions allow you to assert that a method is called n number
 of times, with x arguments, returning x value. For example:
 
-  person = { getPets : function(species){ return ['izzy'] }}
-  person.should.receive('getPets', 'twice').with_args(an_instance_of(String))and_return(['izzy'])
-  person.getPets('dog') // This will pass
-  person.getPets()      // This will fail because we asked an instance of String
+    person = { getPets : function(species){ return ['izzy'] }}
+    person.should.receive('getPets', 'twice').with_args(an_instance_of(String))and_return(['izzy'])
+    person.getPets('dog') // This will pass
+    person.getPets()      // This will fail because we asked an instance of String
 
 This is a useful mechanism for testing the behavior of your object, as well as
 how other methods may interact with it. Below is another example:
 
-  array = ['foo', 'bar']
-  array.should.receive('toString').and_return('foo,bar')
-  'array: ' + array // This line causes the spec to pass due to calling toString()
+    array = ['foo', 'bar']
+    array.should.receive('toString').and_return('foo,bar')
+    'array: ' + array // This line causes the spec to pass due to calling toString()
 
 For more examples view spec/spec.matchers.js
 
-== Method Stubbing
+## Method Stubbing
 
 JSpec currently provides very simple stubbing support shown below:
 
-  person = { toString : function(){ return '<Person>' } }
-  stub(person, 'toString').and_return('Ive been stubbed!')
+    person = { toString : function(){ return '<Person>' } }
+    stub(person, 'toString').and_return('Ive been stubbed!')
   
 After each spec all stubs are restored to their original methods so
 there is no reason to explicitly call destub(). To persist stubs, 
 use a before_each hook:
 
-  before_each
-    stub(someObject, 'method').and_return({ some : thing })
-  end
+    before_each
+      stub(someObject, 'method').and_return({ some : thing })
+    end
 
 To destub a method simply call destub() at any time:
 
-  destub(person, 'toString')
+    destub(person, 'toString')
   
 If you would like to whipe an object clear of stubs simply pass it
 to destub() without an additional method argument:
 
-  destub(person)
+    destub(person)
   
 Alternatively both these utility functions may be called as methods
 on any object when using the JSpec grammar:
 
-  someObject.stub('method').and_return('whatever')
-  // Converted to stub(someObject, 'method').and_return('whatever')
+    someObject.stub('method').and_return('whatever')
+    // Converted to stub(someObject, 'method').and_return('whatever')
 
-== Helpers
+## Helpers
 
   * Core
 
-  - an_instance_of                 used in conjunction with the 'receive' matcher
-  - mockRequest, mock_request      mock a request (requires jspec.xhr.js)
-  - unmockRequest, unmock_request  unmock requests (requests jspec.xhr.js)
+    - an_instance_of                 used in conjunction with the 'receive' matcher
+    - mockRequest, mock_request      mock a request (requires jspec.xhr.js)
+    - unmockRequest, unmock_request  unmock requests (requests jspec.xhr.js)
                 
   * jQuery      
                 
-  - sandbox     used to generate new DOM sandbox, using jQuery object
-  - element     same as invoking jQuery, just reads better and no need to worry about $ collisions
-  - elements    alias of element
+    - sandbox     used to generate new DOM sandbox, using jQuery object
+    - element     same as invoking jQuery, just reads better and no need to worry about $ collisions
+    - elements    alias of element
 
-== Shared Behaviors
+## Shared Behaviors
 
 JSpec's support for shared behaviors allows multiple suites or describe blocks to share
 common functionality. For example an Admin, would inherit all specs of User:
 
-  describe 'User'
-    before
-      User = function(name) { this.name = name }
-      user = new User('joe')
-    end
-    
-    it 'should have a name'
-      user.should.have_property 'name'
-    end
-    
-    describe 'Administrator'
-      should_behave_like('User')
-  
+    describe 'User'
       before
-        Admin = function(name) { this.name = name }
-        Admin.prototype.may = function(perm){ return true }
-        user = new Admin('tj')
+        User = function(name) { this.name = name }
+        user = new User('joe')
       end
-  
-      it 'should have access to all permissions'
-        user.may('edit pages').should.be_true
+      
+      it 'should have a name'
+        user.should.have_property 'name'
+      end
+      
+      describe 'Administrator'
+        should_behave_like('User')
+    
+        before
+          Admin = function(name) { this.name = name }
+          Admin.prototype.may = function(perm){ return true }
+          user = new Admin('tj')
+        end
+    
+        it 'should have access to all permissions'
+          user.may('edit pages').should.be_true
+        end
       end
     end
-  end
 
 NOTE: both User and Administrator's before hooks implement the 'user' variable
 
-== Mock Ajax Requests
+## Mock Ajax Requests
 
 JSpec supports generic Ajax mocking which is usable with any JavaScript framework via 'jspec.xhr.js'. The
 API is comprised of two functions, mockRequest() and unmockRequest(). unmockRequest() is
@@ -354,7 +354,7 @@ this will be used to target specific uris for mocking.
 
 NOTE: works with Rhino as well
 
-== Hooks
+## Hooks
 
 Currently the following hooks are supported, and may be utilized any number of times as they
 are simply pushed to a stack. So for instance you may have two before_each blocks within the same
@@ -365,7 +365,7 @@ scope, they will both run, but this can help keep your specs readable.
   * before_each  run before each specification
   * after_each   run after each specification
 
-== Custom Contexts
+## Custom Contexts
 
 Custom contexts can be applied to supply helper
 methods or properties to all subsequent bodies (other hooks, or specs).
@@ -390,7 +390,7 @@ To reset the context simply assign null to obtain the original context.
   end
   ...
 
-== Async Support
+## Async Support
 
 Currently only jspec.jquery.js supports async requests. JSpec uses jQuery.ajaxSetup and sets all
 requests to sync, which preserves execution order, and reports correctly.
@@ -401,7 +401,7 @@ requests to sync, which preserves execution order, and reports correctly.
     })
   end
 
-== Pre-processor
+## Pre-processor
 
 The pre-processing capability of JSpec is extremely powerful. Your JavaScript
 code is not necessarily what it seems. For example when you seemingly invoke a
@@ -426,20 +426,20 @@ We can do:
  
   { foo : 'bar' }.should.include 'foo'
 
-=== Closure Literal
+##= Closure Literal
 
 These are equivalent:
 
   -{ throw 'test' }.should.throw_error
   function() { throw 'test' }.should.throw_error
 
-=== Inclusive Range Literal
+##= Inclusive Range Literal
 
 The following expands to the array of [1,2,3,4,5]
 
   n.should.be_within 1..5
 
-== Formatters
+## Formatters
 
 To change a formatter simply alter the options hash like below, assigning
 a new constructor, or pass it within the hash to run():
@@ -453,7 +453,7 @@ OR
 	.run({ formatter : JSpec.formatters.Terminal })
 	.report()
 	
-== Fixtures
+## Fixtures
 
 The fixture() utility function may be used in order to load arbitrary file contents
 for use with your specifications. JSpec will resolve fixture('data') in the following
@@ -470,7 +470,7 @@ where as 'spec/fixtures/xml/data.xml' must be specified with fixture('xml/data.x
 If you prefer not to store fixtures in the 'fixtures' directory you must be more specific
 with the path supplied.
 
-== Testing DOM Elements
+## Testing DOM Elements
 
 When using jQuery testing DOM elements is very easy. Many may think they require specific
 sandbox divs in their html, however you do not. Using the fixture support mentioned above
@@ -503,13 +503,13 @@ You may also use simple strings, since jQuery's constructor will convert them to
     end
   end
 
-== Custom Matchers
+## Custom Matchers
 
 First lets create a simple equality matcher. In the case below JSpec is smart enough to realize
-this is simply a binary operator, and simply transforms this into 'actual === expected'
+this is simply a binary operator, and simply transforms this into 'actual ##= expected'
 
   JSpec.addMatchers({
-    equal : '==='
+    equal : '##='
   })
 
 To alias a method to keep your specs readable you may alias them like below:
@@ -525,7 +525,7 @@ Matchers with string bodies implicitly return the expression value.
 The expanded version of the equal matcher would then be:
 
   JSpec.addMatchers({
-    equal : 'actual === expected'
+    equal : 'actual ##= expected'
   })
 
 Large matchers or those which require several parameters may wish
@@ -533,7 +533,7 @@ to utilize the hash method:
 
   JSpec.addMatchers({
     equal : { match : function(actual, expected){
-      return actual === expected
+      return actual ##= expected
     }}  
   })
 
@@ -543,7 +543,7 @@ for you, how ever this can be explicitly defined:
   JSpec.addMatchers({
     equal : { 
       match : function(actual, expected){
-        return actual === expected
+        return actual ##= expected
       },
       message : function(actual, expected, negate) {
         return 'a message here'
@@ -563,13 +563,13 @@ function must return the matcher body which will be used.
 
     'have type id title alt href src sel rev name target' : function(attr) {
       return function(actual, value) {
-        return value ? jQuery(actual).attr(attr) == value:
+        return value ? jQuery(actual).attr(attr) ## value:
                        jQuery(actual).attr(attr)
       }
     }
   })
 
-== Extending Or Hooking Into JSpec
+## Extending Or Hooking Into JSpec
 
 JSpec provides a hook architecture for extending or analyzing various
 points in its execution, through the use of 'Modules'. For a Module
@@ -630,7 +630,7 @@ to stub(SomeObject, 'method'):
     }
   })
   
-== JSpec Command-line Utility
+## JSpec Command-line Utility
 
 When installed as a Ruby Gem, the `jspec` executable will become available,
 allowing you to initialize project templates quickly, as well as auto-testing
@@ -648,7 +648,7 @@ For additional usage execute:
 Or for specific usage:
   $ jspec help run
 
-== Rhino
+## Rhino
 
 JSpec provides transparent support for Rhino, while using the Terminal formatter.
 Simply create a JavaScript file with contents similar to below, and then execute
@@ -671,7 +671,7 @@ Run with:
 Or bind (automated testing):
   $ jspec --rhino 
 
-== Server
+## Server
 
 The Ruby JavaScript testing server included with JSpec simply runs
 the spec suites within each browser you specify, while reporting result
@@ -708,7 +708,7 @@ to reply, where as $.get('/status/404', function(){}) will respond
 with an 404 status code. Add additional Sinatra routes to the jspec.rb
 file to add your own functionality.
 
-== Interactive Shell
+## Interactive Shell
 
 JSpec provides an interactive shell through Rhino, utilize with:
 
@@ -722,7 +722,7 @@ Or view additional shell help
 
 $ jspec help shell
 
-== Ruby on Rails
+## Ruby on Rails
 
 No additional gems are required for JSpec to work with rails, although 
 http://github.com/bhauman/jspec-rails has been created by 'bhauman'. JSpec
@@ -744,7 +744,7 @@ Or run via the terminal using Rhino:
 
   $ jspec run --rhino
   
-== Support Browsers
+## Support Browsers
 
 Browsers below are supported and can be found in server/browsers.rb, however
 your spec/server.rb file may support additional browsers.
@@ -755,7 +755,7 @@ your spec/server.rb file may support additional browsers.
 * Opera
 * Internet Explorer
   
-== Known Issues
+## Known Issues
 
 * Tabs may cause a parse error. To prevent this use 'soft tabs' (setting in your IDE/Editor)
   or use JSpec's grammar-less alternative (mentioned above).
@@ -772,11 +772,11 @@ your spec/server.rb file may support additional browsers.
     return 'html'
   })
   
-== Additional JSpec Modules
+## Additional JSpec Modules
 
 * JSocka stubbing http://github.com/gisikw/jsocka/tree/master
   
-== More Information
+## More Information
 
 * IRC Channel irc://irc.freenode.net#jspec
 * Featured article in JSMag: http://www.jsmag.com/main.issues.description/id=21/
@@ -785,7 +785,7 @@ your spec/server.rb file may support additional browsers.
 * For more information consult the JSpec source code documentation or visit http://visionmedia.github.com/jspec
 * jQuery + HTML fixture example http://gist.github.com/147831
 
-== Contributors
+## Contributors
 
 Many ideas and bug reports were contributed by
 the following developers, thankyou for making
@@ -797,7 +797,7 @@ JSpec more enjoyable, and bug free ;)
 * enno84@gmx.net
 * fnando
 
-== License 
+## License 
 
 (The MIT License)
 
