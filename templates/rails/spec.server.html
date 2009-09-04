@@ -5,8 +5,8 @@
 		<script>
 			function runSuites() {
 				JSpec
-				.exec('spec.application.js')
-				.run({ formatter : JSpec.formatters.Server, verbose: true, failuresOnly: true })
+				.exec('spec.js')
+				.run({ formatter: JSpec.formatters.Server, verbose: true, failuresOnly: true })
 				.report()
 			}
 		</script>
