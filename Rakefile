@@ -18,6 +18,13 @@ Echoe.new "jspec", version do |p|
   p.runtime_dependencies << "visionmedia-bind >=0.2.6"
 end
 
+namespace :spec do
+  desc 'Run jspec executable specs'
+  task :bin do
+    sh 'spec --color --require spec/ruby/bin/spec_helper.rb spec/ruby/bin/*_spec.rb'
+  end
+end
+
 namespace :pkg do
   desc 'Build package'
   task :build => ['pkg:clear'] do
