@@ -58,7 +58,7 @@ module JSpec
     # Initialize project with _dest_ and _options_.
     
     def initialize dest, options = {}
-      @dest, @options = dest, options
+      @dest, @options = dest || '.', options
     end
     
     ##
@@ -127,6 +127,23 @@ module JSpec
       end
     end
     
+    ##
+    # Update absolute paths.
+    
+    def update
+      ['environments/dom.html', 'environments/rhino.js'].each do |path|
+        path = normalize path
+        next unless File.exists? path
+        contents = File.read(path).gsub /visionmedia-jspec-(\d+\.\d+\.\d+)/, "visionmedia-jspec-#{program(:version)}"
+        if program(:version) == $1
+          say "skipping #{path}; already #{$1}"
+          next
+        end
+        File.open(path, 'r+'){ |file| file.write contents } 
+        say "updated #{path}; #{$1} -> #{program(:version)}"
+      end
+    end
+    
   end
 end
 
@@ -175,18 +192,13 @@ command :shell do |c|
 end
 
 command :update do |c|
-  c.syntax = 'jspec update [path ...]'
+  c.syntax = 'jspec update [dest]'
   c.summary = 'Update JSpec releases'
-  c.description = 'Update JSpec release in [paths], this will allow you to utilize 
-    the latest JSpec features. Execute from JSpec project root without [paths] to
+  c.description = 'Update JSpec release relative to [dest], this will allow you to utilize 
+    the latest JSpec features. Execute from JSpec project root without [dest] to
     update the default template spec files.'
   c.when_called do |args, options|
-    if args.empty?
-      paths = path_to('environments/dom.html'), path_to('environments/rhino.js')
-    else
-      paths = args
-    end
-    update_version_in *paths
+    JSpec::Project.new(args.first).update
   end
 end
 
