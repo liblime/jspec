@@ -54,7 +54,23 @@ module JSpec
     def init! options = {}
       verify_empty!
       copy_template :default
+      vendorize_with_symlink if options.include? :symlink
+      vendorize_with_copy if options.include? :freeze
       replace_root
+    end
+    
+    ##
+    # Vendorize JSpec with symlink.
+    
+    def vendorize_with_symlink
+      FileUtils.symlink "#{JSPEC_ROOT}/lib", normalize('lib'), :force => true
+    end
+    
+    ##
+    # Vendorize JSpec with copy.
+    
+    def vendorize_with_copy
+      FileUtils.cp_r "#{JSPEC_ROOT}/lib", normalize('lib')
     end
     
     ##
@@ -134,13 +150,39 @@ module JSpec
     end
     
     ##
+    # Start server with _path_ html and _options_.
+
+    def start_server path, options = {}
+      set :port, options[:port] || 4444
+      set :server, 'Mongrel'
+      enable :sessions
+      disable :logging
+      hook = File.expand_path normalize('environments/server.rb')
+      load hook if File.exists? hook
+      browsers = browsers_for(*options[:browsers]) if options.include? :browsers
+      JSpec::Server.new(path, options.port).start(browsers)
+    end
+
+    ##
+    # Return array of browser instances for the given _names_.
+
+    def browsers_for *names
+      names.map do |name|
+        begin
+          Browser.subclasses.find do |browser|
+            browser.matches_name? name
+          end.new
+        rescue
+          raise "Unsupported browser `#{name}'"
+        end
+      end
+    end
+    
+    ##
     # Run _path_ with _options_.
     
     def run! path = nil, options = {}
-      options = {
-        :paths => self.class::BIND_PATHS,
-        :port => 4444
-      }.merge(options)
+      paths = options[:paths] || self.class::BIND_PATHS
 
       # Action
       
@@ -166,7 +208,7 @@ module JSpec
       
       if options.include? :bind
         Bind::Listener.new(
-          :paths => options[:paths],
+          :paths => paths,
           :interval => 1,
           :actions => [action],
           :debug => $stdout).run!
@@ -193,6 +235,8 @@ module JSpec
       def init! options = {}
         verify_rails!
         copy_template :rails, :to => :jspec
+        vendorize_with_symlink if options.include? :symlink
+        vendorize_with_copy if options.include? :freeze
         replace_root
       end
       
@@ -324,97 +368,3 @@ command :run do |c|
 end
 alias_command :bind, :run, '--bind'
 
-##
-# Start server with _suite_ html and _options_.
-
-def start_server suite, options
-  set :port, options.port
-  set :server, 'Mongrel'
-  enable :sessions
-  disable :logging
-  hook = File.expand_path path_to('environments/server.rb')
-  load hook if File.exists? hook
-  JSpec::Server.new(suite, options.port).start(options.browsers ? browsers_for(options.browsers) : nil)
-end
-
-##
-# Return array of browser instances for the given _names_.
-
-def browsers_for names
-  names.map do |name|
-    begin
-      Browser.subclasses.find do |browser|
-        browser.matches_name? name
-      end.new
-    rescue
-      raise "Unsupported browser `#{name}'"
-    end
-  end
-end
-
-##
-# Check if the current directory looks like a rails app.
-
-def rails?
-  File.directory? 'jspec'  
-end
-
-##
-# Replace JSPEC_ROOT placeholder in _paths_ relative to _dest_.
-
-def replace_root_in dest, *paths
-  if rails? && File.exist?("#{dest}/jspec/lib")
-    root = "."
-  elsif File.exist?("#{dest}/spec/lib")
-    root = "."
-  else
-    root = JSPEC_ROOT
-  end
-  
-  paths.each do |path|
-    path = File.join dest, path
-    contents = File.read(path).gsub 'JSPEC_ROOT', root
-    File.open(path, 'w') { |file| file.write contents }
-  end
-end
-
-##
-# Update JSpec version in _paths_. Matches visionmedia-jspec-TRIPLE
-
-def update_version_in *paths
-  paths.each do |path|
-    next unless File.exists? path
-    contents = File.read(path).gsub /visionmedia-jspec-(\d+\.\d+\.\d+)/, "visionmedia-jspec-#{program(:version)}"
-    File.open(path, 'r+'){ |file| file.write contents } 
-    say "Updated #{path}; #{$1} -> #{program(:version)}"
-  end
-  say "Finished updating JSpec"
-end
-
-##
-# Check if _path_ looks like a rails root directory.
-
-def looks_like_rails_root? path = '.'
-  File.directory? "#{path}/vendor"
-end
-
-##
-# Copy or symlink library to the specified path.
-
-def setup_lib_dir dest, options
-  return unless options.symlink || options.freeze
-  
-  if rails?
-    dest = File.join dest, "lib"
-  else
-    dest = File.join dest, "spec", "lib"
-  end
-  
-  from = File.join JSPEC_ROOT, "lib"
-  
-  if options.symlink
-    FileUtils.symlink from, dest, :force => true
-  else
-    FileUtils.cp_r from, dest
-  end
-end
