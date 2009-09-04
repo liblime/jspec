@@ -338,16 +338,16 @@ API is comprised of two functions, mockRequest() and unmockRequest(). unmockRequ
 automatically called after each specification to restore the default functionality of XMLHttpRequest,
 so it is uncommon to call unmockRequest() directly. Below is a jQuery example:
 
-  it 'should mock requests'
-    mockRequest().and_return('{ foo : "bar" }', 'application/json')
-    $.getJSON('foo', function(response, statusText){
-      response.foo.should.eql 'bar'
-    })
-  end
+    it 'should mock requests'
+      mockRequest().and_return('{ foo : "bar" }', 'application/json')
+      $.getJSON('foo', function(response, statusText){
+        response.foo.should.eql 'bar'
+      })
+    end
 
 The mockRequest().and_return signature is as follows:
 
-  mockRequest().and_return(<data>, [content-type], [response-status-code], [headers-hash])
+    mockRequest().and_return(<data>, [content-type], [response-status-code], [headers-hash])
   
 At the moment mockRequest() itself does not accept any arguments, however in the future
 this will be used to target specific uris for mocking.
@@ -376,30 +376,30 @@ custom context.
 
 To reset the context simply assign null to obtain the original context.
 
-  ...
-  before
-    JSpec.context = { foo : 'bar' }
-  end
-
-  after
-    JSpec.context = null
-  end
-
-  it 'will work ;)'
-    foo.should_equal 'bar'
-  end
-  ...
+    ...
+    before
+      JSpec.context = { foo : 'bar' }
+    end
+    
+    after
+      JSpec.context = null
+    end
+    
+    it 'will work ;)'
+      foo.should_equal 'bar'
+    end
+    ...
 
 ## Async Support
 
 Currently only jspec.jquery.js supports async requests. JSpec uses jQuery.ajaxSetup and sets all
 requests to sync, which preserves execution order, and reports correctly.
 
-  it 'should load mah cookies (textfile)'
-    $.post('async', function(text){
-      text.should_eql 'cookies!'
-    })
-  end
+    it 'should load mah cookies (textfile)'
+      $.post('async', function(text){
+        text.should_eql 'cookies!'
+      })
+    end
 
 ## Pre-processor
 
@@ -407,51 +407,51 @@ The pre-processing capability of JSpec is extremely powerful. Your JavaScript
 code is not necessarily what it seems. For example when you seemingly invoke a
 object's prototype like below:
 
-  'foobar'.should.include 'bar'
+    'foobar'.should.include 'bar'
 
 First parens are added:
 
-  'foobar'.should.include('bar')
+    'foobar'.should.include('bar')
 
 Secondly the matcher invocation is converted to a non-polluting match() call:
 
-  JSpec.match('foobar', 'should', 'include', 'bar')
+    expect('foobar').to(include, 'bar')
 
 This also means instead of:
 
-  var object = { foo : 'bar' }
-  object.should.include 'foo'
+    var object = { foo : 'bar' }
+    object.should.include 'foo'
 
 We can do:
  
-  { foo : 'bar' }.should.include 'foo'
+    { foo : 'bar' }.should.include 'foo'
 
 ##= Closure Literal
 
 These are equivalent:
 
-  -{ throw 'test' }.should.throw_error
-  function() { throw 'test' }.should.throw_error
+    -{ throw 'test' }.should.throw_error
+    function() { throw 'test' }.should.throw_error
 
 ##= Inclusive Range Literal
 
 The following expands to the array of [1,2,3,4,5]
 
-  n.should.be_within 1..5
+    n.should.be_within 1..5
 
 ## Formatters
 
 To change a formatter simply alter the options hash like below, assigning
 a new constructor, or pass it within the hash to run():
 
-  JSpec.options.formatter = JSpec.formatters.Console
+    JSpec.options.formatter = JSpec.formatters.Console
 
 OR
 
-	JSpec
-	.exec('...')
-	.run({ formatter : JSpec.formatters.Terminal })
-	.report()
+    JSpec
+    .exec('...')
+    .run({ formatter : JSpec.formatters.Terminal })
+    .report()
 	
 ## Fixtures
 
@@ -476,98 +476,98 @@ When using jQuery testing DOM elements is very easy. Many may think they require
 sandbox divs in their html, however you do not. Using the fixture support mentioned above
 you may simply load some HTML, and use the 'elements()' utility which is an alias of jQuery:
 
-  describe 'JSpec DOM testing'
-    describe 'is so easy'
-      before_each
-        list = elements(fixture('users-list'))
-        // or list = jQuery(fixture('users-list'))
-        // or list = $(fixture('users-list'))
-      end
-      
-      it 'should have users'
-        list.should.have_tag 'ul'
+    describe 'JSpec DOM testing'
+      describe 'is so easy'
+        before_each
+          list = elements(fixture('users-list'))
+          // or list = jQuery(fixture('users-list'))
+          // or list = $(fixture('users-list'))
+        end
+        
+        it 'should have users'
+          list.should.have_tag 'ul'
+        end
       end
     end
-  end
   
 You may also use simple strings, since jQuery's constructor will convert them to DOM elements:
 
-  describe 'Something'
-    before_each
-      html = elements('<p>Foo</p>')
-      // or html = $('<p>Foo</p>') ...
+    describe 'Something'
+      before_each
+        html = elements('<p>Foo</p>')
+        // or html = $('<p>Foo</p>') ...
+      end
+      
+      it 'should do something'
+        html.should.have_text 'Foo'
+      end
     end
-    
-    it 'should do something'
-      html.should.have_text 'Foo'
-    end
-  end
 
 ## Custom Matchers
 
 First lets create a simple equality matcher. In the case below JSpec is smart enough to realize
 this is simply a binary operator, and simply transforms this into 'actual ##= expected'
 
-  JSpec.addMatchers({
-    equal : '##='
-  })
+    JSpec.addMatchers({
+      equal : '##='
+    })
 
 To alias a method to keep your specs readable you may alias them like below:
 
-  JSpec.addMatchers({
-    be : 'alias equal'
-  })
-
-  'foo'.should.equal 'foo'
-  true.should.be true
+    JSpec.addMatchers({
+      be : 'alias equal'
+    })
+    
+    'foo'.should.equal 'foo'
+    true.should.be true
 
 Matchers with string bodies implicitly return the expression value.
 The expanded version of the equal matcher would then be:
 
-  JSpec.addMatchers({
-    equal : 'actual ##= expected'
-  })
+    JSpec.addMatchers({
+      equal : 'actual ##= expected'
+    })
 
 Large matchers or those which require several parameters may wish
 to utilize the hash method:
 
-  JSpec.addMatchers({
-    equal : { match : function(actual, expected){
-      return actual ##= expected
-    }}  
-  })
+    JSpec.addMatchers({
+      equal : { match : function(actual, expected){
+        return actual ##= expected
+      }}  
+    })
 
 To keep JSpec tiny, JSpec will default to generating failure messages
 for you, how ever this can be explicitly defined:
 
-  JSpec.addMatchers({
-    equal : { 
-      match : function(actual, expected){
-        return actual ##= expected
-      },
-      message : function(actual, expected, negate) {
-        return 'a message here'
+    JSpec.addMatchers({
+      equal : { 
+        match : function(actual, expected){
+          return actual ##= expected
+        },
+        message : function(actual, expected, negate) {
+          return 'a message here'
+        }
       }
-    }
-  })
+    })
   
 When defining matchers that are extremely similar in functionality, however
 require different names, you may use a prefixed list of words like below which
 defines be_disabled, be_selected, be_checked, and have_type, have_id, etc. Each
 function must return the matcher body which will be used.
 
-  JSpec.addMatchers({
-    'be disabled selected checked' : function(attr) {
-      return 'jQuery(actual).attr("' + attr + '")'
-    },
-
-    'have type id title alt href src sel rev name target' : function(attr) {
-      return function(actual, value) {
-        return value ? jQuery(actual).attr(attr) ## value:
-                       jQuery(actual).attr(attr)
+    JSpec.addMatchers({
+      'be disabled selected checked' : function(attr) {
+        return 'jQuery(actual).attr("' + attr + '")'
+      },
+    
+      'have type id title alt href src sel rev name target' : function(attr) {
+        return function(actual, value) {
+          return value ? jQuery(actual).attr(attr) ## value:
+                         jQuery(actual).attr(attr)
+        }
       }
-    }
-  })
+    })
 
 ## Extending Or Hooking Into JSpec
 
@@ -611,24 +611,24 @@ anything that has been done by a Module.
 For example you may wish to proxy files which are being executed, simply implement the 
 executing method like below. This example will stop execution of any file matching /matchers/.
 
-  MyModule = {
-    executing : function(file) {
-      if (file.match(/matchers/))
-        return 'stop'
+    MyModule = {
+      executing : function(file) {
+        if (file.match(/matchers/))
+          return 'stop'
+      }
     }
-  }
-  JSpec.include(MyModule)
+    JSpec.include(MyModule)
   
 Immutable values may also be passed to hooks using hookImmutable() internally. This allows
 for simple numbers, strings, etc to be utilized or altered within a hook implementation. Below
 is an example module which adds functionality to the JSpec grammar by converting SomeObject.stub('method')
 to stub(SomeObject, 'method'):
 
-  JSpec.include({
-    preprocessing : function(input) {
-      return input.replace(/(\w+)\.(stub|destub)\((.*?)\)$/gm, '$2($1, $3)')
-    }
-  })
+    JSpec.include({
+      preprocessing : function(input) {
+        return input.replace(/(\w+)\.(stub|destub)\((.*?)\)$/gm, '$2($1, $3)')
+      }
+    })
   
 ## JSpec Command-line Utility
 
@@ -637,16 +637,16 @@ allowing you to initialize project templates quickly, as well as auto-testing
 specifications when a file is altered.
 
 Initialize JSpec-driven project template in directory 'myproject':
-  $ jspec init myproject
+    $ jspec init myproject
 
 Once within 'myproject' start testing by executing:
-  $ jspec
+    $ jspec
 
 For additional usage execute:
-  $ jspec help
+    $ jspec help
 
 Or for specific usage:
-  $ jspec help run
+    $ jspec help run
 
 ## Rhino
 
@@ -654,22 +654,22 @@ JSpec provides transparent support for Rhino, while using the Terminal formatter
 Simply create a JavaScript file with contents similar to below, and then execute
 the command following it:
 
-  load('lib/jspec.js')
-  
-  JSpec
-  .exec('spec/spec.grammar.js')
-  .exec('spec/spec.core.js')
-  .run({ formatter : JSpec.formatters.Terminal, failuresOnly : true })
-  .report()
+    load('lib/jspec.js')
+    
+    JSpec
+    .exec('spec/spec.grammar.js')
+    .exec('spec/spec.core.js')
+    .run({ formatter : JSpec.formatters.Terminal, failuresOnly : true })
+    .report()
 
 Initialize project with:
-  $ jspec init myproject 
+    $ jspec init myproject 
 
 Run with:
-  $ jspec run --rhino
+    $ jspec run --rhino
 
 Or bind (automated testing):
-  $ jspec --rhino 
+    $ jspec --rhino 
 
 ## Server
 
@@ -684,24 +684,24 @@ is present, then it will be loaded before the server is started. This allows you
 add Sinatra routes, support additional Browsers, etc.
 
 Run with all supported browsers:
-  $ jspec run --server
+    $ jspec run --server
   
 Run with specific browsers:
-  $ jspec run --browsers Safari,Firefox,Chrome,Explorer
+    $ jspec run --browsers Safari,Firefox,Chrome,Explorer
   
 Run with alternative browser names:
-  $ jspec run --browsers safari,ff,chrome,ie
+    $ jspec run --browsers safari,ff,chrome,ie
   
 Browsers supported in core:
-  Browser::Safari
-  Browser::Chrome
-  Browser::Opera
-  Browser::Firefox
-  Browser::IE
+  - Browser::Safari
+  - Browser::Chrome
+  - Browser::Opera
+  - Browser::Firefox
+  - Browser::IE
   
 Supplied routes:
-  /slow/NUMBER
-  /status/NUMBER
+  - /slow/NUMBER
+  - /status/NUMBER
   
 For example $.get('/slow/4', function(){}) will take 4 seconds
 to reply, where as $.get('/status/404', function(){}) will respond
@@ -712,15 +712,15 @@ file to add your own functionality.
 
 JSpec provides an interactive shell through Rhino, utilize with:
 
-$ jspec shell
+    $ jspec shell
 
 Or to specify additional files to load:
 
-$ jspec shell lib/*.js
+    $ jspec shell lib/*.js
 
 Or view additional shell help
 
-$ jspec help shell
+    $ jspec help shell
 
 ## Ruby on Rails
 
@@ -728,21 +728,21 @@ No additional gems are required for JSpec to work with rails, although
 http://github.com/bhauman/jspec-rails has been created by 'bhauman'. JSpec
 supports Rails out of the box, simply execute:
 
-  $ jspec init --rails
+    $ jspec init --rails
   
 Then while still in the root directory of your Rails project, run the following
 command which will bind to, and refresh your browsers automatically when any changes 
 are made to ./public/javascripts/*.js or ./jspec/*.js
 
-  $ jspec
+    $ jspec
   
 Or just like regular JSpec applications, run once:
 
-  $ jspec run
+    $ jspec run
   
 Or run via the terminal using Rhino:
 
-  $ jspec run --rhino
+    $ jspec run --rhino
   
 ## Support Browsers
 
@@ -762,15 +762,15 @@ your spec/server.rb file may support additional browsers.
   
 * The preprocessor is not (yet) capable of multiline conversions. For example the following is invalid
   
-  object.stub('getContentsOfURL').and_return(function(url){
-    return 'html'
-  })
+    object.stub('getContentsOfURL').and_return(function(url){
+      return 'html'
+    })
   
   In cases such as this, you may always revert to utilizing JSpec in a grammar-less form as follows:
   
-  stub(object, 'getContentsOfURL').and_return(function(url){
-    return 'html'
-  })
+    stub(object, 'getContentsOfURL').and_return(function(url){
+      return 'html'
+    })
   
 ## Additional JSpec Modules
 
