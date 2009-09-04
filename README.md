@@ -167,9 +167,10 @@ JSpec.options.failuresOnly = true, and ?failuresOnly=1 will both work.
     - include            include substring, array element, or hash key
     - match              string should match regexp x
     - respond_to         property x should be a function
-    - eql                matches simple literals (strings, numbers) with ## 
-                         However composites like arrays or 'hashes' are recursively matched,
-                         meaning that [1, 2, [3]].should_eql([1, 2, [3]]) will be true.
+    - eql                
+      - matches simple literals (strings, numbers) with ## 
+        However composites like arrays or 'hashes' are recursively matched,
+        meaning that [1, 2, [3]].should_eql([1, 2, [3]]) will be true.
   
   * jQuery
   
