@@ -54,7 +54,7 @@ command :shell do |c|
   c.when_called do |args, options|
     paths = ['jspec.js', 'jspec.shell.js'] | args
     paths.map! do |path|
-      if path.include? 'jspec'
+      if path.include? 'jspec.'
         "-f #{JSPEC_ROOT}/lib/#{path}"
       else
         "-f #{path}"
@@ -73,11 +73,7 @@ command :update do |c|
     update the default template spec files.'
   c.when_called do |args, options|
     if args.empty?
-      if rails?
-        paths = 'jspec/spec.dom.html', 'jspec/spec.rhino.js'
-      else
-        paths = 'spec/spec.dom.html', 'spec/spec.rhino.js'
-      end
+      paths = path_to('environments/dom.html'), path_to('environments/rhino.js')
     else
       paths = args
     end
@@ -88,27 +84,26 @@ end
 command :run do |c|
   c.syntax = 'jspec run [path] [options]'
   c.summary = 'Run specifications'
-  c.description = 'Run specifications, defaulting [path] to spec/spec.dom.html.
+  c.description = 'Run specifications, defaulting [path] to spec/environments/dom.html.
     You will need to supply [path] if your specs do not reside 
     in this location. `run --bind` is the default sub-command of
     jspec so you may simply execute `jspec` in order to bind execution
     of your specs when a file is altered.
     
     JSpec supports Rhino execution when installed. The [path] is assumed
-    to be spec/spec.rhino.js unless specified. See examples below for
+    to be spec/environments/rhino.js unless specified. See examples below for
     using the --rhino switch.
     
     JSpec\'s server is also available via --server, which defaults 
-    the [path] to spec/server.html'
+    the [path] to spec/environments/server.html'
   c.example 'Run once in Safari', 'jspec run'
   c.example 'Run once in Safari and Firefox', 'jspec run --browsers Safari,Firefox'
   c.example 'Run once in Opera, Firefox, and Chrome', 'jspec run --browsers opera,ff,chrome'
   c.example 'Run custom spec file', 'jspec run foo.html'
   c.example 'Auto-run browsers when a file is altered', 'jspec run --bind --browsers Safari,Firefox'
   c.example 'Shortcut for the previous example', 'jspec --browsers Safari,Firefox'
+  c.example 'Run Rhino specs', 'jspec run --rhino'
   c.example 'Auto-run rhino when a file is altered', 'jspec --rhino'
-  c.example 'Run Rhino specs at spec/rhino.js', 'jspec run --rhino'
-  c.example 'Run Rhino specs once', 'jspec run specs/something.js --rhino'
   c.option '-b', '--browsers BROWSERS', Array, 'Specify browsers to test'
   c.option '-p', '--paths PATHS', Array, 'Specify paths when binding, defaults to javascript within ./lib and ./spec'
   c.option '-B', '--bind', 'Auto-run specs when source files or specs are altered'
@@ -126,14 +121,14 @@ command :run do |c|
     
     # Actions
     if options.rhino
-      suite = args.shift || path_to('spec.rhino.js')
+      suite = args.shift || path_to('environments/rhino.js')
       action = lambda { rhino suite }
     elsif options.server
       raise 'Cannot use --server with --bind' if options.bind
-      suite = args.shift || path_to('spec.server.html')
+      suite = args.shift || path_to('environments/server.html')
       action = lambda { start_server suite, options }
     else
-      suite = args.shift || path_to('spec.dom.html')
+      suite = args.shift || path_to('environments/dom.html')
       browsers = browsers_for options.browsers || ['safari']
       action = lambda do
         browsers.each do |browser|
@@ -163,7 +158,7 @@ def initialize_at dest, options
   
   copy_template_to 'default', dest
   setup_lib_dir dest, options
-  replace_root_in dest, 'spec/spec.dom.html', 'spec/spec.rhino.js'
+  replace_root_in dest, 'spec/environments/dom.html', 'spec/environments/rhino.js'
 end
 
 ##
@@ -176,7 +171,7 @@ def initialize_rails_at dest, options
   
   copy_template_to 'rails', "#{dest}/jspec"
   setup_lib_dir "#{dest}/jspec", options
-  replace_root_in "#{dest}/jspec", 'spec.dom.html', 'spec.rhino.js'
+  replace_root_in "#{dest}/jspec", 'environments/dom.html', 'environments/rhino.js'
 end
 
 ##
@@ -217,7 +212,7 @@ def start_server suite, options
   set :server, 'Mongrel'
   enable :sessions
   disable :logging
-  hook = File.expand_path path_to('server.rb')
+  hook = File.expand_path path_to('environments/server.rb')
   load hook if File.exists? hook
   JSpec::Server.new(suite, options.port).start(options.browsers ? browsers_for(options.browsers) : nil)
 end
