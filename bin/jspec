@@ -16,32 +16,12 @@ program :version, '2.11.0'
 program :description, 'JavaScript BDD Testing Framework'
 default_command :bind
 
-
-# ##
-# # Initialize template at _dest_. 
-# 
-# def initialize_at dest, options
-#   
-#   
-#   copy_template_to 'default', dest
-#   setup_lib_dir dest, options
-#   replace_root_in dest, 'spec/environments/dom.html', 'spec/environments/rhino.js'
-# end
-# 
-# ##
-# # Initialize rails template at _dest_.
-# 
-# def initialize_rails_at dest, options
-#   unless looks_like_rails_root?(dest)
-#     abort unless agree "'#{dest}' does not look like root of a rails project; continue? "
-#   end
-#   
-#   copy_template_to 'rails', "#{dest}/jspec"
-#   setup_lib_dir "#{dest}/jspec", options
-#   replace_root_in "#{dest}/jspec", 'environments/dom.html', 'environments/rhino.js'
-# end
-
 module JSpec
+  
+  #--
+  # Base project
+  #++
+  
   class Project
     
     ##
