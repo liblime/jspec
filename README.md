@@ -828,12 +828,12 @@ your _spec/server.rb_ file may support additional browsers.
   
 ## More Information
 
-- IRC Channel irc://irc.freenode.net#jspec
-- Featured article in JSMag: http://www.jsmag.com/main.issues.description/id=21/
-- Syntax comparison with other frameworks http://gist.github.com/92283
-- Get the TextMate bundle at https://github.com/visionmedia/jspec.tmbundle/tree
-- For more information consult the JSpec source code documentation or visit http://visionmedia.github.com/jspec
-- jQuery + HTML fixture example http://gist.github.com/147831
+- IRC Channel [irc://irc.freenode.net#jspec](irc://irc.freenode.net#jspec)
+- Featured article in JSMag [http://www.jsmag.com/main.issues.description/id=21/](http://www.jsmag.com/main.issues.description/id=21/)
+- Syntax comparison with other frameworks [http://gist.github.com/92283](http://gist.github.com/92283)
+- Get the TextMate bundle at [https://github.com/visionmedia/jspec.tmbundle/tree](https://github.com/visionmedia/jspec.tmbundle/tree)
+- For more information consult the JSpec source code documentation or visit [http://visionmedia.github.com/jspec](http://visionmedia.github.com/jspec)
+- jQuery + HTML fixture example [http://gist.github.com/147831](http://gist.github.com/147831)
 
 ## Contributors
 
