@@ -26,6 +26,9 @@ namespace :pkg do
       sh 'cp -fr lib/* pkg'
       minify 'lib/jspec.js', 'pkg/jspec.min.js'
       minify 'lib/jspec.jquery.js', 'pkg/jspec.jquery.min.js'
+      minify 'lib/jspec.shell.js', 'pkg/jspec.shell.min.js'
+      minify 'lib/jspec.timers.js', 'pkg/jspec.timers.min.js'
+      minify 'lib/jspec.xhr.js', 'pkg/jspec.xhr.min.js'
       compress 'lib/jspec.css', 'pkg/jspec.min.css'
       sh 'git add pkg/.'
     rescue Exception => e
