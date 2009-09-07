@@ -58,7 +58,7 @@ command :shell do |c|
       end
     end
     say "JSpec #{program(:version)}"
-    `#{RHINO} #{paths.join(' ')} -f -`
+    `#{JSpec::Project::RHINO} #{paths.join(' ')} -f -`
   end
 end
 
