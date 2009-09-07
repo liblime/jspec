@@ -771,7 +771,21 @@ Or to specify additional files to load:
 Or view additional shell help
 
     $ jspec help shell
+    
+When running the shell JSpec provides several commands:
 
+  - quit, exit
+    - Terminate the shell session 
+  - p()
+    - Inspect the object passed
+    
+Or add your own. In the examples below, `foo` will become a getter, so it can
+be invoked simply as `$ foo ` where as `bar` is a regular function which must be called
+as `$ bar("something") `.
+  
+  Shell.commands.foo = ['Does some foo', function(){ return 'something' }] 
+  Shell.commands.bar = ['Does some bar', function(o){ return 'something' }]
+      
 ## Ruby on Rails
 
 No additional gems are required for JSpec to work with rails, although 
