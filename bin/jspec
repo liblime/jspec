@@ -248,14 +248,15 @@ module JSpec
     # Start server with _path_ html and _options_.
 
     def start_server path, options = {}
-      set :port, options[:port] || 4444
+      options[:port] ||= 4444
+      set :port, options[:port]
       set :server, 'Mongrel'
       enable :sessions
       disable :logging
       hook = File.expand_path normalize('environments/server.rb')
       load hook if File.exists? hook
       browsers = browsers_for(options[:browsers]) if options.include? :browsers
-      JSpec::Server.new(path, options.port).start(browsers)
+      JSpec::Server.new(path, options[:port]).start(browsers)
     end
 
     ##
