@@ -13,7 +13,7 @@ describe "jspec" do
     end
     
     it "should initialize a default project at the given path" do
-      jspec('init', @dest)
+      capture { jspec('init', @dest) }.should == "Template initialized at `./spec/ruby/bin/test'\n"
       File.directory?(@dest).should be_true
     end
     
