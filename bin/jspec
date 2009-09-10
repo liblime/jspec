@@ -30,12 +30,13 @@ command :init do |c|
   c.option '-s', '--symlink', 'Symlink the JSpec library instead of copying it'
   c.example 'Create a directory foo, initialized with a jspec template', 'jspec init foo'
   c.when_called do |args, options|
-    if options.rails
-      JSpec::Project::Rails.new(args.first || '.').init! options.__hash__
+    dest = args.shift || '.'
+    if options.rails || File.directory?("#{dest}/vendor")
+      JSpec::Project::Rails.new(dest).init! options.__hash__
     else
-      JSpec::Project.new(args.first || '.').init! options.__hash__
+      JSpec::Project.new(dest).init! options.__hash__
     end
-    say "Template initialized at `#{args.first}'"
+    say "Template initialized at `#{dest}'"
   end
 end
 
@@ -69,7 +70,8 @@ command :update do |c|
     the latest JSpec features. Execute from JSpec project root without [dest] to
     update the default template spec files.'
   c.when_called do |args, options|
-    JSpec::Project.new(args.first).update!
+    base = File.directory?('jspec') ? JSpec::Project::Rails : JSpec::Project
+    base.new(args.first).update!
   end
 end
 
@@ -103,7 +105,7 @@ command :run do |c|
   c.option '-S', '--server', 'Run specs using the JSpec server'
   c.option '-P', '--port NUMBER', Integer, 'Start JSpec server using the given port number'
   c.when_called do |args, options|
-    base = options.rails ? JSpec::Project::Rails : JSpec::Project
+    base = File.directory?('jspec') ? JSpec::Project::Rails : JSpec::Project
     base.new('.').run! args.first, options.__hash__
   end
 end

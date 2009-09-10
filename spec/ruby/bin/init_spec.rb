@@ -24,6 +24,13 @@ describe "jspec" do
       File.directory?(@dest + '/jspec').should be_true
     end
     
+    it "should initialize a rails project without --rails when the destination looks like a rails app" do
+      mkdir @dest + '/vendor'
+      jspec(:init, @dest)
+      File.directory?(@dest).should be_true
+      File.directory?(@dest + '/jspec').should be_true
+    end
+    
     it "should symlink jspec's library to spec/lib when using --symlink" do
       jspec(:init, @dest, '--symlink')
       File.directory?(@dest).should be_true
