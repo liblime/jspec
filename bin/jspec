@@ -24,11 +24,18 @@ command :init do |c|
     Additional switches --freeze, and --symlink are available in order
     to preserve the version of JSpec at the time of initialization. Otherwise
     incompatibilities from later versions may prevent your suite from
-    running properly.'
+    running properly.
+    
+    To update a project to the recent version of JSpec use
+    `jspec help udpate` for more information.'
   c.option '-R', '--rails', 'Initialize rails template from rails root directory'
   c.option '-f', '--freeze', 'Copy the JSpec library'
   c.option '-s', '--symlink', 'Symlink the JSpec library instead of copying it'
+  c.example 'Create a project in the current directory', 'jspec init'
   c.example 'Create a directory foo, initialized with a jspec template', 'jspec init foo'
+  c.example 'Rails application support', 'jspec init --rails'
+  c.example 'Rails application support, --rails is no longer required', 'jspec init'
+  c.example 'Freeze JSpec\'s library at spec/lib', 'jspec init --freeze'
   c.when_called do |args, options|
     dest = args.shift || '.'
     if options.rails || File.directory?("#{dest}/vendor")
