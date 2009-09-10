@@ -59,6 +59,14 @@ describe "jspec" do
       jspec(:update, @dest)
       File.exists?("#{@dest}/spec/lib/jspec.js").should be_true
     end
+    
+    it "should update rails projects initialized with --freeze" do
+      mkdir @dest + '/vendor'
+      jspec(:init, @dest, '--freeze')
+      rm "#{@dest}/jspec/lib/jspec.js"
+      jspec(:update, @dest)
+      File.exists?("#{@dest}/jspec/lib/jspec.js").should be_true
+    end
         
   end
 end
