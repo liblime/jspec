@@ -189,7 +189,7 @@ module JSpec
     # Check if we are working with vendorized JSpec.
     
     def vendorized?
-      File.exist? normalize(:lib)
+      File.directory?(normalize(:lib)) && normalize(:lib)
     end
     
     ##
@@ -234,19 +234,26 @@ module JSpec
     end
     
     ##
-    # Update absolute paths.
+    # Update absolute paths and/or vendorized libraries.
     
     def update!
-      ['environments/dom.html', 'environments/rhino.js'].each do |path|
-        path = normalize path
-        next unless File.exists? path
-        contents = File.read(path).gsub /visionmedia-jspec-(\d+\.\d+\.\d+)/, "visionmedia-jspec-#{program(:version)}"
-        if program(:version) == $1
-          say "skipping #{path}; already #{$1}"
-          next
+      if path = vendorized?
+        type = File.symlink?(path) ? :symlink : :copy
+        FileUtils.rm_rf normalize(:lib)
+        send "vendorize_with_#{type}"
+        say "updated #{type} #{path} -> #{program(:version)}"
+      else
+        ['environments/dom.html', 'environments/rhino.js'].each do |path|
+          path = normalize path
+          next unless File.exists? path
+          contents = File.read(path).gsub /visionmedia-jspec-(\d+\.\d+\.\d+)/, "visionmedia-jspec-#{program(:version)}"
+          if program(:version) == $1
+            say "skipping #{path}; already #{$1}"
+            next
+          end
+          File.open(path, 'r+'){ |file| file.write contents } 
+          say "updated #{path}; #{$1} -> #{program(:version)}"
         end
-        File.open(path, 'r+'){ |file| file.write contents } 
-        say "updated #{path}; #{$1} -> #{program(:version)}"
       end
     end
     
