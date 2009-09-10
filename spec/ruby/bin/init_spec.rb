@@ -12,6 +12,13 @@ describe "jspec" do
       rm_rf @dest
     end
     
+    it "should initialize a default project at the current directory when no destination is passed" do
+      Dir.chdir @dest do
+        jspec(:init)
+        File.directory?(@dest).should be_true
+      end
+    end
+    
     it "should initialize a default project at the given path" do
       jspec(:init, @dest).should include('ruby/bin/test')
       File.directory?(@dest).should be_true
