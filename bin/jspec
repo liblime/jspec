@@ -37,12 +37,7 @@ command :init do |c|
   c.example 'Rails application support, --rails is no longer required', 'jspec init'
   c.example 'Freeze JSpec\'s library at spec/lib', 'jspec init --freeze'
   c.when_called do |args, options|
-    dest = args.shift || '.'
-    if options.rails || File.directory?("#{dest}/vendor")
-      JSpec::Project::Rails.new(dest).init! options.__hash__
-    else
-      JSpec::Project.new(dest).init! options.__hash__
-    end
+    JSpec::Project.for(dest = args.shift || '.').init! options.__hash__
     say "Template initialized at `#{dest}'"
   end
 end
@@ -339,6 +334,15 @@ module JSpec
       else
         action.call File.new(path)
       end
+    end
+    
+    ##
+    # Return the Project instance which should be used for _dest_. 
+    
+    def self.for dest
+      (File.directory?("#{dest}/vendor") ? 
+        JSpec::Project::Rails : 
+          JSpec::Project).new(dest)
     end
     
     #--
