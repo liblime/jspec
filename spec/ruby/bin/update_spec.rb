@@ -52,6 +52,13 @@ describe "jspec" do
         File.read(path).should include("visionmedia-jspec-#{program(:version)}")
       end
     end
+    
+    it "should update projects initialized with --freeze" do
+      jspec(:init, @dest, '--freeze')
+      rm "#{@dest}/spec/lib/jspec.js"
+      jspec(:update, @dest)
+      File.exists?("#{@dest}/spec/lib/jspec.js").should be_true
+    end
         
   end
 end
