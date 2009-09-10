@@ -200,10 +200,16 @@ module JSpec
     end
     
     ##
+    # Root JSpec directory.
+    
+    def root
+      vendorized? ? './spec' : JSPEC_ROOT
+    end
+    
+    ##
     # Replace absolute JSPEC_ROOT _paths_.
     
     def replace_root_in *paths
-      root = vendorized? ? '.' : JSPEC_ROOT
       paths.each do |path|
         contents = File.read(normalize(path)).gsub 'JSPEC_ROOT', root
         File.open(normalize(path), 'w') { |file| file.write contents }
@@ -334,6 +340,13 @@ module JSpec
         vendorize_with_symlink if options.include? :symlink
         vendorize_with_copy if options.include? :freeze
         replace_root
+      end
+      
+      ##
+      # Root JSpec directory.
+
+      def root
+        vendorized? ? './jspec' : JSPEC_ROOT
       end
       
       ##
