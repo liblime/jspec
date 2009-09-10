@@ -70,8 +70,9 @@ command :update do |c|
     the latest JSpec features. Execute from JSpec project root without [dest] to
     update the default template spec files.'
   c.when_called do |args, options|
-    base = File.directory?('jspec') ? JSpec::Project::Rails : JSpec::Project
-    base.new(args.first).update!
+    dest = args.shift || '.'
+    base = File.directory?("#{dest}/jspec") ? JSpec::Project::Rails : JSpec::Project
+    base.new(dest).update!
   end
 end
 

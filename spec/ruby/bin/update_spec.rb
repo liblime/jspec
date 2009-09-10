@@ -27,5 +27,14 @@ describe "jspec" do
       end
     end
     
+    it "should update absolute paths matching visionmedia-jspec-n.n.n for a rails project" do
+      mkdir @dest + '/vendor'
+      jspec(:init, @dest)
+      mock_version_in "#{@dest}/jspec/environments/dom.html" do |path|
+        jspec(:update, @dest)
+        File.read(path).should include("visionmedia-jspec-#{program(:version)}")
+      end
+    end
+        
   end
 end
