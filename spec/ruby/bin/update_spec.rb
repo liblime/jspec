@@ -26,24 +26,6 @@ describe "jspec" do
         File.read(path).should include("visionmedia-jspec-#{program(:version)}")
       end
     end
-
-    it "should update absolute paths in specific paths passed" do
-      jspec(:init, @dest)
-      mock_version_in "#{@dest}/spec/environments/dom.html" do |path|
-        File.exists()
-        jspec(:update, path)
-        File.read(path).should include("visionmedia-jspec-#{program(:version)}")
-      end
-    end
-        
-    it "should update absolute paths when using in a rails app" do
-      mkdir @dest + '/vendor'
-      jspec(:init, @dest, '--rails')
-      mock_version_in "#{@dest}/jspec/environments/dom.html" do |path|
-        jspec(:update, @dest)
-        File.read(path).should include("visionmedia-jspec-#{program(:version)}")
-      end
-    end
     
   end
 end
