@@ -1,10 +1,12 @@
 
 require 'fileutils'
 
-BIN = File.dirname(__FILE__) + '/../../../bin/jspec'
+load File.dirname(__FILE__) + '/../../../bin/jspec'
 
-def jspec *args
-  system BIN, *args
+def jspec name, *args
+  capture do
+    command(name).run *args
+  end
 end
 
 def capture &block

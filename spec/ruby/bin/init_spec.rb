@@ -13,33 +13,33 @@ describe "jspec" do
     end
     
     it "should initialize a default project at the given path" do
-      capture { jspec('init', @dest) }.should == "Template initialized at `./spec/ruby/bin/test'\n"
+      jspec(:init, @dest).should match(/ruby\/bin\/test/)
       File.directory?(@dest).should be_true
     end
     
     it "should initialize a rails project when using -R or --rails" do
       mkdir @dest + '/vendor'
-      jspec('init', @dest, '--rails')
+      jspec(:init, @dest, '--rails')
       File.directory?(@dest).should be_true
       File.directory?(@dest + '/jspec').should be_true
     end
     
     it "should symlink jspec's library to spec/lib when using --symlink" do
-      jspec('init', @dest, '--symlink')
+      jspec(:init, @dest, '--symlink')
       File.directory?(@dest).should be_true
       File.symlink?(@dest + '/spec/lib').should be_true
     end
     
     it "should symlink jspec's library to jspec/lib when using --symlink and --rails" do
       mkdir @dest + '/vendor'
-      jspec('init', @dest, '--symlink', '--rails')
+      jspec(:init, @dest, '--symlink', '--rails')
       File.directory?(@dest).should be_true
       File.directory?(@dest + '/jspec').should be_true
       File.symlink?(@dest + '/jspec/lib').should be_true
     end
     
     it "should vendorize jspec's library to spec/lib when using --freeze" do
-      jspec('init', @dest, '--freeze')
+      jspec(:init, @dest, '--freeze')
       File.directory?(@dest).should be_true
       File.directory?(@dest + '/spec/lib').should be_true
       File.exists?(@dest + '/spec/lib/jspec.js').should be_true
@@ -47,7 +47,7 @@ describe "jspec" do
     
     it "should vendor jspec's library to jspec/lib when using --freeze and --rails" do
       mkdir @dest + '/vendor'
-      jspec('init', @dest, '--freeze', '--rails')
+      jspec(:init, @dest, '--freeze', '--rails')
       File.directory?(@dest).should be_true
       File.directory?(@dest + '/jspec').should be_true
       File.directory?(@dest + '/jspec/lib').should be_true
