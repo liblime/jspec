@@ -13,7 +13,7 @@ describe "jspec" do
     end
     
     it "should initialize a default project at the given path" do
-      jspec(:init, @dest).should match(/ruby\/bin\/test/)
+      jspec(:init, @dest).should include('ruby/bin/test')
       File.directory?(@dest).should be_true
     end
     
