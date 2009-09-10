@@ -44,5 +44,23 @@ describe "jspec" do
       end
     end
     
+    it "should update vendor libs created with --freeze" do
+      mkdir @dest + '/foo'
+      jspec(:init, @dest, '--freeze')
+      rm "#{@dest}/lib/jspec.js"
+      jspec(:update, @dest)
+      File.exists?("#{@dest}/lib/jspec.js").should be_true
+      File.directory?("#{@dest}/foo").should be_true
+    end
+    
+    it "should update vendor libs created with --symlink" do
+      mkdir @dest + '/foo'
+      jspec(:init, @dest, '--symlink')
+      rm "#{@dest}/lib/jspec.js"
+      jspec(:update, @dest)
+      File.exists?("#{@dest}/lib/jspec.js").should be_true
+      File.directory?("#{@dest}/foo").should be_true
+    end
+    
   end
 end
