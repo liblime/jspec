@@ -73,9 +73,14 @@ end
 command :update do |c|
   c.syntax = 'jspec update [dest]'
   c.summary = 'Update JSpec releases'
-  c.description = 'Update JSpec release relative to [dest], this will allow you to utilize 
-    the latest JSpec features. Execute from JSpec project root without [dest] to
-    update the default template spec files.'
+  c.description = 'Update JSpec release relative to [dest], this will allow you 
+    to utilize the latest JSpec features. Execute from JSpec project 
+    root without [dest] to update the default template spec files.
+    
+    This command supports regular projects, as well as those initialized
+    with --symlink and --freeze.'
+  c.example 'Update project in the current directory', 'jspec update'
+  c.example 'Update project in the directory specified', 'jspec update path/to/project'
   c.when_called do |args, options|
     dest = args.shift || '.'
     base = File.directory?("#{dest}/jspec") ? JSpec::Project::Rails : JSpec::Project
