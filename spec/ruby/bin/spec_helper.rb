@@ -14,3 +14,12 @@ def capture &block
     io ? io.read : yield
   end
 end
+
+def shell *args
+  IO.popen(JSPEC_ROOT + '/bin/jspec shell', 'r+') do |io|
+    args.each do |arg|
+      io.puts arg
+    end
+    io.read
+  end
+end
