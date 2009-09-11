@@ -101,5 +101,27 @@ describe "jspec" do
       end
     end
     
+    describe "dojo" do
+      it "should install to spec/support/dojo.js by default" do
+        Dir.chdir @dest do
+          jspec(:install, 'dojo')
+          File.exists?('spec/support/dojo.js').should be_true
+        end
+      end
+      
+      it "should install to the destination passed" do
+        jspec(:install, 'dojo', "#{@dest}/spec")
+        File.exists?("#{@dest}/spec/dojo.js").should be_true
+      end
+      
+      it "should install specific versions" do
+        Dir.chdir @dest do
+          jspec(:install, 'dojo', '--release', '1.1.1')
+          File.exists?('spec/support/dojo.js').should be_true
+          File.read('spec/support/dojo.js').should include('1.1.1')
+        end
+      end
+    end
+    
   end
 end

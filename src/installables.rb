@@ -123,6 +123,16 @@ module JSpec
       @current = '1.2.3'
       @uri = 'http://ajax.googleapis.com/ajax/libs/mootools/RELEASE/mootools.js'
     end
-      
+    
+    #--
+    # Dojo
+    #++
+    
+    class Dojo < GoogleLib
+      @name = 'Dojo'
+      @current = '1.3.2'
+      @uri = 'http://ajax.googleapis.com/ajax/libs/dojo/RELEASE/dojo/dojo.xd.js.uncompressed.js'
+    end
+    
   end
 end
