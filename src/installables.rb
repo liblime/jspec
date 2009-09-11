@@ -32,35 +32,30 @@ module JSpec
     def installed_message; end
     
     #--
-    # jQuery
+    # Google lib
     #++
     
-    class Jquery < self
-      
-      ##
-      # Current release.
-      
-      CURRENT = '1.3.2'
-      
+    class GoogleLib < self
+
       ##
       # Release specified or the current release.
       
       def release
-        options[:release] || self.class::CURRENT
+        options[:release] || self.class.current
       end
       
       ##
       # Installation path.
       
       def path
-        options[:to] + '/jquery.js'
+        options[:to] + "/#{self.class.name.downcase.tr(' ', '.')}.js"
       end
       
       ##
       # Installation uri.
       
       def uri
-        "http://ajax.googleapis.com/ajax/libs/jquery/#{release}/jquery.js"
+        self.class.uri.sub 'RELEASE', release
       end
       
       ##
@@ -76,43 +71,47 @@ module JSpec
       # Installation message.
       
       def installed_message
-        "jQuery #{release} installed to #{path}"
+        "#{self.class.name} #{release} installed to #{path}"
       end
       
+      #--
+      # DSL
+      #++
+      
+      class << self
+        attr_accessor :name, :uri, :current
+      end
+
+    end
+    
+    #--
+    # jQuery
+    #++
+    
+    class Jquery < GoogleLib
+      @name = 'jQuery'
+      @current = '1.3.2'
+      @uri = 'http://ajax.googleapis.com/ajax/libs/jquery/RELEASE/jquery.js'
     end
     
     #--
     # jQuery UI.
     #++
     
-    class Jqueryui < Jquery
-      
-      ##
-      # Current release.
-      
-      CURRENT = '1.7.2'
-      
-      ##
-      # Installation path.
-      
-      def path
-        options[:to] + '/jquery.ui.js'
-      end
-      
-      ##
-      # Installation uri.
-      
-      def uri
-        "http://ajax.googleapis.com/ajax/libs/jqueryui/#{release}/jquery-ui.js"
-      end
-      
-      ##
-      # Installation message.
-      
-      def installed_message
-        "jQuery UI #{release} installed to #{path}"
-      end
-      
+    class Jqueryui < GoogleLib
+      @name = 'jQuery UI'
+      @current = '1.7.2'
+      @uri = 'http://ajax.googleapis.com/ajax/libs/jqueryui/RELEASE/jquery-ui.js'
+    end
+    
+    #--
+    # Prototype
+    #++
+    
+    class Prototype < GoogleLib
+      @name = 'Prototype'
+      @current = '1.6.1.0'
+      @uri = 'http://ajax.googleapis.com/ajax/libs/prototype/RELEASE/prototype.js'
     end
       
   end
