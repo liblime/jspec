@@ -710,7 +710,7 @@ Alternatively we may specify the destination path:
 Or provide a specific version string:
     $ jspec install jquery --release 1.3.1
   
-The install command will also install Rhino for you (MacOS only) so you
+The install command will also install Rhino for you (**MacOS only**) so you
 can run specs, and js via the command-line.
     $ jspec install rhino
 
