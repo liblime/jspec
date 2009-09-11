@@ -39,10 +39,17 @@ module JSpec
     def install name, options = {}
       raise ArgumentError, ':to option required' unless options.include? :to
       project = JSpec::Installable.const_get(name.downcase.capitalize).new options
-      progress [:before, :install, :after], 
-        :complete_message => project.installed_message,
-        :format => "Installing #{name} (:progress_bar) %:percent_complete" do |method|
-        project.send method
+      if project.use_progress_bar?
+        progress [:before, :install, :after], 
+          :complete_message => project.install_message,
+          :format => "Installing #{name} (:progress_bar) %:percent_complete" do |method|
+          project.send method
+        end
+      else
+        project.before
+        project.install
+        project.after
+        say project.install_message
       end
     end
     

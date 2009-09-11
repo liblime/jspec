@@ -29,7 +29,58 @@ module JSpec
     ##
     # Message to display after installation.
     
-    def installed_message; end
+    def install_message; end
+    
+    ##
+    # Weither or not to use the progress bar.
+    
+    def use_progress_bar?; true end
+    
+    #--
+    # Rhino
+    #++
+    
+    class Rhino < self
+      
+      ##
+      # No thanks!
+      
+      def use_progress_bar?
+        false
+      end
+      
+      ##
+      # Zip uri.
+      
+      def uri
+        'ftp://ftp.mozilla.org/pub/mozilla.org/js/rhino1_7R2.zip'
+      end
+      
+      ##
+      # Extension destination.
+      
+      def dest
+        '/Library/Java/Extensions/js.jar'
+      end
+      
+      ##
+      # Install
+      
+      def install
+        say "... downloading #{uri}"; `curl #{uri} -o /tmp/rhino.zip`
+        say "... decompressing"; `unzip /tmp/rhino.zip -d /tmp`
+        say "... installing to #{dest}"; `sudo mv /tmp/rhino1_7R2/js.jar #{dest}`
+      end
+      
+      ##
+      # Install message.
+      
+      def install_message
+        "Rhino installed:\n" \
+        "Usage: java org.mozilla.javascript.tools.shell.Main [options...] [files]"
+      end
+      
+    end
     
     #--
     # Google lib
@@ -70,7 +121,7 @@ module JSpec
       ##
       # Installation message.
       
-      def installed_message
+      def install_message
         "#{self.class.name} #{release} installed to #{path}"
       end
       
