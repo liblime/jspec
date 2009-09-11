@@ -46,7 +46,7 @@ module JSpec
       # Release specified or the current release.
       
       def release
-        options[:release] || CURRENT
+        options[:release] || self.class::CURRENT
       end
       
       ##
@@ -57,12 +57,18 @@ module JSpec
       end
       
       ##
+      # Installation uri.
+      
+      def uri
+        "http://ajax.googleapis.com/ajax/libs/jquery/#{release}/jquery.js"
+      end
+      
+      ##
       # Install.
       
       def install
-        response = open("http://ajax.googleapis.com/ajax/libs/jquery/#{release}/jquery.min.js")
         File.open(path, 'w+') do |file|
-          file.write response.read
+          file.write open(uri).read
         end
       end
       
@@ -71,6 +77,40 @@ module JSpec
       
       def installed_message
         "jQuery #{release} installed to #{path}"
+      end
+      
+    end
+    
+    #--
+    # jQuery UI.
+    #++
+    
+    class Jqueryui < Jquery
+      
+      ##
+      # Current release.
+      
+      CURRENT = '1.7.2'
+      
+      ##
+      # Installation path.
+      
+      def path
+        options[:to] + '/jquery.ui.js'
+      end
+      
+      ##
+      # Installation uri.
+      
+      def uri
+        "http://ajax.googleapis.com/ajax/libs/jqueryui/#{release}/jquery-ui.js"
+      end
+      
+      ##
+      # Installation message.
+      
+      def installed_message
+        "jQuery UI #{release} installed to #{path}"
       end
       
     end

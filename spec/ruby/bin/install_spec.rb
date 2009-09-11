@@ -34,6 +34,28 @@ describe "jspec" do
         end
       end
     end
-
+    
+    describe "jqueryui" do
+      it "should install to spec/support/jquery.ui.js by default" do
+        Dir.chdir @dest do
+          jspec(:install, 'jqueryui')
+          File.exists?('spec/support/jquery.ui.js').should be_true
+        end
+      end
+      
+      it "should install to the destination passed" do
+        jspec(:install, 'jqueryui', "#{@dest}/spec")
+        File.exists?("#{@dest}/spec/jquery.ui.js").should be_true
+      end
+      
+      it "should install specific versions" do
+        Dir.chdir @dest do
+          jspec(:install, 'jqueryui', '--release', '1.6')
+          File.exists?('spec/support/jquery.ui.js').should be_true
+          File.read('spec/support/jquery.ui.js').should include('1.6')
+        end
+      end
+    end
+    
   end
 end
