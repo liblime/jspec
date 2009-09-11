@@ -78,6 +78,28 @@ describe "jspec" do
         end
       end
     end
+    
+    describe "mootools" do
+      it "should install to spec/support/mootools.js by default" do
+        Dir.chdir @dest do
+          jspec(:install, 'mootools')
+          File.exists?('spec/support/mootools.js').should be_true
+        end
+      end
       
+      it "should install to the destination passed" do
+        jspec(:install, 'mootools', "#{@dest}/spec")
+        File.exists?("#{@dest}/spec/mootools.js").should be_true
+      end
+      
+      it "should install specific versions" do
+        Dir.chdir @dest do
+          jspec(:install, 'mootools', '--release', '1.2.1')
+          File.exists?('spec/support/mootools.js').should be_true
+          File.read('spec/support/mootools.js').should include('1.2.1')
+        end
+      end
+    end
+    
   end
 end

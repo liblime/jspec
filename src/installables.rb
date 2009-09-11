@@ -113,6 +113,16 @@ module JSpec
       @current = '1.6.1.0'
       @uri = 'http://ajax.googleapis.com/ajax/libs/prototype/RELEASE/prototype.js'
     end
+    
+    #--
+    # MooTools
+    #++
+    
+    class Mootools < GoogleLib
+      @name = 'MooTools'
+      @current = '1.2.3'
+      @uri = 'http://ajax.googleapis.com/ajax/libs/mootools/RELEASE/mootools.js'
+    end
       
   end
 end

@@ -24,7 +24,9 @@ command :install do |c|
     Currently the following projects are supported:
 
       - jquery
-      - jqueryui'
+      - jqueryui
+      - prototype
+      - mootools'
   c.option '-r', '--release STRING', 'Release version to install'
   c.example 'Install jQuery to spec/support/jquery.js', 'jspec install jquery'
   c.example 'Install jQuery 1.3.0 to spec/support/jquery.js', 'jspec install jquery --release 1.3.0'
