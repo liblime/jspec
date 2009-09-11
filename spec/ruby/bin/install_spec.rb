@@ -1,0 +1,39 @@
+
+include FileUtils
+
+describe "jspec" do
+  describe "install" do
+    before :each do
+      @dest = File.dirname(__FILE__) + '/test'
+      mkdir @dest  
+      jspec(:init, @dest)
+    end
+    
+    after :each do
+      rm_rf @dest
+    end
+    
+    describe "jquery" do
+      it "should install to spec/support/jquery.js by default" do
+        Dir.chdir @dest do
+          jspec(:install, 'jquery')
+          File.exists?('spec/support/jquery.js').should be_true
+        end
+      end
+      
+      it "should install to the destination passed" do
+        jspec(:install, 'jquery', "#{@dest}/spec")
+        File.exists?("#{@dest}/spec/jquery.js").should be_true
+      end
+      
+      it "should install specific versions" do
+        Dir.chdir @dest do
+          jspec(:install, 'jquery', '--release', '1.3.1')
+          File.exists?('spec/support/jquery.js').should be_true
+          File.read('spec/support/jquery.js').should include('1.3.1')
+        end
+      end
+    end
+
+  end
+end
