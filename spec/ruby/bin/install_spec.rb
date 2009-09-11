@@ -57,5 +57,27 @@ describe "jspec" do
       end
     end
     
+    describe "prototype" do
+      it "should install to spec/support/prototype.js by default" do
+        Dir.chdir @dest do
+          jspec(:install, 'prototype')
+          File.exists?('spec/support/prototype.js').should be_true
+        end
+      end
+      
+      it "should install to the destination passed" do
+        jspec(:install, 'prototype', "#{@dest}/spec")
+        File.exists?("#{@dest}/spec/prototype.js").should be_true
+      end
+      
+      it "should install specific versions" do
+        Dir.chdir @dest do
+          jspec(:install, 'prototype', '--release', '1.6.0.2')
+          File.exists?('spec/support/prototype.js').should be_true
+          File.read('spec/support/prototype.js').should include('1.6.0.2')
+        end
+      end
+    end
+      
   end
 end
