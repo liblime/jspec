@@ -35,6 +35,7 @@ and **much more**.
 * Profiling
 * Interactive Shell
 * Ruby on Rails Integration
+* Install support projects with a single command (jQuery, Rhino, Prototype, Dojo, etc)
 * Tiny (15 kb compressed, 1300-ish LOC)
 
 ## Installation
@@ -695,7 +696,27 @@ For additional usage execute:
 
 Or for specific usage:
     $ jspec help run
+    
+## Installing Support Projects
 
+Lets say you need jQuery for your project, and wish to test against it. You could download
+jQuery manually, use an absolute uri to Google's CDN, or use the following command, which will
+install jQuery to _spec/support/jquery.js_.
+  $ jspec install jquery
+  
+Alternatively we may specify the destination path:
+  $ jspec install jquery spec/jquery.js
+  
+Or provide a specific version string:
+  $ jspec install jquery --release 1.3.1
+  
+The install command will also install Rhino for you (MacOS only) so you
+can run specs, and js via the command-line.
+  $ jspec install rhino
+
+To view the current projects supported view:
+  $ jspec help install
+  
 ## Rhino
 
 JSpec provides transparent support for Rhino, while using the Terminal formatter.
