@@ -8,12 +8,39 @@ require 'commander'
 require 'bind'
 require 'fileutils'
 require 'src/project'
+require 'src/installables'
 require 'src/server'
 
 program :name, 'JSpec'
 program :version, '2.11.0'
 program :description, 'JavaScript BDD Testing Framework'
 default_command :bind
+
+command :install do |c|
+  c.syntax = 'jspec install <project> [dest]'
+  c.summary = 'Install a project such as jQuery, Prototype, Rhino, etc.'
+  c.description = 'Install the given <project> to [dest] or spec/support/<project>.
+    Currently the following projects are supported:
+
+      - jquery
+      - prototype
+      - rhino'
+  c.option '-r', '--release STRING', 'Release version to install'
+  c.example 'Install jQuery to spec/support/jquery.js', 'jspec install jquery'
+  c.example 'Install jQuery 1.3.0 to spec/support/jquery.js', 'jspec install jquery --release 1.3.0'
+  c.example 'Install Prototype to spec/prototype.js', 'jspec install prototype spec'
+  c.example 'Install Prototype to spec/vendor/prototype.js', 'jspec install prototype spec/vendor'
+  c.when_called do |args, options|
+    name = args.shift or raise 'Project name required'
+    project = JSpec::Project.for '.'
+    if dest = args.shift
+      project.install name, :to => dest, :release => options.release
+    else
+      Dir.mkdir project.normalize('support') unless File.directory? project.normalize('support')
+      project.install name, :to => project.normalize('support'), :release => options.release
+    end
+  end
+end
 
 command :init do |c|
   c.syntax = 'jspec init [dest]'
