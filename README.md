@@ -702,20 +702,20 @@ Or for specific usage:
 Lets say you need jQuery for your project, and wish to test against it. You could download
 jQuery manually, use an absolute uri to Google's CDN, or use the following command, which will
 install jQuery to _spec/support/jquery.js_.
-  $ jspec install jquery
+    $ jspec install jquery
   
 Alternatively we may specify the destination path:
-  $ jspec install jquery spec/jquery.js
+    $ jspec install jquery spec/jquery.js
   
 Or provide a specific version string:
-  $ jspec install jquery --release 1.3.1
+    $ jspec install jquery --release 1.3.1
   
 The install command will also install Rhino for you (MacOS only) so you
 can run specs, and js via the command-line.
-  $ jspec install rhino
+    $ jspec install rhino
 
 To view the current projects supported view:
-  $ jspec help install
+    $ jspec help install
   
 ## Rhino
 
