@@ -278,6 +278,24 @@ describe 'Utility'
   end
   
   describe 'puts()'
+    describe 'with primitive scalar values'
+      it 'should output true'
+        puts(true).should.eql 'true'
+      end
+      
+      it 'should output false'
+        puts(false).should.eql 'false'
+      end
+      
+      it 'should output null'
+        puts(null).should.eql 'null'
+      end
+      
+      it 'should output undefined'
+        puts().should.eql 'undefined'
+      end
+    end
+    
     describe 'with strings'
       it 'should output within double quotes'
         puts("string").should.eql '"string"'
@@ -318,11 +336,35 @@ describe 'Utility'
     
     describe 'with hashes'
       it 'should output an object literal'
-        puts({ foo: 'bar' }).should.eql '{ "foo" : "bar" }'
+        puts({ foo: 'bar' }).should.eql '{ foo: "bar" }'
+      end
+      
+      it 'should output nested objects'
+        puts({ foo: { bar: 'baz' }}).should.eql '{ foo: { bar: "baz" } }'
       end
       
       it 'should output empty objects'
-        puts({}).should.eql '{}'
+        puts({}).should.eql '{ }'
+      end
+    end
+    
+    describe 'with an_instance_of'
+      it 'should output an instance of Constructor'
+        object = { an_instance_of: Array }
+        puts(object).should.eql 'an instance of Array'
+      end
+    end
+    
+    describe 'with jQuery'
+      it 'should output selector ".foo bar"'
+        object = { jquery: '1.3.2', selector: '.foo bar' }
+        puts(object).should.eql 'selector ".foo bar"'
+      end
+    end
+    
+    describe 'with elements'
+      it 'should output the outerHTML'
+        puts(document.getElementById('jspec')).should.include '<div id="jspec">'
       end
     end
   end
