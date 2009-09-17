@@ -382,10 +382,16 @@ describe 'Utility'
     end
     
     describe 'circular references'
-      it 'should output <circular reference>'
+      it 'should output <circular reference> with objects'
         object = { a: 1 }
         object.b = object
         puts(object).should.eql '{ a: 1, b: <circular reference> }'
+      end
+      
+      it 'should output <circular reference> with arrays'
+        array = [1,2,3]
+        array[3] = array
+        puts(array).should.eql '[ 1, 2, 3, <circular reference> ]'
       end
     end
   end
