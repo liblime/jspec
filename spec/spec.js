@@ -5,7 +5,7 @@ describe 'Failing specs'
     spec = mock_it(function(){
       'test'.should.not.eql 'test'
     })
-    spec.should.have_failure_message("expected 'test' to not eql 'test'")
+    spec.should.have_failure_message('expected "test" to not eql "test"')
   end
 
   it 'should fail with one faulty assertion'
@@ -13,7 +13,7 @@ describe 'Failing specs'
       'test'.should.equal 'test' 
       'test'.should.equal 'foo'
     })
-    spec.should.have_failure_message("expected 'test' to be 'foo'")
+    spec.should.have_failure_message('expected "test" to be "foo"')
   end
   
   it 'should fail and print array with square braces'
@@ -27,7 +27,7 @@ describe 'Failing specs'
     spec = mock_it(function() {
       [1, ['foo']].should.equal [1, ['bar', ['whatever', 1.0, { foo : 'bar', bar : { 1 : 2 } }]]]
     })
-    spec.should.have_failure_message(/^expected \[\s*1,\s*\[\s*'foo'/)
+    spec.should.have_failure_message(/^expected \[\s*1,\s*\[\s*"foo"/)
   end
   
   it 'should fail with selector for jQuery objects'
@@ -35,14 +35,14 @@ describe 'Failing specs'
       elem = { jquery : '1.3.1', selector : '.foobar' } 
       elem.should.eql 'foo'  
     })
-    spec.should.have_failure_message("expected selector '.foobar' to eql 'foo'")
+    spec.should.have_failure_message('expected selector ".foobar" to eql "foo"')
   end
   
   it 'should fail with negated message'
     spec = mock_it(function(){
       '1'.should.not.be_true
     })
-    spec.should.have_failure_message(/expected '1' to not be true/)
+    spec.should.have_failure_message(/expected "1" to not be true/)
   end
   
   it 'should fail with positive message'
@@ -56,21 +56,21 @@ describe 'Failing specs'
     spec = mock_it(function() {
       -{ throw 'foo' }.should.throw_error 'bar'
     })
-    spec.should.have_failure_message("expected exception of 'bar' to be thrown, but got 'foo'")
+    spec.should.have_failure_message('expected exception of "bar" to be thrown, but got "foo"')
   end
   
   it 'should fail saying no error was thrown'
     spec = mock_it(function() {
       -{ }.should.throw_error 'foo'
     })
-    spec.should.have_failure_message("expected exception of 'foo' to be thrown, but nothing was")
+    spec.should.have_failure_message('expected exception of "foo" to be thrown, but nothing was')
   end
   
   it 'should fail saying no error matching was thrown'
     spec = mock_it(function() {
       -{ throw 'bar' }.should.throw_error(/foo/)
     })
-    spec.should.have_failure_message("expected exception matching /foo/ to be thrown, but got 'bar'")
+    spec.should.have_failure_message('expected exception matching /foo/ to be thrown, but got "bar"')
   end
   
   it 'should fail saying constructors'
@@ -112,14 +112,14 @@ describe 'Failing specs'
       'bar'.should.match(/foo/gm)
       'bar'.should.include 'foo'
     })
-    spec.should.have_failure_message("expected 'bar' to match /foo/gm")
+    spec.should.have_failure_message('expected "bar" to match /foo/gm')
   end
   
   it 'should fail with list'
     spec = mock_it(function() {
       ['foo', 'bar'].should.include 'foo', 'car'
     })
-    spec.should.have_failure_message("expected [ 'foo', 'bar' ] to include 'foo', 'car'")
+    spec.should.have_failure_message('expected [ "foo", "bar" ] to include "foo", "car"')
   end
   
   it 'should catch exceptions throw within specs'

@@ -306,7 +306,7 @@ describe 'Utility'
       end
 
       it 'should output non-printables as \n \t etc'
-        puts("one\ntwo\three").should.eql '"one\\ntwo\\nthree"'
+        puts("\n\t\n\t").should.eql '"\\n\\t\\n\\t"'
       end
     end
     
@@ -386,12 +386,6 @@ describe 'Utility'
         object = { a: 1 }
         object.b = object
         puts(object).should.eql '{ a: 1, b: <circular reference> }'
-      end
-      
-      it 'should output <circular reference> with arrays'
-        array = [1,2,3]
-        array[3] = array
-        puts(array).should.eql '[ 1, 2, 3, <circular reference> ]'
       end
     end
   end
