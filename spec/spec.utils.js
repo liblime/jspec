@@ -276,4 +276,54 @@ describe 'Utility'
       JSpec.paramsFor(function(){}).should.eql []
     end
   end
+  
+  describe 'puts()'
+    describe 'with strings'
+      it 'should output within double quotes'
+        puts("string").should.eql '"string"'
+      end
+
+      it 'should escape double quotes'
+        puts('he said "hey"').should.eql '"he said \\"hey\\""'
+      end
+
+      it 'should output non-printables as \n \t etc'
+        puts("one\ntwo\three").should.eql '"one\\ntwo\\nthree"'
+      end
+    end
+    
+    describe 'with arrays'
+      it 'should output an array literal'
+        puts([1, 2, 3]).should.eql '[ 1, 2, 3 ]'
+      end
+      
+      it 'should output nested arrays'
+        puts([1, 2, [ 1, 2 ]]).should.eql '[ 1, 2, [ 1, 2 ] ]'
+      end
+      
+      it 'should output empty arrays'
+        puts([]).should.eql '[ ]'
+      end
+    end
+    
+    describe 'with regular expressions'
+      it 'should output a regexp literal'
+        puts(/test/).should.eql '/test/'
+      end
+      
+      it 'should output flags as well'
+        puts(/test/gm).should.eql '/test/gm'
+      end
+    end
+    
+    describe 'with hashes'
+      it 'should output an object literal'
+        puts({ foo: 'bar' }).should.eql '{ "foo" : "bar" }'
+      end
+      
+      it 'should output empty objects'
+        puts({}).should.eql '{}'
+      end
+    end
+  end
 end
