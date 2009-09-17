@@ -324,6 +324,19 @@ describe 'Utility'
       end
     end
     
+    describe 'with integers'
+      it 'should output an integer literal'
+        puts(1).should.eql '1'
+        puts(10).should.eql '10'
+      end
+    end
+    
+    describe 'with floats'
+      it 'should output a float literal'
+        puts(1.5).should.eql '1.5'
+      end
+    end
+    
     describe 'with regular expressions'
       it 'should output a regexp literal'
         puts(/test/).should.eql '/test/'
@@ -365,6 +378,14 @@ describe 'Utility'
     describe 'with elements'
       it 'should output the outerHTML'
         puts(document.getElementById('jspec')).should.include '<div id="jspec">'
+      end
+    end
+    
+    describe 'circular references'
+      it 'should output <circular reference>'
+        object = { a: 1 }
+        object.b = object
+        puts(object).should.eql '{ a: 1, b: <circular reference> }'
       end
     end
   end
