@@ -99,7 +99,7 @@ describe 'JSpec'
       
       it 'should not interrupt JSpec request related functionality'
         mockRequest().and_return('fail')
-        (JSpec.tryLoading('async') || JSpec.tryLoading('spec/async')).should.eql 'cookies!'
+        (JSpec.tryLoading('../async') || JSpec.tryLoading('async')).should.eql 'cookies!'
         fixture('test').should.eql '<p>test</p>'
         fixture('test.json').should.include '{ user'
       end
