@@ -245,6 +245,13 @@ module JSpec
           JSpec::Project).new(dest)
     end
     
+    ##
+    # Load all commands at the given _dir_.
+    
+    def self.load_commands_at dir
+      Dir["#{dir}/**/*_command.rb"].each { |file| load file }
+    end
+    
     #--
     # Rails project
     #++

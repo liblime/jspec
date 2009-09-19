@@ -16,6 +16,10 @@ program :version, '2.11.0'
 program :description, 'JavaScript BDD Testing Framework'
 default_command :bind
 
+JSpec::Project.load_commands_at '~/.jspec/commands'
+JSpec::Project.load_commands_at 'spec/commands'
+JSpec::Project.load_commands_at 'jspec/commands'
+
 command :install do |c|
   c.syntax = 'jspec install <project> [dest]'
   c.summary = 'Install a project such as jQuery, Prototype, Rhino, etc.'
