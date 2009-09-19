@@ -9,19 +9,21 @@
 		<script src="../spec.grammar-less.js"></script>
 		<script>
 			function runSuites() {
-				JSpec
-        .exec('../spec.grammar.js')
-        .exec('../spec.js')
-        .exec('../spec.matchers.js')
-        .exec('../spec.utils.js')
-        .exec('../spec.fixtures.js')
-        .exec('../spec.shared-behaviors.js')
-        .exec('../spec.jquery.js')
-        .exec('../spec.modules.js')
-        .exec('../spec.xhr.js')
-        .exec('../spec.jquery.xhr.js')
-				.run({ failuresOnly: true })
-				.report()
+				setTimeout(function(){
+				  JSpec
+          .exec('../spec.grammar.js')
+          .exec('../spec.js')
+          .exec('../spec.matchers.js')
+          .exec('../spec.utils.js')
+          .exec('../spec.fixtures.js')
+          .exec('../spec.shared-behaviors.js')
+          .exec('../spec.jquery.js')
+          .exec('../spec.modules.js')
+          .exec('../spec.xhr.js')
+          .exec('../spec.jquery.xhr.js')
+  				.run({ failuresOnly: true })
+  				.report()
+				}, 4000)
 			}
 		</script>
 	</head>
