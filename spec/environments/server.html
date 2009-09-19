@@ -4,22 +4,22 @@
 		<script src="/jspec/jspec.js"></script>
 		<script src="/jspec/jspec.jquery.js"></script>
 		<script src="/jspec/jspec.xhr.js"></script>
-		<script src="helpers.js"></script>
-		<script src="spec.grammar-less.js"></script>
+		<script src="/spec/helpers.js"></script>
+		<script src="/spec/spec.grammar-less.js"></script>
 		<script>
 			function runSuites() {
 				JSpec
-				.exec('spec.grammar.js')
-				.exec('spec.js')
-				.exec('spec.matchers.js')
-				.exec('spec.utils.js')
-				.exec('spec.fixtures.js')
-				.exec('spec.shared-behaviors.js')
-				.exec('spec.jquery.js')
-				.exec('spec.modules.js')
-				.exec('spec.xhr.js')
-				.exec('spec.jquery.xhr.js')
-				.run({ formatter : JSpec.formatters.Server })
+				.exec('/spec/spec.grammar.js')
+				.exec('/spec/spec.js')
+				.exec('/spec/spec.matchers.js')
+				.exec('/spec/spec.utils.js')
+				.exec('/spec/spec.fixtures.js')
+				.exec('/spec/spec.shared-behaviors.js')
+				.exec('/spec/spec.jquery.js')
+				.exec('/spec/spec.modules.js')
+				.exec('/spec/spec.xhr.js')
+				.exec('/spec/spec.jquery.xhr.js')
+				.run({ formatter: JSpec.formatters.Server })
 				.report()
 			}
 		</script>

@@ -39,7 +39,7 @@ post '/results' do
 end
 
 get '/*' do |path|
-  pass unless File.exists?(path)
+  pass unless File.exists? path
   send_file path
 end
 
