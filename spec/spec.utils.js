@@ -153,14 +153,6 @@ describe 'Utility'
       })
       result.should.eql [1,2,3]
     end
-    
-    it 'should iterate words in a string'
-      result = []
-      each('some foo bar', function(value){
-        result.push(value)
-      })
-      result.should.eql ['some', 'foo', 'bar']
-    end
   end
   
   describe 'map()'
@@ -169,13 +161,6 @@ describe 'Utility'
         return value * 2
       })
       result.should.eql [2,4,6]
-    end
-    
-    it 'should inherit the ability to iterate words in a string'
-      result = map('some foo bar', function(i, value){
-        return i + '-' + value
-      })
-      result.should.eql ['0-some', '1-foo', '2-bar']
     end
   end
   
@@ -204,7 +189,7 @@ describe 'Utility'
     end
     
     it 'should return the value of the first matching expression'
-      result = any('foo some bar', function(value){
+      result = any(['foo', 'some', 'bar'], function(value){
         return value.length > 3
       })
       result.should.eql 'some'
@@ -221,7 +206,7 @@ describe 'Utility'
   
   describe 'select()'
     it 'should return an array of values when the callback evaluates to true'
-      result = select('some foo bar baz stuff', function(value){
+      result = select(['some', 'foo', 'bar', 'baz', 'stuff'], function(value){
         return value.length > 3
       })
       result.should.eql ['some', 'stuff']
