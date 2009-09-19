@@ -9,5 +9,9 @@
 #   c.when_called do |args, options|
 #     p args
 #     p options.__hash__
+#     # options.foo
+#     # options.bar
+#     # options.__hash__[:foo]
+#     # options.__hash__[:bar]
 #   end 
 # end

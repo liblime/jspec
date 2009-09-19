@@ -32,6 +32,7 @@ and **much more**.
 * Proxy or 'Spy' assertions 
 * Method Stubbing
 * Shared behaviors
+* Extend the jspec executable with project / user specific sub-commands.
 * Profiling
 * Interactive Shell
 * Ruby on Rails Integration
@@ -696,6 +697,35 @@ For additional usage execute:
 
 Or for specific usage:
     $ jspec help run
+    
+## Extending JSpec's Executable
+
+Both project specific, and user specific sub-commands may be used to 
+extend those already provided by `jspec`. For example create the following
+in spec/commands/example_command.rb which are loaded when `jspec` is executed.
+
+    command :example do |c|
+      c.syntax = 'jspec example [options]'
+      c.description = 'Just an example command'
+      c.option '-f', '--foo string', 'Does some foo with <string>'
+      c.option '-b', '--bar [string]', 'Does some bar with [string]'
+      c.example 'Do some foo', 'jspec example --foo bar'
+      c.example 'Do some bar', 'jspec example --bar'
+      c.when_called do |args, options|
+        p args
+        p options.__hash__
+        # options.foo
+        # options.bar
+        # options.__hash__[:foo]
+        # options.__hash__[:bar]
+      end 
+    end 
+  
+And execute with:
+
+  `$ jspec example`  
+  
+They may also be placed at ~/jspec/commands for global usage.
     
 ## Installing Support Projects
 
