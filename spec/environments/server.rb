@@ -1,2 +1,2 @@
 
-puts 'Use spec/jspec.rb to alter anything you like, provide routes, browsers, etc'
+puts 'Use environments/server.rb to alter anything you like, provide routes, browser support, etc'
