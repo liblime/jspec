@@ -37,7 +37,7 @@ setTimeout(function(){
   .exec('spec/spec.utils.js')
   .exec('spec/spec.shared-behaviors.js')
   setTimeout(function(){ 
-    JSpec.run({ formatter : JSpec.formatters.Terminal, failuresOnly : false })
+    JSpec.run({ reporter: JSpec.reporters.Terminal, failuresOnly: false })
     setTimeout(function() {
       JSpec.report()
     }, __loadDelay__ / 3)

@@ -23,7 +23,7 @@ and **much more**.
 * Extremely simple and intuitive matcher declaration
 * Over 45 core matchers
 * Allows parens to be optional when using matchers to increase readability
-* Several helpful formatters (DOM, Console, Terminal, ...)
+* Several helpful reporters (DOM, Console, Terminal, ...)
 * Assertion graphs displaying how many, and which assertions pass or failed
 * Default / customizable evaluation contexts
 * DOM sandbox support
@@ -142,7 +142,7 @@ query string, or passing a hash to `run()`. For example
 - failuresOnly 
   - {bool} displays only failing specs, making them quick to discover and fix (DOM, Terminal, Server)
 - reportToId   
-  - {string} an element id to report to when using the DOM formatter (DOM)
+  - {string} an element id to report to when using the DOM reporter (DOM)
 - verbose
   - {bool} verbose server output, defaults to false (Server)
   
@@ -491,16 +491,16 @@ The following expands to the array of [1,2,3,4,5]
 
 ## Formatters
 
-To change a formatter simply alter the options hash like below, assigning
+To change a reporter simply alter the options hash like below, assigning
 a new constructor, or pass it within the hash to `run()`:
 
-    JSpec.options.formatter = JSpec.formatters.Console
+    JSpec.options.reporter = JSpec.reporters.Console
 
 OR
 
     JSpec
     .exec('...')
-    .run({ formatter : JSpec.formatters.Terminal })
+    .run({ reporter: JSpec.reporters.Terminal })
     .report()
 	
 ## Fixtures
@@ -629,7 +629,7 @@ The following methods or properties are utilized by JSpec:
 
   - name       : module name string
   - init       : called to initialize a module
-  - formatters : hash of formatters merged with JSpec.formatters
+  - reporters  : hash of reporters merged with JSpec.reporters
   - utilities  : hash of utility functions merged with JSpec.defaultContext
   - matchers   : hash of matchers merged with JSpec's core matchers via JSpec.addMatchers()
   - DSLs       : hash of DSL methods; for example DSLs.snake contains before_each, after_each, etc.
@@ -726,6 +726,8 @@ And execute with:
   `$ jspec example`  
   
 They may also be placed at ~/jspec/commands for global usage.
+
+For more information on the command creation visit http://visionmedia.github.com/commander
     
 ## Installing Support Projects
 
@@ -749,7 +751,7 @@ To view the current projects supported view:
   
 ## Rhino
 
-JSpec provides transparent support for Rhino, while using the Terminal formatter.
+JSpec provides transparent support for Rhino, while using the Terminal reporter.
 Simply create a JavaScript file with contents similar to below, and then execute
 the command following it:
 
@@ -758,7 +760,7 @@ the command following it:
     JSpec
     .exec('spec/spec.grammar.js')
     .exec('spec/spec.core.js')
-    .run({ formatter : JSpec.formatters.Terminal, failuresOnly : true })
+    .run({ reporter: JSpec.reporters.Terminal, failuresOnly: true })
     .report()
 
 Initialize project with:
@@ -774,7 +776,7 @@ Or bind (automated testing):
 
 The Ruby JavaScript testing server included with JSpec simply runs
 the spec suites within each browser you specify, while reporting result
-back to the terminal. It is essentially the same as using the DOM formatter
+back to the terminal. It is essentially the same as using the DOM reporter
 and auto-testing each browser, however results are centralized to the terminal,
 removing the need to manually view each browser's output.
 
