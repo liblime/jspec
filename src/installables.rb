@@ -64,6 +64,13 @@ module JSpec
       end
       
       ##
+      # Warn that --release is not yet supported.
+      
+      def before
+        warn 'Rhino does not yet support --release' if options[:release]
+      end
+      
+      ##
       # Install
       
       def install
