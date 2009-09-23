@@ -100,6 +100,20 @@ describe "jspec" do
         end
       end
     end
+
+    describe "envjs" do
+      it "should install to spec/support/env.js by default" do
+        Dir.chdir @dest do
+          jspec(:install, 'envjs')
+          File.exists?('spec/support/env.js').should be_true
+        end
+      end
+      
+      it "should install to the destination passed" do
+        jspec(:install, 'envjs', "#{@dest}/spec")
+        File.exists?("#{@dest}/spec/env.js").should be_true
+      end
+    end
     
     describe "dojo" do
       it "should install to spec/support/dojo.js by default" do

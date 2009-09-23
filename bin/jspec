@@ -32,7 +32,8 @@ command :install do |c|
       - prototype
       - mootools
       - dojo
-      - rhino'
+      - envjs (--release not yet supported)
+      - rhino (--release not yet supported)'
   c.option '-r', '--release STRING', 'Release version to install'
   c.example 'Install jQuery to spec/support/jquery.js', 'jspec install jquery'
   c.example 'Install jQuery 1.3.0 to spec/support/jquery.js', 'jspec install jquery --release 1.3.0'

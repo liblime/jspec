@@ -83,10 +83,10 @@ module JSpec
     end
     
     #--
-    # Google lib
+    # URI based installations
     #++
     
-    class GoogleLib < self
+    class URI < self
 
       ##
       # Release specified or the current release.
@@ -136,10 +136,35 @@ module JSpec
     end
     
     #--
+    # Envjs
+    #++
+    
+    class Envjs < URI
+      @name = 'Env.js'
+      @uri = 'http://github.com/thatcher/env-js/raw/master/dist/env.rhino.js'
+      
+      ##
+      # Warn that --release is not yet supported.
+      
+      def release
+        warn 'Envjs does not yet support --release' if options[:release]
+        'edge'
+      end
+      
+      ##
+      # Installation path.
+      
+      def path
+        options[:to] + '/env.js'
+      end
+      
+    end
+    
+    #--
     # jQuery
     #++
     
-    class Jquery < GoogleLib
+    class Jquery < URI
       @name = 'jQuery'
       @current = '1.3.2'
       @uri = 'http://ajax.googleapis.com/ajax/libs/jquery/RELEASE/jquery.js'
@@ -149,7 +174,7 @@ module JSpec
     # jQuery UI.
     #++
     
-    class Jqueryui < GoogleLib
+    class Jqueryui < URI
       @name = 'jQuery UI'
       @current = '1.7.2'
       @uri = 'http://ajax.googleapis.com/ajax/libs/jqueryui/RELEASE/jquery-ui.js'
@@ -159,7 +184,7 @@ module JSpec
     # Prototype
     #++
     
-    class Prototype < GoogleLib
+    class Prototype < URI
       @name = 'Prototype'
       @current = '1.6.1.0'
       @uri = 'http://ajax.googleapis.com/ajax/libs/prototype/RELEASE/prototype.js'
@@ -169,7 +194,7 @@ module JSpec
     # MooTools
     #++
     
-    class Mootools < GoogleLib
+    class Mootools < URI
       @name = 'MooTools'
       @current = '1.2.3'
       @uri = 'http://ajax.googleapis.com/ajax/libs/mootools/RELEASE/mootools.js'
@@ -179,7 +204,7 @@ module JSpec
     # Dojo
     #++
     
-    class Dojo < GoogleLib
+    class Dojo < URI
       @name = 'Dojo'
       @current = '1.3.2'
       @uri = 'http://ajax.googleapis.com/ajax/libs/dojo/RELEASE/dojo/dojo.xd.js.uncompressed.js'
