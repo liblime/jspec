@@ -25,7 +25,7 @@ command :stats do |c|
   c.summary = 'View statistics'
   c.description = 'View statistics for the given [paths], defaulting to /lib'
   c.when_called do |args, options|
-    Dir['lib/**/*.js'].each do |file|
+    Dir['lib/**/*.js'].sort_by { |path| path.length }.each do |file|
       contents = File.read file
       # TODO: SLOC / etc
       say "%25s : \n" % file
