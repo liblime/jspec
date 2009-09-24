@@ -27,8 +27,7 @@ command :stats do |c|
   c.when_called do |args, options|
     Dir['lib/**/*.js'].sort_by { |path| path.length }.each do |file|
       contents = File.read file
-      # TODO: SLOC / etc
-      say "%25s : \n" % file
+      say "%33s : \n" % $terminal.color(file, :bold)
       say "%25s : %d KiB\n" % ['size', File.size(file) / 1024] 
       say "%25s : %d\n" % ['lines', contents.scan(/\n/).length] 
       say "%25s : %d\n" % ['comments', contents.scan(/\/\*.*?\*\/|\/\/.*?$/m).length] 
