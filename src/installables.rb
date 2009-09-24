@@ -137,7 +137,27 @@ module JSpec
       #++
       
       class << self
-        attr_accessor :name, :uri, :current
+        
+        ##
+        # Human readable name.
+        
+        def name string = nil
+          string ? @name = string : @name
+        end
+        
+        ##
+        # Current release _string_.
+        
+        def current string = nil
+          string ? @current = string : @current
+        end
+        
+        ##
+        # Installable uri _string_. use RELEASE as the release placeholder.
+        
+        def uri string = nil
+          string ? @uri = string : @uri
+        end
       end
 
     end
@@ -147,8 +167,8 @@ module JSpec
     #++
     
     class Envjs < URI
-      @name = 'Env.js'
-      @uri = 'http://github.com/thatcher/env-js/raw/master/dist/env.rhino.js'
+      name 'Env.js'
+      uri 'http://github.com/thatcher/env-js/raw/master/dist/env.rhino.js'
       
       ##
       # Warn that --release is not yet supported.
@@ -172,9 +192,9 @@ module JSpec
     #++
     
     class Jquery < URI
-      @name = 'jQuery'
-      @current = '1.3.2'
-      @uri = 'http://ajax.googleapis.com/ajax/libs/jquery/RELEASE/jquery.js'
+      name 'jQuery'
+      current '1.3.2'
+      uri 'http://ajax.googleapis.com/ajax/libs/jquery/RELEASE/jquery.js'
     end
     
     #--
@@ -182,9 +202,9 @@ module JSpec
     #++
     
     class Jqueryui < URI
-      @name = 'jQuery UI'
-      @current = '1.7.2'
-      @uri = 'http://ajax.googleapis.com/ajax/libs/jqueryui/RELEASE/jquery-ui.js'
+      name 'jQuery UI'
+      current '1.7.2'
+      uri 'http://ajax.googleapis.com/ajax/libs/jqueryui/RELEASE/jquery-ui.js'
     end
     
     #--
@@ -192,9 +212,9 @@ module JSpec
     #++
     
     class Prototype < URI
-      @name = 'Prototype'
-      @current = '1.6.1.0'
-      @uri = 'http://ajax.googleapis.com/ajax/libs/prototype/RELEASE/prototype.js'
+      name 'Prototype'
+      current '1.6.1.0'
+      uri 'http://ajax.googleapis.com/ajax/libs/prototype/RELEASE/prototype.js'
     end
     
     #--
@@ -202,9 +222,9 @@ module JSpec
     #++
     
     class Mootools < URI
-      @name = 'MooTools'
-      @current = '1.2.3'
-      @uri = 'http://ajax.googleapis.com/ajax/libs/mootools/RELEASE/mootools.js'
+      name 'MooTools'
+      current '1.2.3'
+      uri 'http://ajax.googleapis.com/ajax/libs/mootools/RELEASE/mootools.js'
     end
     
     #--
@@ -212,9 +232,9 @@ module JSpec
     #++
     
     class Dojo < URI
-      @name = 'Dojo'
-      @current = '1.3.2'
-      @uri = 'http://ajax.googleapis.com/ajax/libs/dojo/RELEASE/dojo/dojo.xd.js.uncompressed.js'
+      name 'Dojo'
+      current '1.3.2'
+      uri 'http://ajax.googleapis.com/ajax/libs/dojo/RELEASE/dojo/dojo.xd.js.uncompressed.js'
     end
     
   end
