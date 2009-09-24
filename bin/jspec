@@ -20,6 +20,24 @@ JSpec::Project.load_commands_at '~/.jspec/commands'
 JSpec::Project.load_commands_at 'spec/commands'
 JSpec::Project.load_commands_at 'jspec/commands'
 
+command :stats do |c|
+  c.syntax = 'jspec stats [path ...]'
+  c.summary = 'View statistics'
+  c.description = 'View statistics for the given [paths], defaulting to /lib'
+  c.when_called do |args, options|
+    Dir['lib/**/*.js'].each do |file|
+      contents = File.read file
+      # TODO: SLOC / etc
+      say "%25s : \n" % file
+      say "%25s : %d KiB\n" % ['size', File.size(file) / 1024] 
+      say "%25s : %d\n" % ['lines', contents.scan(/\n/).length] 
+      say "%25s : %d\n" % ['closures', contents.scan(/function/).length] 
+      say "%25s : %d\n" % ['defined variables', contents.scan(/\bvar\b/).length]
+      say "\n"
+    end
+  end
+end
+
 command :install do |c|
   c.syntax = 'jspec install <project> [dest]'
   c.summary = 'Install a project such as jQuery, Prototype, Rhino, etc.'

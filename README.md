@@ -37,7 +37,7 @@ and **much more**.
 * Interactive Shell
 * Ruby on Rails Integration
 * Install support projects with a single command (jQuery, Rhino, Prototype, Dojo, etc)
-* Tiny (15 kb compressed, 1300-ish LOC)
+* Tiny (18 kb compressed, 1500-ish LOC)
 
 ## Installation
 
