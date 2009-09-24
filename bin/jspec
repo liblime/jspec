@@ -28,10 +28,10 @@ command :stats do |c|
     Dir['lib/**/*.js'].sort_by { |path| path.length }.each do |file|
       contents = File.read file
       say "%33s : \n" % $terminal.color(file, :bold)
-      say "%25s : %d KiB\n" % ['size', File.size(file) / 1024] 
-      say "%25s : %d\n" % ['lines', contents.scan(/\n/).length] 
+      say "%25s : %0.2f KiB\n" % ['size', File.size(file).to_f / 1024] 
+      say "%25s : %d\n" % ['lines', contents.to_a.length] 
       say "%25s : %d\n" % ['comments', contents.scan(/\/\*.*?\*\/|\/\/.*?$/m).length] 
-      say "%25s : %d\n" % ['functions', contents.scan(/function/).length] 
+      say "%25s : %d\n" % ['functions', contents.scan(/function/i).length] 
       say "%25s : %d\n" % ['vars', contents.scan(/\bvar\b/).length]
       say "\n"
     end
