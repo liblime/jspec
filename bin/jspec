@@ -22,13 +22,16 @@ JSpec::Project.load_commands_at 'jspec/commands'
 
 command :stats do |c|
   c.syntax = 'jspec stats [path ...]'
-  c.summary = 'View statistics'
-  c.description = 'View statistics for the given [paths], defaulting to /lib'
-  c.when_called do |args, options|
-    Dir['lib/**/*.js'].sort_by { |path| path.length }.each do |file|
-      contents = File.read file
-      say "%33s : \n" % $terminal.color(file, :bold)
-      say "%25s : %0.2f KiB\n" % ['size', File.size(file).to_f / 1024] 
+  c.summary = 'View javascript source statistics'
+  c.description = 'View statistics for the given [paths], defaulting to /lib/**/*.js'
+  c.example 'View stats for all /lib javascript', 'jspec stats'
+  c.example 'View stats for all /public/javascript files', 'jspec stats public/javascript/*.js'
+  c.when_called do |paths, options|
+    paths = Dir['lib/**/*.js'] if paths.empty?
+    paths.each do |path|
+      contents = File.read path
+      say "%33s : \n" % $terminal.color(path, :bold)
+      say "%25s : %0.2f KiB\n" % ['size', File.size(path).to_f / 1024] 
       say "%25s : %d\n" % ['lines', contents.to_a.length] 
       say "%25s : %d\n" % ['comments', contents.scan(/\/\*.*?\*\/|\/\/.*?$/m).length] 
       say "%25s : %d\n" % ['functions', contents.scan(/function/i).length] 
