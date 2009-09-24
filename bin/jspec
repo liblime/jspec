@@ -31,8 +31,8 @@ command :stats do |c|
       say "%25s : %d KiB\n" % ['size', File.size(file) / 1024] 
       say "%25s : %d\n" % ['lines', contents.scan(/\n/).length] 
       say "%25s : %d\n" % ['comments', contents.scan(/\/\*.*?\*\/|\/\/.*?$/m).length] 
-      say "%25s : %d\n" % ['closures', contents.scan(/function/).length] 
-      say "%25s : %d\n" % ['defined variables', contents.scan(/\bvar\b/).length]
+      say "%25s : %d\n" % ['functions', contents.scan(/function/).length] 
+      say "%25s : %d\n" % ['vars', contents.scan(/\bvar\b/).length]
       say "\n"
     end
   end
