@@ -331,10 +331,13 @@ on any object when using the JSpec grammar:
 
     - an_instance_of
       - used in conjunction with the 'receive' matcher
-    - mockRequest, mock_request
-      - mock a request (requires jspec.xhr.js)
-    - unmockRequest, unmock_request
-      - unmock requests (requests jspec.xhr.js)
+    - jspec.xhr.js
+      - mockRequest, mock_request
+        - mock a request
+      - unmockRequest, unmock_request
+        - unmock requests 
+      - lastRequest, last_request
+        - access previous request data 
                 
   * jQuery      
                 
