@@ -562,7 +562,7 @@ First lets create a simple equality matcher. In the case below JSpec is smart en
 this is simply a binary operator, and simply transforms this into `actual === expected`
 
     JSpec.addMatchers({
-      equal : '##='
+      equal : '==='
     })
 
 To alias a method to keep your specs readable you may alias them like below:
@@ -578,7 +578,7 @@ Matchers with string bodies implicitly return the expression value.
 The expanded version of the equal matcher would then be:
 
     JSpec.addMatchers({
-      equal : 'actual ##= expected'
+      equal : 'actual === expected'
     })
 
 Large matchers or those which require several parameters may wish
@@ -586,7 +586,7 @@ to utilize the hash method:
 
     JSpec.addMatchers({
       equal : { match : function(actual, expected){
-        return actual ##= expected
+        return actual === expected
       }}  
     })
 
@@ -596,7 +596,7 @@ for you, how ever this can be explicitly defined:
     JSpec.addMatchers({
       equal : { 
         match : function(actual, expected){
-          return actual ##= expected
+          return actual === expected
         },
         message : function(actual, expected, negate) {
           return 'a message here'
