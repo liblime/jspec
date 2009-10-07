@@ -1,6 +1,6 @@
 
 describe 'JSpec'
-  describe 'Mock XHR'
+  describe 'Mock XMLHttpRequest'
     before
       responseFrom = function(path) {
         request = new XMLHttpRequest
@@ -27,7 +27,16 @@ describe 'JSpec'
       XMLHttpRequest.should.not.eql JSpec.XMLHttpRequest
     end
     
-    describe 'mock response'
+    describe 'last_request()'
+      it 'should provide access to the previous request'
+        mock_request().and_return('foo')
+        responseFrom('async')
+        last_request().url.should.eql 'async'
+        last_request().status.should.eql 200
+      end
+    end
+    
+    describe 'mock_request()'
       before_each
         mockRequest().and_return('bar', 'text/plain', 200, { 'x-foo' : 'bar' })
         request = new XMLHttpRequest
@@ -146,7 +155,8 @@ describe 'JSpec'
       
       describe 'with uri'
         it 'should mock only the uri specified'
-          mockRequest('ilike').and_return('cookies')
+          mockRequest('ilike').and_return('something')
+          responseFrom('ilike').should.eql 'something'
           responseFrom('async').should.eql 'cookies'
         end
       end
