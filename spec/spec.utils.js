@@ -362,7 +362,7 @@ describe 'Utility'
     
     describe 'with elements'
       it 'should output the outerHTML'
-        puts(document.getElementById('jspec')).should.include '<div id="jspec">'
+        puts(document.getElementById('jspec')).should.match(/<div id="jspec">/i)
       end
     end
     
