@@ -327,19 +327,20 @@ on any object when using the JSpec grammar:
 
 ## Helpers
 
-  * Core
+  * core
 
     - an_instance_of
       - used in conjunction with the 'receive' matcher
-    - jspec.xhr.js
-      - mockRequest, mock_request
-        - mock a request
-      - unmockRequest, unmock_request
-        - unmock requests 
-      - lastRequest, last_request
-        - access previous request data 
+      
+  * jspec.xhr.js
+    - mockRequest, mock_request
+      - mock a request
+    - unmockRequest, unmock_request
+      - unmock requests 
+    - lastRequest, last_request
+      - access previous request data 
                 
-  * jQuery      
+  * jspec.jquery.js      
                 
     - sandbox
       - used to generate new DOM sandbox, using jQuery object
