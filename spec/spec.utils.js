@@ -219,14 +219,14 @@ describe 'Utility'
     end
   end
   
-  describe 'argumentsToArray()'
-    it 'should return an array of arguments'
-      func = function(){ return argumentsToArray(arguments) }
+  describe 'toArray()'
+    it 'should convert an arraylike object to an array'
+      func = function(){ return toArray(arguments) }
       func('foo', 'bar').should.eql ['foo', 'bar']
     end
     
-    it 'should return the offset of an arguments array'
-      func = function(){ return argumentsToArray(arguments, 2) }
+    it 'should allow a slice offset'
+      func = function(){ return toArray(arguments, 2) }
       func('foo', 'bar', 'baz').should.eql ['baz']
     end
   end
