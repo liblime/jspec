@@ -8,36 +8,36 @@ and **much more**.
 
 ## Features
 
-* Highly readable
-* Framework / DOM independent
-* Modular via JSpec Module's and hooks
-* Mock Ajax Requests
-* Rhino support
-* Node.js support
-* Async support
-* Fixture support
-* Ruby JavaScript testing server
-* Nested describes
-* Does not pollute core object prototypes
-* Cascading before/after/before_each/after_each hooks
-* Extremely simple and intuitive matcher declaration
-* Over 45 core matchers
-* Allows parens to be optional when using matchers to increase readability
-* Several helpful reporters (DOM, Console, Terminal, ...)
-* Assertion graphs displaying how many, and which assertions pass or failed
-* Default / customizable evaluation contexts
-* DOM sandbox support
-* Great looking default DOM theme
-* `jspec` command-line utility for auto-running specs, and initializing project templates
-* Proxy or 'Spy' assertions 
-* Method Stubbing
-* Shared behaviors
-* Extend the jspec executable with project / user specific sub-commands.
-* Profiling
-* Interactive Shell
-* Ruby on Rails Integration
-* Install support projects with a single command (jQuery, Rhino, Prototype, Dojo, etc)
-* Tiny (18 kb compressed, 1500-ish LOC)
+  * Highly readable
+  * Framework / DOM independent
+  * Modular via JSpec Module's and hooks
+  * Mock Ajax Requests
+  * Rhino support
+  * Node.js support
+  * Async support
+  * Fixture support
+  * Ruby JavaScript testing server
+  * Nested describes
+  * Does not pollute core object prototypes
+  * Cascading before/after/before_each/after_each hooks
+  * Extremely simple and intuitive matcher declaration
+  * Over 45 core matchers
+  * Allows parens to be optional when using matchers to increase readability
+  * Several helpful reporters (DOM, Console, Terminal, ...)
+  * Assertion graphs displaying how many, and which assertions pass or failed
+  * Default / customizable evaluation contexts
+  * DOM sandbox support
+  * Great looking default DOM theme
+  * `jspec` command-line utility for auto-running specs, and initializing project templates
+  * Proxy or 'Spy' assertions 
+  * Method Stubbing
+  * Shared behaviors
+  * Extend the jspec executable with project / user specific sub-commands.
+  * Profiling
+  * Interactive Shell
+  * Ruby on Rails Integration
+  * Install support projects with a single command (jQuery, Rhino, Prototype, Dojo, etc)
+  * Tiny (18 kb compressed, 1500-ish LOC)
 
 ## Installation
 
