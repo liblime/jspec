@@ -156,7 +156,7 @@ module JSpec
         ['environments/dom.html', 'environments/rhino.js'].each do |path|
           path = normalize path
           next unless File.exists? path
-          contents = File.read(path).gsub /visionmedia-jspec-(\d+\.\d+\.\d+)/, "visionmedia-jspec-#{program(:version)}"
+          contents = File.read(path).gsub /jspec-(\d+\.\d+\.\d+)/, "jspec-#{program(:version)}"
           if program(:version) == $1
             say "skipping #{path}; already #{$1}"
             next
