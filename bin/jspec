@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
-JSPEC_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+JSPEC_ROOT = File.expand_path File.join(File.dirname(__FILE__), '..')
 $:.unshift JSPEC_ROOT
 
 require 'rubygems'
-require 'commander'
+require 'commander/import'
 require 'bind'
 require 'fileutils'
 require 'src/project'
