@@ -244,24 +244,6 @@ describe 'Utility'
     end
   end
   
-  describe 'paramsFor()'
-    it 'should return an array of function parameter names'
-      JSpec.paramsFor(function(foo, bar){}).should.eql ['foo', 'bar']
-    end
-    
-    it 'should return only the params for the root function'
-      foo = function(bar){
-        function baz(test) {}
-        var something = function(foo, bar){}
-      }
-      JSpec.paramsFor(foo).should.eql ['bar']
-    end
-    
-    it 'should return empty array when no params are present'
-      JSpec.paramsFor(function(){}).should.eql []
-    end
-  end
-  
   describe 'puts()'
     describe 'with primitive scalar values'
       it 'should output true'
