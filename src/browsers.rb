@@ -158,7 +158,7 @@ class Browser
     end
     
     def visit uri
-      system "open -g -a Chromium #{uri}" if macos?
+      system "open -g -a Google\ Chrome #{uri}" if macos?
     end
     
     def to_s
