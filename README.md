@@ -913,7 +913,7 @@ JSpec more enjoyable, and bug free ;)
 - Lawrence Pit
 - mpd@jesters-court.ne
 - kevin.gisi@gmail.com
-- tttubbs@dstsystems.com
+- tony_t_tubbs@yahoo.com
 - enno84@gmx.net
 - fnando
 
