@@ -34,14 +34,10 @@ JSpec.include({
   randomHook : function(a, b) {
     return [a, b]
   },
-  beforeSpec  : function() { addedBeforeSpec  = true; doFoo()  },
+  beforeSpec  : function() { addedBeforeSpec  = true; this.utilities.doFoo()  },
   afterSpec   : function() { addedAfterSpec   = true  },
   beforeSuite : function() { addedBeforeSuite = true  },
   afterSuite  : function() { addedAfterSuite  = true  },
-  checkJSpecContext : function(){ return each },
-  checkContext : function() { return fixture('test') },
-  checkModuleContext : function() { return this.name },
-  checkUtilityContext : function() { return doFoo() },
   matchers : {
     be_foo_bar : function() {
       return true
