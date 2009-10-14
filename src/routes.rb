@@ -4,7 +4,7 @@ get '/jspec/*' do |path|
 end
 
 post '/results' do
-  require 'json'
+  require 'json/pure'
   data = JSON.parse request.body.read
   if data['options'].include?('verbose') && data['options']['verbose'] ||
      data['options'].include?('failuresOnly') && data['options']['failuresOnly']
