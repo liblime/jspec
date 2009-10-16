@@ -336,15 +336,19 @@ describe 'Utility'
     end
     
     describe 'with jQuery'
-      it 'should output selector ".foo bar"'
+      it 'should output selector when present'
         object = { jquery: '1.3.2', selector: '.foo bar' }
         puts(object).should.eql 'selector ".foo bar"'
+      end
+      
+      it 'should output outerHTML otherwise'
+        puts($('<p>Foo</p>')).should.match(/<p>Foo<\/p>/i)
       end
     end
     
     describe 'with elements'
       it 'should output the outerHTML'
-        puts(document.getElementById('jspec')).should.match(/<div id="jspec">/i)
+        puts($('<p>Foo</p>').get(0)).should.match(/<p>Foo<\/p>/i)
       end
     end
     
