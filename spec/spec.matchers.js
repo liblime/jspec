@@ -279,15 +279,6 @@ describe 'Matchers'
     end
   end
   
-  describe 'be_within'
-    it 'should check that an object has within n..n of a property'
-      person = { pets : ['izzy', 'niko'] }
-      person.should.have_within 1..2, 'pets'
-      person.should.have_within 2..5, 'pets'
-      person.should.not.have_within 5..10, 'pets'
-    end
-  end
-  
   describe 'receive'
     before_each
       person = { toString : function(){ return 'person' }}

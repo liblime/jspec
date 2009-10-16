@@ -88,7 +88,7 @@ describe 'jQuery'
     
     describe 'have_text'
       it 'should check for plain text'
-        elem.children('label').should.have_text 'Save?'
+        $('label', elem).should.have_text 'Save?'
       end
     end
     
@@ -100,15 +100,15 @@ describe 'jQuery'
 
     describe 'have_class'
       it 'should check if an element has the given class'
-        elem.children('select').should.have_class 'save'
+        $('select', elem).should.have_class 'save'
       end
     end
     
     describe 'have_classes'
       it 'should check if an element has the classes given'
-        elem.children('select').should.have_classes 'save', 'form-select'
-        elem.children('select').should.not.have_classes 'save', 'foo'
-        elem.children('select').should.not.have_classes 'foo', 'save'
+        $('select', elem).should.have_classes 'save', 'form-select'
+        $('select', elem).should.not.have_classes 'save', 'foo'
+        $('select', elem).should.not.have_classes 'foo', 'save'
       end
     end
 

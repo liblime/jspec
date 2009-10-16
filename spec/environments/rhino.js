@@ -19,5 +19,5 @@ JSpec
 .exec('spec/spec.modules.js')
 .exec('spec/spec.xhr.js')
 .exec('spec/spec.jquery.xhr.js')
-.run({ reporter: JSpec.reporters.Terminal, failuresOnly: false })
+.run({ reporter: JSpec.reporters.Terminal, failuresOnly: true })
 .report()
