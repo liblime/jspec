@@ -876,9 +876,6 @@ your _spec/server.rb_ file may support additional browsers.
   
 ## Known Issues
 
-- **Tabs may cause a parse error**. To prevent this use **'soft tabs'** (setting in your IDE/Editor)
-  or use JSpec's grammar-less alternative (mentioned above).
-  
 - The preprocessor is not (yet) capable of multiline conversions. For example the following is invalid
   
     object.stub('getContentsOfURL').and_return(function(url){
