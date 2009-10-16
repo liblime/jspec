@@ -106,6 +106,22 @@ describe 'Grammar'
     'bar'.should.not.equal 'foo'
   end
   
+	describe 'with tabs'
+		before_each
+			foo = 'bar'
+		end
+		
+		it 'should work'
+		  foo.should.eql 'bar'
+		end
+		
+	  it 'should work'
+		  true.should.be	true
+		  true.should.be(true)
+		  true.should.be(true);
+		end
+	end
+  
   describe 'with nested describe'
     it 'should work'
       true.should.be_true
