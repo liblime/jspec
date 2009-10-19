@@ -208,7 +208,7 @@ module JSpec
       case
       when options.include?(:rhino)
         path ||= normalize('environments/rhino.js')
-        action = lambda { rhino path }
+        action = lambda { exit rhino(path) }
       when options.include?(:server)
         raise 'Cannot use --bind with --server' if options.include? :bind
         path ||= normalize('environments/server.html')
