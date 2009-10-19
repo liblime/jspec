@@ -908,10 +908,11 @@ the following developers, thankyou for making
 JSpec more enjoyable, and bug free ;)
 
 - Lawrence Pit
-- mpd@jesters-court.ne
-- kevin.gisi@gmail.com
-- tony_t_tubbs@yahoo.com
-- enno84@gmx.net
+- (mpd@jesters-court.ne)[mpd@jesters-court.ne]
+- (Sarah Brown)[brown.sarah.v@gmail.com]
+- (kevin.gisi@gmail.com)[kevin.gisi@gmail.com]
+- (tony_t_tubbs@yahoo.com)[tony_t_tubbs@yahoo.com]
+- (enno84@gmx.net)[enno84@gmx.net]
 - fnando
 
 ## License 
