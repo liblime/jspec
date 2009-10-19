@@ -900,6 +900,7 @@ your _spec/server.rb_ file may support additional browsers.
 - Get the TextMate bundle at [https://github.com/visionmedia/jspec.tmbundle/tree](https://github.com/visionmedia/jspec.tmbundle/tree)
 - For more information consult the JSpec source code documentation or visit [http://visionmedia.github.com/jspec](http://visionmedia.github.com/jspec)
 - jQuery + HTML fixture example [http://gist.github.com/147831](http://gist.github.com/147831)
+- (Twitter)[http://twitter.com/tjholowaychuk]
 
 ## Contributors
 
