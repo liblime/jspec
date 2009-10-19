@@ -900,20 +900,22 @@ your _spec/server.rb_ file may support additional browsers.
 - Get the TextMate bundle at [https://github.com/visionmedia/jspec.tmbundle/tree](https://github.com/visionmedia/jspec.tmbundle/tree)
 - For more information consult the JSpec source code documentation or visit [http://visionmedia.github.com/jspec](http://visionmedia.github.com/jspec)
 - jQuery + HTML fixture example [http://gist.github.com/147831](http://gist.github.com/147831)
-- (Twitter)[http://twitter.com/tjholowaychuk]
+- [http://twitter.com/tjholowaychuk](Twitter)
 
 ## Contributors
 
 Many ideas and bug reports were contributed by
 the following developers, thankyou for making
-JSpec more enjoyable, and bug free ;)
+JSpec more enjoyable, and bug free. If I have 
+missed you on this list please let me know 
+(aka the fellow who donated [jspec.info](http://jspec.info))
 
 - Lawrence Pit
-- (mpd@jesters-court.ne)[mpd@jesters-court.ne]
-- (Sarah Brown)[brown.sarah.v@gmail.com]
-- (kevin.gisi@gmail.com)[kevin.gisi@gmail.com]
-- (tony_t_tubbs@yahoo.com)[tony_t_tubbs@yahoo.com]
-- (enno84@gmx.net)[enno84@gmx.net]
+- [mpd@jesters-court.ne](mpd@jesters-court.ne)
+- [Sarah Brown](brown.sarah.v@gmail.com)
+- [kevin.gisi@gmail.com](kevin.gisi@gmail.com)
+- [tony_t_tubbs@yahoo.com](tony_t_tubbs@yahoo.com)
+- [enno84@gmx.net](enno84@gmx.net)
 - fnando
 
 ## License 
