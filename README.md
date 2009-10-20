@@ -460,7 +460,7 @@ requests to sync, which preserves execution order, and reports correctly.
       })
     end
 
-## Pre-processor
+## Grammer Pre-processor
 
 The pre-processing capability of JSpec is extremely powerful. Your JavaScript
 code is not necessarily what it seems. For example when you seemingly invoke a
@@ -497,6 +497,15 @@ These are equivalent:
 The following expands to the array of [1,2,3,4,5]
 
     n.should.be_within 1..5
+    
+### __END__
+
+Any text placed after **__END__** is considered irrelevant and
+is striped out before evaluation. This is sometimes useful for
+document or code reference while writing specs. 
+
+For example when writting regression specs it is sometimes useful
+to paste the issue ticket's comment(s) below this area for reference. 
 
 ## Formatters
 
