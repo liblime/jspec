@@ -232,3 +232,10 @@ describe 'Grammar'
   end
   
 end
+
+__END__
+
+this should not matter because it is
+considered a comment by the JSpec grammar :)
+and is sometimes useful for temp reference info 
+when writting specs.
