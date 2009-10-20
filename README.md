@@ -15,6 +15,7 @@ and **much more**.
   * Rhino support
   * Node.js support
   * Async support
+  * Growl (unobtrustive notifications) support
   * Fixture support
   * Ruby JavaScript testing server
   * Nested describes
@@ -235,6 +236,12 @@ query string, or passing a hash to `run()`. For example
  - be_disabled
  - be_selected
  - be_checked
+ 
+## Growl Support
+
+JSpec uses the [JavaScript Growl](http://github.com/visionmedia/js-growl) library to provide
+growl support when using the **Rhino JavaScript engine**. To enable simply `load()` _jspec.growl.js_
+within _spec/environments/rhino.js_
   
 ## Async Support With Mock Timers
 
