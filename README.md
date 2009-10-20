@@ -894,6 +894,7 @@ your _spec/server.rb_ file may support additional browsers.
   
 ## More Information
 
+- [Google Group](http://groups.google.com/group/jspec)
 - IRC Channel [irc://irc.freenode.net#jspec](irc://irc.freenode.net#jspec)
 - Featured article in JSMag [http://www.jsmag.com/main.issues.description/id=21/](http://www.jsmag.com/main.issues.description/id=21/)
 - Syntax comparison with other frameworks [http://gist.github.com/92283](http://gist.github.com/92283)
