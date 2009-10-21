@@ -39,6 +39,16 @@ and **much more**.
   * Ruby on Rails Integration
   * Install support projects with a single command (jQuery, Rhino, Prototype, Dojo, etc)
   * Tiny (18 kb compressed, 1500-ish LOC)
+  
+## Companies Using JSpec
+
+To add or request removal from this list please email tj@vision-media.ca
+
+  * [Apple](http://apple.com)
+  * [Google - YouTube](http://youtube.com)
+  * [Palm](http://palm.com)
+  * [Carfax](http://carfax.com)
+  * [Vision Media](http://vision-media.ca)
 
 ## Installation
 
