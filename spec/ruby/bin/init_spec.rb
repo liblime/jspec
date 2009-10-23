@@ -67,5 +67,50 @@ describe "jspec" do
       File.directory?(@dest + '/jspec/lib').should be_true
       File.exists?(@dest + '/jspec/lib/jspec.js').should be_true
     end
+    
+    it "should set jspec's DOM root to jspec's gem directory" do
+      jspec(:init, @dest)
+      File.read(@dest + '/spec/environments/dom.html').should include('src="/')
+    end
+    
+    it "should set jspec's DOM root to ../lib/ when using --freeze" do
+      jspec(:init, @dest, '--freeze')
+      File.read(@dest + '/spec/environments/dom.html').should include('src="../lib/jspec.js')
+    end
+    
+    it "should set jspec's DOM root to ../lib/ when using --symlink" do
+      jspec(:init, @dest, '--symlink')
+      File.read(@dest + '/spec/environments/dom.html').should include('src="../lib/jspec.js')
+    end
+    
+    it "should set jspec's Rhino root to jspec's gem directory" do
+      jspec(:init, @dest)
+      File.read(@dest + '/spec/environments/rhino.js').should_not include("load('./spec/lib/jspec.js')")
+    end
+    
+    it "should set jspec's Rhino root to ./spec/lib/ when using --freeze" do
+      jspec(:init, @dest, '--freeze')
+      File.read(@dest + '/spec/environments/rhino.js').should include("load('./spec/lib/jspec.js')")
+    end
+    
+    it "should set jspec's Rhino root to ./spec/lib/ when using --symlink" do
+      jspec(:init, @dest, '--symlink')
+      File.read(@dest + '/spec/environments/rhino.js').should include("load('./spec/lib/jspec.js')")
+    end
+    
+    it "should set jspec's Server root to jspec's gem directory" do
+      jspec(:init, @dest)
+      File.read(@dest + '/spec/environments/server.html').should include('src="/')
+    end
+    
+    it "should set jspec's Server root to ../lib/ when using --freeze" do
+      jspec(:init, @dest, '--freeze')
+      File.read(@dest + '/spec/environments/server.html').should include('src="../lib/jspec.js')
+    end
+    
+    it "should set jspec's Server root to ../lib/ when using --symlink" do
+      jspec(:init, @dest, '--symlink')
+      File.read(@dest + '/spec/environments/server.html').should include('src="../lib/jspec.js')
+    end
   end
 end
