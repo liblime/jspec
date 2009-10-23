@@ -8,7 +8,7 @@
 			function runSuites() {
 				JSpec
 				.exec('spec.js')
-				.run({ formatter: JSpec.formatters.Server, verbose: true, failuresOnly: true })
+				.run({ reporter: JSpec.reporters.Server, verbose: true, failuresOnly: true })
 				.report()
 			}
 		</script>

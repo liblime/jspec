@@ -5,5 +5,5 @@ load('public/javascripts/application.js')
 
 JSpec
 .exec('spec/spec.js')
-.run({ formatter: JSpec.formatters.Terminal })
+.run({ reporter: JSpec.reporters.Terminal })
 .report()
