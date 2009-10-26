@@ -14,5 +14,10 @@ describe 'Utility'
       fixture('test').should.eql 'foo'
       delete JSpec.cache['test']
     end
+
+		it 'should fail a few times'
+		  true.should.be false
+		  false.should.be true
+		end
   end
 end
