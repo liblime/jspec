@@ -5,5 +5,5 @@ load('public/javascripts/application.js')
 
 JSpec
 .exec('spec/spec.js')
-.run({ reporter: JSpec.reporters.Terminal })
+.run({ reporter: JSpec.reporters.Terminal, fixturePath: 'jspec/fixtures' })
 .report()

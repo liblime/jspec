@@ -20,7 +20,7 @@
         .exec('../spec.modules.js')
         .exec('../spec.xhr.js')
         .exec('../spec.jquery.xhr.js')
-				.run({ failuresOnly: true })
+				.run({ failuresOnly: true, fixturePath: '../fixtures' })
 				.report()
 			}
 		</script>
