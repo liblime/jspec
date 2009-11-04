@@ -19,7 +19,7 @@
 				.exec('/spec/spec.modules.js')
 				.exec('/spec/spec.xhr.js')
 				.exec('/spec/spec.jquery.xhr.js')
-				.run({ reporter: JSpec.reporters.Server })
+				.run({ reporter: JSpec.reporters.Server, fixturePath: '/spec/fixtures' })
 				.report()
 			}
 		</script>
