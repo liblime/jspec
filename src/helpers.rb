@@ -14,24 +14,9 @@ helpers do
   ##
   # Override Sinatra's #send_file to prevent caching.
   
-  def send_file path, opts = {}
-    stat = File.stat(path)
+  def send_file *args
     response['Cache-Control'] = 'no-cache'
-    content_type media_type(opts[:type]) ||
-      media_type(File.extname(path)) ||
-      response['Content-Type'] ||
-      'application/octet-stream'
-    response['Content-Length'] ||= (opts[:length] || stat.size).to_s
-
-    if opts[:disposition] == 'attachment' || opts[:filename]
-      attachment opts[:filename] || path
-    elsif opts[:disposition] == 'inline'
-      response['Content-Disposition'] = 'inline'
-    end
-
-    halt ::Sinatra::Application::StaticFile.open(path, 'rb')
-  rescue Errno::ENOENT
-    not_found
+    super
   end
   
   ##
