@@ -141,13 +141,10 @@ may also use grammar-less assertions):
 
 ## Options
 
-You may alter the way JSpec operates by assigning options via the
-JSpec.options hash, by passing string-based option values via the 
-query string, or passing a hash to `run()`. For example 
-`JSpec.options.failuresOnly = true`, and `?failuresOnly=1` will both work.
+The following options may be passed to _JSpec.run()_.
 
-- profile       
-  - {bool} when enabled, uses `console.time()` in order to display performance information in your console log as specs are completed. (DOM, Console)
+- fixturePath
+  - {string} path to fixture directory (DOM, Terminal, Server)
 - failuresOnly 
   - {bool} displays only failing specs, making them quick to discover and fix (DOM, Terminal, Server)
 - reportToId   
