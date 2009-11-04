@@ -537,16 +537,11 @@ The `fixture()` utility function may be used in order to load arbitrary file con
 for use with your specifications. JSpec will resolve `fixture('data')` in the following
 manor:
   
-  - _data_
-  - _spec/data_
-  - _spec/fixtures/data_
-  - _spec/fixtures/data.html_
+  - <fixturePath>/data
+  - <fixturePath>/data.html
 
-So if the file _spec/fixtures/data.html_ exists, we can simply use `fixture('data')`,
-where as _spec/fixtures/xml/data.xml_ must be specified with `fixture('xml/data.xml')`.
-
-If you prefer not to store fixtures in the _fixtures_ directory you must be more specific
-with the path supplied.
+In order for the `fixture()` utility to function you must pass the **fixturePath** option
+to _JSpec.run()_ which provides JSpec with the fixture directory.
 
 ## Testing DOM Elements
 
