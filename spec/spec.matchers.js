@@ -455,10 +455,23 @@ describe 'Matchers'
       personWithPets.addPets('izzy')
     end
     
-    it 'should fail with negation with times'
-      personWithPets.should.not.receive('addPets', 'twice')
+    it 'should fail with negation when called once with no times specified'
+      personWithPets.should.not.receive('addPets')
       personWithPets.addPets('izzy')
-      personWithPets.addPets('max')
+    end
+    
+    it 'should fail with negation when called more than once with no times specified'
+      personWithPets.should.not.receive('addPets')
+      personWithPets.addPets('izzy')
+      personWithPets.addPets('izzy')
+    end
+        
+    it 'should fail with negation when called more than the times specified'
+      personWithPets.should.not.receive('addPets', 3)
+      personWithPets.addPets('izzy')
+      personWithPets.addPets('izzy')
+      personWithPets.addPets('izzy')
+      personWithPets.addPets('izzy')
     end
     
     it 'should fail with boolean args'
