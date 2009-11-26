@@ -815,6 +815,7 @@ Run with alternative browser names:
   
 Browsers supported in core:
 
+- Browser::Default (system default)
 - Browser::Safari
 - Browser::Chrome
 - Browser::Opera

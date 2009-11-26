@@ -217,7 +217,7 @@ module JSpec
         action = lambda { start_server path, options }
       else
         path ||= normalize('environments/dom.html')
-        browsers = browsers_for options[:browsers] || ['safari']
+        browsers = browsers_for options[:browsers] || ['default']
         action = lambda do
           browsers.each do |browser|
             browser.visit File.expand_path(path)

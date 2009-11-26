@@ -83,6 +83,24 @@ class Browser
   end
   
   #--
+  # Default
+  #++
+  
+  class Default < self
+    def self.matches_name? string
+      string =~ /default/i
+    end
+    
+    def visit uri
+      system 'open', uri if macos?
+    end
+    
+    def to_s
+      'Default'
+    end
+  end
+  
+  #--
   # Firefox
   #++
   

@@ -154,7 +154,7 @@ command :run do |c|
     
     JSpec\'s server is also available via --server, which defaults 
     the [path] to spec/environments/server.html'
-  c.example 'Run once in Safari', 'jspec run'
+  c.example 'Run once in default browser', 'jspec run'
   c.example 'Run once in Safari and Firefox', 'jspec run --browsers Safari,Firefox'
   c.example 'Run once in Opera, Firefox, and Chrome', 'jspec run --browsers opera,ff,chrome'
   c.example 'Run custom spec file', 'jspec run foo.html'
