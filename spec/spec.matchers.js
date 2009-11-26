@@ -447,18 +447,27 @@ describe 'Matchers'
     end
     
     it 'should fail when expecting multiple arguments'
-      personWithPets.should.receive('addPets').with_args('suki', 'max')
-      personWithPets.addPets('suki')
+      spec = mock_it(function(){
+        personWithPets.should.receive('addPets').with_args('suki', 'max')
+        personWithPets.addPets('suki')
+      })
+      spec.should.have_failure_message('expected personWithPets.addPets() to be called with "suki", "max" but was called with "suki"')
     end
     
     it 'should fail when argument is of the wrong type'
-      personWithPets.should.receive('addPet').with_args(an_instance_of(String))
-      personWithPets.addPet(['suki'])
+      spec = mock_it(function(){
+        personWithPets.should.receive('addPet').with_args(an_instance_of(String))
+        personWithPets.addPet(['suki'])
+      })
+      spec.should.have_failure_message('expected personWithPets.addPet() to be called with an instance of String but was called with [ "suki" ]')
     end
     
     it 'should fail when return type is incorrect'
-      personWithPets.should.receive('addPet').and_return(an_instance_of(String))
-      personWithPets.addPet('suki')
+      spec = mock_it(function(){
+        personWithPets.should.receive('addPet').and_return(an_instance_of(String))
+        personWithPets.addPet('suki')
+      })
+      spec.should.have_failure_message('expected personWithPets.addPet() to return an instance of String but got [ "izzy", "suki" ]')
     end
         
     it 'should fail with negation when a method is called'
