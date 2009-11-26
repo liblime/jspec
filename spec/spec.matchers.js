@@ -471,55 +471,82 @@ describe 'Matchers'
     end
         
     it 'should fail with negation when a method is called'
-      personWithPets.should.not.receive('addPets')
-      personWithPets.addPets('izzy')
+      spec = mock_it(function(){
+        personWithPets.should.not.receive('addPets')
+        personWithPets.addPets('izzy')
+      })
+      spec.should.have_failure_message('expected personWithPets.addPets() not to be called once, but  was called once')
     end
 
     it 'should fail with negation with args'
-      personWithPets.should.not.receive('addPets').with_args('izzy')
-      personWithPets.addPets('izzy')
+      spec = mock_it(function(){
+        personWithPets.should.not.receive('addPets').with_args('izzy')
+        personWithPets.addPets('izzy')
+      })
+      spec.should.have_failure_message('expected personWithPets.addPets() not to be called with "izzy" but was')
     end
     
     it 'should fail with negation with return values'
-      personWithPets.should.not.receive('addPets').with_args('izzy').and_return(an_instance_of(Array))
-      personWithPets.addPets('izzy')
+      spec = mock_it(function(){
+        personWithPets.should.not.receive('addPets').with_args('izzy').and_return(an_instance_of(Array))
+        personWithPets.addPets('izzy')
+      })
+      spec.should.have_failure_message('expected personWithPets.addPets() not to return an instance of Array but it did')
     end
     
     it 'should fail with negation when called once with no times specified'
-      personWithPets.should.not.receive('addPets')
-      personWithPets.addPets('izzy')
+      spec = mock_it(function(){
+        personWithPets.should.not.receive('addPets')
+        personWithPets.addPets('izzy')
+      })
+      spec.should.have_failure_message('expected personWithPets.addPets() not to be called once, but  was called once')
     end
     
     it 'should fail with negation when called more than once with no times specified'
-      personWithPets.should.not.receive('addPets')
-      personWithPets.addPets('izzy')
-      personWithPets.addPets('izzy')
+      spec = mock_it(function(){
+        personWithPets.should.not.receive('addPets')
+        personWithPets.addPets('izzy')
+        personWithPets.addPets('izzy')
+      })
+      spec.should.have_failure_message('expected personWithPets.addPets() not to be called once, but  was called twice')
     end
         
     it 'should fail with negation when called more than the times specified'
-      personWithPets.should.not.receive('addPets', 3)
-      personWithPets.addPets('izzy')
-      personWithPets.addPets('izzy')
-      personWithPets.addPets('izzy')
-      personWithPets.addPets('izzy')
+      spec = mock_it(function(){
+        personWithPets.should.not.receive('addPets', 3)
+        personWithPets.addPets('izzy')
+        personWithPets.addPets('izzy')
+        personWithPets.addPets('izzy')
+        personWithPets.addPets('izzy')
+      })
+      spec.should.have_failure_message('expected personWithPets.addPets() not to be called 3 times, but  was called 4 times')
     end
     
     it 'should fail with boolean args'
-      foo = { bar : function(arg){ return arg }}
-      foo.should.receive('bar').with_args(true)
-      foo.bar(false)
+      spec = mock_it(function(){
+        foo = { bar : function(arg){ return arg }}
+        foo.should.receive('bar').with_args(true)
+        foo.bar(false)
+      })
+      spec.should.have_failure_message('expected [object Object].bar() to be called with true but was called with false')
     end
     
     it 'should fail with boolean return value true'
-      foo = { bar : function(){ return true }}
-      foo.should.receive('bar').and_return(false)
-      foo.bar()
+      spec = mock_it(function(){
+        foo = { bar : function(){ return true }}
+        foo.should.receive('bar').and_return(false)
+        foo.bar()
+      })
+      spec.should.have_failure_message('expected [object Object].bar() to return false but got true')
     end
     
     it 'should fail with boolean return value false'
-      foo = { bar : function(){ return false }}
-      foo.should.receive('bar').and_return(true)
-      foo.bar()
+      spec = mock_it(function(){
+        foo = { bar : function(){ return false }}
+        foo.should.receive('bar').and_return(true)
+        foo.bar()
+      })
+      spec.should.have_failure_message('expected [object Object].bar() to return true but got false')
     end
   end
   
