@@ -234,7 +234,7 @@ module JSpec
           :actions => [action],
           :debug => $stdout).run!
       else
-        action.call File.new(path)
+        action.call
       end
     end
     
