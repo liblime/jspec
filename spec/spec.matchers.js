@@ -422,19 +422,28 @@ describe 'Matchers'
     end
         
     it 'should fail when not invoked the expected number of times'
-      personWithPets.should.receive('getPets', 'twice').and_return(['izzy'])
-      personWithPets.getPets()
+      spec = mock_it(function(){
+        personWithPets.should.receive('getPets', 'twice').and_return(['izzy'])
+        personWithPets.getPets()
+      })
+      spec.should.have_failure_message('expected personWithPets.getPets() to be called twice, but  was called once')
     end
     
     it 'should fail when not invoked many times'
-      personWithPets.should.receive('getPets', 3).and_return(['izzy'])
-      personWithPets.getPets()
-      personWithPets.getPets()
+      spec = mock_it(function(){
+        personWithPets.should.receive('getPets', 3).and_return(['izzy'])
+        personWithPets.getPets()
+        personWithPets.getPets()
+      })
+      spec.should.have_failure_message('expected personWithPets.getPets() to be called 3 times, but  was called twice')
     end
     
     it 'should fail when not invoked with specific arguments'
-      personWithPets.should.receive('addPet', 'once').with_args('suki')
-      personWithPets.addPet('niko')
+      spec = mock_it(function(){
+        personWithPets.should.receive('addPet', 'once').with_args('suki')
+        personWithPets.addPet('niko')
+      })
+      spec.should.have_failure_message('expected personWithPets.addPet() to be called with "suki" but was called with "niko"')
     end
     
     it 'should fail when expecting multiple arguments'
