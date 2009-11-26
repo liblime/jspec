@@ -392,21 +392,33 @@ describe 'Matchers'
     end
                                      
     it 'should fail when the method does not exist'
-      person.should.receive('getPets')
+      spec = mock_it(function(){
+        person.should.receive('getPets')
+      })
+      spec.should.have_failure_message('expected person.getPets() to be called once, but  was not called')
     end
     
     it 'should fail when the method is never invoked'
-      personWithPets.should.receive('getPets')
+      spec = mock_it(function(){
+        personWithPets.should.receive('getPets')
+      })
+      spec.should.have_failure_message('expected personWithPets.getPets() to be called once, but  was not called')
     end
     
     it 'should fail when improper value is returned'
-      personWithPets.should.receive('getPets').and_return(['niko'])
-      personWithPets.getPets()
+      spec = mock_it(function(){
+        personWithPets.should.receive('getPets').and_return(['niko'])
+        personWithPets.getPets()
+      })
+      spec.should.have_failure_message('expected personWithPets.getPets() to return [ "niko" ] but got [ "izzy" ]')
     end
     
     it 'should fail when checking the type of multiple args and return types'
-      personWithPets.should.receive('addPets').with_args(an_instance_of(String), an_instance_of(Array)).and_return(an_instance_of(Array))
-      personWithPets.addPets('suki', 'max')
+      spec = mock_it(function(){
+        personWithPets.should.receive('addPets').with_args(an_instance_of(String), an_instance_of(Array)).and_return(an_instance_of(Array))
+        personWithPets.addPets('suki', 'max')
+      })
+      spec.should.have_failure_message('expected personWithPets.addPets() to be called with an instance of String, an instance of Array but was called with "suki", "max"')
     end
         
     it 'should fail when not invoked the expected number of times'
