@@ -122,6 +122,15 @@ describe 'Failing specs'
     spec.should.have_failure_message('expected [ "foo", "bar" ] to include "foo", "car"')
   end
   
+  it 'should list all failure messages'
+    spec = mock_it(function() {
+      false.should.be_true
+      true.should.be_false
+    })
+    spec.should.have_failure_message('expected false to be true ')
+    spec.should.have_failure_message('expected true to be false ')
+  end
+  
   it 'should catch exceptions throw within specs'
     spec = mock_it(function() {
       throw new Error('Oh noes!')
