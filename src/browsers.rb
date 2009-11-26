@@ -95,6 +95,10 @@ class Browser
       system 'open', uri if macos?
     end
     
+    def supported?
+      macos?
+    end
+    
     def to_s
       'Default'
     end
