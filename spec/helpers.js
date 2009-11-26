@@ -3,10 +3,12 @@ JSpec.include({
   name: 'Helpers',
   utilities : {
     mock_it : function(body) {
+      JSpec.assert = false
       var spec = new JSpec.Spec('mock', body)
       var prev = JSpec.currentSpec
       JSpec.runSpec(spec)
       JSpec.currentSpec = prev
+      JSpec.assert = true
       return spec
     }
   },
