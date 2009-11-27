@@ -93,6 +93,7 @@ class Browser
     
     def visit uri
       system 'open', uri if macos?
+      system 'start', uri if windows?
     end
     
     def supported?
