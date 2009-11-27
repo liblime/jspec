@@ -152,14 +152,6 @@ describe 'JSpec'
           request.responseText.should.be_null
         end
       end
-      
-      describe 'with uri'
-        it 'should mock only the uri specified'
-          mockRequest('ilike').and_return('something')
-          responseFrom('ilike').should.eql 'something'
-          responseFrom('async').should.eql 'cookies'
-        end
-      end
     end
   end
 end
