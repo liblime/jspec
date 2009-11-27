@@ -52,49 +52,46 @@ describe 'Failing specs'
     spec.should.have_failure_message(/expected false to be true/)
   end
   
-  it 'should fail saying which error has been thrown'
-    spec = mock_it(function() {
-      -{ throw 'foo' }.should.throw_error 'bar'
-    })
-    spec.should.have_failure_message('expected exception of "bar" to be thrown, but got "foo"')
-  end
-  
-  it 'should fail saying no error was thrown'
-    spec = mock_it(function() {
-      -{ }.should.throw_error 'foo'
-    })
-    spec.should.have_failure_message('expected exception of "foo" to be thrown, but nothing was')
-  end
-  
-  it 'should fail saying no error matching was thrown'
-    spec = mock_it(function() {
-      -{ throw 'bar' }.should.throw_error(/foo/)
-    })
-    spec.should.have_failure_message('expected exception matching /foo/ to be thrown, but got "bar"')
-  end
-  
-  it 'should fail saying constructors'
-    spec = mock_it(function() {
-      -{ throw new TypeError('oh no') }.should.throw_error(Error)
-    })
-    spec.should.have_failure_message("expected Error to be thrown, but got TypeError: oh no")
-  end
-  
-  it 'should fail saying multiple arg messages'
-    spec = mock_it(function() {
-      -{ throw new TypeError('oh no') }.should.throw_error(TypeError, /foo/)
-    })
-    spec.should.have_failure_message("expected TypeError and exception matching /foo/ to be thrown, but got TypeError: oh no")
-  end
-  
-  it 'should fail with constructor name'
-    spec = mock_it(function() {
-      function Foo(){}
-      function Bar(){}
-      Bar.prototype.toString = function(){ return 'Bar: oh no' }
-      -{ throw new Bar }.should.throw_error Foo
-    })
-    spec.should.have_failure_message("expected Foo to be thrown, but got Bar: oh no")
+  describe 'throw_error'
+    before
+      CustomError = function CustomError(message) { this.message = message }
+      CustomError.prototype.toString = function(){ return 'CustomError: oh no' }
+    end
+
+    it 'should fail saying which error has been thrown'
+      spec = mock_it(function() {
+        -{ throw 'foo' }.should.throw_error 'bar'
+      })
+      spec.should.have_failure_message('expected exception of "bar" to be thrown, but got "foo"')
+    end
+
+    it 'should fail saying no error was thrown'
+      spec = mock_it(function() {
+        -{ }.should.throw_error 'foo'
+      })
+      spec.should.have_failure_message('expected exception of "foo" to be thrown, but nothing was')
+    end
+
+    it 'should fail saying no error matching was thrown'
+      spec = mock_it(function() {
+        -{ throw 'bar' }.should.throw_error(/foo/)
+      })
+      spec.should.have_failure_message('expected exception matching /foo/ to be thrown, but got "bar"')
+    end
+
+    it 'should fail saying constructors'
+      spec = mock_it(function() {
+        -{ throw new CustomError('oh no') }.should.throw_error(Error)
+      })
+      spec.should.have_failure_message("expected Error to be thrown, but got CustomError: oh no")
+    end
+
+    it 'should fail saying multiple arg messages'
+      spec = mock_it(function() {
+        -{ throw new CustomError('oh no') }.should.throw_error(CustomError, /foo/)
+      })
+      spec.should.have_failure_message("expected CustomError and exception matching /foo/ to be thrown, but got CustomError: oh no")
+    end
   end
   
   it 'should fail with constructor name'

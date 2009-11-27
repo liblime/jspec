@@ -199,6 +199,10 @@ describe 'Matchers'
   end
 
   describe 'throw_error'
+    before
+      CustomError = function CustomError(message) { this.message = message }
+    end
+
     it 'should check if an error is thrown'
       -{ throw 'error' }.should.throw_error
       -{ return 'test' }.should.not.throw_error
@@ -213,17 +217,17 @@ describe 'Matchers'
     
     it 'should check if an error of a specific constructor is thrown'
       -{ throw new Error('foo') }.should.throw_error(Error)
-      -{ throw new TypeError('foo') }.should.throw_error(TypeError)
+      -{ throw new CustomError('foo') }.should.throw_error(CustomError)
       -{ throw 'foo' }.should.not.throw_error TypeError
     end
     
     it 'should check if an error with a specific constructor and message is thrown'
-      -{ throw new TypeError('oh no!') }.should.throw_error(TypeError, 'oh no!')
-      -{ throw new TypeError('oh no!') }.should.not.throw_error(TypeError, 'foo bar')
-      -{ throw new TypeError('oh no!') }.should.throw_error(TypeError, /oh no/)
-      -{ throw new TypeError('oh no!') }.should.not.throw_error(TypeError, /foo bar/)
-      -{ throw new TypeError('oh no!') }.should.not.throw_error(Error, 'oh no!')
-      -{ throw new TypeError('oh no!') }.should.not.throw_error(Error, 'foo bar')
+      -{ throw new CustomError('oh no!') }.should.throw_error(CustomError, 'oh no!')
+      -{ throw new CustomError('oh no!') }.should.not.throw_error(CustomError, 'foo bar')
+      -{ throw new CustomError('oh no!') }.should.throw_error(CustomError, /oh no/)
+      -{ throw new CustomError('oh no!') }.should.not.throw_error(CustomError, /foo bar/)
+      -{ throw new CustomError('oh no!') }.should.not.throw_error(Error, 'oh no!')
+      -{ throw new CustomError('oh no!') }.should.not.throw_error(Error, 'foo bar')
     end
   end
   
