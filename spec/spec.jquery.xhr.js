@@ -4,28 +4,39 @@ describe 'jQuery'
     it "should call the success function when 200"
       mock_request().and_return('{ foo: "bar" }', 'application/json')
       var successCalled = false
+      var errorCalled = false
       $.ajax({
         type: "POST",
         url: 'foo',
         dataType: 'json',
         success: function() {
           successCalled = true
+        },
+        error: function(xhr, status, e) {
+          alert(status)
+          errorCalled = true
         }
       })
       successCalled.should.be_true
+      errorCalled.should.be_false
     end
     
     it "should call the error function when 404"
       mock_request().and_return('{ foo: "bar" }', 'application/json', 404)
+      var successCalled = false
       var errorCalled = false
       $.ajax({
         type: "POST",
         url: 'foo',
         dataType: 'json',
+        success: function() {
+          successCalled = true
+        },
         error: function() {
           errorCalled = true
         }
       })
+      successCalled.should.be_false
       errorCalled.should.be_true
     end
   end
