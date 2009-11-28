@@ -54,8 +54,8 @@ describe 'Failing specs'
   
   describe 'throw_error'
     before
-      CustomError = function CustomError(message) { this.message = message }
-      CustomError.prototype.toString = function(){ return 'CustomError: oh no' }
+      // The Error.name property is not defined in IE
+      Error.name = "Error"
     end
 
     it 'should fail saying which error has been thrown'
@@ -81,6 +81,10 @@ describe 'Failing specs'
 
     it 'should fail saying constructors'
       spec = mock_it(function() {
+        // IE loses scope of virtually everything once global inside nested eval()s
+        // Create everything we need here.
+        function CustomError(message) { this.message = message }
+        CustomError.prototype.toString = -{ return 'CustomError: oh no' }
         -{ throw new CustomError('oh no') }.should.throw_error(Error)
       })
       spec.should.have_failure_message("expected Error to be thrown, but got CustomError: oh no")
@@ -88,6 +92,11 @@ describe 'Failing specs'
 
     it 'should fail saying multiple arg messages'
       spec = mock_it(function() {
+        // IE loses scope of virtually everything once global inside nested eval()s
+        // Create everything we need here.
+        function CustomError(message) { this.message = message }
+        CustomError.name = "CustomError"
+        CustomError.prototype.toString = function(){ return 'CustomError: oh no' }
         -{ throw new CustomError('oh no') }.should.throw_error(CustomError, /foo/)
       })
       spec.should.have_failure_message("expected CustomError and exception matching /foo/ to be thrown, but got CustomError: oh no")
@@ -97,6 +106,7 @@ describe 'Failing specs'
   it 'should fail with constructor name'
     spec = mock_it(function() {
       function Foo(){ this.toString = function(){ return '<Foo>' }}
+      Foo.name = "Foo"
       foo = new Foo
       foo.should.not.be_an_instance_of Foo
     })
@@ -130,6 +140,9 @@ describe 'Failing specs'
   
   it 'should catch exceptions throw within specs'
     spec = mock_it(function() {
+      // IE loses scope of virtually everything once global inside nested eval()s
+      // Create everything we need here.
+      Error.prototype.toString = -{ return "Error: " + this.message }
       throw new Error('Oh noes!')
     })
     spec.should.have_failure_message(/Error: Oh noes!/)
@@ -146,7 +159,9 @@ describe 'Failing specs'
     spec = mock_it(function() {
       iDoNotExist.neitherDoI()
     })
-    spec.should.have_failure_message(/iDoNotExist/)
+    // NOTE: Most browsers will specifically mention iDoNotExist being undefined.
+    // IE only reports an Error.
+    spec.should.have_failure_message(/Error/)
   end
   
 end
