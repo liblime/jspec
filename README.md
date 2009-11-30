@@ -921,6 +921,7 @@ your _spec/server.rb_ file may support additional browsers.
 - For more information consult the JSpec source code documentation or visit [http://visionmedia.github.com/jspec](http://visionmedia.github.com/jspec)
 - jQuery + HTML fixture example [http://gist.github.com/147831](http://gist.github.com/147831)
 - [http://twitter.com/tjholowaychuk](Twitter)
+- [JSpec Vim Snippits](http://github.com/tobiassvn/snipmate-jspec/)
 
 ## Contributors
 
