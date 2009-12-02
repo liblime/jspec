@@ -13,6 +13,20 @@ describe "jspec" do
       rm_rf @dest
     end
     
+    describe "rhino" do
+      it "should install to spec/support/js.jar by default" do
+        Dir.chdir @dest do
+          jspec(:install, 'rhino')
+          File.exists?('spec/support/js.jar').should be_true
+        end
+      end
+      
+      it "should install to the destination passed" do
+        jspec(:install, 'rhino', "#{@dest}/spec")
+        File.exists?("#{@dest}/spec/js.jar").should be_true
+      end
+    end
+        
     describe "jquery" do
       it "should install to spec/support/jquery.js by default" do
         Dir.chdir @dest do
