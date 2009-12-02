@@ -12,7 +12,7 @@ module JSpec
     #++
     
     BIND_PATHS = 'lib/**/*.js', 'spec/**/*.js'
-    RHINO = 'java org.mozilla.javascript.tools.shell.Main'
+    RHINO = JSPEC_ROOT + '/support/js.jar'
     
     ##
     # Destination directory.
@@ -30,7 +30,22 @@ module JSpec
     # Execute _file_ with Rhino.
 
     def rhino file
-      system "#{RHINO} #{file}"
+      system "java -jar #{rhino_jar} #{file}"
+    end
+    
+    ##
+    # Locate Rhino jar.
+    #
+    #  * checks spec/support/js.jar
+    #  * defaults to JSpec's support/js.jar
+    #
+    
+    def rhino_jar
+      if File.exists? normalize('support/js.jar')
+        normalize 'support/js.jar'
+      else
+        RHINO
+      end
     end
     
     ##
