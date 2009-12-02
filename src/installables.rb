@@ -37,59 +37,6 @@ module JSpec
     def use_progress_bar?; true end
     
     #--
-    # Rhino
-    #++
-    
-    class Rhino < self
-      
-      ##
-      # No thanks!
-      
-      def use_progress_bar?
-        false
-      end
-      
-      ##
-      # Zip uri.
-      
-      def uri
-        'ftp://ftp.mozilla.org/pub/mozilla.org/js/rhino1_7R2.zip'
-      end
-      
-      ##
-      # Extension destination.
-      
-      def dest
-        '/Library/Java/Extensions/js.jar'
-      end
-      
-      ##
-      # Warn that --release is not yet supported.
-      
-      def before
-        warn 'Rhino does not yet support --release' if options[:release]
-      end
-      
-      ##
-      # Install
-      
-      def install
-        say "... downloading #{uri}"; `curl #{uri} -o /tmp/rhino.zip`
-        say "... decompressing"; `unzip /tmp/rhino.zip -d /tmp`
-        say "... installing to #{dest}"; `sudo mv /tmp/rhino1_7R2/js.jar #{dest}`
-      end
-      
-      ##
-      # Install message.
-      
-      def install_message
-        "Rhino installed:\n" \
-        "Usage: java org.mozilla.javascript.tools.shell.Main [options...] [files]"
-      end
-      
-    end
-    
-    #--
     # URI based installations
     #++
     
@@ -160,6 +107,47 @@ module JSpec
         end
       end
 
+    end
+    
+    #--
+    # Rhino
+    #++
+    
+    class Rhino < URI
+      name 'Rhino'
+      uri 'ftp://ftp.mozilla.org/pub/mozilla.org/js/RELEASE.zip'
+      
+      ##
+      # No thanks!
+      
+      def use_progress_bar?
+        false
+      end
+      
+      ##
+      # Extension destination.
+      
+      def path
+        options[:to] + '/js.jar'
+      end
+      
+      ##
+      # Warn that --release is not yet supported.
+      
+      def release
+        warn 'Rhino does not yet support --release' if options[:release]
+        'rhino1_7R2'
+      end
+      
+      ##
+      # Install
+      
+      def install
+        say "... fetching #{uri}"; `curl #{uri} -o /tmp/rhino.zip 2> /dev/null`
+        say "... decompressing"; `unzip /tmp/rhino.zip -d /tmp`
+        say "... installing to #{path}"; `mv /tmp/rhino1_7R2/js.jar #{path}`
+      end
+      
     end
     
     #--
