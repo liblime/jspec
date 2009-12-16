@@ -12,13 +12,32 @@ describe 'Matchers'
       10.should.not.eql 11
     end
     
-    it 'should hash compare arrays'
+    it 'should work with regular expressions'
+      a = /foo/
+      b = /foo/
+      c = /foo/g
+      d = /bar/
+      a.should.eql a
+      a.should.eql b
+      a.should.not.eql c
+      a.should.not.eql d
+    end
+    
+    it 'should work with dates'
+      a = new Date('May 25 1987')
+      b = new Date('May 25 1987')
+      c = new Date('May 25 1988')
+      a.should.eql b
+      a.should.not.eql c
+    end
+    
+    it 'should work with arrays'
       [1, 2].should.eql [1, 2]
       [1, 2].should.not.eql [1, 3]
       [1, 2, [3], { foo : 'bar' }].should.eql [1, 2, [3], { foo : 'bar' }]
     end
     
-    it 'should hash compare objects'
+    it 'should work with objects'
       { foo : 'bar' }.should.eql { foo : 'bar' }
     end
     
