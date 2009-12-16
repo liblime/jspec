@@ -12,11 +12,6 @@ describe 'Matchers'
       10.should.not.eql 11
     end
     
-    it 'should loosely compare numbers as strings'
-      '11'.should.eql 11
-      '10'.should.not.eql 11
-    end
-    
     it 'should hash compare arrays'
       [1, 2].should.eql [1, 2]
       [1, 2].should.not.eql [1, 3]
@@ -33,11 +28,10 @@ describe 'Matchers'
       a.should.eql b
     end
     
-    it 'should hash compare arbitrary objects'
-      Foo = function(){}, Bar = function(){}
-      Bar.prototype = { doSomething : function(){ }}
-      foo = new Foo, foo2 = new Foo, bar = new Bar
-      foo.should.eql foo2
+    it 'should work with functions'
+      function foo(){}
+      function bar(){}
+      foo.should.eql foo
       foo.should.not.eql bar
     end
     
@@ -116,7 +110,7 @@ describe 'Matchers'
     
     it 'should check that a property has a specific value'
       'foo'.should.have_prop 'length', 3
-      { length : '3' }.should.have_prop 'length', 3
+      { length : 3 }.should.have_prop 'length', 3
     end
     
     it 'should check object hashes'
