@@ -18,23 +18,6 @@ describe 'jQuery'
     end
   end
   
-  describe 'async'
-    it 'should load mah cookies (textfile)'
-      $.get('async', function(text){
-        text.should_eql 'cookies!'
-      })
-    end
-
-    it 'should load mah cookies twice (ensure multiple async requests work)'
-      $.get('async', function(text){
-        text.should.eql 'cookies!'
-      })
-      $.get('async', function(text){
-        text.should.not.eql 'rawr'
-      })
-    end 
-  end
-  
   describe 'matchers'
     before_each
       html = '<p><label><em>Save?</em></label>                 \
