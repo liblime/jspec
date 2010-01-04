@@ -248,7 +248,7 @@ The following options may be passed to _JSpec.run()_.
 
 JSpec uses the [JavaScript Growl](http://github.com/visionmedia/js-growl) library to provide
 growl support when using the **Rhino JavaScript engine**. To enable simply `load()` _jspec.growl.js_
-within _spec/environments/rhino.js_
+within _spec/rhino.js_
   
 ## Async Support With Mock Timers
 

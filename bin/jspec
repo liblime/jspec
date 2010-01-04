@@ -142,18 +142,18 @@ end
 command :run do |c|
   c.syntax = 'jspec run [path] [options]'
   c.summary = 'Run specifications'
-  c.description = 'Run specifications, defaulting [path] to spec/environments/dom.html.
+  c.description = 'Run specifications, defaulting [path] to spec/dom.html.
     You will need to supply [path] if your specs do not reside 
     in this location. `run --bind` is the default sub-command of
     jspec so you may simply execute `jspec` in order to bind execution
     of your specs when a file is altered.
     
     JSpec supports Rhino execution when installed. The [path] is assumed
-    to be spec/environments/rhino.js unless specified. See examples below for
+    to be spec/rhino.js unless specified. See examples below for
     using the --rhino switch.
     
     JSpec\'s server is also available via --server, which defaults 
-    the [path] to spec/environments/server.html'
+    the [path] to spec/server.html'
   c.example 'Run once in default browser', 'jspec run'
   c.example 'Run once in Safari and Firefox', 'jspec run --browsers Safari,Firefox'
   c.example 'Run once in Opera, Firefox, and Chrome', 'jspec run --browsers opera,ff,chrome'

@@ -121,7 +121,7 @@ module JSpec
     # Replace absolute JSPEC_ROOT paths.
     
     def replace_root
-      replace_root_in 'environments/dom.html', 'environments/rhino.js'
+      replace_root_in 'dom.html', 'rhino.js'
     end
     
     ##
@@ -170,7 +170,7 @@ module JSpec
         send "vendorize_with_#{type}"
         say "updated #{type} #{path} -> #{program(:version)}"
       else
-        ['environments/dom.html', 'environments/rhino.js'].each do |path|
+        ['dom.html', 'rhino.js'].each do |path|
           path = normalize path
           next unless File.exists? path
           contents = File.read(path).gsub /jspec-(\d+\.\d+\.\d+)/, "jspec-#{program(:version)}"
@@ -193,7 +193,7 @@ module JSpec
       set :server, 'Mongrel'
       enable :sessions
       disable :logging
-      hook = File.expand_path normalize('environments/server.rb')
+      hook = File.expand_path normalize('server.rb')
       load hook if File.exists? hook
       browsers = browsers_for(options[:browsers]) if options.include? :browsers
       JSpec::Server.new(path, options[:port]).start(browsers)
@@ -224,14 +224,14 @@ module JSpec
       
       case
       when options.include?(:rhino)
-        path ||= normalize('environments/rhino.js')
+        path ||= normalize('rhino.js')
         action = lambda { rhino(path) }
       when options.include?(:server)
         raise 'Cannot use --bind with --server' if options.include? :bind
-        path ||= normalize('environments/server.html')
+        path ||= normalize('server.html')
         action = lambda { start_server path, options }
       else
-        path ||= normalize('environments/dom.html')
+        path ||= normalize('dom.html')
         browsers = browsers_for options[:browsers] || ['default']
         action = lambda do
           browsers.each do |browser|
