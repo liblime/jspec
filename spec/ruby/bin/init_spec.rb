@@ -75,12 +75,12 @@ describe "jspec" do
     
     it "should set jspec's DOM root to ../lib/ when using --freeze" do
       jspec(:init, @dest, '--freeze')
-      File.read(@dest + '/spec/dom.html').should include('src="../lib/jspec.js')
+      File.read(@dest + '/spec/dom.html').should include('src="./lib/jspec.js')
     end
     
     it "should set jspec's DOM root to ../lib/ when using --symlink" do
       jspec(:init, @dest, '--symlink')
-      File.read(@dest + '/spec/dom.html').should include('src="../lib/jspec.js')
+      File.read(@dest + '/spec/dom.html').should include('src="./lib/jspec.js')
     end
     
     it "should set jspec's Rhino root to jspec's gem directory" do
