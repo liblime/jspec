@@ -3,7 +3,7 @@ require.paths.unshift('./lib', './spec');
 process.mixin(require('sys'))
 
 require("jspec")
-require("helpers")
+require("unit/helpers")
 
 quit = process.exit
 print = puts

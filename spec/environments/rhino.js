@@ -6,7 +6,7 @@ load('lib/jspec.js')
 load('lib/jspec.xhr.js')
 load('lib/jspec.growl.js')
 load('lib/jspec.jquery.js')
-load('spec/helpers.js')
+load('spec/unit/helpers.js')
 load('spec/unit/spec.grammar-less.js')
 
 JSpec
