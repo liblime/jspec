@@ -103,8 +103,8 @@ describe 'Matchers'
   
   describe 'be_undefined'
     it 'should check if a var is defined'
-      var foo
-      foo.should.be_undefined
+      var rawr
+      rawr.should.be_undefined
     end
   end
   
