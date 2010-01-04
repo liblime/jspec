@@ -20,6 +20,7 @@
   * Changed project templates to a newer cleaner format with markdown files, and better structure
   * Changed; Rails is now detected when using `jspec init` --rails is no longer required
   * Changed; Major refactor of the `jspec` executable and all Ruby
+  * Changed; Ruby server re-written using Sinatra
   * Removed JSpec.hash()
   * Removed JSpec.paramsFor()
   * Removed profiling [#85]
