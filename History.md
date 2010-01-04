@@ -1,3 +1,38 @@
+
+3.0.0 / 2010-01-04
+==================
+
+  * Added JSpec.equal() replacing hash()
+  * Added Rhino's .jar to JSpec so that users do not need to install it
+  * Added specs for receive matcher negation with times [#150]
+  * Added fixturePath option to let JSpec know where your fixtures live
+  * Added `jspec stats`
+  * Added lastRequest() / last_request() helper [#58]
+  * Added jspec.xhr.js in templates by default [#44]
+  * Added jspec subcommand hooks; checks for spec/commands/*_command.rb [#38]
+  * Added circular reference printing support now shown as { foo: "bar", self: <circular reference> }
+  * Added install sub-command with support for jquery, jqueryui, prototype, mootools, dojo, envjs, and rhino
+  * Added update support for --freeze / --symlink [#34]
+  * Changed; defaulting browsers using system calls [#104]
+  * Changed; using json_pure gem instead of json to prevent c extension requirements 
+  * Changed argumentsToArray() -> toArray() [#62]
+  * Changed formatter to reporter [#6]
+  * Changed project templates to a newer cleaner format with markdown files, and better structure
+  * Changed; Rails is now detected when using `jspec init` --rails is no longer required
+  * Changed; Major refactor of the `jspec` executable and all Ruby
+  * Removed JSpec.hash()
+  * Removed JSpec.paramsFor()
+  * Removed profiling [#85]
+  * Removed module contexts [#72]
+  * Fixed --rhino from exiting using --bind [#111]
+  * Fixed sprite spacing when several failure messages are shown [#90]
+  * Fixed receive matcher negation issue with the number of times called [#150]
+  * Fixed #send_file override; no-cache [#93]
+  * Fixed most css issues in IE8 [#71]
+  * Fixed "Access is denied" error in IE
+  * Fixed __END__
+  * Fixed; inverted core specifications (mock_it()) for easier contribution
+  
 2.11.13 / 2009-11-22
 --------------------
 
