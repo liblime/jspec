@@ -4,12 +4,13 @@
 		<script src="JSPEC_ROOT/lib/jspec.js"></script>
 		<script src="JSPEC_ROOT/lib/jspec.xhr.js"></script>
 		<script src="../public/javascripts/application.js"></script>
+		<script src="unit/spec.helper.js"></script>
 		<script>
 			function runSuites() {
 				JSpec
-				.exec('spec.js')
+				.exec('unit/spec.js')
 				.run()
-				.report({ fixturePath: '../fixtures' })
+				.report({ fixturePath: 'fixtures' })
 			}
 		</script>
 	</head>

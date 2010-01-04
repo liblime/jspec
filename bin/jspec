@@ -12,7 +12,7 @@ require 'src/installables'
 require 'src/server'
 
 program :name, 'JSpec'
-program :version, '2.11.0'
+program :version, '3.0.0'
 program :description, 'JavaScript BDD Testing Framework'
 default_command :bind
 
@@ -103,7 +103,7 @@ end
 command :shell do |c|
   c.syntax = 'jspec shell [path ...]'
   c.summary = 'JSpec interactive shell'
-  c.description = 'Launch interactive shell with jspec.js, jspec.shell.js, 
+  c.description = 'Launch interactive Rhino shell with jspec.js, jspec.shell.js, 
     and any [path]s given. Simply type "quit" or "exit" to 
     terminate the shell.'
   c.example 'Run shell', 'jspec shell'

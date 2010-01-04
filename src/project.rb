@@ -137,7 +137,7 @@ module JSpec
     def replace_root_in *paths
       paths.each do |path|
         jspec_root = root
-        jspec_root = '..' if vendorized? and path.include? '.html'
+        jspec_root = '.' if vendorized? and path.include? '.html'
         contents = File.read(normalize(path)).gsub 'JSPEC_ROOT', jspec_root
         File.open(normalize(path), 'w') { |file| file.write contents }
       end
