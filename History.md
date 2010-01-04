@@ -10,7 +10,7 @@
   * Added lastRequest() / last_request() helper [#58]
   * Added jspec.xhr.js in templates by default [#44]
   * Added jspec subcommand hooks; checks for spec/commands/*_command.rb [#38]
-  * Added circular reference printing support now shown as { foo: "bar", self: <circular reference> }
+  * Added circular reference printing support now shown as { foo: "bar", self: &lt;circular reference&gt; }
   * Added install sub-command with support for jquery, jqueryui, prototype, mootools, dojo, envjs, and rhino
   * Added update support for --freeze / --symlink [#34]
   * Changed; defaulting browsers using system calls [#104]
