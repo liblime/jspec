@@ -1,11 +1,11 @@
 2.11.13 / 2009-11-22
--------------------
+--------------------
 
   * Fixed dom template root replacement
   * Added Tobias Svensson to contributor list
 
 2.11.12 / 2009-11-12
--------------------
+--------------------
 
   * Changed; DOM formatter displaying several failure messages when present [#89]
   * Changed; displaying multiple error messages for Terminal formatter
@@ -13,7 +13,7 @@
   * Fixed receive matcher negation issue with the number of times called [#150]
 
 2.11.11 / 2009-10-23
--------------------
+--------------------
 
   * Added cheat sheet install docs
   * Added Google Group link
@@ -24,7 +24,7 @@
   * Fixed __END__
 
 2.11.10 / 2009-10-19
--------------------
+--------------------
 
   * Fixed exit status with Terminal reporter [#77] [thanks darxriggs for reporting]
     This is now fixed when using `jspec run --rhino` as well as `java -jar js.jar spec/spec.rhino.js`.
