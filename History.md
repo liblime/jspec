@@ -1,3 +1,92 @@
+2.11.13 / 2009-11-22
+-------------------
+
+  * Fixed dom template root replacement
+  * Added Tobias Svensson to contributor list
+
+2.11.12 / 2009-11-12
+-------------------
+
+  * Changed; DOM formatter displaying several failure messages when present [#89]
+  * Changed; displaying multiple error messages for Terminal formatter
+  * Updated mock timers to 1.0.2
+  * Fixed receive matcher negation issue with the number of times called [#150]
+
+2.11.11 / 2009-10-23
+-------------------
+
+  * Added cheat sheet install docs
+  * Added Google Group link
+  * Added sarah to contrib list
+  * Changed Terminal formatter's java.lang.System.exit() -> quit()
+  * Removed unnecessary flags from several regexps
+  * Fixed DOM paths when using --freeze [#88]
+  * Fixed __END__
+
+2.11.10 / 2009-10-19
+-------------------
+
+  * Fixed exit status with Terminal reporter [#77] [thanks darxriggs for reporting]
+    This is now fixed when using `jspec run --rhino` as well as `java -jar js.jar spec/spec.rhino.js`.
+
+2.11.9 / 2009-10-16
+-------------------
+
+  * Fixed puts() with jQuery instance without .selector should output outerHTML, not innerHTML
+  * Fixed some specs breaking when using Env.js
+  * Fixed Env.js support
+
+2.11.8 / 2009-10-16
+-------------------
+
+  * Fixed newline support in grammar (supports \r\n, \n, \r)
+  * Fixed tabs in grammar [#11]
+
+2.11.7 / 2009-10-15
+-------------------
+
+  * Fixed minor grammar issues for windows users [thanks Tony]
+  * Fixes installation issue when XCode is not present; changed dependency json -> json_pure [thanks esbie]
+  * Fixed Chrome#visit; latest builds of Chrome for the mac are now "Google Chrome"
+
+2.11.6 / 2009-10-12
+-------------------
+
+  * Added Tony to contributor list
+  * Removed JSpec.paramsFor()
+  * Removed module contexts [#72]
+  * Fixed some css styling issues in IE8 [#71]
+  * Fixed; DOM formatter supporting \r\n \r \n for EOL in the body source [Thanks Tony]
+  * Fixed "Access is denied" error in IE
+  * Fixed some css support for older browsers [Thanks Tony]
+
+2.11.5 / 2009-10-10
+-------------------
+
+  * Fixed dependencies (created by github's gem builder removal)
+
+2.11.4 / 2009-10-10
+-------------------
+
+  * Updated installation docs
+  * Removed namespaced dependencies (thanks alot github...)
+
+2.11.3 / 2009-09-30
+-------------------
+
+  * Updated to mock timers 1.0.1
+    fixes an issue where setTimeout(function(){}, 0); tick(100) is never called
+
+2.11.2 / 2009-09-21
+-------------------
+
+  * Fixed example path in rails template
+
+2.11.1 / 2009-09-10
+-------------------
+
+  * Fixed JSpec root when using --symlink, --freeze [#36]
+  * Added __END__ to the grammar (works like Ruby's __END__)
 
 2.11.0 / 2009-09-04
 -------------------
