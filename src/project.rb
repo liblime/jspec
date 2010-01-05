@@ -121,7 +121,7 @@ module JSpec
     # Replace absolute JSPEC_ROOT paths.
     
     def replace_root
-      replace_root_in 'dom.html', 'rhino.js'
+      replace_root_in 'dom.html', 'rhino.js', 'node.js'
     end
     
     ##
@@ -170,7 +170,7 @@ module JSpec
         send "vendorize_with_#{type}"
         say "updated #{type} #{path} -> #{program(:version)}"
       else
-        ['dom.html', 'rhino.js'].each do |path|
+        ['dom.html', 'rhino.js', 'node.js'].each do |path|
           path = normalize path
           next unless File.exists? path
           contents = File.read(path).gsub /jspec-(\d+\.\d+\.\d+)/, "jspec-#{program(:version)}"

@@ -1,8 +1,8 @@
 
 process.mixin(require('sys'))
-require.paths.unshift('spec', 'spec/lib', 'lib')
+require.paths.unshift('spec', 'JSPEC_ROOT/lib', 'lib')
 require('jspec')
-require('spec/unit/spec.helper')
+require('unit/spec.helper')
 require('yourlib')
 
 quit = process.exit
