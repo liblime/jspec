@@ -24,3 +24,5 @@ namespace :spec do
     sh 'spec --color --require spec/ruby/bin/spec_helper.rb spec/ruby/bin/*_spec.rb'
   end
 end
+
+task :gemspec => :build_gemspec
