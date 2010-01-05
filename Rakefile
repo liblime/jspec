@@ -24,34 +24,3 @@ namespace :spec do
     sh 'spec --color --require spec/ruby/bin/spec_helper.rb spec/ruby/bin/*_spec.rb'
   end
 end
-
-namespace :pkg do
-  desc 'Build package'
-  task :build => ['pkg:clear'] do
-    begin
-      # TODO: finish
-    rescue Exception => e
-      puts "Failed to package: #{e}."
-    else 
-      puts "Packaging of JSpec-#{version} completed."
-    end
-  end
-  
-  desc 'Clear packaging'
-  task :clear do
-    if File.directory? 'pkg'
-      sh 'rm -fr pkg/*'
-      sh 'rmdir pkg'
-    end
-  end
-end
-
-def minify from, to
-  sh "jsmin < #{from} > #{to}"
-end
-
-def compress from, to
-  File.open(to, 'w+') do |file|
-    file.write File.read(from).gsub(/(^[\t ]*)|\n/, '')
-  end
-end
