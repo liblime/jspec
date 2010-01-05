@@ -18,10 +18,7 @@ readFile = function(path) {
   return result
 }
 
-if (process.ARGV[2])
-  JSpec.exec('spec/unit/' + process.ARGV[2] + '.spec.js')  
-else
-  JSpec
-    .exec('spec/unit/spec.js')
-JSpec.run({ reporter: JSpec.reporters.Terminal })
-JSpec.report()
+JSpec
+  .exec('spec/unit/spec.js')
+  .run({ reporter: JSpec.reporters.Terminal })
+  .report()
