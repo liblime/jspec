@@ -58,6 +58,7 @@ templates/default/Readme.md
 templates/default/lib/yourlib.js
 templates/default/spec/commands/example_command.rb
 templates/default/spec/dom.html
+templates/default/spec/node.js
 templates/default/spec/rhino.js
 templates/default/spec/server.html
 templates/default/spec/server.rb

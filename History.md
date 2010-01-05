@@ -1,4 +1,11 @@
 
+3.1.0 / 2010-01-05
+==================
+
+  * Added --node (works just like --rhino)
+  * Added Node.js support [#114]
+  * Fixed markdown < > chars in Readme.md
+
 3.0.0 / 2010-01-04
 ==================
 
