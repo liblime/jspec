@@ -27,6 +27,13 @@ module JSpec
     end
     
     ##
+    # Execute _file_ with Node.js
+    
+    def node file
+      system "node #{file}"
+    end
+    
+    ##
     # Execute _file_ with Rhino.
 
     def rhino file
@@ -223,6 +230,9 @@ module JSpec
       # Action
       
       case
+      when options.include?(:node)
+        path ||= normalize('node.js')
+        action = lambda { node(path) }
       when options.include?(:rhino)
         path ||= normalize('rhino.js')
         action = lambda { rhino(path) }

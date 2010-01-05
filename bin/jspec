@@ -148,9 +148,11 @@ command :run do |c|
     jspec so you may simply execute `jspec` in order to bind execution
     of your specs when a file is altered.
     
-    JSpec supports Rhino execution when installed. The [path] is assumed
-    to be spec/rhino.js unless specified. See examples below for
-    using the --rhino switch.
+    Rhino:
+    The [path] is assumed to be spec/rhino.js unless specified.
+    
+    Node.js:
+    The [path] is assumed to be spec/node.js unless specified.
     
     JSpec\'s server is also available via --server, which defaults 
     the [path] to spec/server.html'
@@ -166,6 +168,7 @@ command :run do |c|
   c.option '-p', '--paths PATHS', Array, 'Specify paths when binding, defaults to javascript within ./lib and ./spec'
   c.option '-B', '--bind', 'Auto-run specs when source files or specs are altered'
   c.option '-R', '--rhino', 'Run specs using Rhino'
+  c.option '-N', '--node', 'Run specs using Node.js'
   c.option '-S', '--server', 'Run specs using the JSpec server'
   c.option '-P', '--port NUMBER', Integer, 'Start JSpec server using the given port number'
   c.when_called do |args, options|
