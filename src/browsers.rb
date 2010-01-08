@@ -50,7 +50,7 @@ class Browser
   # Host environment.
  
   def host
-    Config::CONFIG['host']
+    Config::CONFIG['host_os']
   end
   
   ##
@@ -64,7 +64,7 @@ class Browser
   # Check if we are using windows.
   
   def windows?
-    host.include? 'mswin'
+    host =~ /mswin|mingw/
   end
   
   ##
