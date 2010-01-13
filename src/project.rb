@@ -268,7 +268,7 @@ module JSpec
     # Return the Project instance which should be used for _dest_. 
     
     def self.for dest
-      (File.directory?("#{dest}/vendor") ? 
+      (File.exists?("#{dest}/config/boot.rb") ?
         JSpec::Project::Rails : 
           JSpec::Project).new(dest)
     end
