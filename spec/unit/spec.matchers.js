@@ -183,6 +183,10 @@ describe 'Matchers'
       (/(foo)?bar/).should.include '(foo)'
     end
     
+    it 'should check if a string contains a substring'
+      'if (foo) return [foo, bar]'.should.include '[foo, bar'
+    end
+    
     it 'should check if a function body includes a string'
       -{ return [foo, bar] }.should.include 'foo', 'bar'
     end
