@@ -38,7 +38,7 @@ and **much more**.
   * Interactive Shell
   * Ruby on Rails Integration
   * Install support projects with a single command (jQuery, Rhino, Prototype, Dojo, etc)
-  * Tiny (18 kb compressed, 1500-ish LOC)
+  * Tiny (2000-ish LOC)
   
 ## Companies Using JSpec
 
