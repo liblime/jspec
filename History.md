@@ -1,4 +1,11 @@
 
+3.1.2 / 2010-01-14
+==================
+
+  * Changed dependency; commander 4.0.1 for JRuby support
+  * Fixed rails init issue with node.js. Closes #135
+  * Fixed bin specs
+
 3.1.1 / 2010-01-14
 ==================
 
