@@ -1,4 +1,9 @@
 
+3.1.1 / 2010-01-14
+==================
+
+  * Fixed include matcher substring matching regexp issue. Closes #132
+
 3.1.0 / 2010-01-05
 ==================
 
