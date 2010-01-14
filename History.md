@@ -1,4 +1,10 @@
 
+3.1.3 / 2010-01-14
+==================
+
+  * Fixed node.js template which was missing fixturePath option. Closes #131
+  * Fixed some stray globals
+
 3.1.2 / 2010-01-14
 ==================
 
