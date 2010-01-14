@@ -14,7 +14,7 @@ Echoe.new "jspec", version do |p|
   p.url = "http://visionmedia.github.com/jspec"
   p.runtime_dependencies << "sinatra"
   p.runtime_dependencies << "json_pure"
-  p.runtime_dependencies << "commander >=4.0.0"
+  p.runtime_dependencies << "commander >=4.0.1"
   p.runtime_dependencies << "bind >=0.2.8"
 end
 
