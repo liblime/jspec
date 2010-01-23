@@ -2,7 +2,7 @@
 # JSpec
 
 JSpec is a minimalistic JavaScript behavior driven development framework,
-providing **simple installatio**n, extremely **low learning curve**, absolutely **no pollution**
+providing **simple installation**, extremely **low learning curve**, absolutely **no pollution**
 to core prototypes, async request support, and incredibly sexy syntax, tons of matchers
 and **much more**.
 
@@ -882,7 +882,7 @@ Or run via the terminal using Rhino:
 
     $ jspec run --rhino
   
-## Support Browsers
+## Supported Browsers
 
 Browsers below are supported and can be found in _server/browsers.rb_, however
 your _spec/server.rb_ file may support additional browsers.
@@ -944,7 +944,7 @@ missed you on this list please let me know
 
 (The MIT License)
 
-Copyright (c) 2008 - 2009 TJ Holowaychuk <tj@vision-media.ca>
+Copyright (c) 2008 - 2010 TJ Holowaychuk <tj@vision-media.ca>
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
