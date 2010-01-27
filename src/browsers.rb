@@ -190,6 +190,36 @@ class Browser
   end
   
   #--
+  # WebKit
+  #++
+  
+  class WebKit < self
+    def self.matches_agent? string
+      string =~ / AppleWebKit\/[\d\.]+\+/i
+    end
+    
+    def self.matches_name? string
+      string =~ /webkit|wk/i
+    end
+    
+    def supported?
+      macos?
+    end
+    
+    def setup
+      applescript 'tell application "WebKit" to make new document'
+    end           
+    
+    def visit uri 
+      applescript 'tell application "WebKit" to set URL of front document to "' + uri + '"'
+    end
+    
+    def to_s
+      'WebKit Nightly'
+    end
+  end
+  
+  #--
   # Internet Explorer
   #++
   

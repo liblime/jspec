@@ -817,9 +817,10 @@ Browsers supported in core:
 
 - Browser::Default (system default)
 - Browser::Safari
+- Browser::WebKit
 - Browser::Chrome
-- Browser::Opera
 - Browser::Firefox
+- Browser::Opera
 - Browser::IE
   
 Supplied routes:
@@ -888,6 +889,7 @@ Browsers below are supported and can be found in _server/browsers.rb_, however
 your _spec/server.rb_ file may support additional browsers.
 
 - Safari
+- WebKit
 - Chrome
 - Firefox
 - Opera

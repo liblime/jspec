@@ -158,7 +158,7 @@ command :run do |c|
     the [path] to spec/server.html'
   c.example 'Run once in default browser', 'jspec run'
   c.example 'Run once in Safari and Firefox', 'jspec run --browsers Safari,Firefox'
-  c.example 'Run once in Opera, Firefox, and Chrome', 'jspec run --browsers opera,ff,chrome'
+  c.example 'Run once in Opera, Firefox, Chrome, and WebKit', 'jspec run --browsers opera,ff,chrome,webkit'
   c.example 'Run custom spec file', 'jspec run foo.html'
   c.example 'Auto-run browsers when a file is altered', 'jspec run --bind --browsers Safari,Firefox'
   c.example 'Shortcut for the previous example', 'jspec --browsers Safari,Firefox'
