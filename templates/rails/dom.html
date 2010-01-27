@@ -9,8 +9,8 @@
 			function runSuites() {
 				JSpec
 				.exec('unit/spec.js')
-				.run()
-				.report({ fixturePath: 'fixtures' })
+				.run({ fixturePath: 'fixtures' })
+				.report()
 			}
 		</script>
 	</head>
