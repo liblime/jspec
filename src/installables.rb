@@ -211,7 +211,7 @@ module JSpec
     
     class Mootools < URI
       name 'MooTools'
-      current '1.2.3'
+      current '1.2.4'
       uri 'http://ajax.googleapis.com/ajax/libs/mootools/RELEASE/mootools.js'
     end
     
