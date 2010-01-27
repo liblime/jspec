@@ -181,7 +181,7 @@ module JSpec
     
     class Jquery < URI
       name 'jQuery'
-      current '1.3.2'
+      current '1.4.0'
       uri 'http://ajax.googleapis.com/ajax/libs/jquery/RELEASE/jquery.js'
     end
     
@@ -221,7 +221,7 @@ module JSpec
     
     class Dojo < URI
       name 'Dojo'
-      current '1.3.2'
+      current '1.4.0'
       uri 'http://ajax.googleapis.com/ajax/libs/dojo/RELEASE/dojo/dojo.xd.js.uncompressed.js'
     end
     
