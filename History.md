@@ -1,4 +1,9 @@
 
+3.2.1 / 2010-02-02
+==================
+
+  * Fixed JRuby compatibility; Look up host in a JRuby-compatible way.
+
 3.2.0 / 2010-01-27
 ==================
 
