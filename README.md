@@ -24,7 +24,7 @@ and **much more**.
   * Extremely simple and intuitive matcher declaration
   * Over 45 core matchers
   * Allows parens to be optional when using matchers to increase readability
-  * Several helpful reporters (DOM, Console, Terminal, ...)
+  * Several helpful reporters (DOM, Terminal, ...)
   * Assertion graphs displaying how many, and which assertions pass or failed
   * Default / customizable evaluation contexts
   * DOM sandbox support
@@ -519,7 +519,7 @@ to paste the issue ticket's comment(s) below this area for reference.
 To change a reporter simply alter the options hash like below, assigning
 a new constructor, or pass it within the hash to `run()`:
 
-    JSpec.options.reporter = JSpec.reporters.Console
+    JSpec.options.reporter = JSpec.reporters.Terminal
 
 OR
 
