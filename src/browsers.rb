@@ -97,10 +97,6 @@ class Browser
       system 'xdg-open', uri if linux?
     end
     
-    def supported?
-      macos? or linux?
-    end
-    
     def to_s
       'Default'
     end
