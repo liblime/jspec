@@ -94,10 +94,11 @@ class Browser
     def visit uri
       system 'open', uri if macos?
       system 'start', uri if windows?
+      system 'xdg-open', uri if linux?
     end
     
     def supported?
-      macos?
+      macos? or linux?
     end
     
     def to_s
