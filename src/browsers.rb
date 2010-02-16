@@ -32,7 +32,7 @@ class Browser
   end
   
   ##
-  # Weither or not the browser is supported.
+  # Whether or not the browser is supported.
   
   def supported?; true end
   
