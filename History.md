@@ -1,4 +1,13 @@
 
+3.3.0 / 2010-02-16
+==================
+
+  * Added support for Chrome on Linux [alex-bepple]
+  * Added node.js support in core, no longer has node-specific code in template
+  * Fixed linux Default browser support, use 'xdg-open' [alex-bepple]
+  * Fixed lastRequest global
+  * Removed Console reporter. Closes #142
+
 3.2.1 / 2010-02-02
 ==================
 
