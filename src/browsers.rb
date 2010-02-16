@@ -32,7 +32,7 @@ class Browser
   end
   
   ##
-  # Weither or not the browser is supported.
+  # Whether or not the browser is supported.
   
   def supported?; true end
   
@@ -94,10 +94,7 @@ class Browser
     def visit uri
       system 'open', uri if macos?
       system 'start', uri if windows?
-    end
-    
-    def supported?
-      macos?
+      system 'xdg-open', uri if linux?
     end
     
     def to_s
@@ -177,11 +174,12 @@ class Browser
     end
     
     def supported?
-      macos?
+      macos? or linux?
     end
     
     def visit uri
       system "open -g -a 'Google Chrome' #{uri}" if macos?
+      system "google-chrome #{uri}" if linux?
     end
     
     def to_s
