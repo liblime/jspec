@@ -47,11 +47,13 @@ describe 'jQuery'
       end
     end
 
-    describe 'have_tags / have_many'
+    describe 'have_tags / have_many / have_any'
       it 'should check if more than one child is present'
         elem.should.have_tags 'option'
         elem.should.have_many 'option'
         elem.should.not.have_many 'label'
+        elem.find('option').remove()
+        elem.should.not.have_any 'option'
       end
     end
 
