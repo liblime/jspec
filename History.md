@@ -1,4 +1,10 @@
 
+3.3.1 / 2010-02-22
+==================
+
+  * Added have_any matcher
+  * Fixed; using readFileSync for node.js support
+
 3.3.0 / 2010-02-16
 ==================
 
