@@ -917,6 +917,7 @@ your _spec/server.rb_ file may support additional browsers.
 
 - [Google Group](http://groups.google.com/group/jspec)
 - IRC Channel [irc://irc.freenode.net#jspec](irc://irc.freenode.net#jspec)
+- Featured in Devmag ["Advanced JavaScript"](http://www.dev-mag.com/2010/02/18/advanced-javascript/) ebook for 4$
 - Featured article in JSMag [http://www.jsmag.com/main.issues.description/id=21/](http://www.jsmag.com/main.issues.description/id=21/)
 - Syntax comparison with other frameworks [http://gist.github.com/92283](http://gist.github.com/92283)
 - Get the TextMate bundle at [https://github.com/visionmedia/jspec.tmbundle/tree](https://github.com/visionmedia/jspec.tmbundle/tree)
