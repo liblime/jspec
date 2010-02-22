@@ -335,23 +335,6 @@ describe 'Utility'
       end
     end
     
-    describe 'with jQuery'
-      it 'should output selector when present'
-        object = { jquery: '1.3.2', selector: '.foo bar' }
-        puts(object).should.eql 'selector ".foo bar"'
-      end
-      
-      it 'should output outerHTML otherwise'
-        puts($('<p>Foo</p>')).should.match(/<p>Foo<\/p>/i)
-      end
-    end
-    
-    describe 'with elements'
-      it 'should output the outerHTML'
-        puts($('<p>Foo</p>').get(0)).should.match(/<p>Foo<\/p>/i)
-      end
-    end
-    
     describe 'circular references'
       it 'should output <circular reference> with objects'
         object = { a: 1 }
