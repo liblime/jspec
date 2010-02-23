@@ -13,7 +13,6 @@ describe 'jQuery'
           successCalled = true
         },
         error: function(xhr, status, e) {
-          alert(status)
           errorCalled = true
         }
       })
