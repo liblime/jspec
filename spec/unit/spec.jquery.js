@@ -1,6 +1,6 @@
 
 describe 'jQuery'
-  describe 'with jQuery'
+  describe 'puts()'
     it 'should output selector when present'
       object = { jquery: '1.3.2', selector: '.foo bar' }
       puts(object).should.eql 'selector ".foo bar"'
