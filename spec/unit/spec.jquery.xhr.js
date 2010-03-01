@@ -40,6 +40,15 @@ describe 'jQuery'
     end
   end
   
+  it 'should work with getScript()'
+    mock_request().and_return('var foo = "bar"', 'application/javascript', 200)
+    var called = false
+    $.getScript('foobar', function(data, textStatus){
+      called = true
+    })
+    called.should.be_true
+  end
+  
   describe '.getJSON()'
     it 'should work with mockRequest'
       mockRequest().and_return('{ foo : "bar" }')
