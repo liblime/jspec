@@ -38,6 +38,25 @@ describe 'jQuery'
       successCalled.should.be_false
       errorCalled.should.be_true
     end
+    
+    it "should call the success function when GET script"
+      mock_request().and_return('', 'application/javascript', 200)
+      var successCalled = false
+      var errorCalled = false
+      $.ajax({
+        type: "GET",
+        url: 'http://code.jquery.com/jquery-1.4.2.js',
+        dataType: 'script',
+        success: function() {
+          successCalled = true
+        },
+        error: function() {
+          errorCalled = false
+        }
+      })
+      successCalled.should.be_true
+      errorCalled.should.be_false
+    end
   end
   
   it 'should work with getScript()'
