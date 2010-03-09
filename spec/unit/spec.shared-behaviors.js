@@ -1,4 +1,11 @@
+// TODO: shared behavior hooks...???
+// TODO: fix duplication of behavior find 
+
 shared_behaviors_for 'ninjas'
+	before
+		ninja = {makesNoSound : function(){return true;}}
+	end
+
 	it 'should be silent'
 		ninja.makesNoSound().should.be_true
 	end
@@ -26,7 +33,7 @@ describe 'Shared Behaviors'
       person = new User('joe')
     end
     
-		should_behave_like('person')  
+		should_behave_like('person')  		
   end
 
   describe 'Administrator' 
@@ -132,14 +139,14 @@ describe 'Shared Behaviors'
 		
 		describe 'override behavior'
 			it 'should find local shared behavior before global'
-				JSpec.findSharedBehavior('person').specs[0].name.should.eql 'should not have name'
+				JSpec.findSharedBehavior('person').specs[0].description.should.eql('should not have name')
 			end
 		end
 		
 		it 'should find shared global behavior by name'
 			JSpec.findGlobalSharedBehavior('ninjas').should.be_a JSpec.Suite
 		end
-		
+	
     it 'should return null when not found at either level'
       JSpec.findGlobalSharedBehavior('Rawr').should.be_null
     end
