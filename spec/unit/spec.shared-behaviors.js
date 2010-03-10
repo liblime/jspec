@@ -1,5 +1,7 @@
-// TODO: shared behavior hooks...???
+// TODO: shared behavior hooks...??? when do they run in rspec?
 // TODO: fix duplication of behavior find 
+// TODO: fix helper methods in describe blocks
+// TODO: breaking changes: before_all runs for every suite, including nested
 
 shared_behaviors_for 'ninjas'
 	before

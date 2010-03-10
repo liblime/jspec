@@ -5,12 +5,6 @@ describe 'Grammar'
     true.should.be_true
   end
   
-  n = 10
-  
-  it 'should allow literal javascript outside of blocks'
-    n.should.eql 10
-  end
-  
   it 'should escape <html> in <p>descriptions</p> and body'
     '<p></p>'.should.eql '<p></p>'
   end
@@ -166,8 +160,10 @@ describe 'Grammar'
   end
   
   describe 'before_each / after_each blocks'
-    hits = []
-    
+   	before
+ 			hits = []
+    end
+
     before_each
       n = 1
       hits.push('before_each')
@@ -194,11 +190,11 @@ describe 'Grammar'
       it 'should be accessable'
         n.should.eql 1
         o.should.eql 2
-        hits.should.eql ['before_each', 'after_each', 'before_each', 'after_each', 'before_each']
+        hits.should.eql ['before_each']
       end
       
       it 'should continue hits'
-        hits.should.eql ['before_each', 'after_each', 'before_each', 'after_each', 'before_each', 'after_each', 'before_each']
+        hits.should.eql ['before_each', 'after_each', 'before_each']
       end
       
       describe 'with more hooks'
@@ -210,8 +206,8 @@ describe 'Grammar'
           hits.push('after_each')
         end
         
-        it 'should continue hits, while cascading properly'
-          hits.should.eql ['before_each', 'after_each', 'before_each', 'after_each', 'before_each', 'after_each', 'before_each', 'after_each', 'before_each', 'before_each']
+        it 'should cascade properly'
+          hits.should.eql ['before_each', 'before_each']
         end
       end
       
