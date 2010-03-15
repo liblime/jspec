@@ -2,7 +2,7 @@
 require.paths.unshift('spec', 'JSPEC_ROOT/lib', 'lib')
 require('jspec')
 require('unit/spec.helper')
-require('yourlib')
+yourlib = require('yourlib')
 
 JSpec
   .exec('spec/unit/spec.js')

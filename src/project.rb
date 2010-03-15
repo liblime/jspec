@@ -80,7 +80,7 @@ module JSpec
 
     def init! options = {}
       verify_empty!
-      copy_template :default
+      copy_template options[:node] ? :node : :default
       vendorize_with_symlink if options.include? :symlink
       vendorize_with_copy if options.include? :freeze
       replace_root
