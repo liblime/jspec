@@ -64,6 +64,12 @@ templates/default/spec/server.html
 templates/default/spec/server.rb
 templates/default/spec/unit/spec.helper.js
 templates/default/spec/unit/spec.js
+templates/node/History.md
+templates/node/Readme.md
+templates/node/lib/yourlib.js
+templates/node/spec/node.js
+templates/node/spec/unit/spec.helper.js
+templates/node/spec/unit/spec.js
 templates/rails/commands/example_commands.rb
 templates/rails/dom.html
 templates/rails/rhino.js
