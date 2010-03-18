@@ -48,6 +48,7 @@ To add or request removal from this list please email tj@vision-media.ca
   * [Google - YouTube](http://youtube.com)
   * [Palm](http://palm.com)
   * [Carfax](http://carfax.com)
+  * [Apache CouchDB](http://couchdb.apache.org)
   * [Vision Media](http://vision-media.ca)
 
 ## Installation
