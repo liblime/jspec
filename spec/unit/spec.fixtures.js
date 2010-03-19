@@ -14,4 +14,11 @@ describe 'Utility'
       delete JSpec.cache['test']
     end
   end
+  
+  describe 'json_fixture()'
+    it 'should evaluate json fixtures'
+      json_fixture('test').should.eql { users : { tj : { email : 'tj@vision-media.ca' }}}
+      json_fixture('test.json').should.eql { users : { tj : { email : 'tj@vision-media.ca' }}}
+    end
+  end
 end
