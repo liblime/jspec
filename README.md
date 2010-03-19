@@ -541,6 +541,12 @@ manor:
 In order for the `fixture()` utility to function you must pass the **fixturePath** option
 to _JSpec.run()_ which provides JSpec with the fixture directory.
 
+The `json_fixture()` utility works much the same as `fixture()` however `fixture('data')` 
+will be parsed as JSON, and resolved as shown below:
+
+  - <fixturePath>/data
+  - <fixturePath>/data.json
+
 ## Testing DOM Elements
 
 When using jQuery testing DOM elements is very easy. Many may think they require specific

@@ -12,6 +12,6 @@ JSpec
 .exec('spec/unit/spec.shared-behaviors.js')
 .exec('spec/unit/spec.grammar.js')
 .exec('spec/unit/spec.grammar-less.js')
-//.exec('spec/unit/spec.fixtures.js') TODO: when exceptions bubble properly uncomment
+.exec('spec/unit/spec.fixtures.js')
 .run({ reporter: JSpec.reporters.Terminal, failuresOnly: true, fixturePath: 'spec/fixtures' })
 .report()
