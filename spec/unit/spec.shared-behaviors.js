@@ -1,15 +1,153 @@
-// TODO: shared behavior hooks...??? when do they run in rspec?
-// TODO: fix duplication of behavior find 
-// TODO: fix helper methods in describe blocks
-// TODO: breaking changes: before_all runs for every suite, including nested
+// TODO: add correct support for :nested / :self option for before / each
+// TODO: cleaner way to not nest before/after?
 
-shared_behaviors_for 'ninjas'
+shared_behaviors_for 'animal'	
 	before
-		ninja = {makesNoSound : function(){return true;}}
+		animal = {eats: function(){return true;}}
+	end
+	
+	it 'should eat'
+		animal.eats().should.eql true 
+	end
+end
+
+shared_behaviors_for 'canine'
+	should_behave_like('animal')
+
+	before
+		animal.hasFourLegs = function(){return true;}
+		animal.barks = function(){return true;}
 	end
 
-	it 'should be silent'
-		ninja.makesNoSound().should.be_true
+	it 'should have 4 legs'
+		animal.hasFourLegs().should.eql true
+	end
+	
+	it 'should bark'
+		animal.barks().should.eql true
+	end
+end
+
+describe 'mastif'
+	should_behave_like('canine')
+
+	before
+		animal.weight = 200
+	end
+
+	it 'should weigh > 100 lbs'
+		animal.weight.should.be_greater_than 100
+	end	
+end
+
+describe 'poodle breeds'
+	should_behave_like('canine')
+	
+	shared_behaviors_for 'poodle'
+		before
+			animal.isMean = true
+		end
+
+		it 'should be mean'
+			animal.isMean.should.eql true
+		end
+	end
+	
+	describe 'fancy poodle'
+		should_behave_like('poodle')
+		
+		before
+			animal.looksRidiculous = true
+		end
+		
+		it 'should look ridiculous'
+			animal.looksRidiculous.should.eql true
+		end
+	end
+end
+
+describe 'shared behaviors'
+	before
+		before_sequence = []
+		before_each_sequence = []
+		after_sequence = []
+		after_each_sequence = []
+	end
+	
+	shared_behaviors_for 'A'
+		before
+			before_sequence.push('A')
+		end
+			
+		after
+			after_sequence.push('A')
+		end
+
+		before_each
+			before_each_sequence.push('A')
+		end
+			
+		after_each
+			after_each_sequence.push('A')
+		end		
+	end
+	
+	shared_behaviors_for 'B'
+		before
+			before_sequence.push('B')
+		end
+			
+		after
+			after_sequence.push('B')
+		end		
+		
+		before_each
+			before_each_sequence.push('B')
+		end
+			
+		after_each
+			after_each_sequence.push('B')
+		end		
+	end
+
+	describe 'before ordering'
+		should_behave_like('B')
+
+		before
+			before_sequence.push('C')
+		end
+
+		should_behave_like('A')
+						
+		after 
+			after_sequence.push('C')
+		end
+	
+		before_each
+			before_each_sequence.push('C')
+		end
+			
+		after_each
+			after_each_sequence.push('C')
+		end
+				
+		it "should sequence befores in include order"
+			before_sequence.should.eql ['B', 'C', 'A']
+		end
+
+		it "should sequence before_eachs in include order"
+			before_each_sequence.should.eql ['B', 'A', 'C', 'B', 'A', 'C']
+		end		
+	end
+	
+	describe 'after ordering'
+		it "should sequence afters in include order"
+			after_sequence.should.eql ['B', 'A', 'C']
+		end
+	
+		it "should sequence after_eachs in include order"
+			after_each_sequence.should.eql ['B', 'A', 'C', 'B', 'A', 'C']		
+		end	
 	end
 end
 
@@ -91,20 +229,6 @@ describe 'Shared Behaviors'
     end
   end
   
-  describe 'findSuite'
-    it 'should find a suite by full description'
-      JSpec.findSuite('Shared Behaviors Administrator').should.be_a JSpec.Suite
-    end
-    
-    it 'should find a suite by name'
-      JSpec.findSuite('User').should.be_a JSpec.Suite
-    end
-    
-    it 'should return null when not found'
-      JSpec.findSuite('Rawr').should.be_null
-    end
-  end
-
 	describe 'findLocalSharedBehavior'
 		it 'should find shared behavior by name'
 			JSpec.findLocalSharedBehavior('User with toString()').should.be_a JSpec.Suite
@@ -132,7 +256,6 @@ describe 'Shared Behaviors'
 	end
 	
 	describe 'findSharedBehavior'
-		
 		shared_behaviors_for 'person'
 			it 'should not have name'
 				person.should.not.have_property 'name'
@@ -141,18 +264,19 @@ describe 'Shared Behaviors'
 		
 		describe 'override behavior'
 			it 'should find local shared behavior before global'
-				JSpec.findSharedBehavior('person').specs[0].description.should.eql('should not have name')
+				JSpec.findSharedBehavior('person').body.toString().should.match(/should not have name/)
 			end
 		end
 		
 		it 'should find shared global behavior by name'
-			JSpec.findGlobalSharedBehavior('ninjas').should.be_a JSpec.Suite
+			JSpec.findGlobalSharedBehavior('animal').should.be_a JSpec.Suite
 		end
 	
     it 'should return null when not found at either level'
       JSpec.findGlobalSharedBehavior('Rawr').should.be_null
     end
-		
 	end
-
 end
+
+
+
