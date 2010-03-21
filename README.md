@@ -48,6 +48,7 @@ To add or request removal from this list please email tj@vision-media.ca
   * [Google - YouTube](http://youtube.com)
   * [Palm](http://palm.com)
   * [Carfax](http://carfax.com)
+  * [Apache CouchDB](http://couchdb.apache.org)
   * [Vision Media](http://vision-media.ca)
 
 ## Installation
@@ -590,6 +591,12 @@ manor:
 
 In order for the `fixture()` utility to function you must pass the **fixturePath** option
 to _JSpec.run()_ which provides JSpec with the fixture directory.
+
+The `json_fixture()` utility works much the same as `fixture()` however `fixture('data')` 
+will be parsed as JSON, and resolved as shown below:
+
+  - <fixturePath>/data
+  - <fixturePath>/data.json
 
 ## Testing DOM Elements
 

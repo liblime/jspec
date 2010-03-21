@@ -12,7 +12,7 @@ require 'src/installables'
 require 'src/server'
 
 program :name, 'JSpec'
-program :version, '3.3.2'
+program :version, '3.3.3'
 program :description, 'JavaScript BDD Testing Framework'
 default_command :bind
 
@@ -79,6 +79,9 @@ command :init do |c|
     when [dest] is not specified. The template includes several files for 
     running via Rhino, DOM, and the JSpec Rack server.
     
+    JSpec is also packed with a nodejs template via --node, omitting all of the 
+    unnecessary browser related files.
+    
     Additional switches --freeze, and --symlink are available in order
     to preserve the version of JSpec at the time of initialization. Otherwise
     incompatibilities from later versions may prevent your suite from
@@ -86,6 +89,7 @@ command :init do |c|
     
     To update a project to the recent version of JSpec use
     `jspec help udpate` for more information.'
+  c.option '-n', '--node', 'Initialize nodejs template'
   c.option '-R', '--rails', 'Initialize rails template from rails root directory'
   c.option '-f', '--freeze', 'Copy the JSpec library'
   c.option '-s', '--symlink', 'Symlink the JSpec library instead of copying it'
