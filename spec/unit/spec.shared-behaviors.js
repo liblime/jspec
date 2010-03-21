@@ -1,6 +1,3 @@
-// TODO: add correct support for :nested / :self option for before / each
-// TODO: cleaner way to not nest before/after?
-
 shared_behaviors_for 'animal'	
 	before
 		animal = {eats: function(){return true;}}

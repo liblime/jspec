@@ -477,6 +477,10 @@ scope, they will both run, but this can help keep your specs readable.
   - run before each specification
 - after_each
   - run after each specification
+- before_nested
+  - run once before the suite and once before any nested suites
+- after_nested
+  - run once after the suite and once after any nested suites
 
 ## Custom Contexts
 

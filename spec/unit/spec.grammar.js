@@ -166,6 +166,37 @@ end
     end
   end
   
+  describe 'before_nested / after_nested blocks'
+    before
+			x = 0
+			y = 0
+		end
+
+		before_nested
+      x++
+    end
+    
+    after_nested
+      y++
+    end
+    
+    it 'should execute before_nested before suite'
+      x.should.eql 1
+    end
+       
+    describe 'with nested describe'
+      it 'should execute before_nested before nested suite'
+        x.should.eql 2
+      end
+		end
+		
+		describe 'after_nested'
+			it 'should execute after_nested after nested suite'
+				y.should.eql 1
+			end
+		end
+  end
+
   describe 'before_each / after_each blocks'
     before
 			hits = []
