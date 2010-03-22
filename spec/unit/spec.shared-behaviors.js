@@ -211,7 +211,6 @@ describe 'Shared Behaviors'
   describe 'Manager'
     should_behave_like('person')
     should_behave_like('User with toString()')
-    should_behave_like('foobar')
     
     before
       Manager = function(name) { this.name = name }
