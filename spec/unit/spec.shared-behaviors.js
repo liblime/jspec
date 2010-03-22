@@ -1,6 +1,6 @@
 shared_behaviors_for 'animal'	
 	before
-		animal = {eats: function(){return true;}}
+		animal = { eats: function(){ return true } }
 	end
 	
 	it 'should eat'
@@ -12,8 +12,8 @@ shared_behaviors_for 'canine'
 	should_behave_like('animal')
 
 	before
-		animal.hasFourLegs = function(){return true;}
-		animal.barks = function(){return true;}
+		animal.hasFourLegs = function(){ return true }
+		animal.barks = function(){ return true }
 	end
 
 	it 'should have 4 legs'
@@ -187,7 +187,7 @@ describe 'Shared Behaviors'
     before
       SuperAdmin = function(name) { this.name = name }
       SuperAdmin.prototype.may = function(perm){ return true }
-	  	SuperAdmin.prototype.canCreateUsers = function(){ return true}
+	  	SuperAdmin.prototype.canCreateUsers = function(){ return true }
       person = new SuperAdmin('tj')
     end
 
