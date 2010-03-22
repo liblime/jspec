@@ -368,12 +368,12 @@ JSpec's support for shared behaviors allows multiple suites or describe blocks t
 common functionality, including specs and hooks. Shared functionality is run in the order in
 which it is included in the hosting suite. For example a canine would inherit all 
 behavior of an animal, and particular breeds of dog would inherit all behavior from the canine.
-Note that as in the poodle example, shared behavior sets can be nested inside suites or describe
-blocks and will be visible only to other describe blocks at or below the same nesting level.
+Note that as in the poodle example, shared behaviors can be nested inside suites or describe
+blocks and will be visible only to other describe blocks _at or below_ the same nesting level.
 
 	shared_behaviors_for 'animal'	
 		before
-			animal = {eats: function(){return true;}}
+			animal = { eats: function(){return true }}
 		end
 	
 		it 'should eat'
@@ -385,8 +385,8 @@ blocks and will be visible only to other describe blocks at or below the same ne
 		should_behave_like('animal')
 
 		before
-			animal.hasFourLegs = function(){return true;}
-			animal.barks = function(){return true;}
+			animal.hasFourLegs = function(){ return true }
+			animal.barks = function(){ return true }
 		end
 
 		it 'should have 4 legs'
@@ -437,7 +437,7 @@ blocks and will be visible only to other describe blocks at or below the same ne
 	end
 
 NOTE: When the should_behave_like() call is searching for behaviors to include, it works inside out.
-      Therefore any nested shared behavior sets by the same name as a shared behavior set at a higher
+      Therefore any nested shared behaviors by the same name as a shared behavior at a higher
       nesting level will override the one at the higher level.
  
 
