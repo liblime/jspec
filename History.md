@@ -1,8 +1,25 @@
-4.0.0 / 2010-03-30
+
+4.0.0 / 2010-03-22
 ==================
-  * Added better support for nested behaviors. Breaks compatibility with old functioning of before/after hook. 
-    Before/after hook is now only executed once per suite, and you must use before_nested/after_nested to execute 
-    hooks for nested suites.
+
+  * Added json_fixture(). Closes #157
+  
+  * Added swalke16 to contrib list (shared behavior fixes)
+  
+  * Added shared_behaviors_for() for shared behavior support.
+    This is essentially a Suite instance, however the shared
+    behavior itself is no longer executed, only suites which use
+    should_behave_like().
+    
+  * Added before_nested / after_nested for legacy support.
+    These hooks function just as before / after did < 4.0.0,
+    where they will execute once per nested suite as well.
+    
+  * Changed; before / after are now executed ONLY once, not
+    when a nested suite is running. Use before_nested / after_nested 
+    if you wish to re-gain this functionality.
+    
+  * Removed JSpec.error()
 
 3.3.3 / 2010-03-15
 ==================
