@@ -1,7 +1,5 @@
-
 describe 'Grammar'
-  
-  it  'should allow "it" spec literal'
+  it 'should allow "it" spec literal'
     true.should.be_true
   end
   
@@ -10,7 +8,7 @@ describe 'Grammar'
   it 'should allow literal javascript outside of blocks'
     n.should.eql 10
   end
-  
+
   it 'should escape <html> in <p>descriptions</p> and body'
     '<p></p>'.should.eql '<p></p>'
   end
@@ -75,9 +73,9 @@ describe 'Grammar'
   
   it 'should allow multi-line expect() assertions'
     expect(' \
-      foo    \
-      bar    \
-    ').to(include, 'foo', 'bar')
+foo \
+bar \
+').to(include, 'foo', 'bar')
   end
   
   it 'should allow commenting out of conversions'
@@ -106,21 +104,21 @@ describe 'Grammar'
     'bar'.should.not.equal 'foo'
   end
   
-	describe 'with tabs'
-		before_each
-			foo = 'bar'
-		end
-		
-		it 'should work'
-		  foo.should.eql 'bar'
-		end
-		
-	  it 'should work'
-		  true.should.be	true
-		  true.should.be(true)
-		  true.should.be(true);
-		end
-	end
+describe 'with tabs'
+before_each
+foo = 'bar'
+end
+ 
+it 'should work'
+foo.should.eql 'bar'
+end
+ 
+it 'should work'
+true.should.be true
+true.should.be(true)
+true.should.be(true);
+end
+end
   
   describe 'with nested describe'
     it 'should work'
@@ -141,7 +139,7 @@ describe 'Grammar'
       hits.push('before')
     end
     
-    after 
+    after
       n = 0
       hits.push('after')
     end
@@ -158,15 +156,51 @@ describe 'Grammar'
     end
     
     describe 'with nested describe'
-      it 'should be accessable'
-        n.should.eql 1
-        hits.should.eql ['before']
+      it 'variables should be accessable'
+        n.should.eql 2
       end
+
+			it 'should only run for outer describe'
+        hits.should.eql ['before']
+			end
     end
   end
   
+  describe 'before_nested / after_nested blocks'
+    before
+			x = 0
+			y = 0
+		end
+
+		before_nested
+      x++
+    end
+    
+    after_nested
+      y++
+    end
+    
+    it 'should execute before_nested before suite'
+      x.should.eql 1
+    end
+       
+    describe 'with nested describe'
+      it 'should execute before_nested before nested suite'
+        x.should.eql 2
+      end
+		end
+		
+		describe 'after_nested'
+			it 'should execute after_nested after nested suite'
+				y.should.eql 1
+			end
+		end
+  end
+
   describe 'before_each / after_each blocks'
-    hits = []
+    before
+			hits = []
+		end
     
     before_each
       n = 1
@@ -202,7 +236,7 @@ describe 'Grammar'
       end
       
       describe 'with more hooks'
-        before_each 
+        before_each
           hits.push('before_each')
         end
         
@@ -232,10 +266,10 @@ describe 'Grammar'
   end
   
 end
-
+ 
 __END__
-
+ 
 this should not matter because it is
 considered a comment by the JSpec grammar :)
-and is sometimes useful for temp reference info 
+and is sometimes useful for temp reference info
 when writting specs.

@@ -365,34 +365,81 @@ on any object when using the JSpec grammar:
 ## Shared Behaviors
 
 JSpec's support for shared behaviors allows multiple suites or describe blocks to share
-common functionality. For example an Admin, would inherit all specs of User:
+common functionality, including specs and hooks. Shared functionality is run in the order in
+which it is included in the hosting suite. For example a canine would inherit all 
+behavior of an animal, and particular breeds of dog would inherit all behavior from the canine.
+Note that as in the poodle example, shared behavior sets can be nested inside suites or describe
+blocks and will be visible only to other describe blocks at or below the same nesting level.
 
-    describe 'User'
-      before
-        User = function(name) { this.name = name }
-        user = new User('joe')
-      end
-      
-      it 'should have a name'
-        user.should.have_property 'name'
-      end
-      
-      describe 'Administrator'
-        should_behave_like('User')
-    
-        before
-          Admin = function(name) { this.name = name }
-          Admin.prototype.may = function(perm){ return true }
-          user = new Admin('tj')
-        end
-    
-        it 'should have access to all permissions'
-          user.may('edit pages').should.be_true
-        end
-      end
-    end
+	shared_behaviors_for 'animal'	
+		before
+			animal = {eats: function(){return true;}}
+		end
+	
+		it 'should eat'
+			animal.eats().should.eql true 
+		end
+	end
 
-**NOTE**: both User and Administrator's before hooks implement the 'user' variable
+	shared_behaviors_for 'canine'
+		should_behave_like('animal')
+
+		before
+			animal.hasFourLegs = function(){return true;}
+			animal.barks = function(){return true;}
+		end
+
+		it 'should have 4 legs'
+			animal.hasFourLegs().should.eql true
+		end
+	
+		it 'should bark'
+			animal.barks().should.eql true
+		end
+	end
+
+	describe 'mastif'
+		should_behave_like('canine')
+
+		before
+			animal.weight = 200
+		end
+
+		it 'should weigh > 100 lbs'
+			animal.weight.should.be_greater_than 100
+		end	
+	end
+
+	describe 'poodle breeds'
+		should_behave_like('canine')
+	
+		shared_behaviors_for 'poodle'
+			before
+				animal.isMean = true
+			end
+
+			it 'should be mean'
+				animal.isMean.should.eql true
+			end
+		end
+	
+		describe 'fancy poodle'
+			should_behave_like('poodle')
+		
+			before
+				animal.looksRidiculous = true
+			end
+		
+			it 'should look ridiculous'
+				animal.looksRidiculous.should.eql true
+			end
+		end
+	end
+
+NOTE: When the should_behave_like() call is searching for behaviors to include, it works inside out.
+      Therefore any nested shared behavior sets by the same name as a shared behavior set at a higher
+      nesting level will override the one at the higher level.
+ 
 
 ## Mock Ajax Requests
 
@@ -431,6 +478,10 @@ scope, they will both run, but this can help keep your specs readable.
   - run before each specification
 - after_each
   - run after each specification
+- before_nested
+  - run once before the suite and once before any nested suites
+- after_nested
+  - run once after the suite and once after any nested suites
 
 ## Custom Contexts
 

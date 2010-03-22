@@ -1,3 +1,8 @@
+4.0.0 / 2010-03-30
+==================
+  * Added better support for nested behaviors. Breaks compatibility with old functioning of before/after hook. 
+    Before/after hook is now only executed once per suite, and you must use before_nested/after_nested to execute 
+    hooks for nested suites.
 
 3.3.3 / 2010-03-15
 ==================
