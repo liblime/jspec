@@ -35,5 +35,11 @@ describe 'node'
       end
     end
     
+    describe 'have_prototype'
+      [].should.have_prototype Array.prototype
+      {}.should.not.have_prototype Array.prototype
+      {}.should.have_prototype Object.prototype
+    end
+    
   end
 end
