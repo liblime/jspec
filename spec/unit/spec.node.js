@@ -19,5 +19,14 @@ describe 'node'
       end
     end
     
+    describe 'have_configurable_property'
+      it 'should check if a property is configurable'
+        { foo: 'bar' }.should.have_configurable_property 'foo'
+        var o = {}
+        Object.defineProperty(o, 'foo', { value: 'bar', configurable: false })
+        o.should.not.have_configurable_property 'foo'
+      end
+    end
+    
   end
 end
