@@ -28,5 +28,12 @@ describe 'node'
       end
     end
     
+    describe 'have_keys'
+      it 'should check if keys match'
+        { foo: 'bar' }.should.have_keys ['foo']
+        { bar: 'baz' }.should.not.have_keys ['foo']
+      end
+    end
+    
   end
 end
