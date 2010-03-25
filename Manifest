@@ -14,6 +14,7 @@ lib/jspec.css
 lib/jspec.growl.js
 lib/jspec.jquery.js
 lib/jspec.js
+lib/jspec.nodejs.js
 lib/jspec.shell.js
 lib/jspec.timers.js
 lib/jspec.xhr.js
@@ -43,6 +44,7 @@ spec/unit/spec.jquery.xhr.js
 spec/unit/spec.js
 spec/unit/spec.matchers.js
 spec/unit/spec.modules.js
+spec/unit/spec.node.js
 spec/unit/spec.shared-behaviors.js
 spec/unit/spec.utils.js
 spec/unit/spec.xhr.js

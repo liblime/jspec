@@ -1,4 +1,14 @@
 
+4.1.0 / 2010-03-25
+==================
+
+  * Added jspec.nodejs.js - have_prototype matcher
+  * Added jspec.nodejs.js - have_keys matcher
+  * Added jspec.nodejs.js - have_configurable_property matcher
+  * Added jspec.nodejs.js - have_writable_property matcher
+  * Added jspec.nodejs.js
+  * Remove unused error() method
+
 4.0.0 / 2010-03-22
 ==================
 
