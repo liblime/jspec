@@ -2,10 +2,12 @@
 require.paths.unshift('./lib', './spec');
 
 require("jspec")
+require("jspec.nodejs")
 require("unit/helpers")
 
 JSpec
 .exec('spec/unit/spec.js')
+.exec('spec/unit/spec.node.js')
 .exec('spec/unit/spec.utils.js')
 .exec('spec/unit/spec.modules.js')
 .exec('spec/unit/spec.matchers.js')
