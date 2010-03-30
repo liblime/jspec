@@ -141,6 +141,7 @@ describe 'jQuery'
     
     describe 'be_animated'            
       it 'should check if an element is currently animated'
+        elem.should.not.be_animated
         elem.fadeIn(1000)
         elem.should.be_animated
       end
