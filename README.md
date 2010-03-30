@@ -244,6 +244,7 @@ The following options may be passed to _JSpec.run()_.
  - be_disabled
  - be_selected
  - be_checked
+ - be_animated
  
 ## Growl Support
 
