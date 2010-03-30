@@ -139,13 +139,9 @@ describe 'jQuery'
       end
     end
     
-    describe 'be_animated'      
-      before
-        elem = '<div id="myTest"></div>';
-      end
-      
+    describe 'be_animated'            
       it 'should check if an element is currently animated'
-        $(elem).fadeIn(1000).fadeOut(1000);
+        elem.fadeIn(1000)
         elem.should.be_animated
       end
     end
