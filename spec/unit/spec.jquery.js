@@ -139,6 +139,17 @@ describe 'jQuery'
       end
     end
     
+    describe 'be_animated'      
+      before
+        elem = '<div id="myTest"></div>';
+      end
+      
+      it 'should check if an element is currently animated'
+        $(elem).fadeIn(1000).fadeOut(1000);
+        elem.should.be_animated
+      end
+    end
+    
     describe 'have_ATTR'
       it 'should check if an attribute exists'
         '<input type="checkbox"/>'.should.have_type
