@@ -238,12 +238,14 @@ The following options may be passed to _JSpec.run()_.
  - have_value     
  - have_class
  - have_classes
+ - have_event_handlers
  - be_visible
  - be_hidden
  - be_enabled
  - be_disabled
  - be_selected
  - be_checked
+ - be_animated
  
 ## Growl Support
 

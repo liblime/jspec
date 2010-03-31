@@ -113,6 +113,14 @@ describe 'jQuery'
         $('select', elem).should.not.have_classes 'foo', 'save'
       end
     end
+    
+    describe 'have_event_handlers'
+      it 'should check if an element has handlers for a given event'
+        elem.should.not.have_event_handlers 'click'
+        elem.bind('click', function(){})
+        elem.should.have_event_handlers 'click'
+      end
+    end
 
     describe 'be_visible'
       it 'should check that an element is not hidden or set to display of none'
@@ -136,6 +144,14 @@ describe 'jQuery'
         '<input type="button"/>'.should.not.be_disabled
         '<input type="button" disabled="disabled" />'.should.be_disabled
         '<option value="foo" selected="selected">Foo</option>'.should.be_selected
+      end
+    end
+    
+    describe 'be_animated'            
+      it 'should check if an element is currently animated'
+        elem.should.not.be_animated
+        elem.fadeIn(1000)
+        elem.should.be_animated
       end
     end
     
