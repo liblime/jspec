@@ -113,6 +113,14 @@ describe 'jQuery'
         $('select', elem).should.not.have_classes 'foo', 'save'
       end
     end
+    
+    describe 'have_event'
+      it 'should check if an element has a specific event bound'
+        elem.should.not.have_event 'click'
+        elem.bind('click', function(){})
+        elem.should.have_event 'click'
+      end
+    end
 
     describe 'be_visible'
       it 'should check that an element is not hidden or set to display of none'
