@@ -114,11 +114,11 @@ describe 'jQuery'
       end
     end
     
-    describe 'have_event'
-      it 'should check if an element has a specific event bound'
-        elem.should.not.have_event 'click'
+    describe 'have_event_handlers'
+      it 'should check if an element has handlers for a given event'
+        elem.should.not.have_event_handlers 'click'
         elem.bind('click', function(){})
-        elem.should.have_event 'click'
+        elem.should.have_event_handlers 'click'
       end
     end
 

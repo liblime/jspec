@@ -238,7 +238,7 @@ The following options may be passed to _JSpec.run()_.
  - have_value     
  - have_class
  - have_classes
- - have_event
+ - have_event_handlers
  - be_visible
  - be_hidden
  - be_enabled
