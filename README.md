@@ -329,7 +329,7 @@ To destub a method simply call `destub()` at any time:
 
     destub(person, 'toString')
   
-If you would like to whipe an object clear of stubs simply pass it
+If you would like to wipe an object clear of stubs simply pass it
 to `destub()` without an additional method argument:
 
     destub(person)
@@ -462,7 +462,7 @@ The mock_request().and_return signature is as follows:
     mock_request().and_return(<data>, [content-type], [response-status-code], [headers-hash])
   
 At the moment `mock_request()` itself does not accept any arguments, however in the future
-this will be used to target specific uris for mocking.
+this will be used to target specific URIs for mocking.
 
 **NOTE**: works with Rhino as well
 
@@ -521,7 +521,7 @@ requests to sync, which preserves execution order, and reports correctly.
       })
     end
 
-## Grammer Pre-processor
+## Grammar Pre-processor
 
 The pre-processing capability of JSpec is extremely powerful. Your JavaScript
 code is not necessarily what it seems. For example when you seemingly invoke a
@@ -565,7 +565,7 @@ Any text placed after **__END__** is considered irrelevant and
 is striped out before evaluation. This is sometimes useful for
 document or code reference while writing specs. 
 
-For example when writting regression specs it is sometimes useful
+For example when writing regression specs it is sometimes useful
 to paste the issue ticket's comment(s) below this area for reference. 
 
 ## Formatters
@@ -989,7 +989,7 @@ your _spec/server.rb_ file may support additional browsers.
 ## Contributors
 
 Many ideas and bug reports were contributed by
-the following developers, thankyou for making
+the following developers, thank you for making
 JSpec more enjoyable, and bug free. If I have 
 missed you on this list please let me know 
 (aka the fellow who donated [jspec.info](http://jspec.info))
