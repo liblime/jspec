@@ -1,4 +1,13 @@
 
+4.2.0 / 2010-04-07
+==================
+
+  * Merge branch 'master' of git://github.com/vipulb/jspec into xml
+  * Added support for mock requests to parse xml
+  * Added have_event_handlers matcher
+  * Adding be_animated matcher
+  * Add option "disableColors" to disable coloring in terminal reporter
+
 4.1.0 / 2010-03-25
 ==================
 
