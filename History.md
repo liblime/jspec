@@ -1,4 +1,10 @@
 
+4.2.1 / 2010-04-15
+==================
+
+  * Fixed; strict type checks for have_prop[erty]
+  * Removed some globals
+
 4.2.0 / 2010-04-07
 ==================
 
