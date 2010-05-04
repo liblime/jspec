@@ -218,6 +218,32 @@ class Browser
   end
   
   #--
+  # Chromium
+  #++
+
+  class Chromium < self
+    def self.matches_agent? string
+      string =~ /chrome/i
+    end
+
+    def self.matches_name? string
+      string =~ /chromium/i
+    end
+
+    def supported?
+      linux?
+    end
+
+    def visit uri
+      system "chromium #{uri}" if linux?
+    end
+
+    def to_s
+      'Chromium'
+    end
+  end
+
+  #--
   # Internet Explorer
   #++
   
