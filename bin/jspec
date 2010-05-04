@@ -123,7 +123,7 @@ command :shell do |c|
       end
     end
     say "JSpec #{program(:version)}"
-    `#{JSpec::Project::RHINO} #{paths.join(' ')} -f -`
+    `java -jar #{JSpec::Project::RHINO} #{paths.join(' ')} -f -`
   end
 end
 
