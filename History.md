@@ -1,4 +1,11 @@
 
+4.3.0 / 2010-05-04
+==================
+
+  * Added chromium to supported browsers
+  * Fixed rhino support by using java command
+  * Fixed MockXMLHttpRequest#getAllResponseHeaders() matches spec returning a string
+
 4.2.1 / 2010-04-15
 ==================
 
