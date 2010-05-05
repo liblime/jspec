@@ -37,7 +37,7 @@ module JSpec
     # Execute _file_ with Rhino.
 
     def rhino file
-      system "java -jar #{rhino_jar} #{file}"
+      system "java -jar #{rhino_jar} -opt -1 #{file}"
     end
     
     ##
