@@ -1,3 +1,7 @@
+4.3.1 / 2010-05-04
+==================
+
+  * Fixed; proper handling of undefind values for have_prop[erty]
 
 4.3.0 / 2010-05-04
 ==================
