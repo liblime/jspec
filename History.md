@@ -1,3 +1,9 @@
+
+4.3.2 / 2010-05-30
+==================
+
+  * Fixed nodejs support due to recent Buffer changes
+
 4.3.1 / 2010-05-04
 ==================
 
