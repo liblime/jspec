@@ -2,7 +2,7 @@
 describe 'jQuery'
   describe '.ajax()'
     it "should call the success function when 200"
-      mock_request().and_return('{ foo: "bar" }', 'application/json')
+      mock_request().and_return('{ "foo": "bar" }', 'application/json')
       var successCalled = false
       var errorCalled = false
       $.ajax({
@@ -21,7 +21,7 @@ describe 'jQuery'
     end
     
     it "should call the error function when 404"
-      mock_request().and_return('{ foo: "bar" }', 'application/json', 404)
+      mock_request().and_return('{ "foo": "bar" }', 'application/json', 404)
       var successCalled = false
       var errorCalled = false
       $.ajax({
@@ -51,7 +51,7 @@ describe 'jQuery'
   
   describe '.getJSON()'
     it 'should work with mockRequest'
-      mockRequest().and_return('{ foo : "bar" }')
+      mockRequest().and_return('{ "foo" : "bar" }')
       $.getJSON('foo', function(response, statusText){
         response.foo.should.eql 'bar'
         statusText.should.eql 'success'
