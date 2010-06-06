@@ -17,6 +17,12 @@ describe 'jQuery'
     end
   end
   
+  describe 'without elements'
+    it 'should output the default jQuery object'
+      puts($()).should.match(/jQuery\(document\)/i)
+    end
+  end
+  
   describe 'sandbox()'
     before
       dom = sandbox()
