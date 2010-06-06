@@ -17,9 +17,15 @@ describe 'jQuery'
     end
   end
   
-  describe 'without elements'
-    it 'should output the default jQuery object'
-      puts($()).should.match(/jQuery\(document\)/i)
+  describe 'with the document element'
+    it 'should output "jQuery(document)"'
+      puts($(document)).should.match(/jQuery\(document\)/i)
+    end
+  end
+  
+  describe 'without parameters'
+    it 'should output "jQuery()"'
+      puts($()).should.match(/jQuery\(\)/i)
     end
   end
   
