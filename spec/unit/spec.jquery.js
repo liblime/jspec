@@ -17,6 +17,18 @@ describe 'jQuery'
     end
   end
   
+  describe 'with the document element'
+    it 'should output "jQuery(document)"'
+      puts($(document)).should.match(/jQuery\(document\)/i)
+    end
+  end
+  
+  describe 'without parameters'
+    it 'should output "jQuery()"'
+      puts($()).should.match(/jQuery\(\)/i)
+    end
+  end
+  
   describe 'sandbox()'
     before
       dom = sandbox()
