@@ -1,6 +1,10 @@
 
 get '/jspec/*' do |path|
-  send_file JSPEC_ROOT + '/lib/' + path
+	if !File.exists?(JSPEC_ROOT + '/lib/' + path)
+		pass
+	else
+	  send_file JSPEC_ROOT + '/lib/' + path
+	end
 end
 
 post '/results' do
