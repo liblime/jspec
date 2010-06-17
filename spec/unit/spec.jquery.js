@@ -132,6 +132,12 @@ describe 'jQuery'
         elem.bind('click', function(){})
         elem.should.have_event_handlers 'click'
       end
+
+      it 'should check if an element has handlers for a given event when binded with live'
+        $('.live-event').should.not.have_event_handlers 'click'
+        $('.live-event').live('click', function(){})
+        $('.live-event').should.have_event_handlers 'click'
+      end
     end
 
     describe 'be_visible'
