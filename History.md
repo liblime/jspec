@@ -1,4 +1,12 @@
 
+4.3.3 / 2010-07-13
+==================
+
+  * Fixed destubing stub overrides
+  * Fixed jQuery have_event_handlers to match "live" events
+  * Installables updated: MooTools to 1.2.4, Dojo to 1.4.0, jQuery to 1.4.0.
+  * Call rhino with "-opt -1" to avoid silent failure
+
 4.3.2 / 2010-05-30
 ==================
 
