@@ -82,6 +82,15 @@ describe 'Utility'
           text.should_eql 'is awesome'
         })
       end
+			
+			it 'should overwrite previous stub'
+				stub(object, 'toString').and_return('I am stub overriden')
+				object.toString().should.eql 'I am stub overriden'
+				
+				destub(object, 'toString')
+				object.toString().should.eql '<Im an object>'				
+			end
+
     end
     
     describe 'destub()'
