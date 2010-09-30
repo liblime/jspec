@@ -1,5 +1,8 @@
-
 # JSpec
+
+## No Longer Supported
+
+The JSpec library is no longer being supported. We recommend taking a look at [Jasmine](http://github.com/pivotal/jasmine)
 
 JSpec is a minimalistic JavaScript behavior driven development framework,
 providing **simple installation**, extremely **low learning curve**, absolutely **no pollution**
